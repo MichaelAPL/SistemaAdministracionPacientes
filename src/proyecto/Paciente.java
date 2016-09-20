@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Milka
  */
 public class Paciente {
-    private String nombres2;
+    private String nombres;
     private String apellidos;
     private int edad;
     private String direccion;
@@ -24,11 +24,11 @@ public class Paciente {
     private Date fechaDeInscripcion;
 
     public String getNombres() {
-        return nombres2;
+        return nombres;
     }
 
     public void setNombres(String nombres) {
-        this.nombres2 = nombres;
+        this.nombres = nombres;
     }
 
     public String getApellidos() {
