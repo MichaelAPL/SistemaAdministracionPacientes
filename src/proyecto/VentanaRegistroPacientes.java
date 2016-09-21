@@ -14,8 +14,12 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     /**
      * Creates new form VentanaRegistroPacientes
      */
+    TablaPadecimientos datosPadecimientos = new TablaPadecimientos();
+    
     public VentanaRegistroPacientes() {
         initComponents();
+        setLocationRelativeTo(null);
+        datosPadecimientos.inicializarTabla(tablaPadecimientos);
     }
 
     /**
@@ -45,11 +49,9 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         padecimiento = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaPadecimientos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(2147483647, 2147483600));
-        setPreferredSize(new java.awt.Dimension(1000, 670));
 
         jLabel1.setText("Nombres:");
 
@@ -79,7 +81,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
 
         jLabel8.setText("Padecimientos Previos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPadecimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -90,7 +92,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaPadecimientos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -252,10 +254,10 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField localidad;
     private javax.swing.JTextField nombres;
     private javax.swing.JTextField padecimiento;
+    private javax.swing.JTable tablaPadecimientos;
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }
