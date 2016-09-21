@@ -15,10 +15,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Angel Basto Gonzalez
  */
 public class TablaPadecimientos {
-    public static ArrayList padecimientos = new ArrayList();
+    private  ArrayList padecimientos = new ArrayList();
     
-    public static void agregarPadecimiento(String padecimiento){
+    public void agregarPadecimiento(String padecimiento){
         padecimientos.add(padecimiento);
+    }
+
+    public ArrayList getPadecimientos() {
+        return padecimientos;
     }
     
     public void eliminarPadecimiento(int index){

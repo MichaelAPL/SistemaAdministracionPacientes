@@ -23,6 +23,19 @@ public class Paciente {
     private int dosisEDTA;
     private Date fechaDeInscripcion;
 
+    public Paciente(String nombres, String apellidos, int edad, String direccion, String localidad, String telefono,int dosisEDTA, ArrayList<String> enfermedadesPrevias ) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.edad = edad;
+        this.direccion = direccion;
+        this.localidad = localidad;
+        this.telefono = telefono;
+        this.dosisEDTA = dosisEDTA;
+        this.enfermedadesPrevias = enfermedadesPrevias;
+    }
+    
+    
+
     public String getNombres() {
         return nombres;
     }
