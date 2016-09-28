@@ -12,76 +12,22 @@ import java.util.Date;
  *
  * @author Milka
  */
-public class Paciente {
-    private String nombres;
-    private String apellidos;
-    private int edad;
-    private String direccion;
-    private String localidad;
-    private String telefono;
+public class Paciente extends Persona{
+
     private ArrayList<String> enfermedadesPrevias;
     private int dosisEDTA;
     private Date fechaDeInscripcion;
 
-    public Paciente(String nombres, String apellidos, int edad, String direccion, String localidad, String telefono,int dosisEDTA, ArrayList<String> enfermedadesPrevias ) {
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.edad = edad;
-        this.direccion = direccion;
-        this.localidad = localidad;
-        this.telefono = telefono;
+    public Paciente(Persona persona, int dosisEDTA, ArrayList<String> enfermedadesPrevias ) {
+        this.nombres = persona.nombres;
+        this.apellidos = persona.apellidos;
+        this.edad = persona.edad;
+        this.direccion = persona.direccion;
+        this.localidad = persona.localidad;
+        this.telefono = persona.telefono;
         this.dosisEDTA = dosisEDTA;
         this.enfermedadesPrevias = enfermedadesPrevias;
-    }
-    
-    
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+        fechaDeInscripcion = inicializarFechaDeIncripcion();
     }
 
     public ArrayList<String> getEnfermedadesPrevias() {
@@ -98,6 +44,10 @@ public class Paciente {
 
     public void setDosisEDTA(int dosisEDTA) {
         this.dosisEDTA = dosisEDTA;
+    }
+
+    private Date inicializarFechaDeIncripcion(){
+        return new Date();
     }
 
     public Date getFechaDeInscripcion() {
