@@ -15,19 +15,16 @@ import java.util.Date;
 public class Paciente extends Persona{
 
     private ArrayList<String> enfermedadesPrevias;
-    private int dosisEDTA;
-    private Date fechaDeInscripcion;
+    private int dosis_ml_EDTA;
+    private final Date fechaDeInscripcion;
+    private ArrayList<Cita> historialDeCitas;
 
-    public Paciente(Persona persona, int dosisEDTA, ArrayList<String> enfermedadesPrevias ) {
-        this.nombres = persona.nombres;
-        this.apellidos = persona.apellidos;
-        this.edad = persona.edad;
-        this.direccion = persona.direccion;
-        this.localidad = persona.localidad;
-        this.telefono = persona.telefono;
-        this.dosisEDTA = dosisEDTA;
+    public Paciente(Persona persona, int dosis_ml_EDTA, ArrayList<String> enfermedadesPrevias ) {
+        super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), persona.getDireccion(), persona.getLocalidad(), persona.getTelefono() );
+        this.dosis_ml_EDTA = dosis_ml_EDTA;
         this.enfermedadesPrevias = enfermedadesPrevias;
         fechaDeInscripcion = inicializarFechaDeIncripcion();
+        historialDeCitas = new ArrayList();
     }
 
     public ArrayList<String> getEnfermedadesPrevias() {
@@ -38,12 +35,12 @@ public class Paciente extends Persona{
         this.enfermedadesPrevias = enfermedadesPrevias;
     }
 
-    public int getDosisEDTA() {
-        return dosisEDTA;
+    public int getDosis_ml_EDTA() {
+        return dosis_ml_EDTA;
     }
 
-    public void setDosisEDTA(int dosisEDTA) {
-        this.dosisEDTA = dosisEDTA;
+    public void set_ml_DosisEDTA(int dosisEDTA) {
+        this.dosis_ml_EDTA = dosisEDTA;
     }
 
     private Date inicializarFechaDeIncripcion(){
@@ -53,5 +50,14 @@ public class Paciente extends Persona{
     public Date getFechaDeInscripcion() {
         return fechaDeInscripcion;
     }
+
+    public ArrayList<Cita> getHistorialDeCitas() {
+        return historialDeCitas;
+    }
+
+    public void setHistorialDeCitas(ArrayList<Cita> historialDeCitas) {
+        this.historialDeCitas = historialDeCitas;
+    }
+    
     
 }
