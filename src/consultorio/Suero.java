@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto;
+package consultorio;
 
 /**
  *
  * @author Milka
  */
-public enum Tratamiento {
+public enum Suero {
     SUERO_QUELANTE, SUERO_MINERAL;
 }

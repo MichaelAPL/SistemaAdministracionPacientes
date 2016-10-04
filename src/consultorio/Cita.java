@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto;
+package consultorio;
 
 import java.util.Date;
 
@@ -14,8 +14,8 @@ import java.util.Date;
 class Cita {
     
     private Date fechaDeRealizacion;
-    private int númeroDeCita;
-    private Tratamiento tipo;
+    private int numeroDeCita;
+    private Suero tipo;
 
     public Date getFechaDeRealizacion() {
         return fechaDeRealizacion;
@@ -26,21 +26,20 @@ class Cita {
     }
 
     public int getNúmeroDeCita() {
-        return númeroDeCita;
+        return numeroDeCita;
     }
 
-    public void setNúmeroDeCita(int númeroDeCita) {
-        this.númeroDeCita = númeroDeCita;
+    public void setNúmeroDeCita() {
+        numeroDeCita++;
     }
 
-    public Tratamiento getTipo() {
+    public Suero getTipo() {
         return tipo;
-    }
+    }    
 
-    public void setTipo(Tratamiento tipo) {
+    public void setTipo(Suero tipo) {
         this.tipo = tipo;
     }
-    
     
     
 }

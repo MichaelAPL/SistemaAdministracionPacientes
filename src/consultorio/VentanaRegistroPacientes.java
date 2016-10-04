@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto;
+package consultorio;
 
+import gestoresDeVentanillas.Controlador;
 import java.util.ArrayList;
 
 /**

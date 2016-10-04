@@ -1,6 +1,7 @@
 /SistemaAdministracionPacientes/nbproject/private/
 /build/
+/build.xml
+/manifest.mf
 /Reverse/nbproject/private/
 /Reverse/build/
-/Filters/nbproject/private/
-/FilterPipe/nbproject/private/
+

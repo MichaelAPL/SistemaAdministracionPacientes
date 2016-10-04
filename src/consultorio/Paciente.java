@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto;
+package consultorio;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +18,7 @@ public class Paciente extends Persona{
     private int dosis_ml_EDTA;
     private final Date fechaDeInscripcion;
     private ArrayList<Cita> historialDeCitas;
+    
 
     public Paciente(Persona persona, int dosis_ml_EDTA, ArrayList<String> enfermedadesPrevias ) {
         super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), persona.getDireccion(), persona.getLocalidad(), persona.getTelefono() );
@@ -57,6 +58,11 @@ public class Paciente extends Persona{
 
     public void setHistorialDeCitas(ArrayList<Cita> historialDeCitas) {
         this.historialDeCitas = historialDeCitas;
+    }
+    
+    public Cita getSiguienteCita(){
+        Cita cita = historialDeCitas.get(historialDeCitas.size()-1);        
+        return cita;
     }
     
     
