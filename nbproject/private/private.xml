@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/proyecto/NewMain.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/proyecto/Tratamiento.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/proyecto/Controlador.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/proyecto/Cita.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/proyecto/TablaPadecimientos.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/proyecto/Paciente.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/proyecto/VentanaRegistroPacientes.java</file>
+            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/NewMain.java</file>
+            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Persona.java</file>
+            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/gestoresDeVentanillas/Controlador.java</file>
+            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/ventanillas/PaseDeLista.java</file>
+            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Cita.java</file>
+            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Suero.java</file>
+            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Paciente.java</file>
+            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/ventanillas/VentanillaVPaseDeLista.java</file>
         </group>
     </open-files>
 </project-private>
