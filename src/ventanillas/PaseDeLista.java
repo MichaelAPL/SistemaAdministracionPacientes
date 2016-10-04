@@ -21,10 +21,9 @@ public class PaseDeLista {
     }
     
     private void crearPaseDeLista(){
-        for (Paciente paciente : pacientes) {
+        for (int i = 0; i < pacientes.size(); i++) {
             JCheckBox checkBox = new JCheckBox();
-            checkBox.setText( /* No me deja acceder al tipo de tratamiento*/ paciente.getNombres() + " " + paciente.getApellidos() + " -- Tipo:" + paciente.getSiguienteCita() + /* No me deja acceder al tipo de tratamiento*/
-                    " - EDTA:" + paciente.getDosis_ml_EDTA());
+            checkBox.setText(pacientes.get(i).getNombres()+" "+pacientes.get(i).getApellidos()+" -- Tipo:"+pacientes.get(i).getSiguienteCita()+" - EDTA:"+pacientes.get(i).getDosis_ml_EDTA());
             ventana.add(checkBox);
         }
     }

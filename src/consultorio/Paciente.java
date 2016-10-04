@@ -15,7 +15,6 @@ import java.util.Date;
 public class Paciente extends Persona{
 
     private ArrayList<String> enfermedadesPrevias;
-    private ArrayList<String> medicamentosPrevios;
     private int dosis_ml_EDTA;
     private final Date fechaDeInscripcion;
     private ArrayList<Cita> historialDeCitas;
@@ -45,18 +44,9 @@ public class Paciente extends Persona{
         this.dosis_ml_EDTA = dosisEDTA;
     }
 
-    public ArrayList<String> getMedicamentosPrevios() {
-        return medicamentosPrevios;
-    }
-
-    public void setMedicamentosPrevios(ArrayList<String> medicamentosPrevios) {
-        this.medicamentosPrevios = medicamentosPrevios;
-    }
-
     private Date inicializarFechaDeIncripcion(){
         return new Date();
     }
-    
 
     public Date getFechaDeInscripcion() {
         return fechaDeInscripcion;
@@ -75,9 +65,5 @@ public class Paciente extends Persona{
         return cita;
     }
     
-    public boolean tocaCitaHoy(){
-        Date fechaActual = new Date();
-        return getSiguienteCita().getFechaProgramada() == fechaActual;
-    }
     
 }
