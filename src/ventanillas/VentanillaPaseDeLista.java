@@ -29,7 +29,7 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
         }
     }
     
-    public void buscarCheckBox(){
+    public void agregarAsistenciaAlPaciente(){
         for (int indice = 0; indice < arregloCheckBox.size(); indice++) {
             JCheckBox checkBox = arregloCheckBox.get(indice);
             if(checkBox.isSelected()){
