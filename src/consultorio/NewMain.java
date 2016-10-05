@@ -5,7 +5,9 @@
  */
 package consultorio;
 
-import gestoresDeVentanillas.Controlador;
+import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
@@ -14,8 +16,7 @@ import gestoresDeVentanillas.Controlador;
 public class NewMain {
 
     public static void main(String[] args) {
-        Controlador ctr = new Controlador();
-        VentanaRegistroPacientes ventana = new VentanaRegistroPacientes(ctr);
+        
     }
     
 }

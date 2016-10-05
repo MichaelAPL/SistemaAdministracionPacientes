@@ -13,7 +13,7 @@ import consultorio.Persona;
  *
  * @author Milka
  */
-public class Controlador {
+public class ControladorRegistro {
     
     public void crearNuevoPaciente(ArrayList arregloDeDatos){
         Paciente pacienteNuevo = new Paciente(
@@ -24,6 +24,7 @@ public class Controlador {
         (String)arregloDeDatos.get(4),
         (String)arregloDeDatos.get(5)),
         Integer.valueOf((String)arregloDeDatos.get(6)),
-        (ArrayList)arregloDeDatos.get(7));
+        (ArrayList)arregloDeDatos.get(7),
+        (ArrayList)arregloDeDatos.get(8));
     }
 }

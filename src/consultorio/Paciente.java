@@ -14,16 +14,18 @@ import java.util.Date;
  */
 public class Paciente extends Persona{
 
+    private ArrayList<String> medicamentosExternos; 
     private ArrayList<String> enfermedadesPrevias;
     private int dosis_ml_EDTA;
     private final Date fechaDeInscripcion;
     private ArrayList<Cita> historialDeCitas;
     
 
-    public Paciente(Persona persona, int dosis_ml_EDTA, ArrayList<String> enfermedadesPrevias ) {
+    public Paciente(Persona persona, int dosis_ml_EDTA, ArrayList<String> enfermedadesPrevias,ArrayList<String> medicamentosExternos) {
         super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), persona.getDireccion(), persona.getLocalidad(), persona.getTelefono() );
         this.dosis_ml_EDTA = dosis_ml_EDTA;
         this.enfermedadesPrevias = enfermedadesPrevias;
+        this.medicamentosExternos = medicamentosExternos;
         fechaDeInscripcion = inicializarFechaDeIncripcion();
         historialDeCitas = new ArrayList();
     }
