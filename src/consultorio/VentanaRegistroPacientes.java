@@ -14,9 +14,7 @@ import java.util.ArrayList;
  */
 public class VentanaRegistroPacientes extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaRegistroPacientes
-     */
+    
     TablaPadecimientos datosPadecimientos = new TablaPadecimientos();
     Controlador controlador;
     

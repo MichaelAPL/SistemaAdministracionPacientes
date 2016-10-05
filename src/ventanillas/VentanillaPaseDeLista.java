@@ -1,5 +1,8 @@
-
 package ventanillas;
+
+import consultorio.Paciente;
+import java.util.ArrayList;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -7,9 +10,30 @@ package ventanillas;
  */
 public class VentanillaPaseDeLista extends javax.swing.JFrame {
 
+    ArrayList<JCheckBox> arregloCheckBox;
     public VentanillaPaseDeLista() {
         initComponents();
+        arregloCheckBox = new ArrayList();
     }
+
+    public void crearListaDeCitasHoy(ArrayList<Paciente> pacientes) {
+        for (Paciente paciente : pacientes) {
+            JCheckBox checkBox = new JCheckBox();
+            checkBox.setText(paciente.getNombres() + " " + paciente.getApellidos() + " -- Tipo:" + paciente.getSiguienteCita() + " - EDTA:" + paciente.getDosis_ml_EDTA());
+            add(checkBox);
+            arregloCheckBox.add(checkBox);
+        }
+    }
+    
+    public void buscarCheckBox(){
+        for (JCheckBox checkBox : arregloCheckBox) {
+            checkBox.
+        }
+    }
+    
+    
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
