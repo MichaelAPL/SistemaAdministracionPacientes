@@ -5,9 +5,9 @@ package ventanillas;
  *
  * @author Milka
  */
-public class VentanillaVPaseDeLista extends javax.swing.JFrame {
+public class VentanillaPaseDeLista extends javax.swing.JFrame {
 
-    public VentanillaVPaseDeLista() {
+    public VentanillaPaseDeLista() {
         initComponents();
     }
 

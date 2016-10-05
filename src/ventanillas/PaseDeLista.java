@@ -11,11 +11,11 @@ import javax.swing.JCheckBox;
  */
 public class PaseDeLista {
     ArrayList<Paciente> pacientes;
-    VentanillaVPaseDeLista ventana;
+    VentanillaPaseDeLista ventana;
     
     public PaseDeLista(ArrayList<Paciente> pacientes){
         this.pacientes = pacientes;
-        ventana = new VentanillaVPaseDeLista();
+        ventana = new VentanillaPaseDeLista();
         crearPaseDeLista();
         ventana.setVisible(true);
     }
