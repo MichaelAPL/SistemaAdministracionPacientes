@@ -19,7 +19,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
      * Creates new form VentanaRegistroPacientes
      */
     
-    
     private ControladorRegistro controladorRegistro;
     private ArrayList<String> padecimientosPrevios;
     private ArrayList<String> medicamentosExternos;
@@ -33,8 +32,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         this.setVisible(true);
     }   
 
-
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

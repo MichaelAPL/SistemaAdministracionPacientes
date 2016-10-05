@@ -1,6 +1,7 @@
 package ventanillas;
 
 import consultorio.Paciente;
+import gestoresDeVentanillas.ControladorCitas;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 
@@ -10,10 +11,13 @@ import javax.swing.JCheckBox;
  */
 public class VentanillaPaseDeLista extends javax.swing.JFrame {
 
+    ControladorCitas controladorCitas;
     ArrayList<JCheckBox> arregloCheckBox;
+    
     public VentanillaPaseDeLista() {
         initComponents();
         arregloCheckBox = new ArrayList();
+        controladorCitas = new ControladorCitas();
     }
 
     public void crearListaDeCitasHoy(ArrayList<Paciente> pacientes) {
@@ -26,8 +30,11 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
     }
     
     public void buscarCheckBox(){
-        for (JCheckBox checkBox : arregloCheckBox) {
-            checkBox.
+        for (int indice = 0; indice < arregloCheckBox.size(); indice++) {
+            JCheckBox checkBox = arregloCheckBox.get(indice);
+            if(checkBox.isSelected()){
+                controladorCitas.asistenciaDePacientes(indice);
+            }
         }
     }
     
