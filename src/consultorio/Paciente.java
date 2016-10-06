@@ -67,5 +67,9 @@ public class Paciente extends Persona{
         return cita;
     }
     
+    public void setSiguienteCita(Cita cita){
+        historialDeCitas.add(cita);
+    }
+    
     
 }

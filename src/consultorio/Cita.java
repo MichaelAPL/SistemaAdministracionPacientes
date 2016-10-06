@@ -19,8 +19,10 @@ class Cita {
     private Suero tipo;
     private boolean realizada;
 
-    public Cita() {
+    public Cita(int numeroDeCita) {
+        realizada = false;
         fechaDeRealizacion = null;
+        this.numeroDeCita = numeroDeCita;
     }
 
     
