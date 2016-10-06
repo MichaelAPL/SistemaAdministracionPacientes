@@ -14,15 +14,52 @@ import java.util.Date;
 class Cita {
     
     private Date fechaDeRealizacion;
+    private Date fechaProgramada;
     private int numeroDeCita;
     private Suero tipo;
+    private boolean realizada;
 
+    public Cita() {
+        fechaDeRealizacion = null;
+    }
+
+    
     public Date getFechaDeRealizacion() {
+        if(isRealizada()){
+           fechaDeRealizacion = getFechaProgramada(); 
+        }
         return fechaDeRealizacion;
     }
 
-    protected void setFechaDeRealizacion() {
-        this.fechaDeRealizacion = new Date();
+    public void setFechaDeRealizacion(Date fechaDeRealizacion) {
+        this.fechaDeRealizacion = fechaDeRealizacion;
+    }
+
+    public Date getFechaProgramada() {
+        if(!isRealizada()){
+            fechaProgramada = new Date();
+        }
+        return fechaProgramada;
+    }
+
+    public void setFechaProgramada(Date fechaProgramada) {
+        this.fechaProgramada = fechaProgramada;
+    }
+
+    public int getNumeroDeCita() {
+        return numeroDeCita;
+    }
+
+    public void setNumeroDeCita(int numeroDeCita) {
+        this.numeroDeCita = numeroDeCita;
+    }
+
+    public boolean isRealizada() {
+        return realizada;
+    }
+
+    public void setRealizada(boolean realizada) {
+        this.realizada = realizada;
     }
 
     public int getNúmeroDeCita() {

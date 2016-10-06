@@ -23,7 +23,7 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
     public void crearListaDeCitasHoy(ArrayList<Paciente> pacientes) {
         for (Paciente paciente : pacientes) {
             JCheckBox checkBox = new JCheckBox();
-            checkBox.setText(paciente.getNombres() + " " + paciente.getApellidos() + " -- Tipo:" + paciente.getSiguienteCita() + " - EDTA:" + paciente.getDosis_ml_EDTA());
+            checkBox.setText("Paciente Fulanito");
             add(checkBox);
             arregloCheckBox.add(checkBox);
         }
@@ -34,15 +34,11 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
             JCheckBox checkBox = arregloCheckBox.get(indice);
             if(checkBox.isSelected()){
                 controladorCitas.asistenciaDePacientes(indice);
+                arregloCheckBox.remove(indice);
+                indice--;
             }
         }
     }
-    
-    
-    
-    
-
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

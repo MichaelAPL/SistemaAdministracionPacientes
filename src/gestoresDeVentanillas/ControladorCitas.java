@@ -2,7 +2,6 @@
 package gestoresDeVentanillas;
 
 
-import javax.swing.JCheckBox;
 
 /**
  *
