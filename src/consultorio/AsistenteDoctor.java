@@ -33,9 +33,14 @@ public class AsistenteDoctor {
         ventanillaPaseLista.crearListaDeCitasHoy(pacientesConCitaHoy);
     }
 
-    public void ponerAsistenciaYCrearNuevaCitaAlPaciente(int numeroDePacienteEnLaLista) {
+    public void ponerAsistenciaAlPaciente(int numeroDePacienteEnLaLista) {
         Paciente paciente = pacientesConCitaHoy.remove(numeroDePacienteEnLaLista);
         paciente.getSiguienteCita().setRealizada(true);
+        
+        crearNuevaCitaAlPaciente(paciente);
+    }
+    
+    public void crearNuevaCitaAlPaciente(Paciente paciente){
         Cita cita = new Cita(paciente.getSiguienteCita().getNumeroDeCita()+1);
         paciente.setSiguienteCita(cita);
     }
