@@ -10,12 +10,13 @@ import ventanillas.VentanillaPaseDeLista;
  */
 public class AsistenteDoctor {
 
-    VentanillaPaseDeLista ventanillaPaseLista;
-    ArrayList<Paciente> bancoDePacientes;
-    ArrayList<Paciente> pacientesConCitaHoy;
+    private VentanillaPaseDeLista ventanillaPaseLista;
+    private ArrayList<Paciente> bancoDePacientes;
+    private ArrayList<Paciente> pacientesConCitaHoy;
     
-    public AsistenteDoctor(){
-        pacientesConCitaHoy = generarListaDePacientesConCitaHoy();
+    public AsistenteDoctor(ArrayList<Paciente> pacientes){
+        this.bancoDePacientes = pacientes;
+        this.pacientesConCitaHoy = generarListaDePacientesConCitaHoy();
     }
 
     public ArrayList<Paciente> generarListaDePacientesConCitaHoy() {
@@ -38,6 +39,16 @@ public class AsistenteDoctor {
         paciente.getSiguienteCita().setRealizada(true);
         Cita cita = new Cita(paciente.getSiguienteCita().getNumeroDeCita()+1);
         paciente.setSiguienteCita(cita);
+    }
+    
+    public Paciente buscarPaciente(String nombre){
+        Paciente paciente = null;
+        for (int i = 0; i < bancoDePacientes.size(); i++) {
+            if (bancoDePacientes.get(i).getNombres().equals(nombre)) {
+                paciente = bancoDePacientes.get(i);
+            }
+        }
+        return paciente;
     }
 
 }
