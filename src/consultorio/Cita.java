@@ -1,22 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *
  */
 package consultorio;
 
 import java.util.Date;
 
-/**
- *
- * @author Milka
- */
-class Cita {
+public class Cita {
     
     private Date fechaDeRealizacion;
     private Date fechaProgramada;
     private int numeroDeCita;
-    private Suero tipo;
     private boolean realizada;
 
     public Cita(int numeroDeCita) {
@@ -70,13 +63,5 @@ class Cita {
 
     public void setNúmeroDeCita() {
         numeroDeCita++;
-    }
-
-    public Suero getTipo() {
-        return tipo;
     }    
-
-    public void setTipo(Suero tipo) {
-        this.tipo = tipo;
-    }   
 }

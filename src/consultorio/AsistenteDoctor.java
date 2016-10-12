@@ -10,12 +10,14 @@ import ventanillas.VentanillaPaseDeLista;
  */
 public class AsistenteDoctor {
 
-    VentanillaPaseDeLista ventanillaPaseLista;
-    ArrayList<Paciente> bancoDePacientes;
-    ArrayList<Paciente> pacientesConCitaHoy;
+    private VentanillaPaseDeLista ventanillaPaseLista;
+    private ArrayList<Paciente> bancoDePacientes;
+    private ArrayList<Paciente> pacientesConCitaHoy;
     
-    public AsistenteDoctor(){
-        pacientesConCitaHoy = generarListaDePacientesConCitaHoy();
+    public AsistenteDoctor(ArrayList<Paciente> pacientes, VentanillaPaseDeLista ventanillaPaseLista){
+        this.bancoDePacientes = pacientes;
+        this.pacientesConCitaHoy = generarListaDePacientesConCitaHoy();
+        this.ventanillaPaseLista = ventanillaPaseLista;
     }
 
     public ArrayList<Paciente> generarListaDePacientesConCitaHoy() {
@@ -33,11 +35,26 @@ public class AsistenteDoctor {
         ventanillaPaseLista.crearListaDeCitasHoy(pacientesConCitaHoy);
     }
 
-    public void ponerAsistenciaYCrearNuevaCitaAlPaciente(int numeroDePacienteEnLaLista) {
+    public void ponerAsistenciaAlPaciente(int numeroDePacienteEnLaLista) {
         Paciente paciente = pacientesConCitaHoy.remove(numeroDePacienteEnLaLista);
         paciente.getSiguienteCita().setRealizada(true);
+        
+        crearNuevaCitaAlPaciente(paciente);
+    }
+    
+    public void crearNuevaCitaAlPaciente(Paciente paciente){
         Cita cita = new Cita(paciente.getSiguienteCita().getNumeroDeCita()+1);
         paciente.setSiguienteCita(cita);
+    }
+    
+    public Paciente buscarPaciente(String nombre){
+        Paciente paciente = null;
+        for (int i = 0; i < bancoDePacientes.size(); i++) {
+            if (bancoDePacientes.get(i).getNombres().equals(nombre)) {
+                paciente = bancoDePacientes.get(i);
+            }
+        }
+        return paciente;
     }
 
 }
