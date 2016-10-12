@@ -1,5 +1,6 @@
 package gestoresDeVentanillas;
 
+import consultorio.DatosPaciente;
 import java.util.ArrayList;
 import consultorio.Paciente;
 import consultorio.Persona;
@@ -11,15 +12,18 @@ import consultorio.Persona;
 public class ControladorRegistro {
     
     public void crearNuevoPaciente(ArrayList arregloDeDatos){
-        Paciente pacienteNuevo = new Paciente(
-        new Persona((String)arregloDeDatos.get(0),
-        (String)arregloDeDatos.get(1),
-        Integer.valueOf((String)arregloDeDatos.get(2)),
-        (String)arregloDeDatos.get(3),
-        (String)arregloDeDatos.get(4),
-        (String)arregloDeDatos.get(5)),
-        Integer.valueOf((String)arregloDeDatos.get(6)),
-        (ArrayList)arregloDeDatos.get(7),
-        (ArrayList)arregloDeDatos.get(8));
+        Paciente pacienteNuevo;
+        
+        pacienteNuevo = new Paciente(
+                new Persona((String)arregloDeDatos.get(DatosPaciente.NOMBRES.getDato()),
+                        (String)arregloDeDatos.get(DatosPaciente.APELLIDOS.getDato()),
+                        Integer.valueOf((String)arregloDeDatos.get(DatosPaciente.EDAD.getDato())),
+                        (String)arregloDeDatos.get(DatosPaciente.DIRECCION.getDato()),
+                        (String)arregloDeDatos.get(DatosPaciente.LOCALIDAD.getDato()),
+                        (String)arregloDeDatos.get(DatosPaciente.TELEFONO.getDato())),
+                Integer.valueOf((String)arregloDeDatos.get(DatosPaciente.EDTA.getDato())),
+                (ArrayList)arregloDeDatos.get(DatosPaciente.PADECIMIENTOS_PREVIOS.getDato()),
+                (ArrayList)arregloDeDatos.get(DatosPaciente.MEDICAMENTOS_EXTERNOS.getDato()));
+ 
     }
 }
