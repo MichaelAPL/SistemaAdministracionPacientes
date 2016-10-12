@@ -5,12 +5,11 @@ package consultorio;
 
 import java.util.Date;
 
-class Cita {
+public class Cita {
     
     private Date fechaDeRealizacion;
     private Date fechaProgramada;
     private int numeroDeCita;
-    private Suero tipo;
     private boolean realizada;
 
     public Cita(int numeroDeCita) {
@@ -64,15 +63,5 @@ class Cita {
 
     public void setNúmeroDeCita() {
         numeroDeCita++;
-    }
-
-    public Suero getTipo() {
-        return tipo;
     }    
-
-    public void setTipo(Suero tipo) {
-        this.tipo = tipo;
-    }
-    
-    
 }

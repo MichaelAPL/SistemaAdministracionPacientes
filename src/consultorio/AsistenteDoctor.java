@@ -14,9 +14,10 @@ public class AsistenteDoctor {
     private ArrayList<Paciente> bancoDePacientes;
     private ArrayList<Paciente> pacientesConCitaHoy;
     
-    public AsistenteDoctor(ArrayList<Paciente> pacientes){
+    public AsistenteDoctor(ArrayList<Paciente> pacientes, VentanillaPaseDeLista ventanillaPaseLista){
         this.bancoDePacientes = pacientes;
         this.pacientesConCitaHoy = generarListaDePacientesConCitaHoy();
+        this.ventanillaPaseLista = ventanillaPaseLista;
     }
 
     public ArrayList<Paciente> generarListaDePacientesConCitaHoy() {
