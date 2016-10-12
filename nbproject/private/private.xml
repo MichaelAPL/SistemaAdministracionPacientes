@@ -1,26 +1,16 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-    </open-files>
-</project-private>
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/NewMain.java</file>
-            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Persona.java</file>
-            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/gestoresDeVentanillas/Controlador.java</file>
-            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/ventanillas/PaseDeLista.java</file>
-            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Cita.java</file>
-            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Suero.java</file>
-            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Paciente.java</file>
-            <file>file:/C:/Users/Milka/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/ventanillas/VentanillaVPaseDeLista.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Persona.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/AsistenteDoctor.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/NewMain.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Cita.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/ventanillas/VentanillaPaseDeLista.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/gestoresDeVentanillas/ControladorRegistro.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Suero.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Paciente.java</file>
         </group>
     </open-files>
 </project-private>
->>>>>>> 4ec8c03ac7d02843d666232efc469fb5bc21d74d

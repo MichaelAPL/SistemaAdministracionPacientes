@@ -6,6 +6,7 @@
 package consultorio;
 
 import gestoresDeVentanillas.ControladorRegistro;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -21,6 +22,9 @@ public class NewMain {
         VentanaRegistroPacientes ventanaRegistro = new VentanaRegistroPacientes(controlRegistro);
         
         ventanaRegistro.setVisible(true);
+        
+        Date hoy = new Date();
+        System.out.println(hoy.toLocaleString());
     }
     
 }

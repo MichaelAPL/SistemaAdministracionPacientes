@@ -78,7 +78,5 @@ class Cita {
 
     public void setTipo(Suero tipo) {
         this.tipo = tipo;
-    }
-    
-    
+    }   
 }
