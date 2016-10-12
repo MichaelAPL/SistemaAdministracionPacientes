@@ -31,7 +31,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setVisible(true);
     }   
-
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -263,7 +263,8 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        ArrayList datosDelPaciente = new ArrayList();
+        ArrayList datosDelPaciente = new ArrayList();  
+        
         datosDelPaciente.add(nombres.getText());
         datosDelPaciente.add(apellidos.getText());
         datosDelPaciente.add(edad.getText());
@@ -273,6 +274,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         datosDelPaciente.add(EDTA.getText());
         datosDelPaciente.add(this.padecimientosPrevios);
         datosDelPaciente.add(this.medicamentosExternos);
+        
         controladorRegistro.crearNuevoPaciente(datosDelPaciente);
     }//GEN-LAST:event_botonGuardarActionPerformed
 
