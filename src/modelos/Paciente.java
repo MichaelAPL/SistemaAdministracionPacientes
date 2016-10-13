@@ -11,7 +11,6 @@ public class Paciente extends Persona{
 
     private ArrayList<String> medicamentosExternos; 
     private ArrayList<String> enfermedadesPrevias;
-    private int dosis_ml_EDTA;
     private Tratamiento tratamiento;
     private final Date fechaDeInscripcion;
     private ArrayList<Cita> historialDeCitas;
