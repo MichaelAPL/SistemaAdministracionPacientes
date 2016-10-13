@@ -10,9 +10,7 @@ import modelos.AsistenteDoctor;
 import modelos.Persona;
 import modelos.Tratamiento;
 import modelos.Cita;
-import controladores.ControladorRegistro;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import vistas.VentanillaPaseDeLista;
 
 
@@ -58,6 +56,6 @@ public class TestSeguimientoCitas {
         AsistenteDoctor asistente = new AsistenteDoctor(bancoPacientes, ventanillaPaseLista);
         asistente.mandarAVentanillaAPacientesConCitas();
         
-        ventanillaPaseLista.setAsistenteControlador(asistente);
+        ventanillaPaseLista.setAsistenteDoctor(asistente);
     }   
 }

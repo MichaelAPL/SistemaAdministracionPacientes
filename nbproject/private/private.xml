@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Persona.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/AsistenteDoctor.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/NewMain.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Cita.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/ventanillas/VentanillaPaseDeLista.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/gestoresDeVentanillas/ControladorRegistro.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Suero.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/consultorio/Paciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Tratamiento.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/tests/TestSeguimientoCitas.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/controladores/ControladorRegistro.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/controladores/ControladorCitas.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Cita.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/AsistenteDoctor.java</file>
         </group>
     </open-files>
 </project-private>

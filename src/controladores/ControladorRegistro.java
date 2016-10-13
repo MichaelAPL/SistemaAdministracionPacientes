@@ -12,7 +12,7 @@ import modelos.Tratamiento;
  */
 public class ControladorRegistro {
     
-    public void crearNuevoPaciente(ArrayList arregloDeDatos){
+    public Paciente crearNuevoPaciente(ArrayList arregloDeDatos){
         Persona persona;
         Paciente pacienteNuevo;
         Tratamiento tratamiento;
@@ -29,5 +29,7 @@ public class ControladorRegistro {
         pacienteNuevo = new Paciente(persona, tratamiento,
                 (ArrayList)arregloDeDatos.get(DatosPaciente.PADECIMIENTOS_PREVIOS.getDato()),
                 (ArrayList)arregloDeDatos.get(DatosPaciente.MEDICAMENTOS_EXTERNOS.getDato()));
+        
+        return pacienteNuevo;
     }
 }

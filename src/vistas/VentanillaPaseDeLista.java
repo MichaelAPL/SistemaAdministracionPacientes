@@ -23,7 +23,7 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
 
     }
     
-    public void setAsistenteControlador(AsistenteDoctor asistente){
+    public void setAsistenteDoctor(AsistenteDoctor asistente){
         this.controladorCitas.setAsistente(asistente);
     }
 

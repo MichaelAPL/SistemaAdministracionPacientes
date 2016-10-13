@@ -57,11 +57,7 @@ public class Cita {
         this.realizada = realizada;
     }
 
-    public int getNúmeroDeCita() {
-        return numeroDeCita;
-    }
-
-    public void setNúmeroDeCita() {
+    public void setNumeroDeCita() {
         numeroDeCita++;
     }    
 }
