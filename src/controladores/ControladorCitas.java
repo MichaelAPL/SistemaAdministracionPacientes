@@ -22,7 +22,6 @@ public class ControladorCitas {
     
     public void asistenciaDePacientes(int indicePaciente){
         asistente.ponerAsistenciaAlPaciente(indicePaciente);
-        
     }
     
     public void actualizarListaPacientes(){

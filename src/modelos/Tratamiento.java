@@ -33,4 +33,12 @@ public class Tratamiento {
             return suero.QUELANTE;
         }
     }
+    
+    public int getNumeroSuerosAplicados(){
+        return this.numeroDeSuerosAPlicados;
+    }
+    
+    public void agregarSueroAlHistorial(){
+        this.numeroDeSuerosAPlicados ++;
+    }
 }
