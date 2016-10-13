@@ -26,7 +26,7 @@ public class TestSeguimientoCitas {
         VentanaRegistroPacientes ventanaRegistro = new VentanaRegistroPacientes(controlRegistro);
      
         ventanaRegistro.setVisible(true);*/
-        
+        System.out.println((int)Math.pow(10, 2));
         VentanillaPaseDeLista ventanillaPaseLista = new VentanillaPaseDeLista();
         ArrayList<Paciente> bancoPacientes = new ArrayList();
         
@@ -39,7 +39,7 @@ public class TestSeguimientoCitas {
         ArrayList enfermedades = new ArrayList();
         enfermedades.add("Diabetes");
         
-        Cita cita = new Cita(1);
+        Cita cita = new Cita(5);
         
         Tratamiento tratamiento1 = new Tratamiento(125);
         Tratamiento tratamiento2 = new Tratamiento(145);
