@@ -1,8 +1,8 @@
-package ventanillas;
+package vistas;
 
-import consultorio.AsistenteDoctor;
-import consultorio.Paciente;
-import gestoresDeVentanillas.ControladorCitas;
+import modelos.AsistenteDoctor;
+import modelos.Paciente;
+import controladores.ControladorCitas;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;

@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package consultorio;
+package tests;
 
-import gestoresDeVentanillas.ControladorRegistro;
+import modelos.Paciente;
+import modelos.AsistenteDoctor;
+import modelos.Persona;
+import modelos.Tratamiento;
+import modelos.Cita;
+import controladores.ControladorRegistro;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import ventanillas.VentanillaPaseDeLista;
+import vistas.VentanillaPaseDeLista;
 
 
 
@@ -16,7 +21,7 @@ import ventanillas.VentanillaPaseDeLista;
  *
  * @author Milka
  */
-public class NewMain {
+public class TestSeguimientoCitas {
 
     public static void main(String[] args) {
         /*ControladorRegistro controlRegistro = new ControladorRegistro();

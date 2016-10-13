@@ -1,7 +1,7 @@
 /*
  *
  */
-package consultorio;
+package modelos;
 
 import java.util.Date;
 

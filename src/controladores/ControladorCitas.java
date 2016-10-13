@@ -1,7 +1,7 @@
 
-package gestoresDeVentanillas;
+package controladores;
 
-import consultorio.AsistenteDoctor;
+import modelos.AsistenteDoctor;
 
 
 

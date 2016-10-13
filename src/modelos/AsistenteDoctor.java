@@ -1,8 +1,8 @@
-package consultorio;
+package modelos;
 
 import java.util.ArrayList;
 import java.util.Date;
-import ventanillas.VentanillaPaseDeLista;
+import vistas.VentanillaPaseDeLista;
 
 /**
  *

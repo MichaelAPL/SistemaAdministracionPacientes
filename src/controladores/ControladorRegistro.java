@@ -1,10 +1,10 @@
-package gestoresDeVentanillas;
+package controladores;
 
-import consultorio.DatosPaciente;
+import modelos.enums.DatosPaciente;
 import java.util.ArrayList;
-import consultorio.Paciente;
-import consultorio.Persona;
-import consultorio.Tratamiento;
+import modelos.Paciente;
+import modelos.Persona;
+import modelos.Tratamiento;
 
 /**
  *
