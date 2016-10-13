@@ -42,7 +42,7 @@ public class AsistenteDoctor {
         crearNuevaCitaAlPaciente(paciente);
     }
     
-    public void crearNuevaCitaAlPaciente(Paciente paciente){
+    private void crearNuevaCitaAlPaciente(Paciente paciente){
         Cita cita = new Cita(paciente.getSiguienteCita().getNumeroDeCita()+1);
         paciente.setSiguienteCita(cita);
     }

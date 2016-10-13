@@ -10,5 +10,5 @@ package consultorio;
  * @author Milka
  */
 public enum Suero {
-    SUERO_QUELANTE, SUERO_MINERAL;
+    QUELANTE, MINERAL;
 }

@@ -22,8 +22,10 @@ public class ControladorCitas {
     
     public void asistenciaDePacientes(int indicePaciente){
         asistente.ponerAsistenciaAlPaciente(indicePaciente);
-        asistente.generarListaDePacientesConCitaHoy();
+        
+    }
+    
+    public void actualizarListaPacientes(){
         asistente.mandarAVentanillaAPacientesConCitas();
     }
- 
 }

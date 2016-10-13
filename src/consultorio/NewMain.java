@@ -21,8 +21,7 @@ public class NewMain {
     public static void main(String[] args) {
         /*ControladorRegistro controlRegistro = new ControladorRegistro();
         VentanaRegistroPacientes ventanaRegistro = new VentanaRegistroPacientes(controlRegistro);
-        
-=======
+     
         ventanaRegistro.setVisible(true);*/
         
         VentanillaPaseDeLista ventanillaPaseLista = new VentanillaPaseDeLista();
@@ -39,10 +38,13 @@ public class NewMain {
         
         Cita cita = new Cita(1);
         
-        Paciente paciente1 = new Paciente(persona1, 125, enfermedades, medicamentos);
+        Tratamiento tratamiento1 = new Tratamiento(125);
+        Tratamiento tratamiento2 = new Tratamiento(145);
+        
+        Paciente paciente1 = new Paciente(persona1, tratamiento1, enfermedades, medicamentos);
         paciente1.setSiguienteCita(cita);
         
-        Paciente paciente2 = new Paciente(persona2, 145, enfermedades, medicamentos);
+        Paciente paciente2 = new Paciente(persona2, tratamiento2, enfermedades, medicamentos);
         paciente2.setSiguienteCita(cita);
         
         bancoPacientes.add(paciente1);
@@ -52,6 +54,5 @@ public class NewMain {
         asistente.mandarAVentanillaAPacientesConCitas();
         
         ventanillaPaseLista.setAsistenteControlador(asistente);
-    }
-    
+    }   
 }

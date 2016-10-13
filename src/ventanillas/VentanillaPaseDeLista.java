@@ -44,13 +44,13 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
         this.tablaDeSesiones.setModel(modelo);
         
         for (Paciente paciente : pacientes) {
-            Object datosPaciente[] = {paciente.getNombres(), paciente.getApellidos(), " ", 
-            paciente.getDosis_ml_EDTA(), paciente.getSiguienteCita().getNumeroDeCita(), false};
+            Object datosPaciente[] = {paciente.getNombres(), paciente.getApellidos(), 
+                paciente.getTratamiento().sueroAaplicar(), paciente.getTratamiento().getDosisEDTA(), 
+                paciente.getSiguienteCita().getNumeroDeCita(), false};
             modelo.addRow(datosPaciente);
         }
-
     }
-
+    
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,10 +101,11 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
         for (int i = 0; i < this.tablaDeSesiones.getModel().getRowCount(); i++) {
            if((Boolean)this.tablaDeSesiones.getModel().getValueAt(i, 5) == true){
                controladorCitas.asistenciaDePacientes(i);
+               controladorCitas.actualizarListaPacientes();
            }
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton guardarCambios;
