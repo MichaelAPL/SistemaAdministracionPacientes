@@ -26,7 +26,6 @@ public class TestSeguimientoCitas {
         VentanaRegistroPacientes ventanaRegistro = new VentanaRegistroPacientes(controlRegistro);
      
         ventanaRegistro.setVisible(true);*/
-        System.out.println((int)Math.pow(10, 2));
         VentanillaPaseDeLista ventanillaPaseLista = new VentanillaPaseDeLista();
         ArrayList<Paciente> bancoPacientes = new ArrayList();
         
@@ -57,9 +56,5 @@ public class TestSeguimientoCitas {
         asistente.mandarAVentanillaAPacientesConCitas();
         
         ventanillaPaseLista.setAsistenteDoctor(asistente);
-        
-        String name = "Miguel Angel Pat Lopez";
-        
-        System.out.println(java.util.UUID.randomUUID().toString());
     }   
 }

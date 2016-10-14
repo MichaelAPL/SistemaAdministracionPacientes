@@ -14,6 +14,7 @@ public class Paciente extends Persona{
     private Tratamiento tratamiento;
     private final Date fechaDeInscripcion;
     private ArrayList<Cita> historialDeCitas;
+    private String id;
     
 
     public Paciente(Persona persona, Tratamiento tratamiento, ArrayList<String> enfermedadesPrevias, 
@@ -24,6 +25,7 @@ public class Paciente extends Persona{
         this.medicamentosExternos = medicamentosExternos;
         fechaDeInscripcion = inicializarFechaDeIncripcion();
         historialDeCitas = new ArrayList();
+        id = java.util.UUID.randomUUID().toString();
     }
 
     public ArrayList<String> getEnfermedadesPrevias() {
@@ -34,6 +36,14 @@ public class Paciente extends Persona{
         this.enfermedadesPrevias = enfermedadesPrevias;
     }
 
+    public ArrayList<String> getMedicamentosExternos() {
+        return medicamentosExternos;
+    }
+
+    public void setMedicamentosExternos(ArrayList<String> medicamentosExternos) {
+        this.medicamentosExternos = medicamentosExternos;
+    }
+    
     public Tratamiento getTratamiento() {
         return tratamiento;
     }
@@ -65,5 +75,9 @@ public class Paciente extends Persona{
     
     public void setSiguienteCita(Cita cita){
         historialDeCitas.add(cita);
+    }
+
+    public String getId() {
+        return id;
     }
 }
