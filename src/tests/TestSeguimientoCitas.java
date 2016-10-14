@@ -57,5 +57,9 @@ public class TestSeguimientoCitas {
         asistente.mandarAVentanillaAPacientesConCitas();
         
         ventanillaPaseLista.setAsistenteDoctor(asistente);
+        
+        String name = "Miguel Angel Pat Lopez";
+        
+        System.out.println(java.util.UUID.randomUUID().toString());
     }   
 }
