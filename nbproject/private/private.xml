@@ -4,17 +4,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Tratamiento.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/enums/Suero.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/enums/DatosPaciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaRegistroPacientes.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Paciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/tests/TestConexionBD.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/AsistenteDoctor.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/database/ConectorBD.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/enums/Suero.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanillaPaseDeLista.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/tests/TestSeguimientoCitas.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaRegistroPacientes.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/controladores/ControladorRegistro.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Paciente.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/controladores/ControladorCitas.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Persona.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Cita.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/AsistenteDoctor.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/PacienteDAO.java</file>
         </group>
     </open-files>
 </project-private>
