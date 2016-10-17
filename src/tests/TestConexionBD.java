@@ -7,14 +7,11 @@ package tests;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelos.Cita;
 import modelos.DAOs.PacienteDAO;
 import modelos.Paciente;
 import modelos.Persona;
 import modelos.Tratamiento;
-import modelos.database.ConectorBD;
 
 /**
  *

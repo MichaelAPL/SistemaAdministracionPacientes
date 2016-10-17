@@ -5,7 +5,6 @@
  */
 package modelos.DAOs;
 
-import com.google.gson.Gson;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import modelos.Paciente;
@@ -24,26 +23,40 @@ public class PacienteDAO {
                 +"Edad, ClvPaciente, EnfermedadesPrevias, MedicamentosExternos";
         
         String consulta = "INSERT INTO Paciente ("+campos+")"+" VALUES (?,?,?,?,?,?,?,?,?)";        
-        PreparedStatement st = conectorBD.getConector().prepareStatement(consulta);
-        st.setString(1, paciente.getNombres());
-        st.setString(2, paciente.getApellidos());
-        st.setString(3, paciente.getDireccion());
-        st.setString(4, paciente.getLocalidad());
-        st.setString(5, paciente.getTelefono());
-        st.setString(6, String.valueOf(paciente.getEdad()));
-        st.setString(7, paciente.getId());
+        PreparedStatement declaracion = conectorBD.getConector().prepareStatement(consulta);
+        declaracion.setString(1, paciente.getNombres());
+        declaracion.setString(2, paciente.getApellidos());
+        declaracion.setString(3, paciente.getDireccion());
+        declaracion.setString(4, paciente.getLocalidad());
+        declaracion.setString(5, paciente.getTelefono());
+        declaracion.setInt(6, paciente.getEdad());
+        declaracion.setString(7, paciente.getId());
+        declaracion.setInt(8, paciente.getEnfermedadesPrevias().size());
+        declaracion.setInt(9, paciente.getMedicamentosExternos().size());
         
-        /*Se utiliza esta clase para poder meter un ArrayList a la base de datos
-        convirtiendola en un Json*/
-        Gson gson = new Gson();
+        String camposEnfermedades = "clvPaciente, NumEnfer, NombreEnfer";
+        consulta = "INSERT INTO EnfermedadesPrevias ("+camposEnfermedades+")" +
+                " VALUES (?, ?, ?)";
+        PreparedStatement declaracionEnfermedades = conectorBD.getConector().prepareStatement(consulta);
+        declaracionEnfermedades.setString(1, paciente.getId());
+        for (int i = 0; i < paciente.getEnfermedadesPrevias().size(); i++) {
+            declaracionEnfermedades.setInt(2, i);
+            declaracionEnfermedades.setString(3, paciente.getEnfermedadesPrevias().get(i));
+        }
         
-        String enfermedadesPrevias = gson.toJson(paciente.getEnfermedadesPrevias());
-        st.setString(8, enfermedadesPrevias);
+        String camposMedicamentos = "clvPaciente, numMedicamento, NombreMedicamento";
+        consulta = "INSERT INTO MedicamentosExternos ("+camposMedicamentos+")" + 
+                " VALUES (?,?,?)";
+        PreparedStatement declaracionMedicamentos = conectorBD.getConector().prepareStatement(consulta);
+        declaracionMedicamentos.setString(1, paciente.getId());
+        for (int i = 0; i < paciente.getMedicamentosExternos().size(); i++) {
+            declaracionMedicamentos.setInt(2, i);
+            declaracionMedicamentos.setString(3, paciente.getMedicamentosExternos().get(i));
+        }
         
-        String medicamentosExternos = gson.toJson(paciente.getMedicamentosExternos());
-        st.setString(9, medicamentosExternos);
-        
-        st.execute();
+        declaracion.execute();
+        declaracionEnfermedades.execute();
+        declaracionMedicamentos.execute();
         conectorBD.desconectar();
     }
 }
