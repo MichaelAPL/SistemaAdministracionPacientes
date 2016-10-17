@@ -15,7 +15,11 @@ import modelos.database.ConectorBD;
  * @author miguelangel
  */
 public class PacienteDAO {
-    private ConectorBD conectorBD = new ConectorBD();
+    private ConectorBD conectorBD;
+    
+    public PacienteDAO(){
+        this.conectorBD = new ConectorBD();
+    }
     
     public void crearPaciente(Paciente paciente) throws SQLException{
         conectorBD.conectar();
