@@ -7,6 +7,7 @@ package modelos.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -25,7 +26,7 @@ public class ConectorBD {
         conexion.close();
     }
     
-    public Connection getConector(){
-        return this.conexion;
+    public PreparedStatement consulta(String consulta) throws SQLException{
+        return this.conexion.prepareStatement(consulta);
     }
 }

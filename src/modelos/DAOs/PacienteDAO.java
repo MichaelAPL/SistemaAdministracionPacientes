@@ -26,8 +26,8 @@ public class PacienteDAO {
         String campos = "Nombre, Apellido, Direccion, Localidad, Telefono, "
                 +"Edad, ClvPaciente, EnfermedadesPrevias, MedicamentosExternos";
         
-        String consulta = "INSERT INTO Paciente ("+campos+")"+" VALUES (?,?,?,?,?,?,?,?,?)";        
-        PreparedStatement declaracion = conectorBD.getConector().prepareStatement(consulta);
+        String consulta = "INSERT INTO Paciente ("+campos+")"+" VALUES (?,?,?,?,?,?,?,?,?, ?)";        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
         declaracion.setString(1, paciente.getNombres());
         declaracion.setString(2, paciente.getApellidos());
         declaracion.setString(3, paciente.getDireccion());
@@ -38,10 +38,13 @@ public class PacienteDAO {
         declaracion.setInt(8, paciente.getEnfermedadesPrevias().size());
         declaracion.setInt(9, paciente.getMedicamentosExternos().size());
         
+        java.sql.Date fechaDeInscripcion = new java.sql.Date(paciente.getFechaDeInscripcion().getTime());
+        declaracion.setDate(10, fechaDeInscripcion);
+        
         String camposEnfermedades = "clvPaciente, NumEnfer, NombreEnfer";
         consulta = "INSERT INTO EnfermedadesPrevias ("+camposEnfermedades+")" +
                 " VALUES (?, ?, ?)";
-        PreparedStatement declaracionEnfermedades = conectorBD.getConector().prepareStatement(consulta);
+        PreparedStatement declaracionEnfermedades = conectorBD.consulta(consulta);
         declaracionEnfermedades.setString(1, paciente.getId());
         for (int i = 0; i < paciente.getEnfermedadesPrevias().size(); i++) {
             declaracionEnfermedades.setInt(2, i);
@@ -51,7 +54,7 @@ public class PacienteDAO {
         String camposMedicamentos = "clvPaciente, numMedicamento, NombreMedicamento";
         consulta = "INSERT INTO MedicamentosExternos ("+camposMedicamentos+")" + 
                 " VALUES (?,?,?)";
-        PreparedStatement declaracionMedicamentos = conectorBD.getConector().prepareStatement(consulta);
+        PreparedStatement declaracionMedicamentos = conectorBD.consulta(consulta);
         declaracionMedicamentos.setString(1, paciente.getId());
         for (int i = 0; i < paciente.getMedicamentosExternos().size(); i++) {
             declaracionMedicamentos.setInt(2, i);
