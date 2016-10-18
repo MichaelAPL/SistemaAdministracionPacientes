@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import modelos.Cita;
 import modelos.Paciente;
 import modelos.database.ConectorBD;
+import modelos.enums.DatosCita;
 
 /**
  *
@@ -22,7 +23,7 @@ public class CitaDAO {
         this.conectorBD = new ConectorBD();
     }
     
-    public void crearCita(Cita cita) throws SQLException{
+    public void crearCita( Cita cita ) throws SQLException{
         conectorBD.conectar();
         
         String campos = "FechaDeRealizacion, FechaProgramada, NumeroDeCita, Realizada, ClvPaciente";
@@ -30,15 +31,15 @@ public class CitaDAO {
         
         PreparedStatement declaracionCita = conectorBD.consulta(consulta);
         
-        java.sql.Date fechaAux = new java.sql.Date(cita.getFechaDeRealizacion().getTime());
-        declaracionCita.setDate(1, fechaAux);
+        java.sql.Date fechaDeRealizacion = new java.sql.Date( cita.getFechaDeRealizacion().getTime() );
+        declaracionCita.setDate( DatosCita.FECHA_DE_REALIZACION.getDato(), fechaDeRealizacion );
         
-        fechaAux = new java.sql.Date(cita.getFechaProgramada().getTime());
-        declaracionCita.setDate(2, fechaAux);
+        java.sql.Date fechaProgramada = new java.sql.Date( cita.getFechaProgramada().getTime() );
+        declaracionCita.setDate( DatosCita.FECHA_PROGRAMADA.getDato(), fechaProgramada );
         
-        declaracionCita.setInt(3, cita.getNumeroDeCita());
-        declaracionCita.setBoolean(4, cita.isRealizada());
-        declaracionCita.setString(5, cita.getClavePaciente());
+        declaracionCita.setInt( DatosCita.NUMERO_DE_CITA.getDato(), cita.getNumeroDeCita() );
+        declaracionCita.setBoolean( DatosCita.REALIZADA.getDato(), cita.isRealizada() );
+        declaracionCita.setString( DatosCita.CLV_PACIENTE.getDato(), cita.getClavePaciente() );
         
         declaracionCita.execute();
         conectorBD.desconectar();
