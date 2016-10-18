@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import modelos.Paciente;
 import modelos.Persona;
 import modelos.database.ConectorBD;
+import modelos.enums.DatosPacienteDao;
 
 /**
  *
@@ -25,24 +26,27 @@ public class PacienteDAO {
     
     public void crearPaciente(Paciente paciente) throws SQLException{
         conectorBD.conectar();
-        String campos = "Nombre, Apellido, Direccion, Localidad, Telefono, "
-                +"Edad, ClvPaciente, EnfermedadesPrevias, MedicamentosExternos, "
-                +"FechaInscripcion";
         
-        String consulta = "INSERT INTO Paciente ("+campos+")"+" VALUES (?,?,?,?,?,?,?,?,?,?)";        
+        String campos = "Nombre, Apellido, Direccion, Localidad, Telefono, "
+                + "Edad, ClvPaciente, EnfermedadesPrevias, MedicamentosExternos, "
+                + "FechaInscripcion";
+        
+        String consulta = "INSERT INTO Paciente ("+campos+")"+" VALUES (?,?,?,?,?,?,?,?,?,?)";  
+        
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setString(1, paciente.getNombres());
-        declaracion.setString(2, paciente.getApellidos());
-        declaracion.setString(3, paciente.getDireccion());
-        declaracion.setString(4, paciente.getLocalidad());
-        declaracion.setString(5, paciente.getTelefono());
-        declaracion.setInt(6, paciente.getEdad());
-        declaracion.setString(7, paciente.getClave());
-        declaracion.setInt(8, paciente.getEnfermedadesPrevias().size());
-        declaracion.setInt(9, paciente.getMedicamentosExternos().size());
+        
+        declaracion.setString( DatosPacienteDao.NOMBRE.getDato(), paciente.getNombres() );
+        declaracion.setString( DatosPacienteDao.APELLIDO.getDato(), paciente.getApellidos() );
+        declaracion.setString( DatosPacienteDao.DIRECCION.getDato(), paciente.getDireccion() );
+        declaracion.setString( DatosPacienteDao.LOCALIDAD.getDato(), paciente.getLocalidad() );
+        declaracion.setString( DatosPacienteDao.TELEFONO.getDato(), paciente.getTelefono() );
+        declaracion.setInt( DatosPacienteDao.EDAD.getDato(), paciente.getEdad() );
+        declaracion.setString( DatosPacienteDao.CLV_PACIENTE.getDato(), paciente.getClave() );
+        declaracion.setInt( DatosPacienteDao.ENFERMEDADES_PREVIAS.getDato(), paciente.getEnfermedadesPrevias().size() );
+        declaracion.setInt( DatosPacienteDao.MEDICAMENTOS_EXTERNOS.getDato(), paciente.getMedicamentosExternos().size() );
         
         java.sql.Date fechaDeInscripcion = new java.sql.Date(paciente.getFechaDeInscripcion().getTime());
-        declaracion.setDate(10, fechaDeInscripcion);
+        declaracion.setDate( DatosPacienteDao.FECHA_INSCRIPCION.getDato(), fechaDeInscripcion );
         
         String camposEnfermedades = "clvPaciente, NumEnfer, NombreEnfer";
         consulta = "INSERT INTO EnfermedadesPrevias ("+camposEnfermedades+")" +
