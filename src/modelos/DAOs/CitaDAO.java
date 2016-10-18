@@ -25,8 +25,8 @@ public class CitaDAO {
     public void crearCita(Cita cita) throws SQLException{
         conectorBD.conectar();
         
-        String campos = "FechaDeRealizacion, FechaProgramada, NumeroDeCita, Relizada, ClvPaciente";
-        String consulta = "INSER INTO Tratamiento ("+campos+")"+" VALUES (?,?,?,?,?)";
+        String campos = "FechaDeRealizacion, FechaProgramada, NumeroDeCita, Realizada, ClvPaciente";
+        String consulta = "INSERT INTO Citas ("+campos+")"+" VALUES (?,?,?,?,?)";
         
         PreparedStatement declaracionCita = conectorBD.consulta(consulta);
         

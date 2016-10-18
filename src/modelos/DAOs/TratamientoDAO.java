@@ -25,12 +25,12 @@ public class TratamientoDAO {
         conectorBD.conectar();
         
         String campos = "DosisEDTA, NumeroDeSuerosAplicados, ClvPaciente";
-        String consulta = "INSER INTO Tratamiento ("+campos+")"+" VALUES (?,?,?)";
+        String consulta = "INSERT INTO Tratamiento ("+campos+")"+" VALUES (?,?,?)";
         
         PreparedStatement declaracionTratamiento = conectorBD.consulta(consulta);
         
         declaracionTratamiento.setInt(1, tratamiento.getDosisEDTA());
-        declaracionTratamiento.setString(2, tratamiento.sueroAaplicar().toString());
+        declaracionTratamiento.setInt(2, tratamiento.getNumeroSuerosAplicados());
         declaracionTratamiento.setString(3, tratamiento.getClavePaciente());
         
         declaracionTratamiento.execute();

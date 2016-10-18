@@ -26,9 +26,10 @@ public class PacienteDAO {
     public void crearPaciente(Paciente paciente) throws SQLException{
         conectorBD.conectar();
         String campos = "Nombre, Apellido, Direccion, Localidad, Telefono, "
-                +"Edad, ClvPaciente, EnfermedadesPrevias, MedicamentosExternos";
+                +"Edad, ClvPaciente, EnfermedadesPrevias, MedicamentosExternos, "
+                +"FechaInscripcion";
         
-        String consulta = "INSERT INTO Paciente ("+campos+")"+" VALUES (?,?,?,?,?,?,?,?,?, ?)";        
+        String consulta = "INSERT INTO Paciente ("+campos+")"+" VALUES (?,?,?,?,?,?,?,?,?,?)";        
         PreparedStatement declaracion = conectorBD.consulta(consulta);
         declaracion.setString(1, paciente.getNombres());
         declaracion.setString(2, paciente.getApellidos());
