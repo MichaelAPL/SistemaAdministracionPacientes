@@ -6,18 +6,28 @@ package modelos;
 import java.util.Date;
 
 public class Cita {
-    
+    private String clavePaciente;
     private Date fechaDeRealizacion;
     private Date fechaProgramada;
     private int numeroDeCita;
     private boolean realizada;
-
-    public Cita(int numeroDeCita) {
+    
+    public Cita(int numeroDeCita){
         realizada = false;
         fechaDeRealizacion = null;
         this.numeroDeCita = numeroDeCita;
     }
 
+    public Cita(String clavePaciente, int numeroDeCita) {
+        this.clavePaciente = clavePaciente;
+        realizada = false;
+        fechaDeRealizacion = null;
+        this.numeroDeCita = numeroDeCita;
+    }
+    
+    public String getClavePaciente() {
+        return clavePaciente;
+    }
     
     public Date getFechaDeRealizacion() {
         if(isRealizada()){

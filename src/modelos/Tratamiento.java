@@ -12,13 +12,27 @@ import modelos.enums.Suero;
  * @author miguelangel
  */
 public class Tratamiento {
+    private String clavePaciente;
     private Suero suero;
     private int dosis_EDTA_ml;
     private int numeroDeSuerosAPlicados;
     
-    public Tratamiento(int dosisEDTA){
+    public Tratamiento(String clavePaciente, int dosisEDTA){
+        this.clavePaciente = clavePaciente;
         this.dosis_EDTA_ml = dosisEDTA;
         this.numeroDeSuerosAPlicados = 0;
+    }
+    
+    public Tratamiento(int dosisEDTA){
+        this.dosis_EDTA_ml = dosisEDTA;
+    }
+
+    public String getClavePaciente() {
+        return clavePaciente;
+    }
+    
+    public void setClavePaciente(String clavePaciente){
+        this.clavePaciente = clavePaciente;
     }
     
     public int getDosisEDTA(){

@@ -29,5 +29,7 @@ public class ControladorRegistro {
         pacienteNuevo = new Paciente(persona, tratamiento,
                 (ArrayList)arregloDeDatos.get(DatosPaciente.PADECIMIENTOS_PREVIOS.getDato()),
                 (ArrayList)arregloDeDatos.get(DatosPaciente.MEDICAMENTOS_EXTERNOS.getDato()));
+        
+        pacienteNuevo.getTratamiento().setClavePaciente(pacienteNuevo.getClave());
     }
 }

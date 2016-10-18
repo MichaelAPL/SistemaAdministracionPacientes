@@ -21,17 +21,17 @@ public class TratamientoDAO {
         conectorBD = new ConectorBD();
     }
     
-    public void crearTratamiento(Tratamiento tratamiento, String clvPaciente) throws SQLException{
+    public void crearTratamiento(Tratamiento tratamiento) throws SQLException{
         conectorBD.conectar();
         
-        String campos = "DosisEDTA, NumeroDeSuerosAplicados, Suero, ClvPaciente";
+        String campos = "DosisEDTA, NumeroDeSuerosAplicados, ClvPaciente";
         String consulta = "INSER INTO Tratamiento ("+campos+")"+" VALUES (?,?,?)";
         
         PreparedStatement declaracionTratamiento = conectorBD.consulta(consulta);
         
         declaracionTratamiento.setInt(1, tratamiento.getDosisEDTA());
         declaracionTratamiento.setString(2, tratamiento.sueroAaplicar().toString());
-        declaracionTratamiento.setString(3, clvPaciente);
+        declaracionTratamiento.setString(3, tratamiento.getClavePaciente());
         
         declaracionTratamiento.execute();
         conectorBD.desconectar();

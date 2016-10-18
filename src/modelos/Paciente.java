@@ -14,18 +14,26 @@ public class Paciente extends Persona{
     private Tratamiento tratamiento;
     private final Date fechaDeInscripcion;
     private ArrayList<Cita> historialDeCitas;
-    private String id;
+    private String clave;
+    
+    public Paciente(Persona persona){
+        super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), 
+                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono());        
+        fechaDeInscripcion = inicializarFechaDeIncripcion();
+        historialDeCitas = new ArrayList();
+    }
     
 
     public Paciente(Persona persona, Tratamiento tratamiento, ArrayList<String> enfermedadesPrevias, 
             ArrayList<String> medicamentosExternos) {
-        super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), persona.getDireccion(), persona.getLocalidad(), persona.getTelefono() );
+        super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), 
+                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono());
         this.tratamiento = tratamiento;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.medicamentosExternos = medicamentosExternos;
         fechaDeInscripcion = inicializarFechaDeIncripcion();
         historialDeCitas = new ArrayList();
-        id = java.util.UUID.randomUUID().toString();
+        clave = java.util.UUID.randomUUID().toString();
     }
 
     public ArrayList<String> getEnfermedadesPrevias() {
@@ -77,7 +85,11 @@ public class Paciente extends Persona{
         historialDeCitas.add(cita);
     }
 
-    public String getId() {
-        return id;
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 }

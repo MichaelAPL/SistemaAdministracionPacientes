@@ -44,18 +44,8 @@ public class AsistenteDoctor {
     }
     
     private void crearNuevaCitaAlPaciente(Paciente paciente){
-        Cita cita = new Cita(paciente.getSiguienteCita().getNumeroDeCita()+1);
+        Cita cita = new Cita(paciente.getClave(), 
+                paciente.getSiguienteCita().getNumeroDeCita()+1);
         paciente.setSiguienteCita(cita);
     }
-    
-    public Paciente buscarPaciente(String nombre){
-        Paciente paciente = null;
-        for (int i = 0; i < bancoDePacientes.size(); i++) {
-            if (bancoDePacientes.get(i).getNombres().equals(nombre)) {
-                paciente = bancoDePacientes.get(i);
-            }
-        }
-        return paciente;
-    }
-
 }

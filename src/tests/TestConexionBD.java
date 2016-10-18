@@ -31,11 +31,12 @@ public class TestConexionBD {
         ArrayList enfermedades = new ArrayList();
         enfermedades.add("Diabetes");
         
-        Cita cita = new Cita(5);
-        
         Tratamiento tratamiento1 = new Tratamiento(125);
         
         Paciente paciente1 = new Paciente(persona1, tratamiento1, enfermedades, medicamentos);
+        
+        Cita cita = new Cita(paciente1.getClave(), 5);
+        
         paciente1.setSiguienteCita(cita);
         
         PacienteDAO pacienteDAO = new PacienteDAO();

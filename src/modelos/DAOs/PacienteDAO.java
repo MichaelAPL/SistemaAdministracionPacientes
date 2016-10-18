@@ -6,8 +6,10 @@
 package modelos.DAOs;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelos.Paciente;
+import modelos.Persona;
 import modelos.database.ConectorBD;
 
 /**
@@ -34,7 +36,7 @@ public class PacienteDAO {
         declaracion.setString(4, paciente.getLocalidad());
         declaracion.setString(5, paciente.getTelefono());
         declaracion.setInt(6, paciente.getEdad());
-        declaracion.setString(7, paciente.getId());
+        declaracion.setString(7, paciente.getClave());
         declaracion.setInt(8, paciente.getEnfermedadesPrevias().size());
         declaracion.setInt(9, paciente.getMedicamentosExternos().size());
         
@@ -45,7 +47,7 @@ public class PacienteDAO {
         consulta = "INSERT INTO EnfermedadesPrevias ("+camposEnfermedades+")" +
                 " VALUES (?, ?, ?)";
         PreparedStatement declaracionEnfermedades = conectorBD.consulta(consulta);
-        declaracionEnfermedades.setString(1, paciente.getId());
+        declaracionEnfermedades.setString(1, paciente.getClave());
         for (int i = 0; i < paciente.getEnfermedadesPrevias().size(); i++) {
             declaracionEnfermedades.setInt(2, i);
             declaracionEnfermedades.setString(3, paciente.getEnfermedadesPrevias().get(i));
@@ -55,7 +57,7 @@ public class PacienteDAO {
         consulta = "INSERT INTO MedicamentosExternos ("+camposMedicamentos+")" + 
                 " VALUES (?,?,?)";
         PreparedStatement declaracionMedicamentos = conectorBD.consulta(consulta);
-        declaracionMedicamentos.setString(1, paciente.getId());
+        declaracionMedicamentos.setString(1, paciente.getClave());
         for (int i = 0; i < paciente.getMedicamentosExternos().size(); i++) {
             declaracionMedicamentos.setInt(2, i);
             declaracionMedicamentos.setString(3, paciente.getMedicamentosExternos().get(i));
@@ -65,5 +67,24 @@ public class PacienteDAO {
         declaracionEnfermedades.execute();
         declaracionMedicamentos.execute();
         conectorBD.desconectar();
+    }
+    
+    public Paciente getPaciente(String clvPaciente) throws SQLException{
+        this.conectorBD.conectar();
+        
+        ResultSet resultado = null;
+        String consulta = "select * from Pacientes where ClvPaciente = " + clvPaciente;
+        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
+        
+        resultado = declaracionDeRecuperacion.executeQuery();
+        
+        Persona persona = new Persona(resultado.getString("Nombre"), resultado.getString("Apellido"),
+        resultado.getInt("Edad"), resultado.getString("Direccion"), resultado.getString("Localidad"), 
+        resultado.getString("Telefono"));
+        
+        Paciente paciente = new Paciente(persona);
+        paciente.setClave(resultado.getString("ClvPaciente"));
+        
+        return paciente;
     }
 }
