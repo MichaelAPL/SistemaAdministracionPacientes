@@ -15,12 +15,12 @@ public class Tratamiento {
     private String clavePaciente;
     private Suero suero;
     private int dosis_EDTA_ml;
-    private int numeroDeSuerosAPlicados;
+    private int numeroDeSueros;
     
     public Tratamiento(String clavePaciente, int dosisEDTA){
         this.clavePaciente = clavePaciente;
         this.dosis_EDTA_ml = dosisEDTA;
-        this.numeroDeSuerosAPlicados = 0;
+        this.numeroDeSueros = 0;
     }
     
     public Tratamiento(int dosisEDTA){
@@ -40,8 +40,8 @@ public class Tratamiento {
     }
     
     public Suero sueroAaplicar(){
-        if(this.numeroDeSuerosAPlicados != 0 && 
-            this.numeroDeSuerosAPlicados % 5 == 0){
+        if(this.numeroDeSueros != 0 && 
+            this.numeroDeSueros % 5 == 0){
             return suero.MINERAL;
         }else{
             return suero.QUELANTE;
@@ -49,10 +49,10 @@ public class Tratamiento {
     }
     
     public int getNumeroSuerosAplicados(){
-        return this.numeroDeSuerosAPlicados;
+        return this.numeroDeSueros;
     }
     
     public void agregarSueroAlHistorial(){
-        this.numeroDeSuerosAPlicados ++;
+        this.numeroDeSueros ++;
     }
 }
