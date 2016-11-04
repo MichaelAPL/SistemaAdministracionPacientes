@@ -12,47 +12,50 @@ import modelos.enums.Suero;
  * @author miguelangel
  */
 public class Tratamiento {
+
     private String clavePaciente;
     private Suero suero;
     private int dosis_EDTA_ml;
     private int numeroDeSuerosAPlicados;
-    
-    public Tratamiento(String clavePaciente, int dosisEDTA){
+
+    public Tratamiento(String clavePaciente, int dosisEDTA) {
         this.clavePaciente = clavePaciente;
         this.dosis_EDTA_ml = dosisEDTA;
         this.numeroDeSuerosAPlicados = 0;
     }
-    
-    public Tratamiento(int dosisEDTA){
+
+    public Tratamiento(int dosisEDTA) {
         this.dosis_EDTA_ml = dosisEDTA;
     }
 
     public String getClavePaciente() {
         return clavePaciente;
     }
-    
-    public void setClavePaciente(String clavePaciente){
+
+    public void setClavePaciente(String clavePaciente) {
         this.clavePaciente = clavePaciente;
     }
-    
-    public int getDosisEDTA(){
+
+    public int getDosisEDTA() {
         return this.dosis_EDTA_ml;
     }
-    
-    public Suero sueroAaplicar(){
-        if(this.numeroDeSuerosAPlicados != 0 && 
-            this.numeroDeSuerosAPlicados % 5 == 0){
+
+    //devuelve el tipo de suero a aplicar según el número de suero que toca aplicar
+
+    public Suero sueroAaplicar() {
+        if (this.numeroDeSuerosAPlicados != 0
+            && this.numeroDeSuerosAPlicados % 5 == 0) {
             return suero.MINERAL;
-        }else{
+        } else {
             return suero.QUELANTE;
         }
     }
-    
-    public int getNumeroSuerosAplicados(){
+
+    public int getNumeroSuerosAplicados() {
         return this.numeroDeSuerosAPlicados;
     }
-    
-    public void agregarSueroAlHistorial(){
-        this.numeroDeSuerosAPlicados ++;
+
+    public void agregarSueroAlHistorial() {
+        this.numeroDeSuerosAPlicados++;
     }
 }
