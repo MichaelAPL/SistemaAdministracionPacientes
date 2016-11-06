@@ -14,10 +14,14 @@ import modelos.enums.Suero;
 public class Tratamiento {
 
     private String clavePaciente;
-    private Suero suero;
+    private Aplicacion ultimaAplicacion;
     private int dosis_EDTA_ml;
-    private int numeroDeSueros;
     private int numeroDeSuerosAPlicados;
+    
+//To Eliminate
+    private Suero suero;
+    private int numeroDeSueros;
+    
 
     public Tratamiento(String clavePaciente, int dosisEDTA) {
         this.clavePaciente = clavePaciente;
