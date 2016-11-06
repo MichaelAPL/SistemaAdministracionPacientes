@@ -8,7 +8,6 @@ package modelos.DAOs;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import modelos.Cita;
-import modelos.Paciente;
 import modelos.database.ConectorBD;
 import modelos.enums.DatosCita;
 
