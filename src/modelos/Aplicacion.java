@@ -17,7 +17,7 @@ public class Aplicacion {
     private Date fecha;
     private Suero suero;
     private int numAplicacion;
-
+    
     public int getNumAplicacion() {
         return numAplicacion;
     }
