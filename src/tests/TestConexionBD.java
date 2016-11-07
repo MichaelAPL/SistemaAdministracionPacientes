@@ -8,7 +8,6 @@ package tests;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import modelos.Cita;
 import modelos.DAOs.CitaDAO;
 import modelos.DAOs.PacienteDAO;
 import modelos.DAOs.TratamientoDAO;

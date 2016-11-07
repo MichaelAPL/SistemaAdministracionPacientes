@@ -5,7 +5,7 @@
  */
 package modelos;
 
-import modelos.enums.Suero;
+import java.util.Date;
 
 /**
  *
@@ -15,22 +15,23 @@ public class Tratamiento {
 
     private String clavePaciente;
     private Aplicacion ultimaAplicacion;
-    private int dosis_EDTA_ml;
-    private int numeroDeSuerosAPlicados;
-    
-//To Eliminate
-    private Suero suero;
-    private int numeroDeSueros;
-    
+    private Aplicacion siguienteAplicacion;
+    private final int dosis_EDTA_ml;
+    private boolean activo;
 
     public Tratamiento(String clavePaciente, int dosisEDTA) {
         this.clavePaciente = clavePaciente;
         this.dosis_EDTA_ml = dosisEDTA;
-        this.numeroDeSueros = 0;
+        this.ultimaAplicacion = null;
+        this.siguienteAplicacion = new Aplicacion(0);
+        this.activo = true;
     }
 
     public Tratamiento(int dosisEDTA) {
         this.dosis_EDTA_ml = dosisEDTA;
+        this.ultimaAplicacion = null;
+        this.siguienteAplicacion = new Aplicacion(0);
+        this.activo = true;
     }
 
     public String getClavePaciente() {
@@ -45,22 +46,43 @@ public class Tratamiento {
         return this.dosis_EDTA_ml;
     }
 
-    //devuelve el tipo de suero a aplicar según el número de suero que toca aplicar
+    public void agregarAplicacion() {
+        int numSiguienteAplicacion = siguienteAplicacion.getNumAplicacion() + 1;
 
-    public Suero sueroAaplicar() {
-        if (this.numeroDeSuerosAPlicados != 0
-            && this.numeroDeSuerosAPlicados % 5 == 0) {
-            return suero.MINERAL;
+        siguienteAplicacion.setFecha(new Date());
+        
+        ultimaAplicacion = siguienteAplicacion;
+        siguienteAplicacion = new Aplicacion(numSiguienteAplicacion);
+    }
+
+    public int getNumeroAplicacionesRealizadas() {
+        int ningunaAplicacion = 0;
+
+        if (ultimaAplicacion == null) {
+            return ningunaAplicacion;
         } else {
-            return suero.QUELANTE;
+            return ultimaAplicacion.getNumAplicacion();
         }
     }
-    
-    public int getNumeroSuerosAplicados(){
-        return this.numeroDeSueros;
+
+    public Aplicacion getUltimaAplicacion() {
+        return ultimaAplicacion;
     }
-    
-    public void agregarSueroAlHistorial(){
-        this.numeroDeSueros ++;
+
+    public Aplicacion getSiguienteAplicacion() {
+        return siguienteAplicacion;
     }
+
+    public int getDosis_EDTA_ml() {
+        return dosis_EDTA_ml;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
 }

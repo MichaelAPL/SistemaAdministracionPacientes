@@ -45,8 +45,8 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
         
         for (Paciente paciente : pacientes) {
             Object datosPaciente[] = {paciente.getNombres(), paciente.getApellidos(), 
-                paciente.getTratamiento().sueroAaplicar(), paciente.getTratamiento().getDosisEDTA(), 
-                paciente.getSiguienteCita().getNumeroDeCita(), false};
+                paciente.getTratamiento().getSiguienteAplicacion().getSuero(), paciente.getTratamiento().getDosisEDTA(), 
+                paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(), false};
             modelo.addRow(datosPaciente);
         }
     }

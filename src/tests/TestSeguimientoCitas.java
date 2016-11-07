@@ -9,7 +9,6 @@ import modelos.Paciente;
 import modelos.AsistenteDoctor;
 import modelos.Persona;
 import modelos.Tratamiento;
-import modelos.Cita;
 import java.util.ArrayList;
 import vistas.VentanillaPaseDeLista;
 
@@ -38,16 +37,12 @@ public class TestSeguimientoCitas {
         ArrayList enfermedades = new ArrayList();
         enfermedades.add("Diabetes");
         
-        Cita cita = new Cita(5);
-        
         Tratamiento tratamiento1 = new Tratamiento(125);
         Tratamiento tratamiento2 = new Tratamiento(145);
         
         Paciente paciente1 = new Paciente(persona1, tratamiento1, enfermedades, medicamentos);
-        paciente1.setSiguienteCita(cita);
         
         Paciente paciente2 = new Paciente(persona2, tratamiento2, enfermedades, medicamentos);
-        paciente2.setSiguienteCita(cita);
         
         bancoPacientes.add(paciente1);
         bancoPacientes.add(paciente2);
