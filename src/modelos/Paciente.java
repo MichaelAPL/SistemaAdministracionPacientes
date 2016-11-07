@@ -13,14 +13,12 @@ public class Paciente extends Persona{
     private ArrayList<String> enfermedadesPrevias;
     private Tratamiento tratamiento;
     private final Date fechaDeInscripcion;
-    private ArrayList<Cita> historialDeCitas;
     private String clave;
     
     public Paciente(Persona persona){
         super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), 
                 persona.getDireccion(), persona.getLocalidad(), persona.getTelefono());        
         fechaDeInscripcion = inicializarFechaDeIncripcion();
-        historialDeCitas = new ArrayList();
     }
     
 
@@ -32,7 +30,6 @@ public class Paciente extends Persona{
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.medicamentosExternos = medicamentosExternos;
         fechaDeInscripcion = inicializarFechaDeIncripcion();
-        historialDeCitas = new ArrayList();
         clave = java.util.UUID.randomUUID().toString();
     }
 
@@ -67,24 +64,7 @@ public class Paciente extends Persona{
     public Date getFechaDeInscripcion() {
         return fechaDeInscripcion;
     }
-
-    public ArrayList<Cita> getHistorialDeCitas() {
-        return historialDeCitas;
-    }
-
-    public void setHistorialDeCitas(ArrayList<Cita> historialDeCitas) {
-        this.historialDeCitas = historialDeCitas;
-    }
     
-    public Cita getSiguienteCita(){
-        Cita cita = historialDeCitas.get(historialDeCitas.size()-1);        
-        return cita;
-    }
-    
-    public void setSiguienteCita(Cita cita){
-        historialDeCitas.add(cita);
-    }
-
     public String getClave() {
         return clave;
     }
