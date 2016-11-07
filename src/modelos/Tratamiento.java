@@ -5,8 +5,6 @@
  */
 package modelos;
 
-import java.util.Date;
-
 /**
  *
  * @author miguelangel
@@ -48,8 +46,6 @@ public class Tratamiento {
 
     public void agregarAplicacion() {
         int numSiguienteAplicacion = siguienteAplicacion.getNumAplicacion() + 1;
-
-        siguienteAplicacion.setFecha(new Date());
         
         ultimaAplicacion = siguienteAplicacion;
         siguienteAplicacion = new Aplicacion(numSiguienteAplicacion);

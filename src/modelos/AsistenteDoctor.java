@@ -52,6 +52,7 @@ public class AsistenteDoctor {
     public void ponerAsistenciaAlPaciente(int numeroDePacienteEnLaLista) {
         Paciente paciente = pacientesConCitaHoy.remove(numeroDePacienteEnLaLista);
         paciente.getTratamiento().getSiguienteAplicacion().setRealizada(true);
+        paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Date ());
 
         crearNuevaCitaAlPaciente(paciente);
     }
