@@ -24,14 +24,14 @@ public class TratamientoDAO {
     public void crearTratamiento(Tratamiento tratamiento) throws SQLException{
         conectorBD.conectar();
         
-        String campos = "DosisEDTA, NumeroDeSuerosAplicados, ClvPaciente";
-        String consulta = "INSERT INTO Tratamiento ("+campos+")"+" VALUES (?,?,?)";
+        String campos = "ID_Tratamiento, DosisEDTA, Activo, Paciente_ID";
+        String consulta = "INSERT INTO Tratamiento ("+campos+")"+" VALUES (?,?,?,?)";
         
         PreparedStatement declaracionTratamiento = conectorBD.consulta(consulta);
         
-        declaracionTratamiento.setInt(1, tratamiento.getDosisEDTA());
-        declaracionTratamiento.setInt(2, tratamiento.getNumeroSuerosAplicados());
-        declaracionTratamiento.setString(3, tratamiento.getClavePaciente());
+        declaracionTratamiento.setInt(2, tratamiento.getDosisEDTA());
+        declaracionTratamiento.setBoolean(3, tratamiento.isActivo());
+        declaracionTratamiento.setInt(4, tratamiento.getPaciente_id());
         
         declaracionTratamiento.execute();
         conectorBD.desconectar();

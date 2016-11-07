@@ -14,11 +14,19 @@ public class Paciente extends Persona{
     private Tratamiento tratamiento;
     private final Date fechaDeInscripcion;
     private String clave;
+    private int id;
+    
+    public Paciente(Persona persona, int id){
+         super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), 
+                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono()); 
+        fechaDeInscripcion = inicializarFechaDeInscripcion(); 
+        this.id = id;
+    }
     
     public Paciente(Persona persona){
         super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), 
                 persona.getDireccion(), persona.getLocalidad(), persona.getTelefono());        
-        fechaDeInscripcion = inicializarFechaDeIncripcion();
+        fechaDeInscripcion = inicializarFechaDeInscripcion();
     }
     
 
@@ -29,7 +37,7 @@ public class Paciente extends Persona{
         this.tratamiento = tratamiento;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.medicamentosExternos = medicamentosExternos;
-        fechaDeInscripcion = inicializarFechaDeIncripcion();
+        fechaDeInscripcion = inicializarFechaDeInscripcion();
         clave = java.util.UUID.randomUUID().toString();
     }
 
@@ -57,7 +65,7 @@ public class Paciente extends Persona{
         this.tratamiento = tratamiento;
     }
 
-    private Date inicializarFechaDeIncripcion(){
+    private Date inicializarFechaDeInscripcion(){
         return new Date();
     }
 

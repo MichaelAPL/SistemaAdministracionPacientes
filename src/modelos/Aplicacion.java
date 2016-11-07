@@ -18,6 +18,7 @@ public class Aplicacion {
     private Date fecha;
     private Suero suero;
     private int numAplicacion;
+    private int tratamiento_id;
 
 
     public Aplicacion(int numAplicacion) {
@@ -51,6 +52,14 @@ public class Aplicacion {
         this.fecha = fecha;
     }
 
+    public int getTratamiento_id() {
+        return tratamiento_id;
+    }
+
+    public void setTratamiento_id(int tratamiento_id) {
+        this.tratamiento_id = tratamiento_id;
+    }
+    
     public Suero getSuero() {
         return suero;
     }

@@ -10,20 +10,12 @@ package modelos;
  * @author miguelangel
  */
 public class Tratamiento {
-
-    private String clavePaciente;
+    
     private Aplicacion ultimaAplicacion;
     private Aplicacion siguienteAplicacion;
     private final int dosis_EDTA_ml;
     private boolean activo;
-
-    public Tratamiento(String clavePaciente, int dosisEDTA) {
-        this.clavePaciente = clavePaciente;
-        this.dosis_EDTA_ml = dosisEDTA;
-        this.ultimaAplicacion = null;
-        this.siguienteAplicacion = new Aplicacion(0);
-        this.activo = true;
-    }
+    private int paciente_id;
 
     public Tratamiento(int dosisEDTA) {
         this.dosis_EDTA_ml = dosisEDTA;
@@ -32,14 +24,7 @@ public class Tratamiento {
         this.activo = true;
     }
 
-    public String getClavePaciente() {
-        return clavePaciente;
-    }
-
-    public void setClavePaciente(String clavePaciente) {
-        this.clavePaciente = clavePaciente;
-    }
-
+   
     public int getDosisEDTA() {
         return this.dosis_EDTA_ml;
     }
@@ -81,4 +66,11 @@ public class Tratamiento {
         this.activo = activo;
     }
 
+    public int getPaciente_id() {
+        return paciente_id;
+    }
+
+    public void setPaciente_id(int paciente_id) {
+        this.paciente_id = paciente_id;
+    }
 }

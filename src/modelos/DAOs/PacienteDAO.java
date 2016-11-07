@@ -28,7 +28,7 @@ public class PacienteDAO {
         conectorBD.conectar();
         
         String campos = "Nombre, Apellido, Direccion, Localidad, Telefono, "
-                + "Edad, ClvPaciente, EnfermedadesPrevias, MedicamentosExternos, "
+                + "Edad, ID_Paciente, EnfermedadesPrevias, MedicamentosExternos, "
                 + "FechaInscripcion";
         
         String consulta = "INSERT INTO Paciente ("+campos+")"+" VALUES (?,?,?,?,?,?,?,?,?,?)";  
@@ -41,7 +41,6 @@ public class PacienteDAO {
         declaracion.setString( DatosPacienteDao.LOCALIDAD.getDato(), paciente.getLocalidad() );
         declaracion.setString( DatosPacienteDao.TELEFONO.getDato(), paciente.getTelefono() );
         declaracion.setInt( DatosPacienteDao.EDAD.getDato(), paciente.getEdad() );
-        declaracion.setString( DatosPacienteDao.CLV_PACIENTE.getDato(), paciente.getClave() );
         declaracion.setInt( DatosPacienteDao.ENFERMEDADES_PREVIAS.getDato(), paciente.getEnfermedadesPrevias().size() );
         declaracion.setInt( DatosPacienteDao.MEDICAMENTOS_EXTERNOS.getDato(), paciente.getMedicamentosExternos().size() );
         
@@ -74,12 +73,13 @@ public class PacienteDAO {
         conectorBD.desconectar();
     }
     
-    public Paciente getPaciente(String clvPaciente) throws SQLException{
+    public Paciente getPaciente(int Paciente_ID) throws SQLException{
         this.conectorBD.conectar();
         
         ResultSet resultado = null;
-        String consulta = "select * from Pacientes where ClvPaciente = " + clvPaciente;
+        String consulta = "select * from Pacientes where Paciente_ID = ?";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
+        declaracionDeRecuperacion.setInt(1, Paciente_ID);
         
         resultado = declaracionDeRecuperacion.executeQuery();
         
@@ -89,6 +89,8 @@ public class PacienteDAO {
         
         Paciente paciente = new Paciente(persona);
         paciente.setClave(resultado.getString("ClvPaciente"));
+        
+        this.conectorBD.desconectar();
         
         return paciente;
     }
