@@ -72,6 +72,14 @@ public class Paciente extends Persona{
     public Date getFechaDeInscripcion() {
         return fechaDeInscripcion;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public String getClave() {
         return clave;

@@ -47,37 +47,45 @@ public class PacienteDAO {
         java.sql.Date fechaDeInscripcion = new java.sql.Date(paciente.getFechaDeInscripcion().getTime());
         declaracion.setDate( DatosPacienteDao.FECHA_INSCRIPCION.getDato(), fechaDeInscripcion );
         
-        String camposEnfermedades = "clvPaciente, NumEnfer, NombreEnfer";
-        consulta = "INSERT INTO EnfermedadesPrevias ("+camposEnfermedades+")" +
+        declaracion.execute();
+        crearEnfermedadesPrevias(paciente);
+        crearMedicamentosExternos(paciente);
+        conectorBD.desconectar();
+    }
+    
+    private void crearEnfermedadesPrevias(Paciente paciente) throws SQLException{
+        String camposEnfermedades = "Paciente_ID, NumEnfer, NombreEnfer";
+        String consulta = "INSERT INTO EnfermedadesPrevias ("+camposEnfermedades+")" +
                 " VALUES (?, ?, ?)";
         PreparedStatement declaracionEnfermedades = conectorBD.consulta(consulta);
-        declaracionEnfermedades.setString(1, paciente.getClave());
+        declaracionEnfermedades.setInt(1, paciente.getId());
         for (int i = 0; i < paciente.getEnfermedadesPrevias().size(); i++) {
             declaracionEnfermedades.setInt(2, i);
             declaracionEnfermedades.setString(3, paciente.getEnfermedadesPrevias().get(i));
         }
         
-        String camposMedicamentos = "clvPaciente, numMedicamento, NombreMedicamento";
-        consulta = "INSERT INTO MedicamentosExternos ("+camposMedicamentos+")" + 
+        declaracionEnfermedades.execute();
+    }
+    
+    private void crearMedicamentosExternos(Paciente paciente) throws SQLException{
+        String camposMedicamentos = "Paciente_ID, numMedicamento, NombreMedicamento";
+        String consulta = "INSERT INTO MedicamentosExternos ("+camposMedicamentos+")" + 
                 " VALUES (?,?,?)";
         PreparedStatement declaracionMedicamentos = conectorBD.consulta(consulta);
-        declaracionMedicamentos.setString(1, paciente.getClave());
+        declaracionMedicamentos.setInt(1, paciente.getId());
         for (int i = 0; i < paciente.getMedicamentosExternos().size(); i++) {
             declaracionMedicamentos.setInt(2, i);
             declaracionMedicamentos.setString(3, paciente.getMedicamentosExternos().get(i));
         }
         
-        declaracion.execute();
-        declaracionEnfermedades.execute();
         declaracionMedicamentos.execute();
-        conectorBD.desconectar();
     }
     
     public Paciente getPaciente(int Paciente_ID) throws SQLException{
         this.conectorBD.conectar();
         
         ResultSet resultado = null;
-        String consulta = "select * from Pacientes where Paciente_ID = ?";
+        String consulta = "select * from Pacientes where ID_Paciente = ?";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
         declaracionDeRecuperacion.setInt(1, Paciente_ID);
         
