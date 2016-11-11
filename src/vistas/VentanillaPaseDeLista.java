@@ -14,26 +14,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanillaPaseDeLista extends javax.swing.JFrame {
 
-    ControladorCitas controladorCitas;
+    private DefaultTableModel modelo;
+    private ControladorCitas controladorCitas;
 
     public VentanillaPaseDeLista() {
         initComponents();
         controladorCitas = new ControladorCitas();
         this.setVisible(true);
-
+        inicializarTablaPacientes();
     }
     
     public void setAsistenteDoctor(AsistenteDoctor asistente){
         this.controladorCitas.setAsistente(asistente);
     }
 
-    public void crearListaDeCitasHoy(ArrayList<Paciente> pacientes) {
-        String[] cabecera = {"Nombre", "Apellidos", "Suero", "Dosis EDTA", "Numero de Sesión", "Asistencia"};
+    private void inicializarTablaPacientes(){
+        
+        String[] cabecera = {"Nombre", "Apellidos", "Suero", "Dosis EDTA", 
+                              "Numero de Sesión", "Asistencia"};
         Object cuerpo[][] = {};
         
-        
-        DefaultTableModel modelo = new DefaultTableModel(cuerpo, cabecera){
-            Class [] types = {String.class, String.class, String.class, Integer.class, Integer.class, Boolean.class};
+        modelo = new DefaultTableModel(cuerpo, cabecera){
+            Class [] types = {String.class, String.class, String.class, 
+                              Integer.class, Integer.class, Boolean.class};
             
             @Override
             public Class getColumnClass(int columnIndex){
@@ -41,12 +44,18 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
             }
         };
         
-        this.tablaDeSesiones.setModel(modelo);
-        
+        tablaDeSesiones.setModel(modelo);
+    }
+    
+    public void mostrarPacientesConCita(ArrayList<Paciente> pacientes) {
+        int LIMPIAR_FILAS = 0;
+        modelo.setRowCount(LIMPIAR_FILAS);
         for (Paciente paciente : pacientes) {
             Object datosPaciente[] = {paciente.getNombres(), paciente.getApellidos(), 
-                paciente.getTratamiento().getSiguienteAplicacion().getSuero(), paciente.getTratamiento().getDosisEDTA(), 
-                paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(), false};
+                paciente.getTratamiento().getSiguienteAplicacion().getSuero(), 
+                paciente.getTratamiento().getDosisEDTA(), 
+                paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(), 
+                false};
             modelo.addRow(datosPaciente);
         }
     }
@@ -101,9 +110,9 @@ public class VentanillaPaseDeLista extends javax.swing.JFrame {
         for (int i = 0; i < this.tablaDeSesiones.getModel().getRowCount(); i++) {
            if((Boolean)this.tablaDeSesiones.getModel().getValueAt(i, 5) == true){
                controladorCitas.asistenciaDePacientes(i);
-               controladorCitas.actualizarListaPacientes();
            }
         }
+        controladorCitas.actualizarListaPacientes();
     }//GEN-LAST:event_guardarCambiosActionPerformed
     
 

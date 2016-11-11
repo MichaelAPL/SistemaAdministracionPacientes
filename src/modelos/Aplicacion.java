@@ -69,13 +69,18 @@ public class Aplicacion {
     }
 
     private Suero setSuero() {
-        int NUM_SUERO_NULO = 0;
-        int NUM_SUERO_PARA_CAMBIO = 6;
-        if (numAplicacion != NUM_SUERO_NULO
-                && numAplicacion % NUM_SUERO_PARA_CAMBIO == 0) {
+
+        if (cambiarASueroMineral()) {
             return Suero.MINERAL;
         } else {
             return Suero.QUELANTE;
         }
     }
+    
+    private boolean cambiarASueroMineral(){
+        int  NUM_SUERO_PARA_CAMBIO = 6;
+        return (numAplicacion % NUM_SUERO_PARA_CAMBIO == 0);
+    }
+    
+    
 }

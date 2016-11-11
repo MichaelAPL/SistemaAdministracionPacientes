@@ -10,75 +10,36 @@ package modelos;
  * @author Angel Basto Gonzalez
  */
 public class Inventario {
-    private String nombreProducto;
+    private int claveProducto;
     private int cantidadExistente;
-    private double costoUnitario;
     private double costoTotal;
 
-    public Inventario(String nombreProducto, int cantidad, double costoUnitario) {
-        this.nombreProducto = nombreProducto;
-        this.cantidadExistente = cantidad;
-        this.costoUnitario = costoUnitario;
-        this.costoTotal = calcularCostoTotal();
+    public Inventario(int claveProducto, int cantidadExistente) {
+        this.claveProducto = claveProducto;
+        this.cantidadExistente = cantidadExistente;
     }
 
-    /**
-     * @return the nombreProducto
-     */
-    public String getNombreProducto() {
-        return nombreProducto;
+    public int getClaveProducto() {
+        return claveProducto;
     }
 
-    /**
-     * @param nombreProducto the nombreProducto to set
-     */
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setClaveProducto(int claveProducto) {
+        this.claveProducto = claveProducto;
     }
 
-    /**
-     * @return the cantidadExistente
-     */
     public int getCantidadExistente() {
         return cantidadExistente;
     }
 
-    /**
-     * @param cantidadExistente the cantidadExistente to set
-     */
     public void setCantidadExistente(int cantidadExistente) {
         this.cantidadExistente = cantidadExistente;
     }
 
-    /**
-     * @return the costoUnitario
-     */
-    public double getCostoUnitario() {
-        return costoUnitario;
-    }
-
-    /**
-     * @param costoUnitario the costoUnitario to set
-     */
-    public void setCostoUnitario(double costoUnitario) {
-        this.costoUnitario = costoUnitario;
-    }
-
-    /**
-     * @return the costoTotal
-     */
     public double getCostoTotal() {
         return costoTotal;
     }
 
-    /**
-     * @param costoTotal the costoTotal to set
-     */
     public void setCostoTotal(double costoTotal) {
         this.costoTotal = costoTotal;
-    }
-    
-    private double calcularCostoTotal(){
-        return cantidadExistente*costoUnitario;
-    }
+    }    
 }
