@@ -11,20 +11,20 @@ import vistas.VentanillaPaseDeLista;
 public class AsistenteDoctor {
 
     private VentanillaPaseDeLista ventanillaPaseLista;
-    private ArrayList<Paciente> bancoDePacientes;
+    private ArrayList<Paciente> pacientes;
     private ArrayList<Paciente> pacientesConCitaHoy;
 
     public AsistenteDoctor(ArrayList<Paciente> pacientes, VentanillaPaseDeLista ventanillaPaseLista) {
-        this.bancoDePacientes = pacientes;
-        this.pacientesConCitaHoy = generarListaDePacientesConCitaHoy();
+        this.pacientes = pacientes;
+        this.pacientesConCitaHoy = generarListaDePacientesConCita();
         this.ventanillaPaseLista = ventanillaPaseLista;
     }
 
-    public ArrayList<Paciente> generarListaDePacientesConCitaHoy() {
+    public ArrayList<Paciente> generarListaDePacientesConCita() {
         ArrayList<Paciente> listaPacientesConCita = new ArrayList();
         Date fechaHoy = new Date();
 
-        for (Paciente paciente : bancoDePacientes) {
+        for (Paciente paciente : pacientes) {
             boolean pacienteYaPasoHoy;
             boolean pacienteConTratamientoActivo;
             if (paciente.getTratamiento().getUltimaAplicacion() != null) {
@@ -46,7 +46,7 @@ public class AsistenteDoctor {
     }
 
     public void mandarAVentanillaAPacientesConCitas() {
-        ventanillaPaseLista.crearListaDeCitasHoy(pacientesConCitaHoy);
+        ventanillaPaseLista.mostrarPacientesConCita(pacientesConCitaHoy);
     }
 
     public void ponerAsistenciaAlPaciente(int numeroDePacienteEnLaLista) {
