@@ -10,37 +10,27 @@ package modelos;
  * @author Angel Basto Gonzalez
  */
 public class Producto {
-    private int claveProducto;
-    private String nombreProducto;
-    private double costoProducto;
+    private int id;
+    private String nombre;
 
-    public Producto(int claveProducto, String nombreProducto, double costoProducto) {
-        this.claveProducto = claveProducto;
-        this.nombreProducto = nombreProducto;
-        this.costoProducto = costoProducto;
+    public Producto(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }
 
-    public int getClaveProducto() {
-        return claveProducto;
+    public int getId() {
+        return id;
     }
 
-    public void setClaveProducto(int claveProducto) {
-        this.claveProducto = claveProducto;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNombreProducto() {
-        return nombreProducto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
-    }
-
-    public double getCostoProducto() {
-        return costoProducto;
-    }
-
-    public void setCostoProducto(double costoProducto) {
-        this.costoProducto = costoProducto;
-    }    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    } 
 }
