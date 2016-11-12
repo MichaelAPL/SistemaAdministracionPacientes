@@ -23,6 +23,8 @@ public class MedicamentosExternosDAO {
     }
     
     public void crearMedicamentosExternos(Paciente paciente) throws SQLException{
+        conectorBD.conectar();
+        
         String camposMedicamentos = "Paciente_ID, numMedicamento, NombreMedicamento";
         String consulta = "INSERT INTO MedicamentosExternos ("+camposMedicamentos+")" + 
                 " VALUES (?,?,?)";
@@ -34,5 +36,7 @@ public class MedicamentosExternosDAO {
         }
         
         declaracionMedicamentos.execute();
+        
+        conectorBD.desconectar();
     }
 }

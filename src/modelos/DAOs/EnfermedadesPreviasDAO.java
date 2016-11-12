@@ -22,8 +22,10 @@ public class EnfermedadesPreviasDAO {
     }
         
     public void crearEnfermedadesPrevias(Paciente paciente) throws SQLException{
+        conectorBD.conectar();
+        
         String camposEnfermedades = "Paciente_ID, NumEnfer, NombreEnfer";
-        String consulta = "INSERT INTO EnfermedadesPrevias ("+camposEnfermedades+")" +
+        String consulta = "INSERT INTO EnfermedadesPrevias (" + camposEnfermedades + ")" +
                 " VALUES (?, ?, ?)";
         PreparedStatement declaracionEnfermedades = conectorBD.consulta(consulta);
         declaracionEnfermedades.setInt(1, paciente.getId());
@@ -33,5 +35,7 @@ public class EnfermedadesPreviasDAO {
         }
         
         declaracionEnfermedades.execute();
+        
+        conectorBD.desconectar();
     }
 }

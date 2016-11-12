@@ -8,6 +8,9 @@ package vistas;
 import controladores.ControladorRegistro;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import modelos.Paciente;
+import modelos.Persona;
+import modelos.Tratamiento;
 
 /**
  *
@@ -18,11 +21,10 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     /**
      * Creates new form VentanaRegistroPacientes
      */
-    
     private ControladorRegistro controladorRegistro;
-    private ArrayList<String> padecimientosPrevios;
+    private ArrayList<String> enfermedadesPrevias;
     private ArrayList<String> medicamentosExternos;
-    
+
     public VentanaRegistroPacientes(ControladorRegistro controladorRegistro) {
         initComponents();
         this.controladorRegistro = controladorRegistro;
@@ -30,8 +32,8 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         inicializarTablaMedicamentos();
         setLocationRelativeTo(null);
         this.setVisible(true);
-    }   
-    
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -59,6 +61,8 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         medicamento = new javax.swing.JTextField();
         scrollTabla1 = new javax.swing.JScrollPane();
         tablaMedicamentos = new javax.swing.JTable();
+        añadirEnfermedad = new javax.swing.JButton();
+        añadirMedicamento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +92,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
             }
         });
 
-        etiquetaPadecimientos.setText("Padecimientos Previos");
+        etiquetaPadecimientos.setText("Enfermedades Previas");
 
         padecimiento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -122,7 +126,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Medicamentos Alternos");
+        jLabel1.setText("Medicamentos");
 
         medicamento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -142,6 +146,20 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
             }
         ));
         scrollTabla1.setViewportView(tablaMedicamentos);
+
+        añadirEnfermedad.setText("+");
+        añadirEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                añadirEnfermedadActionPerformed(evt);
+            }
+        });
+
+        añadirMedicamento.setText("+");
+        añadirMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                añadirMedicamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -182,17 +200,24 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
                                 .addGap(19, 19, 19)
                                 .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(etiquetaPadecimientos)
-                        .addGap(4, 4, 4)
-                        .addComponent(padecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                        .addComponent(scrollTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(scrollTabla1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrollTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(etiquetaPadecimientos)
+                                .addGap(2, 2, 2)
+                                .addComponent(padecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(añadirEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrollTabla1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(añadirMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)))))
                 .addContainerGap())
             .addGroup(panelLayout.createSequentialGroup()
                 .addGap(380, 380, 380)
@@ -235,7 +260,9 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
                             .addComponent(etiquetaPadecimientos)
                             .addComponent(padecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(añadirEnfermedad)
+                            .addComponent(añadirMedicamento))
                         .addGap(18, 18, 18)
                         .addComponent(scrollTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(scrollTabla1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -263,34 +290,37 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        ArrayList datosDelPaciente = new ArrayList();  
+        Persona persona = new Persona(nombres.getText(), apellidos.getText(),
+                Integer.parseInt(edad.getText()), direccion.getText(), localidad.getText(),
+                telefono.getText());
+
+        Tratamiento tratamiento = new Tratamiento(Integer.parseInt(this.EDTA.getText()));
+
+        Paciente paciente = new Paciente(persona, this.medicamentosExternos,
+                this.enfermedadesPrevias, tratamiento);
         
-        datosDelPaciente.add(nombres.getText());
-        datosDelPaciente.add(apellidos.getText());
-        datosDelPaciente.add(edad.getText());
-        datosDelPaciente.add(direccion.getText());
-        datosDelPaciente.add(localidad.getText());
-        datosDelPaciente.add(telefono.getText());
-        datosDelPaciente.add(EDTA.getText());
-        datosDelPaciente.add(this.padecimientosPrevios);
-        datosDelPaciente.add(this.medicamentosExternos);
-        
-        controladorRegistro.crearNuevoPaciente(datosDelPaciente);
+        controladorRegistro.crearNuevoPaciente(paciente);
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edadKeyTyped
         char caracter = evt.getKeyChar();
-        if (caracter<'0'|| caracter>'9') evt.consume();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_edadKeyTyped
 
     private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
         char caracter = evt.getKeyChar();
-        if (caracter<'0'|| caracter>'9') evt.consume();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_telefonoKeyTyped
 
     private void EDTAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EDTAKeyTyped
         char caracter = evt.getKeyChar();
-        if (caracter<'0'|| caracter>'9') evt.consume();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_EDTAKeyTyped
 
     private void padecimientoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_padecimientoKeyPressed
@@ -301,27 +331,39 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_medicamentoKeyPressed
 
-    private void inicializarTablaPadecimientos(){
-        this.padecimientosPrevios = new ArrayList();
-        crearTabla("Padecimientos Previos");
+    private void añadirEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirEnfermedadActionPerformed
+        this.enfermedadesPrevias.add(padecimiento.getText());
+        this.padecimiento.setText("");
+    }//GEN-LAST:event_añadirEnfermedadActionPerformed
+
+    private void añadirMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirMedicamentoActionPerformed
+        this.medicamentosExternos.add(padecimiento.getText());
+        this.padecimiento.setText("");
+    }//GEN-LAST:event_añadirMedicamentoActionPerformed
+
+    private void inicializarTablaPadecimientos() {
+        this.enfermedadesPrevias = new ArrayList();
+        this.tablaPadecimientos.setModel(crearCuerpoTabla("Padecimientos Previos"));
     }
-    
-    private void inicializarTablaMedicamentos(){
+
+    private void inicializarTablaMedicamentos() {
         this.medicamentosExternos = new ArrayList();
-        crearTabla("Medicamentos Externos");
+        this.tablaMedicamentos.setModel(crearCuerpoTabla("Medicamentos Externos"));
     }
-    
-    private void crearTabla(String nombreCabecera){
+
+    private DefaultTableModel crearCuerpoTabla(String nombreCabecera) {
         DefaultTableModel modelo;
         String cabecera[] = {nombreCabecera};
         String datos[][] = {};
         modelo = new DefaultTableModel(datos, cabecera);
-        this.tablaPadecimientos.setModel(modelo);
+        return modelo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField EDTA;
     private javax.swing.JTextField apellidos;
+    private javax.swing.JButton añadirEnfermedad;
+    private javax.swing.JButton añadirMedicamento;
     private javax.swing.JButton botonGuardar;
     private javax.swing.JTextField direccion;
     private javax.swing.JTextField edad;
