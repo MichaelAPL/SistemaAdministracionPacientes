@@ -124,19 +124,22 @@ public class VentanaInventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void inicializarTablaMedicamentos(){
-        DefaultTableModel modelo;
         String cabecera[] = {"Medicamento", "Cantidad", "Costo unitario", "Costo total"};
-        String datos[][] = {};
-        modelo = new DefaultTableModel(datos, cabecera);
+        DefaultTableModel modelo = obtenerModelo(cabecera);
         this.tablaMedicamentos.setModel(modelo);
     }
     
     public void inicializarTablaUtensilios(){
-        DefaultTableModel modelo;
         String cabecera[] = {"Utensilio", "Cantidad", "Costo unitario", "Costo total"};
+        DefaultTableModel modelo = obtenerModelo(cabecera);
+        this.tablaUtensilios.setModel(modelo);
+    }
+    
+    public DefaultTableModel obtenerModelo(String[] cabecera){
+        DefaultTableModel modelo;
         String datos[][] = {};
         modelo = new DefaultTableModel(datos, cabecera);
-        this.tablaUtensilios.setModel(modelo);
+        return modelo;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
