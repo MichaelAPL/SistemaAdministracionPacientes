@@ -80,6 +80,11 @@ public class VentanaInventario extends javax.swing.JFrame {
 
         btnAgregar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,20 +128,29 @@ public class VentanaInventario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        VentanaModificacionInventario ventanaModificacion = 
+                new VentanaModificacionInventario();
+        
+        ventanaModificacion.setVisible(true);
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
     public void inicializarTablaMedicamentos(){
-        DefaultTableModel modelo;
         String cabecera[] = {"Medicamento", "Cantidad", "Costo unitario", "Costo total"};
-        String datos[][] = {};
-        modelo = new DefaultTableModel(datos, cabecera);
-        this.tablaMedicamentos.setModel(modelo);
+        this.tablaMedicamentos.setModel(crearCuerpoTabla(cabecera));
     }
     
     public void inicializarTablaUtensilios(){
-        DefaultTableModel modelo;
         String cabecera[] = {"Utensilio", "Cantidad", "Costo unitario", "Costo total"};
+        this.tablaUtensilios.setModel(crearCuerpoTabla(cabecera));
+    }
+    
+    public DefaultTableModel crearCuerpoTabla(String[] cabecera){
+        DefaultTableModel modelo;
         String datos[][] = {};
         modelo = new DefaultTableModel(datos, cabecera);
-        this.tablaUtensilios.setModel(modelo);
+        return modelo;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
