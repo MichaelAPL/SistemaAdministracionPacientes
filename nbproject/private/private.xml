@@ -4,9 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/EnfermedadesPreviasDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Inventario.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Tratamiento.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Aplicacion.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanillaPaseDeLista.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaRegistroPacientes.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/MedicamentosExternosDAO.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Paciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Producto.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/TratamientoDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/ManejardorInventario.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/PacienteDAO.java</file>
         </group>
     </open-files>

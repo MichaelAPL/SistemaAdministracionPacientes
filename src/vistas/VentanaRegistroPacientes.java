@@ -303,20 +303,20 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
 
     private void inicializarTablaPadecimientos(){
         this.padecimientosPrevios = new ArrayList();
-        DefaultTableModel modelo;
-        String cabecera[] = {"Padecimientos previos"};
-        String datos[][] = {};
-        modelo = new DefaultTableModel(datos, cabecera);
-        this.tablaPadecimientos.setModel(modelo);
+        crearTabla("Padecimientos Previos");
     }
     
     private void inicializarTablaMedicamentos(){
         this.medicamentosExternos = new ArrayList();
+        crearTabla("Medicamentos Externos");
+    }
+    
+    private void crearTabla(String nombreCabecera){
         DefaultTableModel modelo;
-        String cabecera[] = {"Medicamentos externos"};
+        String cabecera[] = {nombreCabecera};
         String datos[][] = {};
         modelo = new DefaultTableModel(datos, cabecera);
-        this.tablaMedicamentos.setModel(modelo);
+        this.tablaPadecimientos.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
