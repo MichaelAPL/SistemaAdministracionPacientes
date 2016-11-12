@@ -80,6 +80,11 @@ public class VentanaInventario extends javax.swing.JFrame {
 
         btnAgregar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,6 +127,14 @@ public class VentanaInventario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        VentanaModificacionInventario ventanaModificacion = 
+                new VentanaModificacionInventario();
+        
+        ventanaModificacion.setVisible(true);
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     public void inicializarTablaMedicamentos(){
         String cabecera[] = {"Medicamento", "Cantidad", "Costo unitario", "Costo total"};
