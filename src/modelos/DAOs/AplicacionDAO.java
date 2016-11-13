@@ -37,6 +37,8 @@ public class AplicacionDAO {
         declaracion.setInt(3, aplicacion.getNumAplicacion());
         declaracion.setInt(4, aplicacion.getTratamiento_id());
         
+        declaracion.execute();
+        
         conectorBD.desconectar();
     }
     
@@ -78,6 +80,7 @@ public class AplicacionDAO {
             }
         }
         
+        conectorBD.desconectar();
         return sigAplicacion;
     }
 }

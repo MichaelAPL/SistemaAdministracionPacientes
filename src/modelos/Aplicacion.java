@@ -23,7 +23,7 @@ public class Aplicacion {
 
     public Aplicacion(int numAplicacion) {
         this.realizada = false;
-        this.fecha = null;
+        this.fecha = new Date();
         this.numAplicacion = numAplicacion;
         this.suero = setSuero();
     }

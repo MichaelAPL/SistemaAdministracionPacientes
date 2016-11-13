@@ -40,7 +40,6 @@ public class TratamientoDAO {
         
         conectorBD.desconectar();
         
-        tratamiento.getSiguienteAplicacion().setTratamiento_id(tratamiento.getPaciente_id());
         aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());               
     }
 }

@@ -25,27 +25,29 @@ public class TestConexionBD {
      */
     public static void main(String[] args) {
         Persona persona1 = new Persona("Juan", "Perez", 45, "X", "Merida", "123456789");
-        Persona persona2 = new Persona("Juan", "Lopez", 50, "Y", "Merida", "111111111");
+        Persona persona2 = new Persona("Juan", "Lopez", 50, "Y", "Merida", "987654321");
         
         ArrayList medicamentos = new ArrayList();
         medicamentos.add("Paracetamol");
+        medicamentos.add("Medicina2");
+        medicamentos.add("Medicina3");
         
         ArrayList enfermedades = new ArrayList();
         enfermedades.add("Diabetes");
+        enfermedades.add("enfermedad2");
+        enfermedades.add("enfermedad3");
         
         Tratamiento tratamiento1 = new Tratamiento(125);
         Tratamiento tratamiento2 = new Tratamiento(115);
         
         Paciente paciente1 = new Paciente(persona1, medicamentos, enfermedades, tratamiento1);
         Paciente paciente2 = new Paciente(persona2, medicamentos, enfermedades, tratamiento2);
-        
-        
-        
+                        
         try {   
             PacienteDAO pacienteDAO = new PacienteDAO();
             
             pacienteDAO.crearPaciente(paciente1);
-            pacienteDAO.crearPaciente(paciente2);
+            //pacienteDAO.crearPaciente(paciente2);
             
             ResultSet pacientes = pacienteDAO.recuperarTodos();
             
