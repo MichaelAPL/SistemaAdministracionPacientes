@@ -6,6 +6,7 @@
 package modelos.DAOs;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelos.Tratamiento;
 import modelos.database.ConectorBD;
@@ -37,6 +38,12 @@ public class TratamientoDAO {
         declaracionTratamiento.setInt(4, tratamiento.getPaciente_id());
         
         declaracionTratamiento.execute();
+        
+        ResultSet generatedKeys = declaracionTratamiento.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int tratamiento_id = generatedKeys.getInt(1);
+            tratamiento.getSiguienteAplicacion().setTratamiento_id(tratamiento_id);
+        }
         
         conectorBD.desconectar();
         

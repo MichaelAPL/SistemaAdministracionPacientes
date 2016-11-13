@@ -59,7 +59,6 @@ public class PacienteDAO {
         ResultSet generatedKeys = declaracion.getGeneratedKeys();
         if (generatedKeys.next()) {
             int id = generatedKeys.getInt(1);
-            paciente.setId(id);
             paciente.getTratamiento().setPaciente_id(id);
         }
         
