@@ -3,18 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/EnfermedadesPreviasDAO.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Inventario.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Tratamiento.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Aplicacion.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanillaPaseDeLista.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaRegistroPacientes.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/MedicamentosExternosDAO.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Paciente.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Producto.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/TratamientoDAO.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/ManejardorInventario.java</file>
-            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/PacienteDAO.java</file>
+            <file>file:/C:/Users/Angel%20Basto%20Gonzalez/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaInventario.java</file>
+            <file>file:/C:/Users/Angel%20Basto%20Gonzalez/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/InventarioProducto.java</file>
+            <file>file:/C:/Users/Angel%20Basto%20Gonzalez/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaModificacionInventario.java</file>
+            <file>file:/C:/Users/Angel%20Basto%20Gonzalez/Documents/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Producto.java</file>
         </group>
     </open-files>
 </project-private>
