@@ -137,12 +137,12 @@ public class VentanaInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     public void inicializarTablaMedicamentos(){
-        String cabecera[] = {"Medicamento", "Cantidad", "Costo unitario", "Costo total"};
+        String cabecera[] = {"Medicamento", "Cantidad"};
         this.tablaMedicamentos.setModel(crearCuerpoTabla(cabecera));
     }
     
     public void inicializarTablaUtensilios(){
-        String cabecera[] = {"Utensilio", "Cantidad", "Costo unitario", "Costo total"};
+        String cabecera[] = {"Utensilio", "Cantidad"};
         this.tablaUtensilios.setModel(crearCuerpoTabla(cabecera));
     }
     
