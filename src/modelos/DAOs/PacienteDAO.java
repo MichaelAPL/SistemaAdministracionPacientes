@@ -19,12 +19,14 @@ import modelos.enums.DatosPacienteDao;
  */
 public class PacienteDAO {
     private ConectorBD conectorBD;
-    private MedicamentosExternosDAO medicamentosExternosDAO;
-    private EnfermedadesPreviasDAO enfermedadesPreviasDAO;
+    TratamientoDAO tratamientoDAO;
+    private final MedicamentosExternosDAO medicamentosExternosDAO;
+    private final EnfermedadesPreviasDAO enfermedadesPreviasDAO;
     
     
     public PacienteDAO(){
         this.conectorBD = new ConectorBD();
+        tratamientoDAO = new TratamientoDAO();
         medicamentosExternosDAO = new MedicamentosExternosDAO();
         enfermedadesPreviasDAO = new EnfermedadesPreviasDAO();
     }
@@ -54,31 +56,52 @@ public class PacienteDAO {
         
         declaracion.execute();
         
-        enfermedadesPreviasDAO.crearEnfermedadesPrevias(paciente);
-        medicamentosExternosDAO.crearMedicamentosExternos(paciente);
+        ResultSet generatedKeys = declaracion.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id = generatedKeys.getInt(1);
+            paciente.getTratamiento().setPaciente_id(id);
+        }
         
         conectorBD.desconectar();
+        
+        tratamientoDAO.crearTratamiento(paciente.getTratamiento());
+        enfermedadesPreviasDAO.crearEnfermedadesPrevias(paciente);
+        medicamentosExternosDAO.crearMedicamentosExternos(paciente);
+    }
+    
+    public ResultSet recuperarTodos() throws SQLException{
+        this.conectorBD.conectar();
+        
+        String consulta = "select * from Paciente";
+        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
+        
+        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
+        
+        return resultado;
     }
     
     public Paciente getPaciente(int Paciente_ID) throws SQLException{
         this.conectorBD.conectar();
         
-        ResultSet resultado = null;
-        String consulta = "select * from Pacientes where ID_Paciente = ?";
+        String consulta = "select * from Pacientes";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
-        declaracionDeRecuperacion.setInt(1, Paciente_ID);
-        
-        resultado = declaracionDeRecuperacion.executeQuery();
-        
+                
+        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
+                
         Persona persona = new Persona(resultado.getString("Nombre"), resultado.getString("Apellido"),
         resultado.getInt("Edad"), resultado.getString("Direccion"), resultado.getString("Localidad"), 
         resultado.getString("Telefono"));
         
         Paciente paciente = new Paciente(persona);
-        paciente.setClave(resultado.getString("ClvPaciente"));
         
+        ResultSet generatedKeys = declaracionDeRecuperacion.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id = generatedKeys.getInt("ID_Paciente");
+            paciente.setId(id);
+        }
+                
         this.conectorBD.desconectar();
-        
+      
         return paciente;
     }
 }

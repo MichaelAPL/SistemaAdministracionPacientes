@@ -1,7 +1,12 @@
 package controladores;
 
+import java.sql.SQLException;
 import modelos.enums.DatosPaciente;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelos.DAOs.PacienteDAO;
 import modelos.Paciente;
 import modelos.Persona;
 import modelos.Tratamiento;
@@ -12,24 +17,17 @@ import modelos.Tratamiento;
  */
 public class ControladorRegistro {
     
-    public void crearNuevoPaciente(ArrayList arregloDeDatos){
-        Persona persona;
-        Paciente pacienteNuevo;
-        Tratamiento tratamiento;
-        
-        persona = new Persona((String)arregloDeDatos.get(DatosPaciente.NOMBRES.getDato()),
-                        (String)arregloDeDatos.get(DatosPaciente.APELLIDOS.getDato()),
-                        Integer.valueOf((String)arregloDeDatos.get(DatosPaciente.EDAD.getDato())),
-                        (String)arregloDeDatos.get(DatosPaciente.DIRECCION.getDato()),
-                        (String)arregloDeDatos.get(DatosPaciente.LOCALIDAD.getDato()),
-                        (String)arregloDeDatos.get(DatosPaciente.TELEFONO.getDato()));
-        
-        tratamiento = new Tratamiento(Integer.valueOf((String)arregloDeDatos.get(DatosPaciente.EDTA.getDato())));
-        
-        pacienteNuevo = new Paciente(persona, tratamiento,
-                (ArrayList)arregloDeDatos.get(DatosPaciente.PADECIMIENTOS_PREVIOS.getDato()),
-                (ArrayList)arregloDeDatos.get(DatosPaciente.MEDICAMENTOS_EXTERNOS.getDato()));
-        
-        pacienteNuevo.getTratamiento().setClavePaciente(pacienteNuevo.getClave());
+    private PacienteDAO pacienteDAO;
+    
+    public ControladorRegistro(){
+        this.pacienteDAO = new PacienteDAO();
+    }
+    
+    public void crearNuevoPaciente(Paciente paciente){
+        try {
+            pacienteDAO.crearPaciente(paciente);
+        } catch (SQLException ex) {
+            System.out.println("Error al conectar a la Base de Datos");
+        }
     }
 }

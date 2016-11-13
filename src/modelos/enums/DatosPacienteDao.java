@@ -16,7 +16,6 @@ public enum DatosPacienteDao {
     LOCALIDAD(4),
     TELEFONO(5),
     EDAD(6),
-    CLV_PACIENTE(7),
     ENFERMEDADES_PREVIAS(8),
     MEDICAMENTOS_EXTERNOS(9),
     FECHA_INSCRIPCION(10);

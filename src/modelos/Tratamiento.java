@@ -15,12 +15,13 @@ public class Tratamiento {
     private Aplicacion siguienteAplicacion;
     private final int dosis_EDTA_ml;
     private boolean activo;
+    private int id;
     private int paciente_id;
 
     public Tratamiento(int dosisEDTA) {
         this.dosis_EDTA_ml = dosisEDTA;
         this.ultimaAplicacion = null;
-        this.siguienteAplicacion = new Aplicacion(0);
+        this.siguienteAplicacion = new Aplicacion(1);
         this.activo = true;
     }
 
@@ -64,6 +65,14 @@ public class Tratamiento {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPaciente_id() {

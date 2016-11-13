@@ -12,12 +12,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Milka
  */
-public class VentanillaPaseDeLista extends javax.swing.JFrame {
+public class VentanaPaseLista extends javax.swing.JFrame {
 
     private DefaultTableModel modelo;
     private ControladorCitas controladorCitas;
 
-    public VentanillaPaseDeLista() {
+    public VentanaPaseLista() {
         initComponents();
         controladorCitas = new ControladorCitas();
         this.setVisible(true);

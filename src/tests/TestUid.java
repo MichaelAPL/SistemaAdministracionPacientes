@@ -5,6 +5,9 @@
  */
 package tests;
 
+import controladores.ControladorRegistro;
+import vistas.VentanaRegistroPacientes;
+
 /**
  *
  * @author Milka
@@ -14,10 +17,9 @@ public class TestUid {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        String objeto = "Milka Del Rosario Cabrilla Manzanero";
-        System.out.println(objeto.hashCode());
-        
+    public static void main(String[] args) {       
+       ControladorRegistro controladorRegistro = new ControladorRegistro();
+       VentanaRegistroPacientes vrc = new VentanaRegistroPacientes(controladorRegistro);               
     }
     
 }
