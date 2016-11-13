@@ -10,7 +10,7 @@ import modelos.AsistenteDoctor;
 import modelos.Persona;
 import modelos.Tratamiento;
 import java.util.ArrayList;
-import vistas.VentanillaPaseDeLista;
+import vistas.VentanaPaseLista;
 
 
 
@@ -25,7 +25,7 @@ public class TestSeguimientoCitas {
         VentanaRegistroPacientes ventanaRegistro = new VentanaRegistroPacientes(controlRegistro);
      
         ventanaRegistro.setVisible(true);*/
-        VentanillaPaseDeLista ventanillaPaseLista = new VentanillaPaseDeLista();
+        VentanaPaseLista ventanillaPaseLista = new VentanaPaseLista();
         ArrayList<Paciente> bancoPacientes = new ArrayList();
         
         Persona persona1 = new Persona("Juan", "Perez", 45, "X", "Merida", "123456789");
@@ -40,9 +40,9 @@ public class TestSeguimientoCitas {
         Tratamiento tratamiento1 = new Tratamiento(125);
         Tratamiento tratamiento2 = new Tratamiento(145);
         
-        Paciente paciente1 = new Paciente(persona1, tratamiento1, enfermedades, medicamentos);
+        Paciente paciente1 = new Paciente(persona1, enfermedades, medicamentos, tratamiento1);
         
-        Paciente paciente2 = new Paciente(persona2, tratamiento2, enfermedades, medicamentos);
+        Paciente paciente2 = new Paciente(persona2, enfermedades, medicamentos, tratamiento2);
         
         bancoPacientes.add(paciente1);
         bancoPacientes.add(paciente2);

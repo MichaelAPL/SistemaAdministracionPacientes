@@ -2,7 +2,7 @@ package modelos;
 
 import java.util.ArrayList;
 import java.util.Date;
-import vistas.VentanillaPaseDeLista;
+import vistas.VentanaPaseLista;
 
 /**
  *
@@ -10,11 +10,11 @@ import vistas.VentanillaPaseDeLista;
  */
 public class AsistenteDoctor {
 
-    private VentanillaPaseDeLista ventanillaPaseLista;
+    private VentanaPaseLista ventanillaPaseLista;
     private ArrayList<Paciente> pacientes;
     private ArrayList<Paciente> pacientesConCitaHoy;
 
-    public AsistenteDoctor(ArrayList<Paciente> pacientes, VentanillaPaseDeLista ventanillaPaseLista) {
+    public AsistenteDoctor(ArrayList<Paciente> pacientes, VentanaPaseLista ventanillaPaseLista) {
         this.pacientes = pacientes;
         this.pacientesConCitaHoy = generarListaDePacientesConCita();
         this.ventanillaPaseLista = ventanillaPaseLista;
@@ -22,29 +22,34 @@ public class AsistenteDoctor {
 
     public ArrayList<Paciente> generarListaDePacientesConCita() {
         ArrayList<Paciente> listaPacientesConCita = new ArrayList();
-        Date fechaHoy = new Date();
 
         for (Paciente paciente : pacientes) {
-            boolean pacienteYaPasoHoy;
-            boolean pacienteConTratamientoActivo;
-            if (paciente.getTratamiento().getUltimaAplicacion() != null) {
-                pacienteYaPasoHoy = paciente.getTratamiento().
-                        getUltimaAplicacion().getFecha().equals(fechaHoy);
-            } else {
-                pacienteYaPasoHoy = false;
-            }
-            
-            pacienteConTratamientoActivo = paciente.getTratamiento().
-                    isActivo();
-
-            if (!pacienteYaPasoHoy && pacienteConTratamientoActivo) {
+            if (!pacienteAsistidoHoy(paciente) && pacienteConTratamientoActivo(paciente)) {
                 listaPacientesConCita.add(paciente);
             }
-
         }
         return listaPacientesConCita;
     }
+    
+    private boolean pacienteConTratamientoActivo(Paciente paciente){
+        return paciente.getTratamiento().isActivo();
+    }
 
+    private boolean pacientePrimeraCitaAsistida(Paciente paciente){
+        return (paciente.getTratamiento().getUltimaAplicacion() != null);
+    }
+    
+    private boolean pacienteAsistidoHoy(Paciente paciente){
+        Date fechaHoy = new Date();
+        boolean pacienteYaPasoHoy = false;
+        
+            if (pacientePrimeraCitaAsistida(paciente)) {
+                pacienteYaPasoHoy = paciente.getTratamiento().
+                        getUltimaAplicacion().getFecha().equals(fechaHoy);
+            }
+            return pacienteYaPasoHoy;
+    }
+    
     public void mandarAVentanillaAPacientesConCitas() {
         ventanillaPaseLista.mostrarPacientesConCita(pacientesConCitaHoy);
     }
