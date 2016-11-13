@@ -27,15 +27,15 @@ public class EnfermedadesPreviasDAO {
         String camposEnfermedades = "Paciente_ID, NumEnfer, NombreEnfer";
         String consulta = "INSERT INTO EnfermedadesPrevias (" + camposEnfermedades + ")" +
                 " VALUES (?, ?, ?)";
-        PreparedStatement declaracionEnfermedades = conectorBD.consulta(consulta);
-        declaracionEnfermedades.setInt(1, paciente.getId());
+        
         for (int i = 0; i < paciente.getEnfermedadesPrevias().size(); i++) {
+            PreparedStatement declaracionEnfermedades = conectorBD.consulta(consulta);
+            declaracionEnfermedades.setInt(1, paciente.getId());
             declaracionEnfermedades.setInt(2, i);
             declaracionEnfermedades.setString(3, paciente.getEnfermedadesPrevias().get(i));
+            declaracionEnfermedades.execute();
         }
-        
-        declaracionEnfermedades.execute();
-        
+                        
         conectorBD.desconectar();
     }
 }

@@ -7,6 +7,7 @@ package vistas;
 
 import controladores.ControladorRegistro;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelos.Paciente;
 import modelos.Persona;
@@ -207,17 +208,16 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
                                 .addGap(2, 2, 2)
                                 .addComponent(padecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(añadirEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(añadirEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(scrollTabla1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
+                                .addGap(3, 3, 3)
+                                .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(añadirMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(13, 13, 13)))))
+                                .addComponent(añadirMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(panelLayout.createSequentialGroup()
                 .addGap(380, 380, 380)
@@ -333,12 +333,14 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
 
     private void añadirEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirEnfermedadActionPerformed
         this.enfermedadesPrevias.add(padecimiento.getText());
+        actualizarDatosTabla(this.tablaPadecimientos, this.enfermedadesPrevias);
         this.padecimiento.setText("");
     }//GEN-LAST:event_añadirEnfermedadActionPerformed
 
     private void añadirMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirMedicamentoActionPerformed
-        this.medicamentosExternos.add(padecimiento.getText());
-        this.padecimiento.setText("");
+        this.medicamentosExternos.add(medicamento.getText());
+        actualizarDatosTabla(this.tablaMedicamentos, this.medicamentosExternos);
+        this.medicamento.setText("");
     }//GEN-LAST:event_añadirMedicamentoActionPerformed
 
     private void inicializarTablaPadecimientos() {
@@ -357,6 +359,16 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         String datos[][] = {};
         modelo = new DefaultTableModel(datos, cabecera);
         return modelo;
+    }
+    
+    private void actualizarDatosTabla(JTable tabla, ArrayList<String> datos){
+        String cabecera[] = {tabla.getColumnName(0)};
+        String[][] cuerpo= new String[datos.size()][1];
+        for (int i = 0; i < datos.size(); i++) {
+            cuerpo[i][0] = datos.get(i);
+        }
+        DefaultTableModel modelo = new DefaultTableModel(cuerpo, cabecera);
+        tabla.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

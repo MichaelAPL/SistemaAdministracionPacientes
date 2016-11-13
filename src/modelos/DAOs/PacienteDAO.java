@@ -83,11 +83,9 @@ public class PacienteDAO {
         
         String consulta = "select * from Pacientes";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
-        
-        
+                
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
-        
-        
+                
         Persona persona = new Persona(resultado.getString("Nombre"), resultado.getString("Apellido"),
         resultado.getInt("Edad"), resultado.getString("Direccion"), resultado.getString("Localidad"), 
         resultado.getString("Telefono"));
