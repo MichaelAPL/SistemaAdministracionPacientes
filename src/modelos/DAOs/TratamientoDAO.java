@@ -15,10 +15,13 @@ import modelos.database.ConectorBD;
  * @author miguelangel
  */
 public class TratamientoDAO {
-    ConectorBD conectorBD; 
+    private ConectorBD conectorBD; 
+    private AplicacionDAO aplicacionDAO;
+    
     
     public TratamientoDAO(){
-        conectorBD = new ConectorBD();
+        this.conectorBD = new ConectorBD();
+        this.aplicacionDAO = new AplicacionDAO();
     }
     
     public void crearTratamiento(Tratamiento tratamiento) throws SQLException{
@@ -34,6 +37,10 @@ public class TratamientoDAO {
         declaracionTratamiento.setInt(4, tratamiento.getPaciente_id());
         
         declaracionTratamiento.execute();
+        
         conectorBD.desconectar();
+        
+        tratamiento.getSiguienteAplicacion().setTratamiento_id(tratamiento.getPaciente_id());
+        aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());               
     }
 }

@@ -19,12 +19,14 @@ import modelos.enums.DatosPacienteDao;
  */
 public class PacienteDAO {
     private ConectorBD conectorBD;
+    TratamientoDAO tratamientoDAO;
     private final MedicamentosExternosDAO medicamentosExternosDAO;
     private final EnfermedadesPreviasDAO enfermedadesPreviasDAO;
     
     
     public PacienteDAO(){
         this.conectorBD = new ConectorBD();
+        tratamientoDAO = new TratamientoDAO();
         medicamentosExternosDAO = new MedicamentosExternosDAO();
         enfermedadesPreviasDAO = new EnfermedadesPreviasDAO();
     }
@@ -58,11 +60,12 @@ public class PacienteDAO {
         if (generatedKeys.next()) {
             int id = generatedKeys.getInt(1);
             paciente.setId(id);
-            System.out.println(paciente.getId());
+            paciente.getTratamiento().setPaciente_id(id);
         }
         
         conectorBD.desconectar();
         
+        tratamientoDAO.crearTratamiento(paciente.getTratamiento());
         enfermedadesPreviasDAO.crearEnfermedadesPrevias(paciente);
         medicamentosExternosDAO.crearMedicamentosExternos(paciente);
     }
@@ -97,8 +100,7 @@ public class PacienteDAO {
             int id = generatedKeys.getInt("ID_Paciente");
             paciente.setId(id);
         }
-        
-        
+                
         this.conectorBD.desconectar();
       
         return paciente;

@@ -6,6 +6,7 @@
 package modelos.DAOs;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelos.Aplicacion;
 import modelos.database.ConectorBD;
@@ -37,5 +38,46 @@ public class AplicacionDAO {
         declaracion.setInt(4, aplicacion.getTratamiento_id());
         
         conectorBD.desconectar();
+    }
+    
+    public void actualizar(Aplicacion aplicacion) throws SQLException{
+        conectorBD.conectar();
+        
+        String consulta = "UPDATE Aplicacion SET Realizada = ?, Fecha = ? WHERE"
+                + "Tratamiento_ID = ?";
+        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        
+        declaracion.setBoolean(1, aplicacion.isRealizada());
+        
+        java.sql.Date fechaDeAplicacion = new java.sql.Date(aplicacion.getFecha().getTime());
+        declaracion.setDate(2, fechaDeAplicacion);
+        declaracion.setInt(3, aplicacion.getTratamiento_id());
+        
+        declaracion.execute();
+        conectorBD.desconectar();
+    }
+    
+    public Aplicacion getSiguienteAplicacion(int tratamiento_ID) throws SQLException{
+        conectorBD.conectar();
+        
+        String consulta = "select from Aplicacion where Tratamiento_ID = ?";
+        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        declaracion.setInt(1, tratamiento_ID);
+        
+        ResultSet resultado = declaracion.executeQuery();
+                
+        Aplicacion sigAplicacion = null;
+        
+        while(resultado.next()){
+            if(!resultado.getBoolean("Realizada")){
+                int numAplicacion = resultado.getInt("Num_Aplicacion");
+                sigAplicacion = new Aplicacion(numAplicacion);
+                sigAplicacion.setTratamiento_id(resultado.getInt("Tratamiento_ID"));                
+            }
+        }
+        
+        return sigAplicacion;
     }
 }

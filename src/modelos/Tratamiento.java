@@ -20,7 +20,7 @@ public class Tratamiento {
     public Tratamiento(int dosisEDTA) {
         this.dosis_EDTA_ml = dosisEDTA;
         this.ultimaAplicacion = null;
-        this.siguienteAplicacion = new Aplicacion(0);
+        this.siguienteAplicacion = new Aplicacion(1);
         this.activo = true;
     }
 
