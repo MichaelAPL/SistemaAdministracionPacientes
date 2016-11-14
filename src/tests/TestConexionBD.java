@@ -8,7 +8,10 @@ package tests;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import modelos.Aplicacion;
+import modelos.DAOs.AplicacionDAO;
 import modelos.DAOs.PacienteDAO;
+import modelos.DAOs.TratamientoDAO;
 import modelos.Paciente;
 import modelos.Persona;
 import modelos.Tratamiento;
@@ -46,18 +49,25 @@ public class TestConexionBD {
         try {   
             PacienteDAO pacienteDAO = new PacienteDAO();
             
-            pacienteDAO.crearPaciente(paciente1);
+            
+            //pacienteDAO.crearPaciente(paciente1);
             //pacienteDAO.crearPaciente(paciente2);
             
             ResultSet pacientes = pacienteDAO.recuperarTodos();
             
+            TratamientoDAO tratamientoDAO = new TratamientoDAO();
+            AplicacionDAO aplicacionDAO = new AplicacionDAO();
+            
             while(pacientes.next()){
+
+                Tratamiento tratamiento = tratamientoDAO.getTratamiento(pacientes.getInt("ID_Paciente"));
+                System.out.println("ID: " + pacientes.getInt("ID_Paciente"));
                 System.out.println("ID: " + pacientes.getDate("FechaInscripcion"));
                 System.out.println("Nombre: "+pacientes.getString("Nombre"));
-            }
+                System.out.println(tratamiento.getPaciente_id());
+            }            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-    }
-    
+    }    
 }

@@ -49,4 +49,29 @@ public class TratamientoDAO {
         
         aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());               
     }
+    
+    public Tratamiento getTratamiento(int paciente_id) throws SQLException{
+        conectorBD.conectar();
+        String consulta = "select * from Tratamiento where Paciente_ID = ? and "
+                + "Activo = ?";
+        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        declaracion.setInt(1, paciente_id);
+        declaracion.setBoolean(2, true);
+        
+        ResultSet resultado = declaracion.executeQuery();
+        
+        Tratamiento tratamiento = null;
+        while(resultado.next()){
+            tratamiento = new Tratamiento(resultado.getInt("DosisEDTA"));
+            tratamiento.setId(resultado.getInt("ID_Tratamiento"));
+            tratamiento.setActivo(resultado.getBoolean("Activo"));
+            tratamiento.setPaciente_id(resultado.getInt("Paciente_ID"));            
+            tratamiento.setSiguienteAplicacion(aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()));                    
+        }
+        
+        conectorBD.desconectar();
+        
+        return tratamiento;
+    }
 }

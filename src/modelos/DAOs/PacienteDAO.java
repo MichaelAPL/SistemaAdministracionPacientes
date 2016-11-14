@@ -21,7 +21,7 @@ import modelos.enums.DatosPacienteDao;
 public class PacienteDAO {
 
     private ConectorBD conectorBD;
-    TratamientoDAO tratamientoDAO;
+    private TratamientoDAO tratamientoDAO;
     private final MedicamentosExternosDAO medicamentosExternosDAO;
     private final EnfermedadesPreviasDAO enfermedadesPreviasDAO;
 

@@ -10,7 +10,6 @@ import modelos.AsistenteDoctor;
 import modelos.Persona;
 import modelos.Tratamiento;
 import java.util.ArrayList;
-import modelos.AdministradorDAOPaciente;
 import vistas.VentanaPaseLista;
 
 
@@ -52,8 +51,5 @@ public class TestSeguimientoCitas {
         asistente.mandarAVentanillaAPacientesConCitas();
         
         ventanillaPaseLista.setAsistenteDoctor(asistente);
-        
-        AdministradorDAOPaciente paciente = new AdministradorDAOPaciente();
-        paciente.imprimirDAOS();
     }   
 }

@@ -55,6 +55,14 @@ public class Tratamiento {
         return siguienteAplicacion;
     }
 
+    public void setUltimaAplicacion(Aplicacion ultimaAplicacion) {
+        this.ultimaAplicacion = ultimaAplicacion;
+    }
+
+    public void setSiguienteAplicacion(Aplicacion siguienteAplicacion) {
+        this.siguienteAplicacion = siguienteAplicacion;
+    }
+
     public int getDosis_EDTA_ml() {
         return dosis_EDTA_ml;
     }
