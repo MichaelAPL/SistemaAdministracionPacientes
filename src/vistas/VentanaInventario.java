@@ -19,6 +19,7 @@ public class VentanaInventario extends javax.swing.JFrame {
      */
     
     ControladorInventario controladorInventario = new ControladorInventario();
+    
     public VentanaInventario(ControladorInventario controladorInventario) {
         initComponents();
         setLocationRelativeTo(null);
@@ -178,7 +179,7 @@ public class VentanaInventario extends javax.swing.JFrame {
         modelo = new DefaultTableModel(datos, cabecera);
         return modelo;
     }
-    
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarExistencias;
     private javax.swing.JButton btnAgregarNuevoMaterial;
