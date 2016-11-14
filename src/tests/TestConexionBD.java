@@ -24,8 +24,8 @@ public class TestConexionBD {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Persona persona1 = new Persona("Juan", "Perez", 45, "X", "Merida", "123456789");
-        Persona persona2 = new Persona("Juan", "Lopez", 50, "Y", "Merida", "987654321");
+        Persona persona1 = new Persona("Juan", "Perez", "X", "Merida", "123456789", 45);
+        Persona persona2 = new Persona("Juan", "Lopez", "Y", "Merida", "987654321", 50);
         
         ArrayList medicamentos = new ArrayList();
         medicamentos.add("Paracetamol");
@@ -52,7 +52,7 @@ public class TestConexionBD {
             ResultSet pacientes = pacienteDAO.recuperarTodos();
             
             while(pacientes.next()){
-                System.out.println("ID: " + pacientes.getInt("ID_Paciente"));
+                System.out.println("ID: " + pacientes.getDate("FechaInscripcion"));
                 System.out.println("Nombre: "+pacientes.getString("Nombre"));
             }
         } catch (SQLException ex) {

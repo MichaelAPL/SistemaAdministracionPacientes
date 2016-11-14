@@ -1,5 +1,6 @@
 package modelos;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import vistas.VentanaPaseLista;
@@ -30,36 +31,41 @@ public class AsistenteDoctor {
         }
         return listaPacientesConCita;
     }
-    
-    private boolean pacienteConTratamientoActivo(Paciente paciente){
+
+    private boolean pacienteConTratamientoActivo(Paciente paciente) {
         return paciente.getTratamiento().isActivo();
     }
 
-    private boolean pacientePrimeraCitaAsistida(Paciente paciente){
+    private boolean pacientePrimeraCitaAsistida(Paciente paciente) {
         return (paciente.getTratamiento().getUltimaAplicacion() != null);
     }
-    
-    private boolean pacienteAsistidoHoy(Paciente paciente){
+
+    private boolean pacienteAsistidoHoy(Paciente paciente) {
         Date fechaHoy = new Date();
         boolean pacienteYaPasoHoy = false;
-        
-            if (pacientePrimeraCitaAsistida(paciente)) {
-                pacienteYaPasoHoy = paciente.getTratamiento().
-                        getUltimaAplicacion().getFecha().equals(fechaHoy);
-            }
-            return pacienteYaPasoHoy;
+
+        if (pacientePrimeraCitaAsistida(paciente)) {
+            int dia = paciente.getTratamiento().getUltimaAplicacion().getFecha().getDate();
+            int mes = paciente.getTratamiento().getUltimaAplicacion().getFecha().getMonth();
+            int año = paciente.getTratamiento().getUltimaAplicacion().getFecha().getYear();
+            pacienteYaPasoHoy = ((dia == fechaHoy.getDate()) && (mes == fechaHoy.getMonth()) && (año == fechaHoy.getYear()));
+        }
+        return pacienteYaPasoHoy;
     }
-    
+
     public void mandarAVentanillaAPacientesConCitas() {
+        pacientesConCitaHoy = generarListaDePacientesConCita();
         ventanillaPaseLista.mostrarPacientesConCita(pacientesConCitaHoy);
     }
 
     public void ponerAsistenciaAlPaciente(int numeroDePacienteEnLaLista) {
-        Paciente paciente = pacientesConCitaHoy.remove(numeroDePacienteEnLaLista);
+        //for (int i = 0; i < numeroDePacienteEnLaLista.size(); i++) {
+        Paciente paciente = pacientesConCitaHoy.get(numeroDePacienteEnLaLista);
         paciente.getTratamiento().getSiguienteAplicacion().setRealizada(true);
-        paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Date ());
+        paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Date());
 
         crearNuevaCitaAlPaciente(paciente);
+        //}
     }
 
     private void crearNuevaCitaAlPaciente(Paciente paciente) {

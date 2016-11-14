@@ -26,7 +26,7 @@ public class Persona {
      * @param localidad contiene la localidad de la persona
      * @param telefono contiene el telefono de la persona
      */
-    public Persona(String nombres, String apellidos, int edad, String direccion, String localidad, String telefono) {
+    public Persona(String nombres, String apellidos, String direccion, String localidad, String telefono, int edad) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.edad = edad;
