@@ -12,13 +12,13 @@ public class Paciente extends Persona{
     private ArrayList<String> medicamentosExternos; 
     private ArrayList<String> enfermedadesPrevias;
     private Tratamiento tratamiento;
-    private final Date fechaDeInscripcion;
+    private Date fechaDeInscripcion;
     private int id;
     
     public Paciente(Persona persona, ArrayList<String> medicamentosExternos, 
             ArrayList<String> enfermedadesPrevias, Tratamiento tratamiento){        
-        super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), 
-              persona.getDireccion(), persona.getLocalidad(), persona.getTelefono()); 
+        super(persona.getNombres(), persona.getApellidos(), 
+              persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(),persona.getEdad()); 
         this.medicamentosExternos = medicamentosExternos;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.tratamiento = tratamiento;
@@ -27,8 +27,8 @@ public class Paciente extends Persona{
     
     public Paciente(Persona persona, ArrayList<String> medicamentosExternos, 
             ArrayList<String> enfermedadesPrevias, Tratamiento tratamiento, int id){        
-        super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), 
-                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono()); 
+        super(persona.getNombres(), persona.getApellidos(), 
+                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(),persona.getEdad()); 
         this.medicamentosExternos = medicamentosExternos;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.tratamiento = tratamiento;
@@ -37,10 +37,10 @@ public class Paciente extends Persona{
     }
     
     //Hay que eliminar
-    public Paciente(Persona persona){
-        super(persona.getNombres(), persona.getApellidos(),persona.getEdad(), 
-                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono());        
-        fechaDeInscripcion = inicializarFechaDeInscripcion();
+    public Paciente(Persona persona, Date fechaInscripcion){
+        super(persona.getNombres(), persona.getApellidos(), 
+                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(),persona.getEdad());        
+        fechaDeInscripcion = fechaInscripcion;
     }
    
     public ArrayList<String> getEnfermedadesPrevias() {
@@ -81,5 +81,5 @@ public class Paciente extends Persona{
 
     public void setId(int id) {
         this.id = id;
-    }
+    }    
 }

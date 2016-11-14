@@ -1,5 +1,6 @@
 package modelos;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import vistas.VentanaPaseLista;
@@ -59,11 +60,11 @@ public class AsistenteDoctor {
 
     public void ponerAsistenciaAlPaciente(int numeroDePacienteEnLaLista) {
         //for (int i = 0; i < numeroDePacienteEnLaLista.size(); i++) {
-            Paciente paciente = pacientesConCitaHoy.get(numeroDePacienteEnLaLista);
-            paciente.getTratamiento().getSiguienteAplicacion().setRealizada(true);
-            paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Date());
+        Paciente paciente = pacientesConCitaHoy.get(numeroDePacienteEnLaLista);
+        paciente.getTratamiento().getSiguienteAplicacion().setRealizada(true);
+        paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Date());
 
-            crearNuevaCitaAlPaciente(paciente);
+        crearNuevaCitaAlPaciente(paciente);
         //}
     }
 
