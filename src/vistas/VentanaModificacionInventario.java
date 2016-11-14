@@ -87,9 +87,10 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
-        String nombreProducto =String.valueOf(producto.getItemAt(producto.getSelectedIndex()));
-        int insumo = Integer.parseInt((String) existencias.getValue());
+        
+        String nombreProducto =String.valueOf(producto.getItemAt(producto.getSelectedIndex()));        
+        int insumo = Integer.parseInt(String.valueOf(existencias.getValue()));
+        
         InventarioProducto productoInventario = new InventarioProducto(nombreProducto, insumo);
         
         controladorInventario.agregarProductoInventario(productoInventario);
