@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import modelos.Paciente;
 import modelos.Persona;
 import modelos.database.ConectorBD;
@@ -100,32 +101,37 @@ public class PacienteDAO {
 
         this.conectorBD.desconectar();*/
         //*********************
-
         return resultado;
     }
 
-    public Paciente getPaciente(int Paciente_ID) throws SQLException {
+    public ArrayList<Paciente> getPacientesPorNombre(String nombre) throws SQLException {
         this.conectorBD.conectar();
 
-        String consulta = "select * from Pacientes";
+        ArrayList<Paciente> pacientes = new ArrayList();
+
+        String consulta = "select * from Pacientes where Nombre = " + nombre;
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
 
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
 
-        Persona persona = new Persona(resultado.getString("Nombre"), resultado.getString("Apellido"),
-                resultado.getString("Direccion"), resultado.getString("Localidad"), resultado.getString("Telefono"),
-                resultado.getInt("Edad"));
+        while (resultado.next()) {
+            Persona persona = new Persona(resultado.getString("Nombre"), resultado.getString("Apellido"),
+                    resultado.getString("Direccion"), resultado.getString("Localidad"), resultado.getString("Telefono"),
+                    resultado.getInt("Edad"));
 
-        Paciente paciente = new Paciente(persona, resultado.getDate("FechaInscripcion"));
+            int paciente_id = resultado.getInt("ID_Paciente");
+            Date fechaInscripcion = resultado.getDate("FechaInscripcion");
 
-        ResultSet generatedKeys = declaracionDeRecuperacion.getGeneratedKeys();
-        if (generatedKeys.next()) {
-            int id = generatedKeys.getInt("ID_Paciente");
-            paciente.setId(id);
+            Paciente paciente = new Paciente(persona,
+                    medicamentosExternosDAO.getMedicamentosExternos(paciente_id),
+                    enfermedadesPreviasDAO.getEnfermedadesPrevias(paciente_id),
+                    tratamientoDAO.getTratamiento(paciente_id),
+                    fechaInscripcion, paciente_id);
+            
+            pacientes.add(paciente);
         }
 
         this.conectorBD.desconectar();
-
-        return paciente;
+        return pacientes;
     }
 }

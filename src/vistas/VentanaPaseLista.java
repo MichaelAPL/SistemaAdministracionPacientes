@@ -4,8 +4,6 @@ import modelos.AsistenteDoctor;
 import modelos.Paciente;
 import controladores.ControladorCitas;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 
 /**

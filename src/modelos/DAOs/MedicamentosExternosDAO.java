@@ -6,7 +6,9 @@
 package modelos.DAOs;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelos.Paciente;
 import modelos.database.ConectorBD;
 
@@ -38,5 +40,24 @@ public class MedicamentosExternosDAO {
         }
         
         conectorBD.desconectar();
+    }
+    
+    public ArrayList<String> getMedicamentosExternos(int paciente_id) throws SQLException{
+        conectorBD.conectar();
+        
+        ArrayList<String> medicamentosExternos = new ArrayList();
+        
+        String consulta = "select * from MedicamentosExternos where Paciente_ID = ?";
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        declaracion.setInt(1, paciente_id);
+        
+        ResultSet resultados = declaracion.executeQuery();
+        
+        while(resultados.next()){
+            medicamentosExternos.add(resultados.getString("NombreMedicamanento"));
+        }
+        
+        conectorBD.desconectar();
+        return medicamentosExternos;
     }
 }
