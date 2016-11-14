@@ -5,6 +5,11 @@
  */
 package controladores;
 
+import java.sql.SQLException;
+import java.time.Month;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelos.DAOs.InventarioProductoDAO;
 import modelos.InventarioProducto;
 
 /**
@@ -12,12 +17,16 @@ import modelos.InventarioProducto;
  * @author Angel Basto Gonzalez
  */
 public class ControladorInventario {
-
+    
     public ControladorInventario() {
         
     }
     
     public void agregarProductoInventario(InventarioProducto producto){
-        System.out.println("Prueba de funcion");
+        System.out.println("Probando");
+    }
+    
+    public void obtenerReporteInventario(Month mes){
+        
     }
 }
