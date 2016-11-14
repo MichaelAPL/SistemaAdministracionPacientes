@@ -3,6 +3,10 @@ package vistas;
 import controladores.ControladorDatosPaciente;
 import modelos.enums.DatosPacienteDao;
 import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+import modelos.Paciente;
 /**
  *
  * @author Milka
@@ -16,19 +20,30 @@ public class VentanaDatosPaciente extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void mostrarDatosPaciente(ArrayList<String> datosPaciente, ArrayList<String> enfermedadesPaciente, ArrayList <String> medicamentosPaciente){
-        nombresPaciente.setText(datosPaciente.get(DatosPacienteDao.NOMBRE.getDato()));
-        apellidosPaciente.setText(datosPaciente.get(DatosPacienteDao.APELLIDO.getDato()));
-        localidadPaciente.setText(datosPaciente.get(DatosPacienteDao.LOCALIDAD.getDato()));
-        edadPaciente.setText(datosPaciente.get(DatosPacienteDao.EDAD.getDato()));
-        direccionPaciente.setText(datosPaciente.get(DatosPacienteDao.DIRECCION.getDato()));
-        dosisEDTApaciente.setText(datosPaciente.get(DatosPacienteDao.DOSIS_EDTA.getDato()));
-        telefonoPaciente.setText(datosPaciente.get(DatosPacienteDao.TELEFONO.getDato()));
+    public void mostrarDatosPaciente(Paciente paciente){
+        nombresPaciente.setText(paciente.getNombres());
+        apellidosPaciente.setText(paciente.getApellidos());
+        localidadPaciente.setText(paciente.getLocalidad());
+        edadPaciente.setText(String.valueOf(paciente.getEdad()));
+        direccionPaciente.setText(paciente.getDireccion());
+        dosisEDTApaciente.setText(String.valueOf(paciente.getTratamiento().getDosisEDTA()));
+        telefonoPaciente.setText(paciente.getTelefono());
+        
+        mostrarEnfermedades(paciente);
+        mostrarMedicamentos(paciente);
     }
     
+    private void mostrarEnfermedades(Paciente paciente){
+        Object [] enfermedades = new String[paciente.getEnfermedadesPrevias().size()];
+        enfermedades = paciente.getEnfermedadesPrevias().toArray(enfermedades);
+        tablaEnfermedadesPaciente.setListData(enfermedades);
+    }
     
-
-    
+    private void mostrarMedicamentos(Paciente paciente){
+        Object [] medicamentos = new String[paciente.getMedicamentosExternos().size()];
+        medicamentos = paciente.getMedicamentosExternos().toArray(medicamentos);
+        tablaEnfermedadesPaciente.setListData(medicamentos);
+    }
     
 
     @SuppressWarnings("unchecked")
