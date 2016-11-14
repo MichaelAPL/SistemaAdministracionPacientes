@@ -292,8 +292,8 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         Persona persona = new Persona(nombres.getText(), apellidos.getText(),
-                Integer.parseInt(edad.getText()), direccion.getText(), localidad.getText(),
-                telefono.getText());
+                direccion.getText(), localidad.getText(),
+                telefono.getText(), Integer.parseInt(edad.getText()));
 
         Tratamiento tratamiento = new Tratamiento(Integer.parseInt(this.EDTA.getText()));
 
