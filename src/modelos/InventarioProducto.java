@@ -10,10 +10,10 @@ package modelos;
  * @author Angel Basto Gonzalez
  */
 public class InventarioProducto extends Producto{
-     private int existencias;
+    private int existencias;
 
-    public InventarioProducto(int id, String nombre, double costo, int existenciasl) {
-        super(id, nombre);
+    public InventarioProducto(String nombre, int existenciasl) {
+        super(nombre);
         this.existencias = existencias;
     }
 

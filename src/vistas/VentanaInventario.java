@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import controladores.ControladorInventario;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,8 +17,13 @@ public class VentanaInventario extends javax.swing.JFrame {
     /**
      * Creates new form VentanaInventario
      */
-    public VentanaInventario() {
+    
+    ControladorInventario controladorInventario = new ControladorInventario();
+    
+    public VentanaInventario(ControladorInventario controladorInventario) {
         initComponents();
+        setLocationRelativeTo(null);
+        this.controladorInventario = controladorInventario;
         inicializarTablaMedicamentos();
         inicializarTablaUtensilios();
     }
@@ -38,7 +44,8 @@ public class VentanaInventario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaUtensilios = new javax.swing.JTable();
-        btnAgregar = new javax.swing.JButton();
+        btnAgregarExistencias = new javax.swing.JButton();
+        btnAgregarNuevoMaterial = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inventario ");
@@ -78,11 +85,19 @@ public class VentanaInventario extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaUtensilios);
 
-        btnAgregar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarExistencias.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        btnAgregarExistencias.setText("Agregar Insumos");
+        btnAgregarExistencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnAgregarExistenciasActionPerformed(evt);
+            }
+        });
+
+        btnAgregarNuevoMaterial.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        btnAgregarNuevoMaterial.setText("Agregar nuevo material");
+        btnAgregarNuevoMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarNuevoMaterialActionPerformed(evt);
             }
         });
 
@@ -104,8 +119,10 @@ public class VentanaInventario extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAgregar)
-                .addGap(361, 361, 361))
+                .addComponent(btnAgregarExistencias)
+                .addGap(18, 18, 18)
+                .addComponent(btnAgregarNuevoMaterial)
+                .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,28 +138,38 @@ public class VentanaInventario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(btnAgregar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarExistencias)
+                    .addComponent(btnAgregarNuevoMaterial))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnAgregarExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarExistenciasActionPerformed
         // TODO add your handling code here:
         VentanaModificacionInventario ventanaModificacion = 
-                new VentanaModificacionInventario();
+                new VentanaModificacionInventario(controladorInventario);
         
         ventanaModificacion.setVisible(true);
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_btnAgregarExistenciasActionPerformed
+
+    private void btnAgregarNuevoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNuevoMaterialActionPerformed
+        // TODO add your handling code here:
+//        VentanaIngresarNuevoProductoInventario ventanaIngresarNuevoProducto =
+//                new VentanaIngresarNuevoProductoInventario();
+//        
+//        ventanaIngresarNuevoProducto.setVisible(true);
+    }//GEN-LAST:event_btnAgregarNuevoMaterialActionPerformed
 
     public void inicializarTablaMedicamentos(){
-        String cabecera[] = {"Medicamento", "Cantidad", "Costo unitario", "Costo total"};
+        String cabecera[] = {"Medicamento", "Cantidad"};
         this.tablaMedicamentos.setModel(crearCuerpoTabla(cabecera));
     }
     
     public void inicializarTablaUtensilios(){
-        String cabecera[] = {"Utensilio", "Cantidad", "Costo unitario", "Costo total"};
+        String cabecera[] = {"Utensilio", "Cantidad"};
         this.tablaUtensilios.setModel(crearCuerpoTabla(cabecera));
     }
     
@@ -152,9 +179,10 @@ public class VentanaInventario extends javax.swing.JFrame {
         modelo = new DefaultTableModel(datos, cabecera);
         return modelo;
     }
-    
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarExistencias;
+    private javax.swing.JButton btnAgregarNuevoMaterial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

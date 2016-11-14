@@ -28,8 +28,8 @@ public class TestSeguimientoCitas {
         VentanaPaseLista ventanillaPaseLista = new VentanaPaseLista();
         ArrayList<Paciente> bancoPacientes = new ArrayList();
         
-        Persona persona1 = new Persona("Juan", "Perez", 45, "X", "Merida", "123456789");
-        Persona persona2 = new Persona("Julio", "Gamboa", 70, "X", "Merida", "123546789");
+        Persona persona1 = new Persona("Juan", "Perez", "X", "Merida", "123456789", 45);
+        Persona persona2 = new Persona("Julio", "Gamboa", "X", "Merida", "123546789", 70);
         
         ArrayList medicamentos = new ArrayList();
         medicamentos.add("Paracetamol");
