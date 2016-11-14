@@ -19,5 +19,5 @@ public class ControladorInventario {
     
     public void agregarProductoInventario(InventarioProducto producto){
         System.out.println("Prueba de funcion");
-    }    
+    }
 }
