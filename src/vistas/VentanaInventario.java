@@ -6,7 +6,10 @@
 package vistas;
 
 import controladores.ControladorInventario;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import modelos.InventarioProducto;
 
 /**
  *
@@ -24,8 +27,7 @@ public class VentanaInventario extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.controladorInventario = controladorInventario;
-        inicializarTablaMedicamentos();
-        inicializarTablaUtensilios();
+        inicializarTablaInsumos();
     }
 
     /**
@@ -39,11 +41,7 @@ public class VentanaInventario extends javax.swing.JFrame {
 
         tituloVent = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaMedicamentos = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaUtensilios = new javax.swing.JTable();
+        tablaInsumos = new javax.swing.JTable();
         btnAgregarExistencias = new javax.swing.JButton();
         btnAgregarNuevoMaterial = new javax.swing.JButton();
 
@@ -53,7 +51,7 @@ public class VentanaInventario extends javax.swing.JFrame {
         tituloVent.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         tituloVent.setText("Inventario");
 
-        tablaMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaInsumos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,26 +62,7 @@ public class VentanaInventario extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaMedicamentos);
-
-        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel1.setText("Medicamentos");
-
-        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel2.setText("Utensilios");
-
-        tablaUtensilios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tablaUtensilios);
+        jScrollPane1.setViewportView(tablaInsumos);
 
         btnAgregarExistencias.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         btnAgregarExistencias.setText("Agregar Insumos");
@@ -109,39 +88,27 @@ public class VentanaInventario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tituloVent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(303, 303, 303)
                 .addComponent(btnAgregarExistencias)
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregarNuevoMaterial)
-                .addGap(115, 115, 115))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tituloVent, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(13, 13, 13)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarExistencias)
                     .addComponent(btnAgregarNuevoMaterial))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,32 +130,64 @@ public class VentanaInventario extends javax.swing.JFrame {
 //        ventanaIngresarNuevoProducto.setVisible(true);
     }//GEN-LAST:event_btnAgregarNuevoMaterialActionPerformed
 
-    public void inicializarTablaMedicamentos(){
-        String cabecera[] = {"Medicamento", "Cantidad"};
-        this.tablaMedicamentos.setModel(crearCuerpoTabla(cabecera));
+    public void inicializarTablaInsumos(){        
+        Vector<String> cabecera = new Vector<String>();
+        cabecera.add("Nombre");
+        cabecera.add("Cantidad");
+        
+        ArrayList<InventarioProducto> productos = controladorInventario.obtenerInventarioProductos();
+        this.tablaInsumos.setModel(crearCuerpoTabla(cabecera));
     }
     
-    public void inicializarTablaUtensilios(){
-        String cabecera[] = {"Utensilio", "Cantidad"};
-        this.tablaUtensilios.setModel(crearCuerpoTabla(cabecera));
-    }
-    
-    public DefaultTableModel crearCuerpoTabla(String[] cabecera){
+    public DefaultTableModel crearCuerpoTabla(Vector<String> cabecera){
         DefaultTableModel modelo;
-        String datos[][] = {};
+        Vector<Vector<Object>> datos = new Vector<Vector<Object>>();
+        
+        datos = obtenerDatosProductos(controladorInventario.obtenerInventarioProductos());
         modelo = new DefaultTableModel(datos, cabecera);
         return modelo;
     }
+    
+    public Vector<Vector<Object>> obtenerDatosProductos(ArrayList<InventarioProducto> productos){
+        Vector<Vector<Object>> datos = new Vector<Vector<Object>>();
+        
+        for (int i = 0; i < productos.size(); i++) {
+            Vector<Object> fila  = new Vector<Object>();
+            
+            fila.add(productos.get(i).getNombre());
+            fila.add(productos.get(i).getExistencias());
+            
+            datos.add(fila);
+        }
+        return datos;
+    }
+    
+//    public void actualizarTablaInsumos(ArrayList<InventarioProducto> productos){
+//        Vector<String> cabecera = new Vector<String>();
+//        Vector<Vector<Object>> datos = new Vector<Vector<Object>>();
+//        
+//        cabecera.add("Nombre");
+//        cabecera.add("Cantidad");
+//        
+//        for (int i = 0; i < productos.size(); i++) {
+//            Vector<Object> fila  = new Vector<Object>();
+//            
+//            fila.add(productos.get(i).getNombre());
+//            fila.add(productos.get(i).getExistencias());
+//            
+//            datos.add(fila);
+//        }
+//        
+//        DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(datos, cabecera);
+//        
+//        this.tablaInsumos.setModel(modelo);
+//    }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarExistencias;
     private javax.swing.JButton btnAgregarNuevoMaterial;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaMedicamentos;
-    private javax.swing.JTable tablaUtensilios;
+    private javax.swing.JTable tablaInsumos;
     private javax.swing.JLabel tituloVent;
     // End of variables declaration//GEN-END:variables
 }
