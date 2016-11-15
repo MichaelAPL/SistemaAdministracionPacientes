@@ -5,26 +5,27 @@
  */
 package controladores;
 
+import modelos.AsistenteDoctor;
+
 /**
  *
  * @author Milka
  */
 public class ControladorBusqueda {
 
-    private static ControladorBusqueda controladorBusqueda;
+    private AsistenteDoctor asistente;
+    
 
-    private ControladorBusqueda() {
+    public ControladorBusqueda() {
+        
     }
-
-    public static ControladorBusqueda obtenerUnicoControladorBusqueda() {
-        if (controladorBusqueda != null) {
-            controladorBusqueda = new ControladorBusqueda();
-        }
-        return controladorBusqueda;
+    
+    public void setAsistente(AsistenteDoctor asistente){
+        this.asistente = asistente;
     }
-
-    public void busquedaPaciente(String nombresPaciente, String apellidosPaciente) {
-
+    
+    public void busquedaPaciente(String nombresPaciente) {
+        asistente.buscarPaciente(nombresPaciente);
     }
 
     public void obtencionDatosPaciente(String nombresYApellidosPaciente) {
