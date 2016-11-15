@@ -103,7 +103,7 @@ public class PacienteDAO {
         //*********************
         return pacientes;
     }
-
+    
     public ArrayList<Paciente> getPacientesPorNombre(String nombre) throws SQLException {
         this.conectorBD.conectar();
 
