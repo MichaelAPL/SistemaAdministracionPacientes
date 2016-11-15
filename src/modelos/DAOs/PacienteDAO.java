@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import modelos.Paciente;
 import modelos.Persona;
+import modelos.Tratamiento;
 import modelos.database.ConectorBD;
 import modelos.enums.DatosPacienteDao;
 
@@ -103,7 +104,37 @@ public class PacienteDAO {
         //*********************
         return pacientes;
     }
-
+    
+    public Paciente getPacientePorID(int id) throws SQLException{
+        conectorBD.conectar();
+        
+        String consulta = "select * from Paciente where ID_Paciente = ?";
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        declaracion.setInt(1, id);
+        
+        ResultSet resultado = declaracion.executeQuery();
+        
+        ArrayList enfermedadesPrevias = enfermedadesPreviasDAO.getEnfermedadesPrevias(id);
+        ArrayList medicamentosExternos = medicamentosExternosDAO.getMedicamentosExternos(id);
+        Tratamiento tratamiento = tratamientoDAO.getTratamiento(id);
+        Date fechaInscripcion = null;
+        Persona persona = null;
+        
+        while(resultado.next()){
+            persona = new Persona(resultado.getString("Nombre"), resultado.getString("Apellido"),
+                    resultado.getString("Direccion"), resultado.getString("Localidad"), resultado.getString("Telefono"),
+                    resultado.getInt("Edad"));
+            fechaInscripcion = resultado.getDate("FechaInscripcion");
+        }
+        
+        Paciente paciente = new Paciente(persona, medicamentosExternos, 
+                enfermedadesPrevias, tratamiento, fechaInscripcion, id);
+        
+        conectorBD.desconectar();
+        
+        return paciente;
+    }
+    
     public ArrayList<Paciente> getPacientesPorNombre(String nombre) throws SQLException {
         this.conectorBD.conectar();
 
