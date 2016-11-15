@@ -22,17 +22,25 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     /**
      * Creates new form VentanaRegistroPacientes
      */
+    private static VentanaRegistroPacientes ventanaRegistro;
     private ControladorRegistro controladorRegistro;
     private ArrayList<String> enfermedadesPrevias;
     private ArrayList<String> medicamentosExternos;
 
-    public VentanaRegistroPacientes(ControladorRegistro controladorRegistro) {
+    private VentanaRegistroPacientes() {
         initComponents();
-        this.controladorRegistro = controladorRegistro;
+        this.controladorRegistro = new ControladorRegistro();
         inicializarTablaPadecimientos();
         inicializarTablaMedicamentos();
         setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+    
+    public static VentanaRegistroPacientes obtenerUnicaVentanaRegistroPacientes(){
+        if (ventanaRegistro == null) {
+            ventanaRegistro = new VentanaRegistroPacientes();
+        }
+        return ventanaRegistro;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -301,6 +309,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
                 this.enfermedadesPrevias, tratamiento);
         
         controladorRegistro.crearNuevoPaciente(paciente);
+        ventanaRegistro.dispose();
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edadKeyTyped

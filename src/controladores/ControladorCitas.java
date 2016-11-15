@@ -11,21 +11,18 @@ import modelos.AsistenteDoctor;
 
 public class ControladorCitas {
 
-    AsistenteDoctor asistente;
+    private final AsistenteDoctor asistente;
 
     public ControladorCitas() {
+        asistente = AsistenteDoctor.obtenerUnicoAsistenteDoctor();
     }
 
     public void actualizarListaPacientes() {
-        asistente.mandarAVentanillaAPacientesConCitas();
+        asistente.mandarAVentanaAPacientesConCitas();
     }
 
     public void asistenciaDePacientes(int indicePaciente) {
         asistente.ponerAsistenciaAlPaciente(indicePaciente);
-    }
-
-    public void setAsistente(AsistenteDoctor asistente) {
-        this.asistente = asistente;
     }
 
 }

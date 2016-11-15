@@ -16,22 +16,22 @@ import vistas.VentanaPaseLista;
  */
 public class AsistenteDoctor {
 
-    private VentanaPaseLista ventanillaPaseLista;
-    private VentanaBusqueda ventanaBusqueda;
     private ArrayList<Paciente> pacientes;
     private ArrayList<Paciente> pacientesConCitaHoy;
     private PacienteDAO pacienteDAO;
-
-    public AsistenteDoctor(ArrayList<Paciente> pacientes, VentanaPaseLista ventanillaPaseLista) {
+    private static AsistenteDoctor asistente;
+    
+    
+    private AsistenteDoctor() {
         pacienteDAO = new PacienteDAO();
         actualizarListaPacientes();
-        this.pacientesConCitaHoy = generarListaDePacientesConCita();
-        this.ventanillaPaseLista = ventanillaPaseLista;
-        
     }
     
-    public void setVentanaBusqueda(VentanaBusqueda ventanaBusqueda){
-        this.ventanaBusqueda  = ventanaBusqueda;
+    public static AsistenteDoctor obtenerUnicoAsistenteDoctor(){
+        if(asistente == null){
+            asistente = new AsistenteDoctor();
+        }
+        return asistente;
     }
     
     private void actualizarListaPacientes(){
@@ -73,9 +73,9 @@ public class AsistenteDoctor {
         return pacienteYaPasoHoy;
     }
 
-    public void mandarAVentanillaAPacientesConCitas() {
+    public void mandarAVentanaAPacientesConCitas() {
         pacientesConCitaHoy = generarListaDePacientesConCita();
-        ventanillaPaseLista.mostrarPacientesConCita(pacientesConCitaHoy);
+        VentanaPaseLista.obtenerUnicaVentana().mostrarPacientesConCita(pacientesConCitaHoy);
     }
 
     public void ponerAsistenciaAlPaciente(int numeroDePacienteEnLaLista) {
@@ -93,7 +93,7 @@ public class AsistenteDoctor {
     
     public void buscarPaciente(String nombrePaciente){
         try {
-            ventanaBusqueda.mostrarPacientes(
+            VentanaBusqueda.obtenerUnicaVentanaBusqueda().mostrarPacientes(
                     pacienteDAO.getPacientesPorNombre(nombrePaciente));
             
         } catch (SQLException ex) {

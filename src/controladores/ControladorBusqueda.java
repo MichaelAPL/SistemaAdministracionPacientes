@@ -13,22 +13,17 @@ import modelos.AsistenteDoctor;
  */
 public class ControladorBusqueda {
 
-    private AsistenteDoctor asistente;
+    private final AsistenteDoctor asistente;
     
 
     public ControladorBusqueda() {
-        
+        asistente = AsistenteDoctor.obtenerUnicoAsistenteDoctor();
     }
-    
-    public void setAsistente(AsistenteDoctor asistente){
-        this.asistente = asistente;
-    }
-    
     public void busquedaPaciente(String nombresPaciente) {
         asistente.buscarPaciente(nombresPaciente);
     }
 
-    public void obtencionDatosPaciente(String nombresYApellidosPaciente) {
+    public void obtencionDatosPaciente(String nombrePaciente) {
         
     }
 

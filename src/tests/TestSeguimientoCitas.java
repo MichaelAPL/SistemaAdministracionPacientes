@@ -26,7 +26,7 @@ public class TestSeguimientoCitas {
         VentanaRegistroPacientes ventanaRegistro = new VentanaRegistroPacientes(controlRegistro);
      
         ventanaRegistro.setVisible(true);*/
-        VentanaPaseLista ventanillaPaseLista = new VentanaPaseLista();
+        /*VentanaPaseLista ventanillaPaseLista = new VentanaPaseLista();
         ArrayList<Paciente> bancoPacientes = new ArrayList();
         
         Persona persona1 = new Persona("Juan", "Perez", "X", "Merida", "123456789", 45);
@@ -57,7 +57,9 @@ public class TestSeguimientoCitas {
         
         asistente.setVentanaBusqueda(ventanaBusqueda);
         ventanaBusqueda.setAsistente(asistente);
+        */
         
+        VentanaBusqueda.obtenerUnicaVentanaBusqueda();
         
     }   
 }

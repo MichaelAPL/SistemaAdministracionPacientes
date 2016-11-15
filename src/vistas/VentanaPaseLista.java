@@ -13,52 +13,61 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaPaseLista extends javax.swing.JFrame {
 
     private DefaultTableModel modelo;
+    private static VentanaPaseLista ventanaPaseLista;
     private ControladorCitas controladorCitas;
 
-    public VentanaPaseLista() {
+    private VentanaPaseLista() {
         initComponents();
         controladorCitas = new ControladorCitas();
-        this.setVisible(true);
         inicializarTablaPacientes();
-    }
-    
-    public void setAsistenteDoctor(AsistenteDoctor asistente){
-        this.controladorCitas.setAsistente(asistente);
+        this.setVisible(true);
+
     }
 
-    private void inicializarTablaPacientes(){
-        
-        String[] cabecera = {"Nombre", "Apellidos", "Suero", "Dosis EDTA", 
-                              "Numero de Sesión", "Asistencia"};
+    public static VentanaPaseLista obtenerUnicaVentana() {
+        if (ventanaPaseLista != null) {
+            return ventanaPaseLista;
+
+        } else {
+            return ventanaPaseLista = new VentanaPaseLista();
+        }
+
+    }
+
+    private void inicializarTablaPacientes() {
+
+        String[] cabecera = {"Nombre", "Apellidos", "Suero", "Dosis EDTA",
+            "Numero de Sesión", "Asistencia"};
         Object cuerpo[][] = {};
-        
-        modelo = new DefaultTableModel(cuerpo, cabecera){
-            Class [] types = {String.class, String.class, String.class, 
-                              Integer.class, Integer.class, Boolean.class};
-            
+
+        modelo = new DefaultTableModel(cuerpo, cabecera) {
+            Class[] types = {String.class, String.class, String.class,
+                Integer.class, Integer.class, Boolean.class};
+
             @Override
-            public Class getColumnClass(int columnIndex){
+            public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
         };
-        
+
         tablaDeSesiones.setModel(modelo);
     }
     
+
     public void mostrarPacientesConCita(ArrayList<Paciente> pacientes) {
         int LIMPIAR_FILAS = 0;
         modelo.setRowCount(LIMPIAR_FILAS);
         for (Paciente paciente : pacientes) {
-            Object datosPaciente[] = {paciente.getNombres(), paciente.getApellidos(), 
-                paciente.getTratamiento().getSiguienteAplicacion().getSuero(), 
-                paciente.getTratamiento().getDosisEDTA(), 
-                paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(), 
+            Object datosPaciente[] = {paciente.getNombres(), paciente.getApellidos(),
+                paciente.getTratamiento().getSiguienteAplicacion().getSuero(),
+                paciente.getTratamiento().getDosisEDTA(),
+                paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(),
                 false};
             modelo.addRow(datosPaciente);
         }
     }
-    
-    
+
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -106,13 +115,13 @@ public class VentanaPaseLista extends javax.swing.JFrame {
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         for (int i = 0; i < this.tablaDeSesiones.getModel().getRowCount(); i++) {
-           if((Boolean)this.tablaDeSesiones.getModel().getValueAt(i, 5) == true){
-               controladorCitas.asistenciaDePacientes(i);
-           }
+            if ((Boolean) this.tablaDeSesiones.getModel().getValueAt(i, 5) == true) {
+                controladorCitas.asistenciaDePacientes(i);
+            }
         }
         controladorCitas.actualizarListaPacientes();
     }//GEN-LAST:event_guardarCambiosActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton guardarCambios;

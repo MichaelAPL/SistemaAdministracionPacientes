@@ -3,32 +3,36 @@ package vistas;
 
 import controladores.ControladorBusqueda;
 import java.util.ArrayList;
-import modelos.AsistenteDoctor;
 import modelos.Paciente;
 
 public class VentanaBusqueda extends javax.swing.JFrame {
+    
+    private static VentanaBusqueda ventanaBusqueda;
     private ControladorBusqueda controladorBusqueda;
     
-    public VentanaBusqueda() {
+    private VentanaBusqueda() {
         initComponents();
         setVisible(true);
         controladorBusqueda = new ControladorBusqueda();
     }
     
-    public void setAsistente(AsistenteDoctor asistente){
-        controladorBusqueda.setAsistente(asistente);
+    public static VentanaBusqueda obtenerUnicaVentanaBusqueda(){
+        if(ventanaBusqueda==null){
+            ventanaBusqueda = new VentanaBusqueda();
+        }
+        return ventanaBusqueda;
     }
     
     public void mostrarPacientes(ArrayList<Paciente> pacientes){
         String[] nombresPacientes = new String [pacientes.size()];
         for (int i = 0; i < pacientes.size(); i++) {
-            nombresPacientes[i] = pacientes.get(i).getNombres()+ " " + pacientes.get(i).getApellidos();
+            nombresPacientes[i] = pacientes.get(i).getId() + ":" +
+                pacientes.get(i).getNombres()+ " " + pacientes.get(i).getApellidos();
         }
         
         listaPacientes.setListData(nombresPacientes);
     }
     
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -47,12 +51,12 @@ public class VentanaBusqueda extends javax.swing.JFrame {
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarPaciente(evt);
+               buscarPaciente(evt);
             }
         });
 
         listaPacientes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {  };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -116,7 +120,9 @@ public class VentanaBusqueda extends javax.swing.JFrame {
 
     private void irDatosPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIrActionPerformed
         if (listaPacientes.getSelectedValue() != null) {
-            controladorBusqueda.obtencionDatosPaciente(String.valueOf(listaPacientes.getSelectedValue()));
+            String[] texto = String.valueOf(listaPacientes.getSelectedValue()).split(":");
+            controladorBusqueda.obtencionDatosPaciente(texto[0]);
+            System.out.println(texto[0]);
         }
     }//GEN-LAST:event_botonIrActionPerformed
 

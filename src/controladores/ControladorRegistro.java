@@ -1,15 +1,8 @@
 package controladores;
 
 import java.sql.SQLException;
-import modelos.enums.DatosPaciente;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import modelos.DAOs.PacienteDAO;
 import modelos.Paciente;
-import modelos.Persona;
-import modelos.Tratamiento;
 
 /**
  *
