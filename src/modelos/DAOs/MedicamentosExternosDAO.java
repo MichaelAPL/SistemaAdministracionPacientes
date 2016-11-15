@@ -60,4 +60,21 @@ public class MedicamentosExternosDAO {
         conectorBD.desconectar();
         return medicamentosExternos;
     }
+    
+    public void actualizar(Paciente paciente) throws SQLException{
+        conectorBD.conectar();
+        
+        String consulta = "UPDATE MedicamentosExternos SET NumMedicamento = ?,"
+                + " NombreMedicamento = ? where Paciente_ID = ?";
+        
+        for (int i = 0; i < paciente.getMedicamentosExternos().size(); i++){
+            PreparedStatement declaracion = conectorBD.consulta(consulta);
+            declaracion.setInt(1, i);
+            declaracion.setString(2, paciente.getMedicamentosExternos().get(i));
+            declaracion.setInt(3, paciente.getId());
+            declaracion.execute();
+        }
+                
+        conectorBD.desconectar();
+    }
 }

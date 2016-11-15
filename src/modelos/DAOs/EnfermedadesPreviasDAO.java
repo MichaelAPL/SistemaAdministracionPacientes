@@ -59,4 +59,21 @@ public class EnfermedadesPreviasDAO {
         conectorBD.desconectar();
         return enfermedadesPrevias;
     }
+    
+    public void actualizar(Paciente paciente) throws SQLException{
+        conectorBD.conectar();
+        
+        String consulta = "UPDATE EnfermedadesPrevias SET NumEnfer = ?,"
+                + " NombreEnfer = ? where Paciente_ID = ?";
+        
+        for (int i = 0; i < paciente.getEnfermedadesPrevias().size(); i++){
+            PreparedStatement declaracion = conectorBD.consulta(consulta);
+            declaracion.setInt(1, i);
+            declaracion.setString(2, paciente.getEnfermedadesPrevias().get(i));
+            declaracion.setInt(3, paciente.getId());
+            declaracion.execute();
+        }
+                
+        conectorBD.desconectar();
+    }
 }

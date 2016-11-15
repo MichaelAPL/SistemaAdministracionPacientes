@@ -74,4 +74,22 @@ public class TratamientoDAO {
         
         return tratamiento;
     }
+    
+    public void actualizar(Tratamiento tratamiento) throws SQLException{
+        conectorBD.conectar();
+        String consulta = "UPDATE Tratamiento SET DosisEDTA = ?, Activo = ? "
+                + "where ID_Tratamiento = ?";
+        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        declaracion.setInt(1, tratamiento.getDosisEDTA());
+        declaracion.setBoolean(2, tratamiento.isActivo());
+        declaracion.setInt(3, tratamiento.getId());
+        
+        declaracion.execute();
+        
+        conectorBD.desconectar();
+        
+        aplicacionDAO.actualizar(tratamiento.getUltimaAplicacion());
+        aplicacionDAO.actualizar(tratamiento.getSiguienteAplicacion());
+    }
 }
