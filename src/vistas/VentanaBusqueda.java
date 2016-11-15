@@ -2,23 +2,38 @@
 package vistas;
 
 import controladores.ControladorBusqueda;
+import java.util.ArrayList;
+import modelos.AsistenteDoctor;
+import modelos.Paciente;
 
 public class VentanaBusqueda extends javax.swing.JFrame {
-    ControladorBusqueda controladorBusqueda;
+    private ControladorBusqueda controladorBusqueda;
     
     public VentanaBusqueda() {
         initComponents();
-        controladorBusqueda = ControladorBusqueda.obtenerUnicoControladorBusqueda();
-             
+        setVisible(true);
+        controladorBusqueda = new ControladorBusqueda();
     }
-
+    
+    public void setAsistente(AsistenteDoctor asistente){
+        controladorBusqueda.setAsistente(asistente);
+    }
+    
+    public void mostrarPacientes(ArrayList<Paciente> pacientes){
+        String[] nombresPacientes = new String [pacientes.size()];
+        for (int i = 0; i < pacientes.size(); i++) {
+            nombresPacientes[i] = pacientes.get(i).getNombres()+ " " + pacientes.get(i).getApellidos();
+        }
+        
+        listaPacientes.setListData(nombresPacientes);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         nombresPaciente = new javax.swing.JTextField();
         etiquetaTextoIntroduccion = new javax.swing.JLabel();
-        apellidosPaciente = new javax.swing.JTextField();
         botonBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaPacientes = new javax.swing.JList();
@@ -27,11 +42,7 @@ public class VentanaBusqueda extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        nombresPaciente.setText("Nombres del paciente");
-
         etiquetaTextoIntroduccion.setText("Introduzca los nombres y apellidos del paciente que se desea buscar.");
-
-        apellidosPaciente.setText("Apellidos del paciente");
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -63,12 +74,8 @@ public class VentanaBusqueda extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(nombresPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(apellidosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(etiquetaTextoIntroduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +87,10 @@ public class VentanaBusqueda extends javax.swing.JFrame {
                         .addComponent(botonBuscar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(166, 166, 166)
-                        .addComponent(botonIr)))
+                        .addComponent(botonIr))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(nombresPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,11 +98,9 @@ public class VentanaBusqueda extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(etiquetaTextoIntroduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombresPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(apellidosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nombresPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addComponent(botonBuscar)
                 .addGap(18, 18, 18)
                 .addComponent(etiquetaTextoSeleccion)
@@ -113,14 +121,13 @@ public class VentanaBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_botonIrActionPerformed
 
     private void buscarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-       if (nombresPaciente.getText() != null && apellidosPaciente.getText() != null) {
-            controladorBusqueda.busquedaPaciente(nombresPaciente.getText(), apellidosPaciente.getText());
+       if (nombresPaciente.getText() != null) {
+            controladorBusqueda.busquedaPaciente(nombresPaciente.getText());
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField apellidosPaciente;
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonIr;
     private javax.swing.JLabel etiquetaTextoIntroduccion;

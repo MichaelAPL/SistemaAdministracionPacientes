@@ -71,7 +71,7 @@ public class PacienteDAO {
         medicamentosExternosDAO.crearMedicamentosExternos(paciente);
     }
 
-    public ResultSet recuperarTodos() throws SQLException {
+    public ArrayList<Paciente> recuperarTodos() throws SQLException {
         this.conectorBD.conectar();
 
         String consulta = "select * from Paciente";
@@ -80,28 +80,28 @@ public class PacienteDAO {
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
 
         //**********************
-        /*ArrayList<Paciente> listaPacientes = new ArrayList();
+        ArrayList<Paciente> pacientes = new ArrayList();
 
         while (resultado.next()) {
-
             Persona persona = new Persona(resultado.getString("Nombre"), resultado.getString("Apellido"),
                     resultado.getString("Direccion"), resultado.getString("Localidad"), resultado.getString("Telefono"),
                     resultado.getInt("Edad"));
 
-            Paciente paciente = new Paciente(persona);
+            int paciente_id = resultado.getInt("ID_Paciente");
+            Date fechaInscripcion = resultado.getDate("FechaInscripcion");
 
-            ResultSet generatedKeys = declaracionDeRecuperacion.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                int id = generatedKeys.getInt("ID_Paciente");
-                paciente.setId(id);
-            }
+            Paciente paciente = new Paciente(persona,
+                    medicamentosExternosDAO.getMedicamentosExternos(paciente_id),
+                    enfermedadesPreviasDAO.getEnfermedadesPrevias(paciente_id),
+                    tratamientoDAO.getTratamiento(paciente_id),
+                    fechaInscripcion, paciente_id);
             
-            listaPacientes.add(paciente);
+            pacientes.add(paciente);
         }
 
-        this.conectorBD.desconectar();*/
+        this.conectorBD.desconectar();
         //*********************
-        return resultado;
+        return pacientes;
     }
 
     public ArrayList<Paciente> getPacientesPorNombre(String nombre) throws SQLException {
@@ -109,7 +109,7 @@ public class PacienteDAO {
 
         ArrayList<Paciente> pacientes = new ArrayList();
 
-        String consulta = "select * from Pacientes where Nombre = " + nombre;
+        String consulta = "select * from Paciente where Nombre = " + "\'"+nombre+"\'";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
 
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();

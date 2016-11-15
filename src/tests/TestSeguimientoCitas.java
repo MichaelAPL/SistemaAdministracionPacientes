@@ -10,6 +10,7 @@ import modelos.AsistenteDoctor;
 import modelos.Persona;
 import modelos.Tratamiento;
 import java.util.ArrayList;
+import vistas.VentanaBusqueda;
 import vistas.VentanaPaseLista;
 
 
@@ -51,5 +52,12 @@ public class TestSeguimientoCitas {
         asistente.mandarAVentanillaAPacientesConCitas();
         
         ventanillaPaseLista.setAsistenteDoctor(asistente);
+        
+        VentanaBusqueda ventanaBusqueda = new VentanaBusqueda();
+        
+        asistente.setVentanaBusqueda(ventanaBusqueda);
+        ventanaBusqueda.setAsistente(asistente);
+        
+        
     }   
 }
