@@ -134,4 +134,30 @@ public class PacienteDAO {
         this.conectorBD.desconectar();
         return pacientes;
     }
+    
+    public void actualizar(Paciente paciente) throws SQLException{
+        conectorBD.conectar();
+        
+        String consulta = "UPDATE Paciente SET Nombre = ?, Apellido = ?, Direccion = ? "
+                + "Localidad = ?, Telefono = ?, Edad = ?, EnfermedadesPrevias = ?, "
+                + "MedicamentosExternos = ? where ID_Paciente = ?";
+        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        declaracion.setString(1, paciente.getNombres());
+        declaracion.setString(2, paciente.getApellidos());
+        declaracion.setString(3, paciente.getDireccion());
+        declaracion.setString(4, paciente.getTelefono());
+        declaracion.setInt(6, paciente.getEdad());
+        declaracion.setInt(7, paciente.getEnfermedadesPrevias().size());
+        declaracion.setInt(8, paciente.getMedicamentosExternos().size());
+        declaracion.setInt(9, paciente.getId());
+        
+        declaracion.execute();
+        
+        enfermedadesPreviasDAO.actualizar(paciente);
+        medicamentosExternosDAO.actualizar(paciente);
+        tratamientoDAO.actualizar(paciente.getTratamiento());        
+        
+        conectorBD.desconectar();
+    }
 }
