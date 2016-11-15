@@ -36,13 +36,6 @@ public class Paciente extends Persona{
         this.fechaDeInscripcion = fechaInscripcion; 
         this.id = id;
     }
-    
-    //Hay que eliminar
-    public Paciente(Persona persona, Date fechaInscripcion){
-        super(persona.getNombres(), persona.getApellidos(), 
-                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(),persona.getEdad());        
-        fechaDeInscripcion = fechaInscripcion;
-    }
    
     public ArrayList<String> getEnfermedadesPrevias() {
         return enfermedadesPrevias;
