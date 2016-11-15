@@ -51,6 +51,7 @@ public class VentanaInventario extends javax.swing.JFrame {
         tituloVent.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         tituloVent.setText("Inventario");
 
+        tablaInsumos.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         tablaInsumos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
