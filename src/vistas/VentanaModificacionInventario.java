@@ -7,6 +7,7 @@ package vistas;
 
 import controladores.ControladorInventario;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import modelos.InventarioProducto;
 
@@ -97,14 +98,11 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     public void insertarOpcionesMenu(){
-        producto.addItem("Normogotero");
-        producto.addItem("M.V.I.");
-        producto.addItem("Merit");
-        producto.addItem("Procaína");
-        producto.addItem("Edetate");
-        producto.addItem("Solución Hartmann");
-        producto.addItem("Magnefusin");
-        producto.addItem("Agujas Mariposa");
+        ArrayList<InventarioProducto> inventarioProducto = controladorInventario.obtenerInventarioProductos();
+        
+        for(int i=0; i<inventarioProducto.size(); i++){
+            producto.addItem(inventarioProducto.get(i).getNombre());
+        }  
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

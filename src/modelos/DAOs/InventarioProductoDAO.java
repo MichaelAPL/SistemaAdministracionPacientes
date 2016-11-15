@@ -6,7 +6,9 @@
 package modelos.DAOs;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelos.InventarioProducto;
 import modelos.database.ConectorBD;
 
@@ -34,6 +36,30 @@ public class InventarioProductoDAO {
         declaracion.execute();
         
         conectorBD.desconectar();
+    }
+    
+    public ArrayList<InventarioProducto> recuperarTodos() throws SQLException{
+        this.conectorBD.conectar();
+        
+        String consulta = "select * from Inventario";
+        
+        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
+
+        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
+        
+        //**********************
+        ArrayList<InventarioProducto> inventarioProductos = new ArrayList();
+        
+        while(resultado.next()){
+            InventarioProducto producto = new InventarioProducto(resultado.getString("Nombre"), 
+                            resultado.getInt("Existencias"));
+            
+            inventarioProductos.add(producto);
+        }
+        
+        this.conectorBD.desconectar();
+        //**********************
+        return inventarioProductos;
     }
 
 }

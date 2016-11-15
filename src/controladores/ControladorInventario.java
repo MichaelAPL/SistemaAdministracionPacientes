@@ -7,6 +7,7 @@ package controladores;
 
 import java.sql.SQLException;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelos.DAOs.InventarioProductoDAO;
@@ -17,6 +18,7 @@ import modelos.InventarioProducto;
  * @author Angel Basto Gonzalez
  */
 public class ControladorInventario {
+    InventarioProductoDAO inventarioProductoDAO = new InventarioProductoDAO();
     
     public ControladorInventario() {
         
@@ -24,6 +26,16 @@ public class ControladorInventario {
     
     public void agregarProductoInventario(InventarioProducto producto){
         System.out.println("Probando");
+    }
+    
+    public ArrayList<InventarioProducto> obtenerInventarioProductos(){
+        ArrayList<InventarioProducto> inventarioProducto = null;
+        try {
+            inventarioProducto = inventarioProductoDAO.recuperarTodos();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return inventarioProducto;
     }
     
     public void obtenerReporteInventario(Month mes){
