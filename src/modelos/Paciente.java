@@ -7,42 +7,50 @@ import java.util.Date;
  *
  * @author Milka
  */
-public class Paciente extends Persona{
+public class Paciente extends Persona {
 
-    private ArrayList<String> medicamentosExternos; 
+    private ArrayList<String> medicamentosExternos;
     private ArrayList<String> enfermedadesPrevias;
     private Tratamiento tratamiento;
     private Date fechaDeInscripcion;
     private int id;
-    
-    public Paciente(Persona persona, ArrayList<String> medicamentosExternos, 
-            ArrayList<String> enfermedadesPrevias, Tratamiento tratamiento){        
-        super(persona.getNombres(), persona.getApellidos(), 
-              persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(),persona.getEdad()); 
+
+    public Paciente(Persona persona, ArrayList<String> medicamentosExternos,
+            ArrayList<String> enfermedadesPrevias, Tratamiento tratamiento) {
+        super(persona.getNombres(), persona.getApellidos(),
+                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(), persona.getEdad());
         this.medicamentosExternos = medicamentosExternos;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.tratamiento = tratamiento;
-        fechaDeInscripcion = inicializarFechaDeInscripcion(); 
+        fechaDeInscripcion = inicializarFechaDeInscripcion();
     }
-    
-    public Paciente(Persona persona, ArrayList<String> medicamentosExternos, 
+
+    public Paciente(Persona persona, ArrayList<String> medicamentosExternos,
             ArrayList<String> enfermedadesPrevias, Tratamiento tratamiento,
-            Date fechaInscripcion, int id){        
-        super(persona.getNombres(), persona.getApellidos(), 
-                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(),persona.getEdad()); 
+            Date fechaInscripcion, int id) {
+        super(persona.getNombres(), persona.getApellidos(),
+                persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(), persona.getEdad());
         this.medicamentosExternos = medicamentosExternos;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.tratamiento = tratamiento;
-        this.fechaDeInscripcion = fechaInscripcion; 
+        this.fechaDeInscripcion = fechaInscripcion;
         this.id = id;
     }
-   
+
     public ArrayList<String> getEnfermedadesPrevias() {
         return enfermedadesPrevias;
     }
 
     public void setEnfermedadesPrevias(ArrayList<String> enfermedadesPrevias) {
         this.enfermedadesPrevias = enfermedadesPrevias;
+    }
+
+    public void insertarEnfermedad(String enfermedadNueva) {
+        this.enfermedadesPrevias.add(enfermedadNueva);
+    }
+    
+    public void eliminarEnfermedad(String enfermedad){
+        this.enfermedadesPrevias.remove(enfermedad);
     }
 
     public ArrayList<String> getMedicamentosExternos() {
@@ -52,7 +60,15 @@ public class Paciente extends Persona{
     public void setMedicamentosExternos(ArrayList<String> medicamentosExternos) {
         this.medicamentosExternos = medicamentosExternos;
     }
+
+    public void insertarMedicamento(String medicamentoNuevo) {
+        this.medicamentosExternos.add(medicamentoNuevo);
+    }
     
+    public void eliminarMedicamento(String medicamento){
+        this.medicamentosExternos.remove(medicamento);
+    }
+
     public Tratamiento getTratamiento() {
         return tratamiento;
     }
@@ -61,7 +77,7 @@ public class Paciente extends Persona{
         this.tratamiento = tratamiento;
     }
 
-    private Date inicializarFechaDeInscripcion(){
+    private Date inicializarFechaDeInscripcion() {
         return new Date();
     }
 
@@ -75,5 +91,5 @@ public class Paciente extends Persona{
 
     public void setId(int id) {
         this.id = id;
-    }    
+    }
 }
