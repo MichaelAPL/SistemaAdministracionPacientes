@@ -92,7 +92,6 @@ public class TratamientoDAO {
         if (tratamiento.getUltimaAplicacion()!=null) {
             aplicacionDAO.actualizar(tratamiento.getUltimaAplicacion());
         }
-        aplicacionDAO.actualizar(tratamiento.getSiguienteAplicacion());
-        
+        aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());        
     }
 }
