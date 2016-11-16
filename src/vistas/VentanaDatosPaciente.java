@@ -13,11 +13,21 @@ import modelos.Paciente;
  */
 public class VentanaDatosPaciente extends javax.swing.JFrame {
 
-    ControladorDatosPaciente controladorDatosPaciente;
+    public static VentanaDatosPaciente ventanaDatosPaciente;
+    private ControladorDatosPaciente controladorDatosPaciente;
     
     
-    public VentanaDatosPaciente() {
+    private VentanaDatosPaciente() {
+        controladorDatosPaciente = new ControladorDatosPaciente();
         initComponents();
+        setVisible(true);
+    }
+    
+    public static VentanaDatosPaciente obtenerUnicaVentanaDatosPaciente(){
+        if (ventanaDatosPaciente == null) {
+            ventanaDatosPaciente = new VentanaDatosPaciente();
+        }
+        return ventanaDatosPaciente;
     }
     
     public void mostrarDatosPaciente(Paciente paciente){
@@ -29,19 +39,22 @@ public class VentanaDatosPaciente extends javax.swing.JFrame {
         dosisEDTApaciente.setText(String.valueOf(paciente.getTratamiento().getDosisEDTA()));
         telefonoPaciente.setText(paciente.getTelefono());
         
-        mostrarEnfermedades(paciente);
-        mostrarMedicamentos(paciente);
+        
+        mostrarEnfermedades(paciente.getEnfermedadesPrevias());
+        mostrarMedicamentos(paciente.getMedicamentosExternos());
     }
     
-    private void mostrarEnfermedades(Paciente paciente){
-        Object [] enfermedades = new String[paciente.getEnfermedadesPrevias().size()];
-        enfermedades = paciente.getEnfermedadesPrevias().toArray(enfermedades);
+    private void mostrarEnfermedades(ArrayList <String> enfermedadesPrevias){
+        System.out.println("entra");
+        Object [] enfermedades = new String[enfermedadesPrevias.size()];
+        enfermedades = enfermedadesPrevias.toArray(enfermedades);
         tablaEnfermedadesPaciente.setListData(enfermedades);
+        System.out.println("no entra");
     }
     
-    private void mostrarMedicamentos(Paciente paciente){
-        Object [] medicamentos = new String[paciente.getMedicamentosExternos().size()];
-        medicamentos = paciente.getMedicamentosExternos().toArray(medicamentos);
+    private void mostrarMedicamentos(ArrayList <String> medicamentosExternos){
+        Object [] medicamentos = new String[medicamentosExternos.size()];
+        medicamentos = medicamentosExternos.toArray(medicamentos);
         tablaEnfermedadesPaciente.setListData(medicamentos);
     }
     
@@ -111,14 +124,14 @@ public class VentanaDatosPaciente extends javax.swing.JFrame {
         telefonoPaciente.setText("Telefono");
 
         tablaEnfermedadesPaciente.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {  };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(tablaEnfermedadesPaciente);
 
         tablaMedicamentosPaciente.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {  };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -144,14 +157,15 @@ public class VentanaDatosPaciente extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel9)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(30, 30, 30)
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(telefonoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(85, 85, 85)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(telefonoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(85, 85, 85))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35))))

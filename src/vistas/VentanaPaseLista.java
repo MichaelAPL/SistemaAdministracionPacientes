@@ -75,8 +75,6 @@ public class VentanaPaseLista extends javax.swing.JFrame {
         tablaDeSesiones = new javax.swing.JTable();
         guardarCambios = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         tablaDeSesiones.getTableHeader().setReorderingAllowed(false);
         scroll.setViewportView(tablaDeSesiones);
 

@@ -44,14 +44,14 @@ public class VentanaBusqueda extends javax.swing.JFrame {
         botonIr = new javax.swing.JButton();
         etiquetaTextoSeleccion = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         etiquetaTextoIntroduccion.setText("Introduzca los nombres y apellidos del paciente que se desea buscar.");
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               buscarPaciente(evt);
+                buscarPaciente(evt);
             }
         });
 
@@ -122,8 +122,8 @@ public class VentanaBusqueda extends javax.swing.JFrame {
         if (listaPacientes.getSelectedValue() != null) {
             String[] texto = String.valueOf(listaPacientes.getSelectedValue()).split(":");
             controladorBusqueda.obtencionDatosPaciente(texto[0]);
-            System.out.println(texto[0]);
         }
+        ventanaBusqueda.dispose();
     }//GEN-LAST:event_botonIrActionPerformed
 
     private void buscarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed

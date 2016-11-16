@@ -23,8 +23,8 @@ public class ControladorBusqueda {
         asistente.buscarPaciente(nombresPaciente);
     }
 
-    public void obtencionDatosPaciente(String nombrePaciente) {
-        
+    public void obtencionDatosPaciente(String idPaciente) {
+        asistente.mandarAVentanaDatosPaciente(idPaciente);
     }
 
 }

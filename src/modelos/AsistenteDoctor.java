@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelos.DAOs.PacienteDAO;
 import vistas.VentanaBusqueda;
+import vistas.VentanaDatosPaciente;
 import vistas.VentanaPaseLista;
 
 /**
@@ -88,6 +89,11 @@ public class AsistenteDoctor {
 
     private void crearNuevaCitaAlPaciente(Paciente paciente) {
         paciente.getTratamiento().agregarAplicacion();
+        try {
+            pacienteDAO.actualizar(paciente);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
     
@@ -98,6 +104,25 @@ public class AsistenteDoctor {
             
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+    
+    public void buscarPacientePorId(String id){
+        try {
+            VentanaDatosPaciente.obtenerUnicaVentanaDatosPaciente()
+                    .mostrarDatosPaciente(pacienteDAO.getPacientePorID(Integer.valueOf(id)));
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }        
+    }
+    
+    public void mandarAVentanaDatosPaciente(String id){
+        try {
+            VentanaDatosPaciente.obtenerUnicaVentanaDatosPaciente().
+                    mostrarDatosPaciente(pacienteDAO.getPacientePorID(Integer.valueOf(id)));
+        } catch (SQLException ex) {
+            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
