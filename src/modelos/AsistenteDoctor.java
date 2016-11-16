@@ -125,4 +125,12 @@ public class AsistenteDoctor {
             Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void actualizarPaciente(Paciente paciente){
+        try {
+            pacienteDAO.actualizar(paciente);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

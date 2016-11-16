@@ -177,7 +177,8 @@ public class PacienteDAO {
         declaracion.setString(1, paciente.getNombres());
         declaracion.setString(2, paciente.getApellidos());
         declaracion.setString(3, paciente.getDireccion());
-        declaracion.setString(4, paciente.getTelefono());
+        declaracion.setString(4, paciente.getLocalidad());
+        declaracion.setString(5, paciente.getTelefono());
         declaracion.setInt(6, paciente.getEdad());
         declaracion.setInt(7, paciente.getEnfermedadesPrevias().size());
         declaracion.setInt(8, paciente.getMedicamentosExternos().size());

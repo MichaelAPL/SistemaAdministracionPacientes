@@ -13,7 +13,7 @@ public class Tratamiento {
     
     private Aplicacion ultimaAplicacion;
     private Aplicacion siguienteAplicacion;
-    private final int dosis_EDTA_ml;
+    private int dosis_EDTA_ml;
     private boolean activo;
     private int id;
     private int paciente_id;
@@ -67,6 +67,10 @@ public class Tratamiento {
         return dosis_EDTA_ml;
     }
 
+    public void setDosis_EDTA_ml(int dosis){
+        this.dosis_EDTA_ml = dosis;
+    }
+    
     public boolean isActivo() {
         return activo;
     }

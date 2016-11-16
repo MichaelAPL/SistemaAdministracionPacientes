@@ -5,10 +5,20 @@
  */
 package controladores;
 
+import modelos.AsistenteDoctor;
+import modelos.Paciente;
+
 /**
  *
  * @author Milka
  */
 public class ControladorDatosPaciente {
     
+    public ControladorDatosPaciente(){
+        
+    }
+    
+    public void actualizarDatosPaciente(Paciente paciente){
+        AsistenteDoctor.obtenerUnicoAsistenteDoctor().actualizarPaciente(paciente);
+    }
 }
