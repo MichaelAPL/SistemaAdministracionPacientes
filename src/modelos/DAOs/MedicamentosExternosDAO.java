@@ -54,7 +54,7 @@ public class MedicamentosExternosDAO {
         ResultSet resultados = declaracion.executeQuery();
         
         while(resultados.next()){
-            medicamentosExternos.add(resultados.getString("NombreMedicamanento"));
+            medicamentosExternos.add(resultados.getString("NombreMedicamento"));
         }
         
         conectorBD.desconectar();
