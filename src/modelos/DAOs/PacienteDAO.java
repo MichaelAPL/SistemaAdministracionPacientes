@@ -169,7 +169,7 @@ public class PacienteDAO {
     public void actualizar(Paciente paciente) throws SQLException{
         conectorBD.conectar();
         
-        String consulta = "UPDATE Paciente SET Nombre = ?, Apellido = ?, Direccion = ? "
+        String consulta = "UPDATE Paciente SET Nombre = ?, Apellido = ?, Direccion = ?, "
                 + "Localidad = ?, Telefono = ?, Edad = ?, EnfermedadesPrevias = ?, "
                 + "MedicamentosExternos = ? where ID_Paciente = ?";
         

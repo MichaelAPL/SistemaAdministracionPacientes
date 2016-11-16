@@ -85,11 +85,14 @@ public class TratamientoDAO {
         declaracion.setBoolean(2, tratamiento.isActivo());
         declaracion.setInt(3, tratamiento.getId());
         
-        declaracion.execute();
+        declaracion.execute();        
         
         conectorBD.desconectar();
         
-        aplicacionDAO.actualizar(tratamiento.getUltimaAplicacion());
+        if (tratamiento.getUltimaAplicacion()!=null) {
+            aplicacionDAO.actualizar(tratamiento.getUltimaAplicacion());
+        }
         aplicacionDAO.actualizar(tratamiento.getSiguienteAplicacion());
+        
     }
 }

@@ -45,7 +45,7 @@ public class AplicacionDAO {
     public void actualizar(Aplicacion aplicacion) throws SQLException{
         conectorBD.conectar();
         
-        String consulta = "UPDATE Aplicacion SET Realizada = ?, Fecha = ? WHERE"
+        String consulta = "UPDATE Aplicacion SET Realizada = ?, Fecha = ? WHERE "
                 + "Tratamiento_ID = ?";
         
         PreparedStatement declaracion = conectorBD.consulta(consulta);
