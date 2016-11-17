@@ -28,19 +28,17 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     private ArrayList<String> medicamentosExternos;
 
     private VentanaRegistroPacientes() {
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
         initComponents();
         controladorRegistro = new ControladorRegistro();
         inicializarTablaPadecimientos();
         inicializarTablaMedicamentos();
-        setLocationRelativeTo(null);
     }
     
     public static VentanaRegistroPacientes obtenerUnicaVentanaRegistroPacientes(){
         if (ventanaRegistro == null) {
             ventanaRegistro = new VentanaRegistroPacientes();
-            ventanaRegistro.setVisible(true);
         }
+        ventanaRegistro.setVisible(true);
         return ventanaRegistro;
     }
 

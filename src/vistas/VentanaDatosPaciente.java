@@ -24,6 +24,7 @@ public class VentanaDatosPaciente extends javax.swing.JFrame {
         if (ventanaDatosPaciente == null) {
             ventanaDatosPaciente = new VentanaDatosPaciente();
         }
+        ventanaDatosPaciente.setVisible(true);
         return ventanaDatosPaciente;
     }
     
