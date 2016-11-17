@@ -61,5 +61,22 @@ public class InventarioProductoDAO {
         //**********************
         return inventarioProductos;
     }
+    
+    public void actualizar(InventarioProducto inventarioProducto) throws SQLException{
+        this.conectorBD.conectar();
+        
+        String consulta = "UPDATE Inventario SET Nombre = ?, Existencias = ?"
+                + "where Producto_ID = ?";
+        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        
+        declaracion.setString(1, inventarioProducto.getNombre());
+        declaracion.setInt(2, inventarioProducto.getExistencias());
+        declaracion.setInt(3, inventarioProducto.getId());
+        
+        declaracion.execute();
+        
+        this.conectorBD.desconectar();        
+    }
 
 }

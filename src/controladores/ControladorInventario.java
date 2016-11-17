@@ -10,6 +10,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelos.AdministradorInventario;
 import modelos.DAOs.InventarioProductoDAO;
 import modelos.InventarioProducto;
 
@@ -19,13 +20,14 @@ import modelos.InventarioProducto;
  */
 public class ControladorInventario {
     InventarioProductoDAO inventarioProductoDAO = new InventarioProductoDAO();
+    private final AdministradorInventario administradorInventario;
     
     public ControladorInventario() {
-        
+        administradorInventario = AdministradorInventario.obtenerUnicoAdministradorInventario();                
     }
     
-    public void agregarProductoInventario(InventarioProducto producto){
-        System.out.println("Probando");
+    public void agregarInsumosInventario(InventarioProducto producto){
+        administradorInventario.actualizarInventario(producto);
     }
     
     public ArrayList<InventarioProducto> obtenerInventarioProductos(){
@@ -36,9 +38,5 @@ public class ControladorInventario {
             System.out.println(ex.getMessage());
         }
         return inventarioProducto;
-    }
-    
-    public void obtenerReporteInventario(Month mes){
-        
     }
 }

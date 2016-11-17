@@ -12,8 +12,13 @@ package modelos;
 public class InventarioProducto extends Producto{
     private int existencias;
 
-    public InventarioProducto(String nombre, int existenciasl) {
+    public InventarioProducto(String nombre, int existencias) {
         super(nombre);
+        this.existencias = existencias;
+    }
+    
+    public InventarioProducto(int id, String nombre, int existencias){
+        super(id, nombre);
         this.existencias = existencias;
     }
 

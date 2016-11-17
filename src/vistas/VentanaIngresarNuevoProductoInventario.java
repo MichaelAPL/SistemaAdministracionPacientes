@@ -98,7 +98,7 @@ public class VentanaIngresarNuevoProductoInventario extends javax.swing.JFrame {
         InventarioProducto producto = new InventarioProducto(nombreMaterial.getText(), 
                 Integer.parseInt(existencias.getText()));
         
-        controladorInventario.agregarProductoInventario(producto);
+        //controladorInventario.agregarProductoInventario(producto);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
 

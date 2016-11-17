@@ -14,10 +14,7 @@ import vistas.VentanaInventario;
  */
 public class TestInventario {
     
-    public static void main(String[] args) {
-        ControladorInventario controladorInventario = new ControladorInventario();
-        
-        VentanaInventario ventanaInventario = new VentanaInventario(controladorInventario);
-        ventanaInventario.setVisible(true);
+    public static void main(String[] args) {        
+        VentanaInventario ventanaInventario = new VentanaInventario();
     }   
 }

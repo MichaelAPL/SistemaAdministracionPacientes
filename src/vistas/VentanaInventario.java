@@ -20,16 +20,27 @@ public class VentanaInventario extends javax.swing.JFrame {
     /**
      * Creates new form VentanaInventario
      */
+    public static VentanaInventario ventanaInventario;
+    private ControladorInventario controladorInventario = new ControladorInventario();
+    private DefaultTableModel modelo;
     
-    ControladorInventario controladorInventario = new ControladorInventario();
-    
-    public VentanaInventario(ControladorInventario controladorInventario) {
+    public VentanaInventario() {
         initComponents();
         setLocationRelativeTo(null);
-        this.controladorInventario = controladorInventario;
+        controladorInventario = new ControladorInventario();
         inicializarTablaInsumos();
+        setVisible(true);
     }
-
+    
+    public static VentanaInventario obtenerUnicaVentanaInventario(){
+        if(ventanaInventario == null){
+            ventanaInventario = new VentanaInventario();
+        }else{
+            ventanaInventario.setVisible(true);
+        }
+        return ventanaInventario;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,12 +56,13 @@ public class VentanaInventario extends javax.swing.JFrame {
         btnAgregarExistencias = new javax.swing.JButton();
         btnAgregarNuevoMaterial = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inventario ");
 
         tituloVent.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         tituloVent.setText("Inventario");
 
+        tablaInsumos.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         tablaInsumos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -115,11 +127,7 @@ public class VentanaInventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarExistenciasActionPerformed
-        // TODO add your handling code here:
-        VentanaModificacionInventario ventanaModificacion = 
-                new VentanaModificacionInventario(controladorInventario);
-        
-        ventanaModificacion.setVisible(true);
+        VentanaModificacionInventario.obtenerUnicaVentanaMoficacionInventario();
     }//GEN-LAST:event_btnAgregarExistenciasActionPerformed
 
     private void btnAgregarNuevoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNuevoMaterialActionPerformed
@@ -131,36 +139,26 @@ public class VentanaInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarNuevoMaterialActionPerformed
 
     public void inicializarTablaInsumos(){        
-        Vector<String> cabecera = new Vector<String>();
-        cabecera.add("Nombre");
-        cabecera.add("Cantidad");
+        String[] cabecera = {"Nombre", "Cantidad"};
+        Object[][] cuerpo ={};
         
-        ArrayList<InventarioProducto> productos = controladorInventario.obtenerInventarioProductos();
-        this.tablaInsumos.setModel(crearCuerpoTabla(cabecera));
+        modelo = new DefaultTableModel(cuerpo, cabecera);
+        
+        tablaInsumos.setModel(modelo);
     }
     
-    public DefaultTableModel crearCuerpoTabla(Vector<String> cabecera){
-        DefaultTableModel modelo;
-        Vector<Vector<Object>> datos = new Vector<Vector<Object>>();
-        
-        datos = obtenerDatosProductos(controladorInventario.obtenerInventarioProductos());
-        modelo = new DefaultTableModel(datos, cabecera);
-        return modelo;
-    }
-    
-    public Vector<Vector<Object>> obtenerDatosProductos(ArrayList<InventarioProducto> productos){
-        Vector<Vector<Object>> datos = new Vector<Vector<Object>>();
-        
-        for (int i = 0; i < productos.size(); i++) {
-            Vector<Object> fila  = new Vector<Object>();
+    public void mostrarInventarioProductos(ArrayList<InventarioProducto> productos){
+        int LIMPIAR_FILAS = 0;
+        modelo.setRowCount(LIMPIAR_FILAS);
+        for(int i=0; i<productos.size(); i++){
+            Object datosProductos[] = {productos.get(i).getNombre(), 
+                productos.get(i).getExistencias()};
             
-            fila.add(productos.get(i).getNombre());
-            fila.add(productos.get(i).getExistencias());
-            
-            datos.add(fila);
+            modelo.addRow(datosProductos);
         }
-        return datos;
     }
+    
+    
     
 //    public void actualizarTablaInsumos(ArrayList<InventarioProducto> productos){
 //        Vector<String> cabecera = new Vector<String>();
