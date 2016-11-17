@@ -193,4 +193,9 @@ public class PacienteDAO {
         
         conectorBD.desconectar();
     }
+
+    public void actualizarAplicaciones(Paciente paciente) throws SQLException {
+        tratamientoDAO.getAplicacionDAO().actualizar(paciente.getTratamiento().getUltimaAplicacion());
+        tratamientoDAO.getAplicacionDAO().crearAplicacion(paciente.getTratamiento().getSiguienteAplicacion());
+    }
 }

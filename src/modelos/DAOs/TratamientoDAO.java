@@ -98,4 +98,8 @@ public class TratamientoDAO {
         }
         aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());        
     }
+    
+    public AplicacionDAO getAplicacionDAO(){
+        return this.aplicacionDAO;
+    }
 }

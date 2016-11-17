@@ -89,8 +89,10 @@ public class AsistenteDoctor {
 
     private void crearNuevaCitaAlPaciente(Paciente paciente) {
         paciente.getTratamiento().agregarAplicacion();
+        paciente.getTratamiento().getSiguienteAplicacion().setTratamiento_id
+        (paciente.getTratamiento().getUltimaAplicacion().getTratamiento_id());
         try {
-            pacienteDAO.actualizar(paciente);
+            pacienteDAO.actualizarAplicaciones(paciente);
         } catch (SQLException ex) {
             Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
         }
