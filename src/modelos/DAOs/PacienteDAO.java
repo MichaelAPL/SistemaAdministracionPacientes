@@ -62,6 +62,7 @@ public class PacienteDAO {
         ResultSet generatedKeys = declaracion.getGeneratedKeys();
         if (generatedKeys.next()) {
             int id = generatedKeys.getInt(1);
+            paciente.setId(id);
             paciente.getTratamiento().setPaciente_id(id);
         }
 
@@ -191,5 +192,10 @@ public class PacienteDAO {
         tratamientoDAO.actualizar(paciente.getTratamiento());        
         
         conectorBD.desconectar();
+    }
+
+    public void actualizarAplicaciones(Paciente paciente) throws SQLException {
+        tratamientoDAO.getAplicacionDAO().actualizar(paciente.getTratamiento().getUltimaAplicacion());
+        tratamientoDAO.getAplicacionDAO().crearAplicacion(paciente.getTratamiento().getSiguienteAplicacion());
     }
 }

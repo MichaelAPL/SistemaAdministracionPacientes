@@ -67,7 +67,11 @@ public class TratamientoDAO {
             tratamiento.setId(resultado.getInt("ID_Tratamiento"));
             tratamiento.setActivo(resultado.getBoolean("Activo"));
             tratamiento.setPaciente_id(resultado.getInt("Paciente_ID"));            
-            tratamiento.setSiguienteAplicacion(aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()));                    
+            tratamiento.setSiguienteAplicacion(aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()));
+            if (aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()).getNumAplicacion()!=1) {
+                            tratamiento.setUltimaAplicacion(aplicacionDAO.getUltimaAplicacion(tratamiento.getId(), 
+                    aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()).getNumAplicacion()-1));
+            }
         }
         
         conectorBD.desconectar();
@@ -93,5 +97,9 @@ public class TratamientoDAO {
             aplicacionDAO.actualizar(tratamiento.getUltimaAplicacion());
         }
         aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());        
+    }
+    
+    public AplicacionDAO getAplicacionDAO(){
+        return this.aplicacionDAO;
     }
 }

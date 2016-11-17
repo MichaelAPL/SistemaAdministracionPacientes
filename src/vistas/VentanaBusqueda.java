@@ -20,6 +20,7 @@ public class VentanaBusqueda extends javax.swing.JFrame {
         if(ventanaBusqueda==null){
             ventanaBusqueda = new VentanaBusqueda();
         }
+        ventanaBusqueda.setVisible(true);
         return ventanaBusqueda;
     }
     

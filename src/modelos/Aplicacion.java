@@ -26,6 +26,7 @@ public class Aplicacion {
         this.fecha = new Date();
         this.numAplicacion = numAplicacion;
         this.suero = setSuero();
+        this.tratamiento_id = tratamiento_id;
     }
 
     public int getNumAplicacion() {

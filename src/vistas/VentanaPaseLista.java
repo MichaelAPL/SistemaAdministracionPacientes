@@ -25,13 +25,11 @@ public class VentanaPaseLista extends javax.swing.JFrame {
     }
 
     public static VentanaPaseLista obtenerUnicaVentana() {
-        if (ventanaPaseLista != null) {
-            return ventanaPaseLista;
-
-        } else {
-            return ventanaPaseLista = new VentanaPaseLista();
+        if (ventanaPaseLista == null) {
+            ventanaPaseLista = new VentanaPaseLista();
         }
-
+        ventanaPaseLista.setVisible(true);
+        return ventanaPaseLista;
     }
 
     private void inicializarTablaPacientes() {
