@@ -21,8 +21,8 @@ public class ControladorCitas {
         asistente.mandarAVentanaAPacientesConCitas();
     }
 
-    public void asistenciaDePacientes(int indicePaciente) {
-        asistente.ponerAsistenciaAlPaciente(indicePaciente);
+    public void asistenciaDePacientes(String pacienteID) {
+        asistente.ponerAsistenciaAlPaciente(pacienteID);
     }
 
 }
