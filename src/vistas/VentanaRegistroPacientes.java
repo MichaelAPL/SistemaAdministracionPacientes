@@ -6,7 +6,9 @@
 package vistas;
 
 import controladores.ControladorRegistro;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelos.Paciente;
@@ -33,19 +35,25 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         inicializarTablaPadecimientos();
         inicializarTablaMedicamentos();
         setLocationRelativeTo(null);
-        this.setVisible(true);
+        
     }
     
     public static VentanaRegistroPacientes obtenerUnicaVentanaRegistroPacientes(){
         if (ventanaRegistro == null) {
             ventanaRegistro = new VentanaRegistroPacientes();
         }
+        
+        ventanaRegistro.setVisible(true);
         return ventanaRegistro;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopUpMenu = new javax.swing.JPopupMenu();
+        jEliminarEnfermedad = new javax.swing.JMenuItem();
+        jPopUpMenu2 = new javax.swing.JPopupMenu();
+        jEliminarMedicamento = new javax.swing.JMenuItem();
         panel = new javax.swing.JPanel();
         etiquetaNombre = new javax.swing.JLabel();
         etiquetaApellidos = new javax.swing.JLabel();
@@ -72,6 +80,22 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         tablaMedicamentos = new javax.swing.JTable();
         añadirEnfermedad = new javax.swing.JButton();
         añadirMedicamento = new javax.swing.JButton();
+
+        jEliminarEnfermedad.setText("Eliminar");
+        jEliminarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEliminarEnfermedadActionPerformed(evt);
+            }
+        });
+        jPopUpMenu.add(jEliminarEnfermedad);
+
+        jEliminarMedicamento.setText("Eliminar");
+        jEliminarMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEliminarMedicamentoActionPerformed(evt);
+            }
+        });
+        jPopUpMenu2.add(jEliminarMedicamento);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -120,6 +144,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaPadecimientos.setComponentPopupMenu(jPopUpMenu);
         scrollTabla.setViewportView(tablaPadecimientos);
 
         botonGuardar.setText("Registrar");
@@ -154,6 +179,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaMedicamentos.setComponentPopupMenu(jPopUpMenu2);
         scrollTabla1.setViewportView(tablaMedicamentos);
 
         añadirEnfermedad.setText("+");
@@ -342,16 +368,28 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_medicamentoKeyPressed
 
     private void añadirEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirEnfermedadActionPerformed
-        this.enfermedadesPrevias.add(padecimiento.getText());
-        actualizarDatosTabla(this.tablaPadecimientos, this.enfermedadesPrevias);
-        this.padecimiento.setText("");
+        if(!this.padecimiento.getText().equals("")){
+            this.enfermedadesPrevias.add(padecimiento.getText());
+            actualizarDatosTabla(this.tablaPadecimientos, this.enfermedadesPrevias);
+            this.padecimiento.setText("");
+        }        
     }//GEN-LAST:event_añadirEnfermedadActionPerformed
 
     private void añadirMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirMedicamentoActionPerformed
-        this.medicamentosExternos.add(medicamento.getText());
-        actualizarDatosTabla(this.tablaMedicamentos, this.medicamentosExternos);
-        this.medicamento.setText("");
+        if(!this.medicamento.getText().equals("")){
+            this.medicamentosExternos.add(medicamento.getText());
+            actualizarDatosTabla(this.tablaMedicamentos, this.medicamentosExternos);
+            this.medicamento.setText("");
+        }        
     }//GEN-LAST:event_añadirMedicamentoActionPerformed
+
+    private void jEliminarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarEnfermedadActionPerformed
+        eliminarEnfermedad(this.tablaPadecimientos);
+    }//GEN-LAST:event_jEliminarEnfermedadActionPerformed
+
+    private void jEliminarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarMedicamentoActionPerformed
+        eliminarMedicamento(this.tablaMedicamentos);
+    }//GEN-LAST:event_jEliminarMedicamentoActionPerformed
 
     private void inicializarTablaPadecimientos() {
         this.enfermedadesPrevias = new ArrayList();
@@ -380,6 +418,16 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel(cuerpo, cabecera);
         tabla.setModel(modelo);
     }
+    
+    private void eliminarEnfermedad(JTable tabla){
+        this.enfermedadesPrevias.remove(tabla.getSelectedRow());
+        actualizarDatosTabla(tabla, this.enfermedadesPrevias);
+    }
+    
+    private void eliminarMedicamento(JTable tabla){
+        this.medicamentosExternos.remove(tabla.getSelectedRow());
+        actualizarDatosTabla(tabla, this.medicamentosExternos);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField EDTA;
@@ -397,7 +445,11 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     private javax.swing.JLabel etiquetaNombre;
     private javax.swing.JLabel etiquetaPadecimientos;
     private javax.swing.JLabel etiquetaTelefono;
+    private javax.swing.JMenuItem jEliminarEnfermedad;
+    private javax.swing.JMenuItem jEliminarMedicamento;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPopupMenu jPopUpMenu;
+    private javax.swing.JPopupMenu jPopUpMenu2;
     private javax.swing.JTextField localidad;
     private javax.swing.JTextField medicamento;
     private javax.swing.JTextField nombres;
