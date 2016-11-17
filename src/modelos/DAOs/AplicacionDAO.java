@@ -60,16 +60,12 @@ public class AplicacionDAO {
         conectorBD.desconectar();
     }
     
-    public Aplicacion getUltimaAplicacion(int tratamiento_ID) throws SQLException{
+    public Aplicacion getUltimaAplicacion(int tratamiento_ID, int siguienteAplicacion) throws SQLException{
         conectorBD.conectar();
         
-        Aplicacion sigAplicacion = getSiguienteAplicacion(tratamiento_ID);
-        
-        int numAplicacion = sigAplicacion.getNumAplicacion();
-        
-        String consulta = "select * from Aplicacion where Num_Aplicacion = ?";
+        String consulta = "select * from Aplicacion WHERE Num_Aplicacion = ?";
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, numAplicacion - 1);
+        declaracion.setInt(1, siguienteAplicacion);
         
         ResultSet resultado = declaracion.executeQuery();
         

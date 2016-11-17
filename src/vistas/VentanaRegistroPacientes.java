@@ -22,23 +22,24 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     /**
      * Creates new form VentanaRegistroPacientes
      */
-    private static VentanaRegistroPacientes ventanaRegistro;
+    private static VentanaRegistroPacientes ventanaRegistro = null;
     private ControladorRegistro controladorRegistro;
     private ArrayList<String> enfermedadesPrevias;
     private ArrayList<String> medicamentosExternos;
 
     private VentanaRegistroPacientes() {
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         initComponents();
-        this.controladorRegistro = new ControladorRegistro();
+        controladorRegistro = new ControladorRegistro();
         inicializarTablaPadecimientos();
         inicializarTablaMedicamentos();
         setLocationRelativeTo(null);
-        this.setVisible(true);
     }
     
     public static VentanaRegistroPacientes obtenerUnicaVentanaRegistroPacientes(){
         if (ventanaRegistro == null) {
             ventanaRegistro = new VentanaRegistroPacientes();
+            ventanaRegistro.setVisible(true);
         }
         return ventanaRegistro;
     }
@@ -72,8 +73,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         tablaMedicamentos = new javax.swing.JTable();
         añadirEnfermedad = new javax.swing.JButton();
         añadirMedicamento = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         etiquetaNombre.setText("Nombres:");
 
@@ -309,7 +308,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
                 this.enfermedadesPrevias, tratamiento);
         
         controladorRegistro.crearNuevoPaciente(paciente);
-        ventanaRegistro.dispose();
+        
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edadKeyTyped
