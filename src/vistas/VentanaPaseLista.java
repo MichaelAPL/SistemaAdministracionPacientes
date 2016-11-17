@@ -34,12 +34,12 @@ public class VentanaPaseLista extends javax.swing.JFrame {
 
     private void inicializarTablaPacientes() {
 
-        String[] cabecera = {"Nombre", "Apellidos", "Suero", "Dosis EDTA",
+        String[] cabecera = {"ID", "Nombre", "Apellidos", "Suero", "Dosis EDTA",
             "Numero de Sesión", "Asistencia"};
         Object cuerpo[][] = {};
 
         modelo = new DefaultTableModel(cuerpo, cabecera) {
-            Class[] types = {String.class, String.class, String.class,
+            Class[] types = {Integer.class, String.class, String.class, String.class,
                 Integer.class, Integer.class, Boolean.class};
 
             @Override
@@ -56,7 +56,7 @@ public class VentanaPaseLista extends javax.swing.JFrame {
         int LIMPIAR_FILAS = 0;
         modelo.setRowCount(LIMPIAR_FILAS);
         for (Paciente paciente : pacientes) {
-            Object datosPaciente[] = {paciente.getNombres(), paciente.getApellidos(),
+            Object datosPaciente[] = {paciente.getId(), paciente.getNombres(), paciente.getApellidos(),
                 paciente.getTratamiento().getSiguienteAplicacion().getSuero(),
                 paciente.getTratamiento().getDosisEDTA(),
                 paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(),
@@ -111,8 +111,8 @@ public class VentanaPaseLista extends javax.swing.JFrame {
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         for (int i = 0; i < this.tablaDeSesiones.getModel().getRowCount(); i++) {
-            if ((Boolean) this.tablaDeSesiones.getModel().getValueAt(i, 5) == true) {
-                controladorCitas.asistenciaDePacientes(i);
+            if ((Boolean) this.tablaDeSesiones.getModel().getValueAt(i, 6) == true) {
+                controladorCitas.asistenciaDePacientes(tablaDeSesiones.getValueAt(i,0).toString());
             }
         }
         controladorCitas.actualizarListaPacientes();

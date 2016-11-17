@@ -19,6 +19,6 @@ public class ControladorDatosPaciente {
     }
     
     public void actualizarDatosPaciente(Paciente paciente){
-        AsistenteDoctor.obtenerUnicoAsistenteDoctor().actualizarPaciente(paciente);
+        AsistenteDoctor.obtenerUnicoAsistenteDoctor().actualizarDatosPaciente(paciente);
     }
 }

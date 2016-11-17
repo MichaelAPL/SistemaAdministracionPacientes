@@ -20,7 +20,7 @@ public class ControladorBusqueda {
         asistente = AsistenteDoctor.obtenerUnicoAsistenteDoctor();
     }
     public void busquedaPaciente(String nombresPaciente) {
-        asistente.buscarPaciente(nombresPaciente);
+        asistente.buscarPacientePorNombre(nombresPaciente);
     }
 
     public void obtencionDatosPaciente(String idPaciente) {

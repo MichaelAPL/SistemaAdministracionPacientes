@@ -1,6 +1,5 @@
 package modelos;
 
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,54 +10,101 @@ import vistas.VentanaBusqueda;
 import vistas.VentanaDatosPaciente;
 import vistas.VentanaPaseLista;
 
-/**
- *
- * @author Milka
- */
 public class AsistenteDoctor {
 
-    private ArrayList<Paciente> pacientes;
-    private ArrayList<Paciente> pacientesConCitaHoy;
     private PacienteDAO pacienteDAO;
     private static AsistenteDoctor asistente;
-    
-    
+
     private AsistenteDoctor() {
         pacienteDAO = new PacienteDAO();
-        actualizarListaPacientes();
     }
-    
-    public static AsistenteDoctor obtenerUnicoAsistenteDoctor(){
-        if(asistente == null){
+
+    public static AsistenteDoctor obtenerUnicoAsistenteDoctor() {
+        if (asistente == null) {
             asistente = new AsistenteDoctor();
         }
         return asistente;
     }
-    
-    private void actualizarListaPacientes(){
+
+    public void actualizarDatosPaciente(Paciente paciente) {
+        try {
+            pacienteDAO.actualizar(paciente);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void buscarPacientePorId(String id) {
+        try {
+            VentanaDatosPaciente.obtenerUnicaVentanaDatosPaciente()
+                    .mostrarDatosPaciente(pacienteDAO.getPacientePorID(Integer.valueOf(id)));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void buscarPacientePorNombre(String nombrePaciente) {
+        try {
+            VentanaBusqueda.obtenerUnicaVentanaBusqueda().mostrarPacientes(
+                    pacienteDAO.getPacientesPorNombre(nombrePaciente));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void mandarAVentanaAPacientesConCitas() {
+        VentanaPaseLista.obtenerUnicaVentana().mostrarPacientesConCita(generarListaDePacientesConCita());
+    }
+
+    public void mandarAVentanaDatosPaciente(String pacienteID) {
+        try {
+            VentanaDatosPaciente.obtenerUnicaVentanaDatosPaciente().
+                    mostrarDatosPaciente(pacienteDAO.getPacientePorID(Integer.valueOf(pacienteID)));
+        } catch (SQLException ex) {
+            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void ponerAsistenciaAlPaciente(String pacienteID) {
+        Paciente paciente;
+        try {
+            paciente = pacienteDAO.getPacientePorID(Integer.valueOf(pacienteID));
+            paciente.getTratamiento().getSiguienteAplicacion().setRealizada(true);
+            paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Date());
+
+            crearNuevaCitaAlPaciente(paciente);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void crearNuevaCitaAlPaciente(Paciente paciente) {
+        paciente.getTratamiento().agregarAplicacion();
+        paciente.getTratamiento().getSiguienteAplicacion().setTratamiento_id(paciente.getTratamiento().getUltimaAplicacion().getTratamiento_id());
+        try {
+            pacienteDAO.actualizarAplicaciones(paciente);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private ArrayList<Paciente> generarListaDePacientesConCita() {
+        ArrayList<Paciente> listaPacientesConCita = new ArrayList();
+        ArrayList<Paciente> pacientes = new ArrayList();
         try {
             pacientes = pacienteDAO.recuperarTodos();
         } catch (SQLException ex) {
             Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    public ArrayList<Paciente> generarListaDePacientesConCita() {
-        ArrayList<Paciente> listaPacientesConCita = new ArrayList();
-
         for (Paciente paciente : pacientes) {
             if (!pacienteAsistidoHoy(paciente) && pacienteConTratamientoActivo(paciente)) {
                 listaPacientesConCita.add(paciente);
             }
         }
         return listaPacientesConCita;
-    }
-
-    private boolean pacienteConTratamientoActivo(Paciente paciente) {
-        return paciente.getTratamiento().isActivo();
-    }
-
-    private boolean pacientePrimeraCitaAsistida(Paciente paciente) {
-        return (paciente.getTratamiento().getUltimaAplicacion() != null);
     }
 
     private boolean pacienteAsistidoHoy(Paciente paciente) {
@@ -74,65 +120,13 @@ public class AsistenteDoctor {
         return pacienteYaPasoHoy;
     }
 
-    public void mandarAVentanaAPacientesConCitas() {
-        pacientesConCitaHoy = generarListaDePacientesConCita();
-        VentanaPaseLista.obtenerUnicaVentana().mostrarPacientesConCita(pacientesConCitaHoy);
+    private boolean pacienteConTratamientoActivo(Paciente paciente) {
+        return paciente.getTratamiento().isActivo();
     }
 
-    public void ponerAsistenciaAlPaciente(int numeroDePacienteEnLaLista) {
-        Paciente paciente = pacientesConCitaHoy.get(numeroDePacienteEnLaLista);
-        paciente.getTratamiento().getSiguienteAplicacion().setRealizada(true);
-        paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Date());
-
-        crearNuevaCitaAlPaciente(paciente);
+    private boolean pacientePrimeraCitaAsistida(Paciente paciente) {
+        return (paciente.getTratamiento().getUltimaAplicacion() != null);
     }
 
-    private void crearNuevaCitaAlPaciente(Paciente paciente) {
-        paciente.getTratamiento().agregarAplicacion();
-        paciente.getTratamiento().getSiguienteAplicacion().setTratamiento_id
-        (paciente.getTratamiento().getUltimaAplicacion().getTratamiento_id());
-        try {
-            pacienteDAO.actualizarAplicaciones(paciente);
-        } catch (SQLException ex) {
-            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-    }
-    
-    public void buscarPaciente(String nombrePaciente){
-        try {
-            VentanaBusqueda.obtenerUnicaVentanaBusqueda().mostrarPacientes(
-                    pacienteDAO.getPacientesPorNombre(nombrePaciente));
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    public void buscarPacientePorId(String id){
-        try {
-            VentanaDatosPaciente.obtenerUnicaVentanaDatosPaciente()
-                    .mostrarDatosPaciente(pacienteDAO.getPacientePorID(Integer.valueOf(id)));
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }        
-    }
-    
-    public void mandarAVentanaDatosPaciente(String id){
-        try {
-            VentanaDatosPaciente.obtenerUnicaVentanaDatosPaciente().
-                    mostrarDatosPaciente(pacienteDAO.getPacientePorID(Integer.valueOf(id)));
-        } catch (SQLException ex) {
-            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void actualizarPaciente(Paciente paciente){
-        try {
-            pacienteDAO.actualizar(paciente);
-        } catch (SQLException ex) {
-            Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
