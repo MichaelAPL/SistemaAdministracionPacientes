@@ -16,6 +16,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public ControladorPrincipal controlador;
     
     public VentanaPrincipal() {
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         initComponents();
         controlador = new ControladorPrincipal();
     }
@@ -78,14 +79,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void paseListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paseListaActionPerformed
+        System.gc();
         controlador.mostrarVentanaPaseDeLista();
     }//GEN-LAST:event_paseListaActionPerformed
 
     private void buscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPacienteActionPerformed
+        System.gc();
         controlador.mostrarVentanaBuscar();
     }//GEN-LAST:event_buscarPacienteActionPerformed
 
     private void registrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarPacienteActionPerformed
+        System.gc();
         controlador.mostrarVentanaRegistroPacientes();
     }//GEN-LAST:event_registrarPacienteActionPerformed
 
