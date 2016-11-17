@@ -31,6 +31,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         registrarPaciente = new javax.swing.JMenuItem();
         paseLista = new javax.swing.JMenuItem();
         buscarPaciente = new javax.swing.JMenuItem();
+        inventario = new javax.swing.JMenu();
+        irAlInventario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +64,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        inventario.setText("Inventario");
+
+        irAlInventario.setText("Ir al inventario");
+        irAlInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irAlInventarioActionPerformed(evt);
+            }
+        });
+        inventario.add(irAlInventario);
+
+        jMenuBar1.add(inventario);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -92,6 +106,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.gc();
         controlador.mostrarVentanaRegistroPacientes();
     }//GEN-LAST:event_registrarPacienteActionPerformed
+
+    private void irAlInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irAlInventarioActionPerformed
+        System.gc();
+        controlador.mostrarVentanaInventario();
+    }//GEN-LAST:event_irAlInventarioActionPerformed
 
     
     /**
@@ -131,6 +150,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem buscarPaciente;
+    private javax.swing.JMenu inventario;
+    private javax.swing.JMenuItem irAlInventario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu jPopupMenu1;

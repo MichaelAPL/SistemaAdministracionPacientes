@@ -20,16 +20,26 @@ public class VentanaInventario extends javax.swing.JFrame {
     /**
      * Creates new form VentanaInventario
      */
+    public static VentanaInventario ventanaInventario;
+    private ControladorInventario controladorInventario = new ControladorInventario();
     
-    ControladorInventario controladorInventario = new ControladorInventario();
-    
-    public VentanaInventario(ControladorInventario controladorInventario) {
+    public VentanaInventario() {
         initComponents();
         setLocationRelativeTo(null);
-        this.controladorInventario = controladorInventario;
+        controladorInventario = new ControladorInventario();
         inicializarTablaInsumos();
+        setVisible(true);
     }
-
+    
+    public static VentanaInventario obtenerUnicaVentanaInventario(){
+        if(ventanaInventario == null){
+            ventanaInventario = new VentanaInventario();
+        }else{
+            ventanaInventario.setVisible(true);
+        }
+        return ventanaInventario;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +55,7 @@ public class VentanaInventario extends javax.swing.JFrame {
         btnAgregarExistencias = new javax.swing.JButton();
         btnAgregarNuevoMaterial = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inventario ");
 
         tituloVent.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N

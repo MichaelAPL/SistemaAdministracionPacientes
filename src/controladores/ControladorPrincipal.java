@@ -7,6 +7,7 @@ package controladores;
 
 import modelos.AsistenteDoctor;
 import vistas.VentanaBusqueda;
+import vistas.VentanaInventario;
 import vistas.VentanaPaseLista;
 import vistas.VentanaRegistroPacientes;
 /**
@@ -28,5 +29,9 @@ public class ControladorPrincipal {
 
     public void mostrarVentanaRegistroPacientes() {
         VentanaRegistroPacientes.obtenerUnicaVentanaRegistroPacientes();
+    }
+    
+    public void mostrarVentanaInventario(){
+        VentanaInventario.obtenerUnicaVentanaInventario();
     }
 }
