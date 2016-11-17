@@ -68,6 +68,7 @@ public class TratamientoDAO {
             tratamiento.setActivo(resultado.getBoolean("Activo"));
             tratamiento.setPaciente_id(resultado.getInt("Paciente_ID"));            
             tratamiento.setSiguienteAplicacion(aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()));
+            
             if (aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()).getNumAplicacion()!=1) {
                             tratamiento.setUltimaAplicacion(aplicacionDAO.getUltimaAplicacion(tratamiento.getId(), 
                     aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()).getNumAplicacion()-1));
