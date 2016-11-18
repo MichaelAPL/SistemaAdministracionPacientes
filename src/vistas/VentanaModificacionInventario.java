@@ -24,7 +24,7 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
     private ControladorInventario controladorInventario = new ControladorInventario();
     private ArrayList<InventarioProducto> inventarioProducto;
     
-    public VentanaModificacionInventario() {
+    private VentanaModificacionInventario() {
         initComponents();
         setLocationRelativeTo(null);
         this.controladorInventario = new ControladorInventario();
@@ -103,7 +103,7 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
         
         String nombreProducto =String.valueOf(producto.getItemAt(producto.getSelectedIndex()));        
         int insumo = Integer.parseInt(String.valueOf(existencias.getValue())) + 
-                insumoAnterior(producto.getSelectedIndex());
+                obtenerCantidadInsumoAnterior(producto.getSelectedIndex());
         int productoID = obtenerProductoID(producto.getSelectedIndex());
         InventarioProducto productoInventario = new InventarioProducto(productoID,nombreProducto, insumo);
         
@@ -119,12 +119,12 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
         ventanaModificacionInventario = null;
     }
     
-    private int obtenerProductoID(int indice){
-        return indice+1;
+    private int obtenerProductoID(int indiceSelecionado){
+        return indiceSelecionado+1;
     }
     
-    private int insumoAnterior(int indice){
-        return inventarioProducto.get(indice).getExistencias();
+    private int obtenerCantidadInsumoAnterior(int indiceSeleccionado){
+        return inventarioProducto.get(indiceSeleccionado).getExistencias();
     }
     
     public void insertarOpcionesMenu(){
