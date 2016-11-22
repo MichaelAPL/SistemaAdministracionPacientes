@@ -113,6 +113,7 @@ public class VentanaPaseLista extends javax.swing.JFrame {
                 controladorCitas.mandarAAsistentePacienteConAsistencia(tablaDeSesiones.getValueAt(i,0).toString());
             }
         }
+        controladorCitas.mandarAventanaPacientesConCita();
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
 
