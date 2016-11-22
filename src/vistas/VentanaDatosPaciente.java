@@ -350,7 +350,7 @@ public class VentanaDatosPaciente extends javax.swing.JFrame {
         paciente.getTratamiento().setDosis_EDTA_ml(Integer.valueOf(dosisEDTApaciente.getText()));
         
         
-        controladorDatosPaciente.actualizarDatosPaciente(paciente);
+        controladorDatosPaciente.mandarAAsistenteDatosPacienteAActualizar(paciente);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -17,11 +17,10 @@ import vistas.VentanaRegistroPacientes;
  */
 public class ControladorPrincipal {
     
-    
     public void mostrarVentanaPaseDeLista(){
-        VentanaPaseLista.obtenerUnicaVentana();
-        AsistenteDoctor.obtenerUnicoAsistenteDoctor().mandarAVentanaAPacientesConCitas();
-        
+        VentanaPaseLista ventanaPaseLista = VentanaPaseLista.obtenerUnicaVentana();
+        ventanaPaseLista.mostrarPacientesConCita
+        (AsistenteDoctor.obtenerUnicoAsistenteDoctor().obtenerListaDePacientesConCita());
     }
 
     public void mostrarVentanaBuscar() {

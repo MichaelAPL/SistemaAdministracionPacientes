@@ -2,7 +2,7 @@ package vistas;
 
 import modelos.AsistenteDoctor;
 import modelos.Paciente;
-import controladores.ControladorCitas;
+import controladores.ControladorVentanaPaseLista;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,11 +14,11 @@ public class VentanaPaseLista extends javax.swing.JFrame {
 
     private DefaultTableModel modelo;
     private static VentanaPaseLista ventanaPaseLista;
-    private ControladorCitas controladorCitas;
+    private ControladorVentanaPaseLista controladorCitas;
 
     private VentanaPaseLista() {
         initComponents();
-        controladorCitas = new ControladorCitas();
+        controladorCitas = new ControladorVentanaPaseLista();
         inicializarTablaPacientes();
         this.setVisible(true);
 
@@ -51,7 +51,6 @@ public class VentanaPaseLista extends javax.swing.JFrame {
         tablaDeSesiones.setModel(modelo);
     }
     
-
     public void mostrarPacientesConCita(ArrayList<Paciente> pacientes) {
         int LIMPIAR_FILAS = 0;
         modelo.setRowCount(LIMPIAR_FILAS);
@@ -64,7 +63,6 @@ public class VentanaPaseLista extends javax.swing.JFrame {
             modelo.addRow(datosPaciente);
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -112,10 +110,9 @@ public class VentanaPaseLista extends javax.swing.JFrame {
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         for (int i = 0; i < this.tablaDeSesiones.getModel().getRowCount(); i++) {
             if ((Boolean) this.tablaDeSesiones.getModel().getValueAt(i, 6) == true) {
-                controladorCitas.asistenciaDePacientes(tablaDeSesiones.getValueAt(i,0).toString());
+                controladorCitas.mandarAAsistentePacienteConAsistencia(tablaDeSesiones.getValueAt(i,0).toString());
             }
         }
-        controladorCitas.actualizarListaPacientes();
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
 

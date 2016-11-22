@@ -6,9 +6,7 @@
 package vistas;
 
 import controladores.ControladorRegistro;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelos.Paciente;
@@ -334,7 +332,7 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         Paciente paciente = new Paciente(persona, this.medicamentosExternos,
                 this.enfermedadesPrevias, tratamiento);
         
-        controladorRegistro.crearNuevoPaciente(paciente);
+        controladorRegistro.mandarAAsistenteNuevoPaciente(paciente);
         ventanaRegistro.dispose();
     }//GEN-LAST:event_botonGuardarActionPerformed
 

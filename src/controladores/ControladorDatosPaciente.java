@@ -14,11 +14,13 @@ import modelos.Paciente;
  */
 public class ControladorDatosPaciente {
     
+    AsistenteDoctor asistente;
+    
     public ControladorDatosPaciente(){
-        
+        asistente = AsistenteDoctor.obtenerUnicoAsistenteDoctor();
     }
     
-    public void actualizarDatosPaciente(Paciente paciente){
-        AsistenteDoctor.obtenerUnicoAsistenteDoctor().actualizarDatosPaciente(paciente);
+    public void mandarAAsistenteDatosPacienteAActualizar(Paciente paciente){
+        asistente.actualizarDatosPaciente(paciente);
     }
 }

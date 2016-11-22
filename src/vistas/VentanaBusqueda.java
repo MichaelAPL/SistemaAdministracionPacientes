@@ -136,7 +136,7 @@ public class VentanaBusqueda extends javax.swing.JFrame {
 
     private void buscarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
        if (nombresPaciente.getText() != null) {
-            controladorBusqueda.busquedaPaciente(nombresPaciente.getText());
+            controladorBusqueda.mandarAVentanaBusquedaPacientesEncontrados(nombresPaciente.getText());
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
 

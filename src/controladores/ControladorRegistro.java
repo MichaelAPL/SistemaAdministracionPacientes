@@ -1,7 +1,7 @@
 package controladores;
 
-import java.sql.SQLException;
-import modelos.DAOs.PacienteDAO;
+
+import modelos.AsistenteDoctor;
 import modelos.Paciente;
 
 /**
@@ -10,17 +10,13 @@ import modelos.Paciente;
  */
 public class ControladorRegistro {
     
-    private PacienteDAO pacienteDAO;
+    AsistenteDoctor asistente;
     
     public ControladorRegistro(){
-        this.pacienteDAO = new PacienteDAO();
+        asistente = AsistenteDoctor.obtenerUnicoAsistenteDoctor();
     }
     
-    public void crearNuevoPaciente(Paciente paciente){
-        try {
-            pacienteDAO.crearPaciente(paciente);
-        } catch (SQLException ex) {
-            System.out.println("Error al conectar a la Base de Datos");
-        }
+    public void mandarAAsistenteNuevoPaciente(Paciente paciente){
+        asistente.registrarNuevoPacienteEnRegistro(paciente);
     }
 }

@@ -35,6 +35,7 @@ public class Tratamiento {
         
         ultimaAplicacion = siguienteAplicacion;
         siguienteAplicacion = new Aplicacion(numSiguienteAplicacion);
+        siguienteAplicacion.setTratamiento_id(id);
     }
 
     public int getNumeroAplicacionesRealizadas() {
