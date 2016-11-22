@@ -12,7 +12,7 @@ public class Paciente extends Persona {
     private ArrayList<String> medicamentosExternos;
     private ArrayList<String> enfermedadesPrevias;
     private Tratamiento tratamiento;
-    private Date fechaDeInscripcion;
+    private Fecha fechaDeInscripcion;
     private int id;
 
     public Paciente(Persona persona, ArrayList<String> medicamentosExternos,
@@ -22,7 +22,7 @@ public class Paciente extends Persona {
         this.medicamentosExternos = medicamentosExternos;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.tratamiento = tratamiento;
-        fechaDeInscripcion = inicializarFechaDeInscripcion();
+        fechaDeInscripcion = new Fecha();
     }
 
     public Paciente(Persona persona, ArrayList<String> medicamentosExternos,
@@ -33,7 +33,7 @@ public class Paciente extends Persona {
         this.medicamentosExternos = medicamentosExternos;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.tratamiento = tratamiento;
-        this.fechaDeInscripcion = fechaInscripcion;
+        this.fechaDeInscripcion = new Fecha(fechaInscripcion);
         this.id = id;
     }
 
@@ -77,11 +77,7 @@ public class Paciente extends Persona {
         this.tratamiento = tratamiento;
     }
 
-    private Date inicializarFechaDeInscripcion() {
-        return new Date();
-    }
-
-    public Date getFechaDeInscripcion() {
+    public Fecha getFechaDeInscripcion() {
         return fechaDeInscripcion;
     }
 

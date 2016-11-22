@@ -2,7 +2,6 @@ package modelos;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelos.DAOs.PacienteDAO;
@@ -65,7 +64,7 @@ public class AsistenteDoctor {
     public void ponerAsistenciaAlPaciente(String pacienteID) {
         Paciente paciente = buscarPacientePorId(pacienteID);
         paciente.getTratamiento().getSiguienteAplicacion().setRealizada(true);
-        paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Date());
+        paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Fecha());
 
         crearNuevaCitaAlPaciente(paciente);
     }
@@ -102,14 +101,12 @@ public class AsistenteDoctor {
     }
 
     private boolean pacienteAsistidoHoy(Paciente paciente) {
-        Date fechaHoy = new Date();
+        Fecha fechaHoy = new Fecha();
         boolean pacienteYaPasoHoy = false;
 
-        if (pacientePrimeraCitaAsistida(paciente)) {
-            int dia = paciente.getTratamiento().getUltimaAplicacion().getFecha().getDate();
-            int mes = paciente.getTratamiento().getUltimaAplicacion().getFecha().getMonth();
-            int año = paciente.getTratamiento().getUltimaAplicacion().getFecha().getYear();
-            pacienteYaPasoHoy = ((dia == fechaHoy.getDate()) && (mes == fechaHoy.getMonth()) && (año == fechaHoy.getYear()));
+        if (pacientePrimeraCitaAsistida(paciente)) {       
+            pacienteYaPasoHoy = paciente.getTratamiento().getUltimaAplicacion().
+                getFecha().comperTo(fechaHoy);
         }
         return pacienteYaPasoHoy;
     }

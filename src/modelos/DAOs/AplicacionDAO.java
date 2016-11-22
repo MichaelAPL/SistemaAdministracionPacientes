@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelos.Aplicacion;
+import modelos.Fecha;
 import modelos.database.ConectorBD;
 
 /**
@@ -72,7 +73,7 @@ public class AplicacionDAO {
         Aplicacion ultimaAplicacion = null;
         while(resultado.next()){
             ultimaAplicacion = new Aplicacion(resultado.getInt("Num_Aplicacion"));
-            ultimaAplicacion.setFecha(resultado.getDate("Fecha"));
+            ultimaAplicacion.setFecha(new Fecha(resultado.getDate("Fecha")));
             ultimaAplicacion.setRealizada(true);
             ultimaAplicacion.setTratamiento_id(resultado.getInt("Tratamiento_ID"));
         }
@@ -99,7 +100,7 @@ public class AplicacionDAO {
                 sigAplicacion = new Aplicacion(numAplicacion);
                 sigAplicacion.setRealizada(resultado.getBoolean("Realizada"));
                 sigAplicacion.setTratamiento_id(resultado.getInt("Tratamiento_ID"));
-                sigAplicacion.setFecha(resultado.getDate("Fecha"));
+                sigAplicacion.setFecha(new Fecha(resultado.getDate("Fecha")));
             }
         }
         

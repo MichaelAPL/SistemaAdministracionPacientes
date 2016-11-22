@@ -5,7 +5,6 @@
  */
 package modelos;
 
-import java.util.Date;
 import modelos.enums.Suero;
 
 /**
@@ -15,7 +14,7 @@ import modelos.enums.Suero;
 public class Aplicacion {
 
     private boolean realizada;
-    private Date fecha;
+    private Fecha fecha;
     private Suero suero;
     private int numAplicacion;
     private int tratamiento_id;
@@ -23,7 +22,7 @@ public class Aplicacion {
 
     public Aplicacion(int numAplicacion) {
         this.realizada = false;
-        this.fecha = new Date();
+        this.fecha = new Fecha();
         this.numAplicacion = numAplicacion;
         this.suero = setSuero();
         this.tratamiento_id = tratamiento_id;
@@ -45,11 +44,11 @@ public class Aplicacion {
         this.realizada = realizada;
     }
 
-    public Date getFecha() {
+    public Fecha getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Fecha fecha) {
         this.fecha = fecha;
     }
 
