@@ -34,14 +34,9 @@ public class AdministradorInventario {
     public void actualizarInventario(InventarioProducto producto){
         try {
             inventarioDAO.actualizar(producto);
-            mandarDatosAVentanaInventario();
         } catch (SQLException ex) {
             Logger.getLogger(AdministradorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public void mandarDatosAVentanaInventario(){
-        VentanaInventario.obtenerUnicaVentanaInventario().mostrarInventarioProductos(obtenerInventarioProductos());
     }
     
     public ArrayList<InventarioProducto> obtenerInventarioProductos(){
