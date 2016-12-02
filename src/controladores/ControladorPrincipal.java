@@ -32,7 +32,8 @@ public class ControladorPrincipal {
     }
     
     public void mostrarVentanaInventario(){
-        VentanaInventario.obtenerUnicaVentanaInventario();
-        AdministradorInventario.obtenerUnicoAdministradorInventario().mandarDatosAVentanaInventario();
+        VentanaInventario ventanaInventario = VentanaInventario.obtenerUnicaVentanaInventario();
+        ventanaInventario.mostrarInventarioProductos(
+        AdministradorInventario.obtenerUnicoAdministradorInventario().obtenerInventarioProductos());
     }
 }

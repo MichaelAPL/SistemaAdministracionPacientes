@@ -13,30 +13,29 @@ import java.util.logging.Logger;
 import modelos.AdministradorInventario;
 import modelos.DAOs.InventarioProductoDAO;
 import modelos.InventarioProducto;
+import vistas.VentanaInventario;
 
 /**
  *
  * @author Angel Basto Gonzalez
  */
 public class ControladorInventario {
-    InventarioProductoDAO inventarioProductoDAO = new InventarioProductoDAO();
     private final AdministradorInventario administradorInventario;
     
     public ControladorInventario() {
         administradorInventario = AdministradorInventario.obtenerUnicoAdministradorInventario();                
     }
     
-    public void agregarInsumosInventario(InventarioProducto producto){
+    public void mandarModificacionesAlInventario(InventarioProducto producto){
         administradorInventario.actualizarInventario(producto);
     }
     
+    public void actualizarVentanaInventario(){
+        VentanaInventario.obtenerUnicaVentanaInventario().mostrarInventarioProductos(
+                administradorInventario.obtenerInventarioProductos());
+    }
+    
     public ArrayList<InventarioProducto> obtenerInventarioProductos(){
-        ArrayList<InventarioProducto> inventarioProducto = null;
-        try {
-            inventarioProducto = inventarioProductoDAO.recuperarTodos();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return inventarioProducto;
+        return administradorInventario.obtenerInventarioProductos();
     }
 }
