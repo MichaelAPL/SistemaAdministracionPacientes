@@ -18,9 +18,8 @@ import vistas.VentanaRegistroPacientes;
 public class ControladorPrincipal {
     
     public void mostrarVentanaPaseDeLista(){
-        VentanaPaseLista ventanaPaseLista = VentanaPaseLista.obtenerUnicaVentana();
-        ventanaPaseLista.mostrarPacientesConCita
-        (AsistenteDoctor.obtenerUnicoAsistenteDoctor().obtenerListaDePacientesConCita());
+        ControladorVentanaPaseLista.obtenerControlador();
+        ControladorVentanaPaseLista.obtenerControlador().mandarARecepcionistaPacientesConCita();
     }
 
     public void mostrarVentanaBuscar() {

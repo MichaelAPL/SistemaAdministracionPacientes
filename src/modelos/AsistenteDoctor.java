@@ -53,11 +53,13 @@ public class AsistenteDoctor {
     public ArrayList<Paciente> obtenerListaDePacientesConCita() {
         ArrayList<Paciente> listaPacientesConCita = new ArrayList();
         ArrayList<Paciente> pacientes = obtenerPacientesEnRegistro();
+        System.out.println(pacientes.size());
         for (Paciente paciente : pacientes) {
             if (!pacienteAsistidoHoy(paciente) && pacienteConTratamientoActivo(paciente)) {
                 listaPacientesConCita.add(paciente);
             }
         }
+        System.out.println(listaPacientesConCita.size());
         return listaPacientesConCita;
     }
 

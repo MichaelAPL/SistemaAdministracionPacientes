@@ -44,6 +44,8 @@ public class Fecha{
     }
     
     public boolean comperTo(Fecha fecha){
+        
         return ((fecha.dia == dia)&&(fecha.mes == mes)&&(fecha.año == año));
+    
     }
 }
