@@ -103,7 +103,6 @@ public class AsistenteDoctor {
     private boolean pacienteAsistidoHoy(Paciente paciente) {
         Fecha fechaHoy = new Fecha();
         boolean pacienteYaPasoHoy = false;
-
         if (pacientePrimeraCitaAsistida(paciente)) {       
             pacienteYaPasoHoy = paciente.getTratamiento().getUltimaAplicacion().
                 getFecha().comperTo(fechaHoy);

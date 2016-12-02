@@ -25,7 +25,7 @@ public class ControladorVentanaPaseLista {
 
     public void mandarAAsistentePacienteConAsistencia(String pacienteID) {
         asistente.ponerAsistenciaAlPaciente(pacienteID);
-        //mandarAventanaPacientesConCita();
+        mandarAventanaPacientesConCita();
     }
 
 }

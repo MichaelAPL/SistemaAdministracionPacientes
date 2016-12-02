@@ -70,15 +70,14 @@ public class AplicacionDAO {
         
         ResultSet resultado = declaracion.executeQuery();
         
-        Aplicacion ultimaAplicacion = null;
-        while(resultado.next()){
-            ultimaAplicacion = new Aplicacion(resultado.getInt("Num_Aplicacion"));
-            ultimaAplicacion.setFecha(new Fecha(resultado.getDate("Fecha")));
-            ultimaAplicacion.setRealizada(true);
-            ultimaAplicacion.setTratamiento_id(resultado.getInt("Tratamiento_ID"));
-        }
+        Aplicacion ultimaAplicacion = null;        
+        ultimaAplicacion = new Aplicacion(resultado.getInt("Num_Aplicacion"));
+        ultimaAplicacion.setFecha(new Fecha(resultado.getDate("Fecha")));
+        ultimaAplicacion.setRealizada(true);
+        ultimaAplicacion.setTratamiento_id(resultado.getInt("Tratamiento_ID"));
         
         conectorBD.desconectar();
+        System.out.println(ultimaAplicacion.getFecha().toString());
         return ultimaAplicacion;       
     }
     
