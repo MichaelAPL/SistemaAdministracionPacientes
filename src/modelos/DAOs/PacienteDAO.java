@@ -140,8 +140,7 @@ public class PacienteDAO {
         this.conectorBD.conectar();
 
         ArrayList<Paciente> pacientes = new ArrayList();
-
-        String consulta = "select * from Paciente where Nombre = " + "\'"+nombre+"\'";
+        String consulta= "select * from paciente  where paciente.Nombre||\" \"||paciente.Apellido like \"%"+nombre+"%\"";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
 
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();

@@ -8,24 +8,31 @@
 package controladores;
 
 import modelos.AsistenteDoctor;
-import vistas.VentanaPaseLista;
+import vistas.RecepcionistaVentanaPaseLista;
 
 public class ControladorVentanaPaseLista {
 
     private final AsistenteDoctor asistente;
-
-    public ControladorVentanaPaseLista() {
+    private static ControladorVentanaPaseLista controlador;
+    
+    private ControladorVentanaPaseLista() {
         asistente = AsistenteDoctor.obtenerUnicoAsistenteDoctor();
     }
-
-    public void mandarAventanaPacientesConCita() {
-        VentanaPaseLista.obtenerUnicaVentana().
-            mostrarPacientesConCita(asistente.obtenerListaDePacientesConCita());
+   
+    public static ControladorVentanaPaseLista obtenerControlador(){
+        if (controlador == null) {
+            controlador = new ControladorVentanaPaseLista();
+        }
+        return controlador;
     }
 
-    public void mandarAAsistentePacienteConAsistencia(String pacienteID) {
+    public void mandarARecepcionistaPacientesConCita() {
+        RecepcionistaVentanaPaseLista.obtenerRecepcionista().
+            recibirPacientesConCita(asistente.obtenerListaDePacientesConCita());
+    }
+
+    public void mandarAAsistenteIDPacienteConAsistencia(String pacienteID) {
         asistente.ponerAsistenciaAlPaciente(pacienteID);
-        //mandarAventanaPacientesConCita();
     }
 
 }

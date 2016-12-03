@@ -1,9 +1,7 @@
 package vistas;
 
-import modelos.AsistenteDoctor;
-import modelos.Paciente;
-import controladores.ControladorVentanaPaseLista;
-import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,14 +12,10 @@ public class VentanaPaseLista extends javax.swing.JFrame {
 
     private DefaultTableModel modelo;
     private static VentanaPaseLista ventanaPaseLista;
-    private ControladorVentanaPaseLista controladorCitas;
 
     private VentanaPaseLista() {
         initComponents();
-        controladorCitas = new ControladorVentanaPaseLista();
         inicializarTablaPacientes();
-        this.setVisible(true);
-
     }
 
     public static VentanaPaseLista obtenerUnicaVentana() {
@@ -50,36 +44,34 @@ public class VentanaPaseLista extends javax.swing.JFrame {
 
         tablaDeSesiones.setModel(modelo);
     }
-    
-    public void mostrarPacientesConCita(ArrayList<Paciente> pacientes) {
-        int LIMPIAR_FILAS = 0;
-        modelo.setRowCount(LIMPIAR_FILAS);
-        for (Paciente paciente : pacientes) {
-            Object datosPaciente[] = {paciente.getId(), paciente.getNombres(), paciente.getApellidos(),
-                paciente.getTratamiento().getSiguienteAplicacion().getSuero(),
-                paciente.getTratamiento().getDosisEDTA(),
-                paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(),
-                false};
-            modelo.addRow(datosPaciente);
-        }
+
+    public DefaultTableModel getModelo() {
+        return modelo;
     }
+
+    public JButton getBotonGuardarCambios() {
+        return botonGuardarCambios;
+    }
+
+    public JTable getTablaDeSesiones() {
+        return tablaDeSesiones;
+    }
+    
+    
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         scroll = new javax.swing.JScrollPane();
         tablaDeSesiones = new javax.swing.JTable();
-        guardarCambios = new javax.swing.JButton();
+        botonGuardarCambios = new javax.swing.JButton();
 
         tablaDeSesiones.getTableHeader().setReorderingAllowed(false);
         scroll.setViewportView(tablaDeSesiones);
 
-        guardarCambios.setText("Guardar");
-        guardarCambios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarCambiosActionPerformed(evt);
-            }
-        });
+        botonGuardarCambios.setText("Guardar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,10 +81,10 @@ public class VentanaPaseLista extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(guardarCambios)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonGuardarCambios)
+                .addGap(234, 234, 234))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,25 +92,16 @@ public class VentanaPaseLista extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(guardarCambios)
+                .addComponent(botonGuardarCambios)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
-        for (int i = 0; i < this.tablaDeSesiones.getModel().getRowCount(); i++) {
-            if ((Boolean) this.tablaDeSesiones.getModel().getValueAt(i, 6) == true) {
-                controladorCitas.mandarAAsistentePacienteConAsistencia(tablaDeSesiones.getValueAt(i,0).toString());
-            }
-        }
-        controladorCitas.mandarAventanaPacientesConCita();
-    }//GEN-LAST:event_guardarCambiosActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton guardarCambios;
+    private javax.swing.JButton botonGuardarCambios;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTable tablaDeSesiones;
     // End of variables declaration//GEN-END:variables

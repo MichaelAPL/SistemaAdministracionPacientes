@@ -25,10 +25,10 @@
               <Component id="scroll" pref="524" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
-              <Component id="guardarCambios" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="botonGuardarCambios" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="234" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scroll" min="-2" pref="249" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="guardarCambios" min="-2" max="-2" attributes="0"/>
+              <Component id="botonGuardarCambios" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -64,13 +64,10 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="guardarCambios">
+    <Component class="javax.swing.JButton" name="botonGuardarCambios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarCambiosActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
