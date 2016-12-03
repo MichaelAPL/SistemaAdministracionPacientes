@@ -5,7 +5,7 @@
  */
 package tests;
 
-import controladores.ControladorInventario;
+import modelos.AdministradorInventario;
 import vistas.VentanaInventario;
 
 /**
@@ -15,6 +15,9 @@ import vistas.VentanaInventario;
 public class TestInventario {
     
     public static void main(String[] args) {        
-        VentanaInventario ventanaInventario = new VentanaInventario();
+        VentanaInventario ventanaInventario = VentanaInventario.obtenerUnicaVentanaInventario();
+        ventanaInventario.mostrarInventarioInsumos(
+            AdministradorInventario.obtenerUnicoAdministradorInventario().obtenerInventarioInsumos());
+        
     }   
 }

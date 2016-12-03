@@ -7,9 +7,10 @@ package vistas;
 
 import controladores.ControladorInventario;
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import modelos.InventarioProducto;
+import modelos.Insumo;
+import modelos.InventarioMedicamentos;
+import modelos.InventarioUtensilios;
 
 /**
  *
@@ -22,13 +23,15 @@ public class VentanaInventario extends javax.swing.JFrame {
      */
     public static VentanaInventario ventanaInventario;
     private ControladorInventario controladorInventario = new ControladorInventario();
-    private DefaultTableModel modelo;
+    private DefaultTableModel modeloUtensilios;
+    private DefaultTableModel modeloMedicamentos;
     
     private VentanaInventario() {
         initComponents();
         setLocationRelativeTo(null);
         controladorInventario = new ControladorInventario();
-        inicializarTablaInsumos();
+        inicializarTablaUtensilios();
+        inicializarTablaMedicamentos();
         setVisible(true);
     }
     
@@ -51,9 +54,13 @@ public class VentanaInventario extends javax.swing.JFrame {
     private void initComponents() {
 
         tituloVent = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaInsumos = new javax.swing.JTable();
         btnAgregarExistencias = new javax.swing.JButton();
+        etiquetaUtensilios = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaMedicamentos = new javax.swing.JTable();
+        etiquetaMedicamento = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaUtensilios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inventario ");
@@ -61,7 +68,18 @@ public class VentanaInventario extends javax.swing.JFrame {
         tituloVent.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         tituloVent.setText("Inventario");
 
-        tablaInsumos.setModel(new javax.swing.table.DefaultTableModel(
+        btnAgregarExistencias.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        btnAgregarExistencias.setText("Agregar Insumos");
+        btnAgregarExistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarExistenciasActionPerformed(evt);
+            }
+        });
+
+        etiquetaUtensilios.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        etiquetaUtensilios.setText("Utensilios");
+
+        tablaMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,15 +90,23 @@ public class VentanaInventario extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaInsumos);
+        jScrollPane1.setViewportView(tablaMedicamentos);
 
-        btnAgregarExistencias.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        btnAgregarExistencias.setText("Agregar Insumos");
-        btnAgregarExistencias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarExistenciasActionPerformed(evt);
+        etiquetaMedicamento.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        etiquetaMedicamento.setText("Medicamentos");
+
+        tablaUtensilios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
+        ));
+        jScrollPane2.setViewportView(tablaUtensilios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,23 +116,34 @@ public class VentanaInventario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tituloVent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregarExistencias))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etiquetaMedicamento)
+                            .addComponent(etiquetaUtensilios))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(303, 303, 303)
-                .addComponent(btnAgregarExistencias)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tituloVent, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(etiquetaUtensilios)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(etiquetaMedicamento)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregarExistencias)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -115,31 +152,57 @@ public class VentanaInventario extends javax.swing.JFrame {
     private void btnAgregarExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarExistenciasActionPerformed
         VentanaModificacionInventario.obtenerUnicaVentanaMoficacionInventario();
     }//GEN-LAST:event_btnAgregarExistenciasActionPerformed
-
-    public void inicializarTablaInsumos(){        
-        String[] cabecera = {"Nombre", "Cantidad"};
-        Object[][] cuerpo ={};
+    
+    private void inicializarTablaUtensilios(){
+        String[] cabecera = {"Nombre", "Unidades", "Costo Unitario"};;
+        Object[][] cuerpo = {};
         
-        modelo = new DefaultTableModel(cuerpo, cabecera);
+        modeloUtensilios = new DefaultTableModel(cuerpo, cabecera);
         
-        tablaInsumos.setModel(modelo);
+        tablaUtensilios.setModel(modeloUtensilios);        
     }
     
-    public void mostrarInventarioProductos(ArrayList<InventarioProducto> productos){
+    public void inicializarTablaMedicamentos(){
+        String[] cabecera = {"Nombre", "Unidades", "Mls por unidad", "Mls Totales", "Costo Unitario"};
+        Object [][] cuerpo = {};
+        
+        modeloMedicamentos = new DefaultTableModel(cuerpo, cabecera);
+        
+        tablaMedicamentos.setModel(modeloMedicamentos);
+    }
+    
+    public void mostrarInventarioInsumos(ArrayList<Insumo> insumos){
         int LIMPIAR_FILAS = 0;
-        modelo.setRowCount(LIMPIAR_FILAS);
-        for(int i=0; i<productos.size(); i++){
-            Object datosProductos[] = {productos.get(i).getNombre(), 
-                productos.get(i).getExistencias()};
+        modeloMedicamentos.setRowCount(LIMPIAR_FILAS);
+        modeloUtensilios.setRowCount(LIMPIAR_FILAS);
+        
+        for(int i=0; i<insumos.size(); i++){
+            if(insumos.get(i) instanceof InventarioMedicamentos){
+                Object datosMedicamentos[] = {insumos.get(i).getNombre(), 
+                ((InventarioMedicamentos)insumos.get(i)).getUnidadesExistentes(), 
+                ((InventarioMedicamentos)insumos.get(i)).getMililitrosPorUnidad(), 
+                ((InventarioMedicamentos)insumos.get(i)).getCantidadTotalMililitros(), 
+                ((InventarioMedicamentos)insumos.get(i)).getCostoUnitario()};
             
-            modelo.addRow(datosProductos);
+            modeloMedicamentos.addRow(datosMedicamentos);
+            }else{
+                Object datosUtensilios[] = {insumos.get(i).getNombre(), 
+                ((InventarioUtensilios)insumos.get(i)).getExistencias(), 
+                ((InventarioUtensilios)insumos.get(i)).getCostoUnitario()};
+            
+            modeloUtensilios.addRow(datosUtensilios);
+            }
         }
     }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarExistencias;
+    private javax.swing.JLabel etiquetaMedicamento;
+    private javax.swing.JLabel etiquetaUtensilios;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaInsumos;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaMedicamentos;
+    private javax.swing.JTable tablaUtensilios;
     private javax.swing.JLabel tituloVent;
     // End of variables declaration//GEN-END:variables
 }
