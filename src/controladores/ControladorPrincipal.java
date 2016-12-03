@@ -23,7 +23,8 @@ public class ControladorPrincipal {
     }
 
     public void mostrarVentanaBuscar() {
-        VentanaBusqueda.obtenerUnicaVentanaBusqueda();
+        ControladorBusqueda.obtenerControlador();
+        ControladorBusqueda.obtenerControlador().llamarARecepcionista();
     }
 
     public void mostrarVentanaRegistroPacientes() {
