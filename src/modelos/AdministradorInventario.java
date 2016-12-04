@@ -55,5 +55,5 @@ public class AdministradorInventario {
         }
         
         return inventarioInsumo;        
-    }
+    }      
 }
