@@ -32,9 +32,11 @@ public class ControladorPrincipal {
     }
     
     public void mostrarVentanaInventario(){
-        VentanaInventario ventanaInventario = VentanaInventario.obtenerUnicaVentanaInventario();
-
-        ventanaInventario.mostrarInventarioInsumos(
-                AdministradorInventario.obtenerUnicoAdministradorInventario().obtenerInventarioInsumos());
+//        VentanaInventario ventanaInventario = VentanaInventario.obtenerUnicaVentanaInventario();
+//
+//        ventanaInventario.mostrarInventarioInsumos(
+//                AdministradorInventario.obtenerUnicoAdministradorInventario().obtenerInventarioInsumos());
+        ControladorInventario.obtenerControladorInventario();
+        ControladorInventario.obtenerControladorInventario().mandarAVentanaInventarioInsumos();
     }
 }

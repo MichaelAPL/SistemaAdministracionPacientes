@@ -5,11 +5,9 @@
  */
 package vistas;
 
-import controladores.ControladorInventario;
-import java.util.ArrayList;
-import modelos.Insumo;
-import modelos.InventarioMedicamentos;
-import modelos.InventarioUtensilios;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -21,15 +19,10 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
      * Creates new form VentanaModificacionInventario
      */
     public static VentanaModificacionInventario ventanaModificacionInventario;
-    private ControladorInventario controladorInventario = new ControladorInventario();
-    private ArrayList<Insumo> inventarioInsumo;
     
     private VentanaModificacionInventario() {
         initComponents();
         setLocationRelativeTo(null);
-        this.controladorInventario = new ControladorInventario();
-        insertarOpcionesMenu();
-        setVisible(true);
     }
     
     public static VentanaModificacionInventario obtenerUnicaVentanaMoficacionInventario(){
@@ -50,25 +43,20 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        producto = new javax.swing.JComboBox();
+        menuInsumo = new javax.swing.JComboBox();
         existencias = new javax.swing.JSpinner();
         btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificación Inventario");
 
-        producto.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        menuInsumo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
         existencias.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         existencias.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
 
         btnAgregar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +67,7 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAgregar)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(producto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(menuInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(existencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(76, 76, 76))
@@ -89,7 +77,7 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(existencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
@@ -99,63 +87,21 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String nombreProducto = String.valueOf(producto.getItemAt(producto.getSelectedIndex()));
-        int cantidadInsumosNuevos = Integer.parseInt(String.valueOf(existencias.getValue()));
-        int cantidadInsumoTotal = obtenerCantidadInsumoAnterior(producto.getSelectedIndex()) + 
-                cantidadInsumosNuevos;
-        double costoUnitarioInsumo = inventarioInsumo.get(producto.getSelectedIndex()).getCostoUnitario();
-        
-        Insumo insumoModificado;
-        if(esMedicamento(producto.getSelectedIndex())){
-            int mililitrosUnidad = ((InventarioMedicamentos)inventarioInsumo.get(producto.getSelectedIndex())).getMililitrosPorUnidad();
-            insumoModificado = new InventarioMedicamentos(
-                    nombreProducto, cantidadInsumoTotal, mililitrosUnidad, costoUnitarioInsumo);
-        }else{
-            System.out.println("Estoy creando el utensilio");
-            insumoModificado = new InventarioUtensilios(
-                    nombreProducto, cantidadInsumoTotal, costoUnitarioInsumo);
-        }
-        
-        controladorInventario.mandarModificacionesAlInventario(insumoModificado);
-        controladorInventario.actualizarVentanaInventario();
-        limpiarVentana();
-    }//GEN-LAST:event_btnAgregarActionPerformed
-    
-    private boolean esMedicamento(int indiceSeleccionado){
-        if(inventarioInsumo.get(indiceSeleccionado) instanceof InventarioMedicamentos){
-            return true;
-        }
-        return false;
+    public JButton getBtnAgregar() {
+        return btnAgregar;
     }
-    
-    public void limpiarVentana(){
-        producto.setSelectedIndex(0);
-        existencias.setValue(0);
-        ventanaModificacionInventario.dispose();
-        ventanaModificacionInventario = null;
+
+    public JSpinner getExistencias() {
+        return existencias;
     }
+
+    public JComboBox getMenuInsumo() {
+        return menuInsumo;
+    }    
     
-    private int obtenerCantidadInsumoAnterior(int indiceSeleccionado){
-        int insumoAnterior;
-        if(esMedicamento(indiceSeleccionado)){
-            insumoAnterior = ((InventarioMedicamentos)inventarioInsumo.get(indiceSeleccionado)).getUnidadesExistentes();
-        }else{
-            insumoAnterior = ((InventarioUtensilios)inventarioInsumo.get(indiceSeleccionado)).getExistencias();
-        }
-        
-        return insumoAnterior;
-    }
-    
-    public void insertarOpcionesMenu(){
-        inventarioInsumo = controladorInventario.obtenerInventarioInsumo();
-        for(int i=0; i<inventarioInsumo.size(); i++){
-            producto.addItem(inventarioInsumo.get(i).getNombre());
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JSpinner existencias;
-    private javax.swing.JComboBox producto;
+    private javax.swing.JComboBox menuInsumo;
     // End of variables declaration//GEN-END:variables
 }
