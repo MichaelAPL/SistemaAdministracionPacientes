@@ -63,10 +63,13 @@ public class AdministradorInventario {
     public void decrementarInsumo(String nombreInsumo, int cantidadDecrementar) {
         Insumo insumo = buscarInsumo(nombreInsumo);
         if (insumo instanceof InventarioMedicamentos) {
+            
             InventarioMedicamentos in_medicamento = (InventarioMedicamentos) insumo;
+            
             in_medicamento.setCantidadTotalMililitros
                 (in_medicamento.getCantidadTotalMililitros()-cantidadDecrementar);
             actualizarInventario(in_medicamento);
+            
         } else {
             InventarioUtensilios in_utensilio = (InventarioUtensilios) insumo;
             in_utensilio.setExistencias

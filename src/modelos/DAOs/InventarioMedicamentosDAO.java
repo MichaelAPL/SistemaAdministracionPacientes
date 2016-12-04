@@ -46,7 +46,6 @@ public class InventarioMedicamentosDAO {
         }
         
         this.conectorBD.desconectar();
-        //*************************
         
         return inventarioMedicamentos;
     }
