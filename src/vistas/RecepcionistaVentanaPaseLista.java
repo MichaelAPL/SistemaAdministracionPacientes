@@ -23,22 +23,14 @@ public class RecepcionistaVentanaPaseLista {
     private RecepcionistaVentanaPaseLista() {
         ventana = VentanaPaseLista.obtenerUnicaVentana();
         controlador = ControladorVentanaPaseLista.obtenerControlador();
-        tomarAsistencias();
-    }
-    
-    public void recibirPacientesConCita(ArrayList<Paciente> pacientes){
-        mostrarPacientesConCita(pacientes);
-    }
-    
-    public static RecepcionistaVentanaPaseLista obtenerRecepcionista(){
-        if (recepcionista == null) {
-            recepcionista = new RecepcionistaVentanaPaseLista();
-        }
-        return recepcionista;
+        tomarDatos();
     }
 
-    private void mostrarPacientesConCita(ArrayList<Paciente> pacientes) {
-        ventana.setVisible(true);
+    public void recibirPacientesConCita(ArrayList<Paciente> pacientes) {
+        mostrarPacientesConCita(pacientes);
+    }
+
+    public void mostrarPacientesConCita(ArrayList<Paciente> pacientes) {
         int LIMPIAR_FILAS = 0;
         ventana.getModelo().setRowCount(LIMPIAR_FILAS);
         for (Paciente paciente : pacientes) {
@@ -46,27 +38,39 @@ public class RecepcionistaVentanaPaseLista {
                 paciente.getTratamiento().getSiguienteAplicacion().getSuero(),
                 paciente.getTratamiento().getDosisEDTA(),
                 paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(),
-                false};
+                paciente.getTratamiento().getSiguienteAplicacion().isRealizada()};
             ventana.getModelo().addRow(datosPaciente);
         }
     }
 
-    public void tomarAsistencias() {
+    public void tomarDatos() {
         ventana.getBotonGuardarCambios().addActionListener((ActionEvent e) -> {
             for (int i = 0; i < ventana.getTablaDeSesiones().getModel().getRowCount(); i++) {
-                if ((Boolean) ventana.getTablaDeSesiones().getModel().getValueAt(i, 6) == true) {
+                
+                if ((Boolean) ventana.getTablaDeSesiones().getModel().getValueAt(i, 6)) {
+                    
                     mandarAsistencia(ventana.getTablaDeSesiones().getValueAt(i, 0).toString());
+
                 }
-                actualizarTablaPacientes();
+                
             }
+            actualizarTablaPacientes();
         });
     }
-    
-    private void mandarAsistencia(String id){
+
+    public static RecepcionistaVentanaPaseLista obtenerRecepcionista() {
+        if (recepcionista == null) {
+            recepcionista = new RecepcionistaVentanaPaseLista();
+        }
+        recepcionista.ventana.setVisible(true);
+        return recepcionista;
+    }
+
+    public void mandarAsistencia(String id) {
         controlador.mandarAAsistenteIDPacienteConAsistencia(id);
     }
-    
-    private void actualizarTablaPacientes(){
+
+    public void actualizarTablaPacientes() {
         controlador.mandarARecepcionistaPacientesConCita();
     }
 }
