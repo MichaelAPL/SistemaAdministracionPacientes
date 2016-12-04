@@ -62,7 +62,6 @@ public class InventarioUtensiliosDAO {
         declaracion.setString(3, utensilio.getNombre());
         
         declaracion.execute();
-        System.out.println("Guardado");
         
         this.conectorBD.desconectar();
     }

@@ -38,7 +38,6 @@ public class AdministradorInventario {
             if(insumo instanceof InventarioMedicamentos){
                 inventarioMedicamentosDAO.actualizar((InventarioMedicamentos) insumo);
             }else{
-                System.out.println("Guardando en la bd utensilio");
                 inventarioUtensiliosDAO.actualizar((InventarioUtensilios)insumo);
             }
         } catch (SQLException ex) {

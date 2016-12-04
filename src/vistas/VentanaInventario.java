@@ -5,12 +5,9 @@
  */
 package vistas;
 
-import controladores.ControladorInventario;
-import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import modelos.Insumo;
-import modelos.InventarioMedicamentos;
-import modelos.InventarioUtensilios;
 
 /**
  *
@@ -22,17 +19,14 @@ public class VentanaInventario extends javax.swing.JFrame {
      * Creates new form VentanaInventario
      */
     public static VentanaInventario ventanaInventario;
-    private ControladorInventario controladorInventario = new ControladorInventario();
     private DefaultTableModel modeloUtensilios;
     private DefaultTableModel modeloMedicamentos;
     
     private VentanaInventario() {
         initComponents();
         setLocationRelativeTo(null);
-        controladorInventario = new ControladorInventario();
         inicializarTablaUtensilios();
         inicializarTablaMedicamentos();
-        setVisible(true);
     }
     
     public static VentanaInventario obtenerUnicaVentanaInventario(){
@@ -54,27 +48,19 @@ public class VentanaInventario extends javax.swing.JFrame {
     private void initComponents() {
 
         tituloVent = new javax.swing.JLabel();
-        btnAgregarExistencias = new javax.swing.JButton();
         etiquetaUtensilios = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMedicamentos = new javax.swing.JTable();
         etiquetaMedicamento = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaUtensilios = new javax.swing.JTable();
+        btnAgregarExistencias = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inventario ");
 
         tituloVent.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         tituloVent.setText("Inventario");
-
-        btnAgregarExistencias.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        btnAgregarExistencias.setText("Agregar Insumos");
-        btnAgregarExistencias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarExistenciasActionPerformed(evt);
-            }
-        });
 
         etiquetaUtensilios.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         etiquetaUtensilios.setText("Utensilios");
@@ -108,6 +94,9 @@ public class VentanaInventario extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaUtensilios);
 
+        btnAgregarExistencias.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        btnAgregarExistencias.setText("Agregar Insumos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,14 +107,14 @@ public class VentanaInventario extends javax.swing.JFrame {
                     .addComponent(tituloVent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregarExistencias))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(etiquetaMedicamento)
                             .addComponent(etiquetaUtensilios))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregarExistencias)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -137,21 +126,17 @@ public class VentanaInventario extends javax.swing.JFrame {
                 .addComponent(etiquetaUtensilios)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(etiquetaMedicamento)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregarExistencias)
-                .addGap(38, 38, 38))
+                .addGap(40, 40, 40))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAgregarExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarExistenciasActionPerformed
-        VentanaModificacionInventario.obtenerUnicaVentanaMoficacionInventario();
-    }//GEN-LAST:event_btnAgregarExistenciasActionPerformed
     
     private void inicializarTablaUtensilios(){
         String[] cabecera = {"Nombre", "Unidades", "Costo Unitario"};;
@@ -170,29 +155,25 @@ public class VentanaInventario extends javax.swing.JFrame {
         
         tablaMedicamentos.setModel(modeloMedicamentos);
     }
-    
-    public void mostrarInventarioInsumos(ArrayList<Insumo> insumos){
-        int LIMPIAR_FILAS = 0;
-        modeloMedicamentos.setRowCount(LIMPIAR_FILAS);
-        modeloUtensilios.setRowCount(LIMPIAR_FILAS);
-        
-        for(int i=0; i<insumos.size(); i++){
-            if(insumos.get(i) instanceof InventarioMedicamentos){
-                Object datosMedicamentos[] = {insumos.get(i).getNombre(), 
-                ((InventarioMedicamentos)insumos.get(i)).getUnidadesExistentes(), 
-                ((InventarioMedicamentos)insumos.get(i)).getMililitrosPorUnidad(), 
-                ((InventarioMedicamentos)insumos.get(i)).getCantidadTotalMililitros(), 
-                ((InventarioMedicamentos)insumos.get(i)).getCostoUnitario()};
-            
-            modeloMedicamentos.addRow(datosMedicamentos);
-            }else{
-                Object datosUtensilios[] = {insumos.get(i).getNombre(), 
-                ((InventarioUtensilios)insumos.get(i)).getExistencias(), 
-                ((InventarioUtensilios)insumos.get(i)).getCostoUnitario()};
-            
-            modeloUtensilios.addRow(datosUtensilios);
-            }
-        }
+
+    public DefaultTableModel getModeloUtensilios() {
+        return modeloUtensilios;
+    }
+
+    public DefaultTableModel getModeloMedicamentos() {
+        return modeloMedicamentos;
+    }
+
+    public JButton getBtnAgregarExistencias() {
+        return btnAgregarExistencias;
+    }
+
+    public JTable getTablaMedicamentos() {
+        return tablaMedicamentos;
+    }
+
+    public JTable getTablaUtensilios() {
+        return tablaUtensilios;
     }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables

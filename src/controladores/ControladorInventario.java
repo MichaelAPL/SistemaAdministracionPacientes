@@ -8,6 +8,7 @@ package controladores;
 import java.util.ArrayList;
 import modelos.AdministradorInventario;
 import modelos.Insumo;
+import vistas.RecepcionVentanaInventario;
 import vistas.VentanaInventario;
 
 /**
@@ -16,9 +17,21 @@ import vistas.VentanaInventario;
  */
 public class ControladorInventario {
     private final AdministradorInventario administradorInventario;
+    private static ControladorInventario controladorInventario;
     
     public ControladorInventario() {
         administradorInventario = AdministradorInventario.obtenerUnicoAdministradorInventario();                
+    }
+    
+    public static ControladorInventario obtenerControladorInventario(){
+        if(controladorInventario==null){
+            controladorInventario = new ControladorInventario();
+        }
+        return controladorInventario;
+    }
+    
+    public void llamarARecepcionVentanaInventario(){
+        RecepcionVentanaInventario.obtenerRecepcionVentanaInventario();
     }
     
     public void mandarModificacionesAlInventario(Insumo insumo){
@@ -26,8 +39,13 @@ public class ControladorInventario {
     }
     
     public void actualizarVentanaInventario(){
-        VentanaInventario.obtenerUnicaVentanaInventario().mostrarInventarioInsumos(
-                administradorInventario.obtenerInventarioInsumos());
+//        VentanaInventario.obtenerUnicaVentanaInventario().mostrarInventarioInsumos(
+//                administradorInventario.obtenerInventarioInsumos());
+    }
+    
+    public void mandarAVentanaInventarioInsumos(){
+        RecepcionVentanaInventario.obtenerRecepcionVentanaInventario().mostrarInventarioInsumo(
+            administradorInventario.obtenerInventarioInsumos());
     }
     
     public ArrayList<Insumo> obtenerInventarioInsumo(){

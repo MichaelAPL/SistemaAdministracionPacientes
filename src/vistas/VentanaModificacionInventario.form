@@ -29,7 +29,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="btnAgregar" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="producto" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="menuInsumo" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="existencias" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -43,7 +43,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="producto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="menuInsumo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="existencias" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JComboBox" name="producto">
+    <Component class="javax.swing.JComboBox" name="menuInsumo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Consolas" size="14" style="0"/>
@@ -78,9 +78,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Agregar"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
