@@ -7,6 +7,7 @@ package modelos;
 
 import java.sql.SQLException;
 import modelos.DAOs.FacturaDAO;
+import modelos.DAOs.IngresoDAO;
 
 /**
  *
@@ -16,9 +17,11 @@ public class Contador {
 
     private static Contador contador;
     private FacturaDAO facturasDao;
+    private IngresoDAO ingresoDao;
 
     private Contador() {
         facturasDao = new FacturaDAO();
+        ingresoDao = new IngresoDAO();
     }
 
     public static Contador llamarContador() {
@@ -38,8 +41,14 @@ public class Contador {
         }
     }
 
-    public void agregarIngreso(double pagoAplicación) {
-        Fecha fechapago = new Fecha();
+    public void agregarIngreso(double pagoAplicacion) {
+        try {
+            Fecha fechaRegistro = new Fecha();
+            Ingreso ingreso = new Ingreso(fechaRegistro, pagoAplicacion);
+            ingresoDao.crearIngreso(ingreso);
+        } catch (SQLException e) {
+
+        }
 
     }
 
