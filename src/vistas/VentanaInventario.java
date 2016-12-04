@@ -55,6 +55,7 @@ public class VentanaInventario extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaUtensilios = new javax.swing.JTable();
         btnAgregarExistencias = new javax.swing.JButton();
+        btnModificarDatos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inventario ");
@@ -97,6 +98,9 @@ public class VentanaInventario extends javax.swing.JFrame {
         btnAgregarExistencias.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         btnAgregarExistencias.setText("Agregar Insumos");
 
+        btnModificarDatos.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        btnModificarDatos.setText("Modificar Datos de los Insumos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,7 +117,8 @@ public class VentanaInventario extends javax.swing.JFrame {
                             .addComponent(etiquetaUtensilios))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnModificarDatos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregarExistencias)))
                 .addContainerGap())
         );
@@ -131,7 +136,9 @@ public class VentanaInventario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAgregarExistencias)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarExistencias)
+                    .addComponent(btnModificarDatos))
                 .addGap(40, 40, 40))
         );
 
@@ -175,9 +182,15 @@ public class VentanaInventario extends javax.swing.JFrame {
     public JTable getTablaUtensilios() {
         return tablaUtensilios;
     }
+
+    public JButton getBtnModificarDatos() {
+        return btnModificarDatos;
+    }
+    
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarExistencias;
+    private javax.swing.JButton btnModificarDatos;
     private javax.swing.JLabel etiquetaMedicamento;
     private javax.swing.JLabel etiquetaUtensilios;
     private javax.swing.JScrollPane jScrollPane1;
