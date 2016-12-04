@@ -1,8 +1,10 @@
 package vistas;
 
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import modelos.Paciente;
 
 /**
  *
@@ -44,7 +46,7 @@ public class VentanaPaseLista extends javax.swing.JFrame {
 
         tablaDeSesiones.setModel(modelo);
     }
-
+    
     public DefaultTableModel getModelo() {
         return modelo;
     }
@@ -56,10 +58,7 @@ public class VentanaPaseLista extends javax.swing.JFrame {
     public JTable getTablaDeSesiones() {
         return tablaDeSesiones;
     }
-    
-    
-    
-    
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,10 +80,10 @@ public class VentanaPaseLista extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(229, 229, 229)
                 .addComponent(botonGuardarCambios)
-                .addGap(234, 234, 234))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
