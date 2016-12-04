@@ -18,20 +18,20 @@ import modelos.database.ConectorBD;
  *
  * @author Milka
  */
-public class FacturasDAO {
+public class FacturaDAO {
     
     private ConectorBD conectorBD;
     
-    public FacturasDAO() {
+    public FacturaDAO() {
         this.conectorBD = new ConectorBD();
     }
 
     public void crearFactura(Factura factura) throws SQLException {
         conectorBD.conectar();
 
-        String campos = "FolioFactura, FechaRegistro, Importe, Descripcion ";
+        String campos = "FolioFactura, FechaRegistro, Importe, Descripcion";
 
-        String consulta = "INSERT INTO Paciente (" + campos + ")" + " VALUES (?,?,?,?)";
+        String consulta = "INSERT INTO Facturas (" + campos + ")" + " VALUES (?,?,?,?)";
 
         PreparedStatement declaracion = conectorBD.consulta(consulta);
 

@@ -5,6 +5,9 @@
  */
 package modelos;
 
+import java.sql.SQLException;
+import modelos.DAOs.FacturaDAO;
+
 /**
  *
  * @author Milka
@@ -12,9 +15,10 @@ package modelos;
 public class Contador {
 
     private static Contador contador;
+    private FacturaDAO facturasDao;
 
     private Contador() {
-
+        facturasDao = new FacturaDAO();
     }
 
     public static Contador llamarContador() {
@@ -24,14 +28,19 @@ public class Contador {
         return contador;
     }
 
-    public void agregarImporte(double pagoInsumos) {
-        Fecha fechaPago = new Fecha();
-        
+    public void agregarImporte(double pagoInsumos, String descripcion) {
+        try {
+            Fecha fechaRegistro = new Fecha();
+            Factura factura = new Factura(fechaRegistro, pagoInsumos, descripcion);
+            facturasDao.crearFactura(factura);
+        } catch (SQLException e) {
+
+        }
     }
 
     public void agregarIngreso(double pagoAplicación) {
         Fecha fechapago = new Fecha();
-        
+
     }
 
     public double calcularGanancia() {
