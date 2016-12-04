@@ -36,7 +36,7 @@ public class RecepcionistaVentanaPaseLista {
         for (Paciente paciente : pacientes) {
             Object datosPaciente[] = {paciente.getId(), paciente.getNombres(), paciente.getApellidos(),
                 paciente.getTratamiento().getSiguienteAplicacion().getSuero(),
-                paciente.getTratamiento().getDosisEDTA(),
+                paciente.getTratamiento().getDosis_EDTA_ml(),
                 paciente.getTratamiento().getSiguienteAplicacion().getNumAplicacion(),
                 paciente.getTratamiento().getSiguienteAplicacion().isRealizada()};
             ventana.getModelo().addRow(datosPaciente);

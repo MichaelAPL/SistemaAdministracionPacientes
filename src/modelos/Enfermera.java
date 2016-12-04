@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelos;
 
 import modelos.enums.NombresInsumos;
@@ -12,20 +7,20 @@ import modelos.enums.Suero;
  *
  * @author Milka
  */
-public class Boticario {
+public class Enfermera {
 
-    private static Boticario farmaceutico;
+    private static Enfermera enfermera;
     private AdministradorInventario administrador;
 
-    private Boticario() {
+    private Enfermera() {
         administrador = AdministradorInventario.obtenerUnicoAdministradorInventario();
     }
 
-    public static Boticario llamarFarmaceutico() {
-        if (farmaceutico == null) {
-            farmaceutico = new Boticario();
+    public static Enfermera llamarEnfermera() {
+        if (enfermera == null) {
+            enfermera = new Enfermera();
         }
-        return farmaceutico;
+        return enfermera;
     }
     
     public void atenderPaciente(Suero suero, int dosisEDTA){

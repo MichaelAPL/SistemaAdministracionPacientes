@@ -65,6 +65,8 @@ public class AsistenteDoctor {
         Paciente paciente = buscarPacientePorId(pacienteID);
         paciente.getTratamiento().getSiguienteAplicacion().setRealizada(true);
         paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Fecha());
+        
+        pasarAlPacienteAlaEnfermera(paciente);
 
         crearNuevaCitaAlPaciente(paciente);
     }
@@ -117,5 +119,9 @@ public class AsistenteDoctor {
     private boolean pacientePrimeraCitaAsistida(Paciente paciente) {
         return (paciente.getTratamiento().getUltimaAplicacion() != null);
     }
-
+    
+    private void pasarAlPacienteAlaEnfermera(Paciente paciente){
+        Enfermera.llamarEnfermera().atenderPaciente(paciente.getTratamiento().
+                getSiguienteAplicacion().getSuero(), paciente.getTratamiento().getDosis_EDTA_ml());
+    }
 }
