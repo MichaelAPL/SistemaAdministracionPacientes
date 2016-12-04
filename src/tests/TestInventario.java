@@ -5,7 +5,9 @@
  */
 package tests;
 
+import javax.swing.JOptionPane;
 import modelos.AdministradorInventario;
+import modelos.MensajesDeDialogo;
 import vistas.VentanaInventario;
 
 /**
@@ -15,9 +17,6 @@ import vistas.VentanaInventario;
 public class TestInventario {
     
     public static void main(String[] args) {        
-        VentanaInventario ventanaInventario = VentanaInventario.obtenerUnicaVentanaInventario();
-        ventanaInventario.mostrarInventarioInsumos(
-            AdministradorInventario.obtenerUnicoAdministradorInventario().obtenerInventarioInsumos());
-        
+        MensajesDeDialogo.errorConLaBD();
     }   
 }
