@@ -20,6 +20,16 @@ public class Fecha{
     private final int año;
     private final Date fecha;
     
+    public Fecha(int dia, int mes, int año){
+        fecha = new Date();
+        fecha.setDate(dia);
+        fecha.setMonth(mes);
+        fecha.setYear(año);
+        this.dia = fecha.getDate();
+        this.mes = fecha.getMonth();
+        this.año = fecha.getYear();
+    }
+    
     public Fecha(Date date){
         dia = date.getDate();
         mes = date.getMonth();

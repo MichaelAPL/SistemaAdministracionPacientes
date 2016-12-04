@@ -42,6 +42,7 @@ public class AdministradorInventario {
             }
         } catch (SQLException ex) {
             Logger.getLogger(AdministradorInventario.class.getName()).log(Level.SEVERE, null, ex);
+            MensajesDeDialogo.errorConLaBD();
         }
     }
     
@@ -51,9 +52,10 @@ public class AdministradorInventario {
             inventarioInsumo = inventarioMedicamentosDAO.recuperarTodoInventarioMedicamentos();
             inventarioInsumo.addAll(inventarioUtensiliosDAO.recuperarTodoInventarioUtensilios());
         } catch (SQLException ex) {
+            MensajesDeDialogo.errorConLaBD();
             Logger.getLogger(AdministradorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return inventarioInsumo;        
-    }
+    }      
 }

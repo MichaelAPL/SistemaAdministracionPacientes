@@ -27,6 +27,7 @@ public class AsistenteDoctor {
             pacienteDAO.actualizar(paciente);
         } catch (SQLException ex) {
             Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+            MensajesDeDialogo.errorConLaBD();
         }
     }
 
@@ -36,6 +37,7 @@ public class AsistenteDoctor {
             pacienteEncontrado = pacienteDAO.getPacientePorID(Integer.valueOf(id));
         } catch (SQLException ex) {
             ex.printStackTrace();
+            MensajesDeDialogo.errorConLaBD();
         }
         return pacienteEncontrado;
     }
@@ -46,6 +48,7 @@ public class AsistenteDoctor {
             pacientesEncontrados = pacienteDAO.getPacientesPorNombre(nombrePaciente);
         } catch (SQLException ex) {
             ex.printStackTrace();
+            MensajesDeDialogo.errorConLaBD();
         }
         return pacientesEncontrados;
     }
@@ -53,13 +56,11 @@ public class AsistenteDoctor {
     public ArrayList<Paciente> obtenerListaDePacientesConCita() {
         ArrayList<Paciente> listaPacientesConCita = new ArrayList();
         ArrayList<Paciente> pacientes = obtenerPacientesEnRegistro();
-        System.out.println(pacientes.size());
         for (Paciente paciente : pacientes) {
             if (!pacienteAsistidoHoy(paciente) && pacienteConTratamientoActivo(paciente)) {
                 listaPacientesConCita.add(paciente);
             }
         }
-        System.out.println(listaPacientesConCita.size());
         return listaPacientesConCita;
     }
 
@@ -76,6 +77,7 @@ public class AsistenteDoctor {
             pacienteDAO.crearPaciente(paciente);
         } catch (SQLException ex) {
             System.out.println("Error al conectar a la Base de Datos");
+            MensajesDeDialogo.errorConLaBD();
         }
     }
 
@@ -89,6 +91,7 @@ public class AsistenteDoctor {
             pacienteDAO.actualizarAplicaciones(paciente);
         } catch (SQLException ex) {
             Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+            MensajesDeDialogo.errorConLaBD();
         }
     }
 
@@ -98,6 +101,7 @@ public class AsistenteDoctor {
             pacientes = pacienteDAO.recuperarTodos();
         } catch (SQLException ex) {
             Logger.getLogger(AsistenteDoctor.class.getName()).log(Level.SEVERE, null, ex);
+            MensajesDeDialogo.errorConLaBD();
         }
         return pacientes;
     }
