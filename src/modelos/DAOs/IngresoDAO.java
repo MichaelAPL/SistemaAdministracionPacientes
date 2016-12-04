@@ -71,7 +71,7 @@ public class IngresoDAO {
         return ingresos;
     }
     
-        public ArrayList<Ingreso> recuperarFacturas(int mes, int año) throws SQLException {
+        public ArrayList<Ingreso> recuperarIngresos() throws SQLException {
         this.conectorBD.conectar();
 
         String consulta = "SELECT * FROM Facturas";
