@@ -62,12 +62,12 @@ public class AplicacionDAO {
         conectorBD.desconectar();
     }
 
-    public Aplicacion getUltimaAplicacion(int tratamiento_ID, int siguienteAplicacion) throws SQLException {
+    public Aplicacion getUltimaAplicacion(int tratamiento_ID, int numUltimaAplicacion) throws SQLException {
         conectorBD.conectar();
 
         String consulta = "select * from Aplicacion WHERE Num_Aplicacion = ?";
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, siguienteAplicacion);
+        declaracion.setInt(1, numUltimaAplicacion);
 
         ResultSet resultado = declaracion.executeQuery();
 
@@ -83,21 +83,22 @@ public class AplicacionDAO {
 
     public Aplicacion getSiguienteAplicacion(int tratamiento_ID) throws SQLException {
         conectorBD.conectar();
-
-        String consulta = "select * from Aplicacion where Tratamiento_ID = ? and Realizada = '0'";
+        String consulta = "select * from Aplicacion where Tratamiento_ID = ? and Realizada = 0";
 
         PreparedStatement declaracion = conectorBD.consulta(consulta);
         declaracion.setInt(1, tratamiento_ID);
 
         ResultSet resultado = declaracion.executeQuery();
-
+        
+        
         Aplicacion sigAplicacion = null;
-
         int numAplicacion = resultado.getInt("Num_Aplicacion");
         sigAplicacion = new Aplicacion(numAplicacion);
         sigAplicacion.setRealizada(resultado.getBoolean("Realizada"));
         sigAplicacion.setTratamiento_id(resultado.getInt("Tratamiento_ID"));
         sigAplicacion.setFecha(new Fecha(resultado.getDate("Fecha")));
+        
+        System.out.println(tratamiento_ID);
 
         conectorBD.desconectar();
         return sigAplicacion;

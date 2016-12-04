@@ -38,7 +38,7 @@ public class Contador {
             Factura factura = new Factura(fechaRegistro, pagoInsumos, descripcion);
             facturaDao.crearFactura(factura);
         } catch (SQLException e) {
-
+            MensajesDeDialogo.errorConLaBD();
         }
     }
 
@@ -48,7 +48,7 @@ public class Contador {
             Ingreso ingreso = new Ingreso(fechaRegistro, pagoAplicacion);
             ingresoDao.crearIngreso(ingreso);
         } catch (SQLException e) {
-
+            MensajesDeDialogo.errorConLaBD();
         }
 
     }
@@ -71,7 +71,7 @@ public class Contador {
                 ingreso += ingresosDelMes.get(i).getMonto();
             }
         } catch (SQLException e) {
-
+            MensajesDeDialogo.errorConLaBD();
         }
         return ingreso;
     }
@@ -84,7 +84,7 @@ public class Contador {
                 importe += facturasDelMes.get(i).getMonto();
             }
         } catch (SQLException e) {
-
+            MensajesDeDialogo.errorConLaBD();
         }
         return importe;
     }

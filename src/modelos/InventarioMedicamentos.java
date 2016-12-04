@@ -48,8 +48,16 @@ public class InventarioMedicamentos extends Insumo {
         return cantidadTotalMililitros;
     }
     
+    public void setCantidadTotalMililitros(int cantidadTotalMililitros){
+        this.cantidadTotalMililitros = cantidadTotalMililitros;
+    }
+    
     private int calcularMililitrosTotal(){
         return getUnidadesExistentes()*getMililitrosPorUnidad();
     }
+    
+    
+    
+    
     
 }

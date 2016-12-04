@@ -16,9 +16,19 @@ public class MensajesDeDialogo {
 
     public MensajesDeDialogo() {
     }
+
+    public static void errorConLaBD() {
+        JOptionPane.showMessageDialog(null, "No ha sido posible conectarse a "
+                + "la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void mostrarErrorPreparacionSuero() {
+        JOptionPane.showMessageDialog(null, "Hubo un error al disminuir los insumos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
     
-    public static void errorConLaBD(){
-        JOptionPane.showMessageDialog(VentanaInventario.obtenerUnicaVentanaInventario(), 
-                    "No ha sido posible conectarse a la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+    public static void mostrarErrorNoSeEncuentraInsumo() {
+        JOptionPane.showMessageDialog(null, "Hubo un error al disminuir los insumos",
+                "Error", JOptionPane.ERROR_MESSAGE);
     }
 }

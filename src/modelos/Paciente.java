@@ -27,13 +27,13 @@ public class Paciente extends Persona {
 
     public Paciente(Persona persona, ArrayList<String> medicamentosExternos,
             ArrayList<String> enfermedadesPrevias, Tratamiento tratamiento,
-            Date fechaInscripcion, int id) {
+            Fecha fechaInscripcion, int id) {
         super(persona.getNombres(), persona.getApellidos(),
                 persona.getDireccion(), persona.getLocalidad(), persona.getTelefono(), persona.getEdad());
         this.medicamentosExternos = medicamentosExternos;
         this.enfermedadesPrevias = enfermedadesPrevias;
         this.tratamiento = tratamiento;
-        this.fechaDeInscripcion = new Fecha(fechaInscripcion);
+        this.fechaDeInscripcion = fechaInscripcion;
         this.id = id;
     }
 

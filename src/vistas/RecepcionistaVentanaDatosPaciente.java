@@ -92,7 +92,7 @@ public class RecepcionistaVentanaDatosPaciente {
         ventana.getLocalidadPaciente().setText(paciente.getLocalidad());
         ventana.getEdadPaciente().setText(String.valueOf(paciente.getEdad()));
         ventana.getDireccionPaciente().setText(paciente.getDireccion());
-        ventana.getDosisEDTApaciente().setText(String.valueOf(paciente.getTratamiento().getDosisEDTA()));
+        ventana.getDosisEDTApaciente().setText(String.valueOf(paciente.getTratamiento().getDosis_EDTA_ml()));
         ventana.getTelefonoPaciente().setText(paciente.getTelefono());
 
         mostrarEnfermedades(paciente.getEnfermedadesPrevias());

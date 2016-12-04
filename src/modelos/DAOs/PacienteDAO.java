@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import modelos.Fecha;
 import modelos.Paciente;
 import modelos.Persona;
 import modelos.Tratamiento;
@@ -63,7 +64,7 @@ public class PacienteDAO {
         if (generatedKeys.next()) {
             int id = generatedKeys.getInt(1);
             paciente.setId(id);
-            paciente.getTratamiento().setPaciente_id(id);
+            paciente.getTratamiento().setId(id);
         }
 
         conectorBD.desconectar();
@@ -81,28 +82,27 @@ public class PacienteDAO {
 
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
 
-        //**********************
         ArrayList<Paciente> pacientes = new ArrayList();
+        
 
+        
         while (resultado.next()) {
+            
             Persona persona = new Persona(resultado.getString("Nombre"), resultado.getString("Apellido"),
                     resultado.getString("Direccion"), resultado.getString("Localidad"), resultado.getString("Telefono"),
                     resultado.getInt("Edad"));
-
             int paciente_id = resultado.getInt("ID_Paciente");
             Date fechaInscripcion = resultado.getDate("FechaInscripcion");
-
             Paciente paciente = new Paciente(persona,
                     medicamentosExternosDAO.getMedicamentosExternos(paciente_id),
                     enfermedadesPreviasDAO.getEnfermedadesPrevias(paciente_id),
                     tratamientoDAO.getTratamiento(paciente_id),
-                    fechaInscripcion, paciente_id);
-            
+                    new Fecha(fechaInscripcion), paciente_id);
             pacientes.add(paciente);
         }
 
         this.conectorBD.desconectar();
-        //*********************
+        
         return pacientes;
     }
     
@@ -129,7 +129,7 @@ public class PacienteDAO {
         }
         
         Paciente paciente = new Paciente(persona, medicamentosExternos, 
-                enfermedadesPrevias, tratamiento, fechaInscripcion, id);
+                enfermedadesPrevias, tratamiento, new Fecha(fechaInscripcion), id);
         
         conectorBD.desconectar();
         
@@ -157,7 +157,7 @@ public class PacienteDAO {
                     medicamentosExternosDAO.getMedicamentosExternos(paciente_id),
                     enfermedadesPreviasDAO.getEnfermedadesPrevias(paciente_id),
                     tratamientoDAO.getTratamiento(paciente_id),
-                    fechaInscripcion, paciente_id);
+                    new Fecha(fechaInscripcion), paciente_id);
             
             pacientes.add(paciente);
         }
