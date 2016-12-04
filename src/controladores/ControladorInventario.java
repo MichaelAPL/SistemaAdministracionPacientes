@@ -5,14 +5,9 @@
  */
 package controladores;
 
-import java.sql.SQLException;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelos.AdministradorInventario;
-import modelos.DAOs.InventarioProductoDAO;
-import modelos.InventarioProducto;
+import modelos.Insumo;
 import vistas.VentanaInventario;
 
 /**
@@ -26,16 +21,16 @@ public class ControladorInventario {
         administradorInventario = AdministradorInventario.obtenerUnicoAdministradorInventario();                
     }
     
-    public void mandarModificacionesAlInventario(InventarioProducto producto){
-        administradorInventario.actualizarInventario(producto);
+    public void mandarModificacionesAlInventario(Insumo insumo){
+        administradorInventario.actualizarInventario(insumo);
     }
     
     public void actualizarVentanaInventario(){
-        VentanaInventario.obtenerUnicaVentanaInventario().mostrarInventarioProductos(
-                administradorInventario.obtenerInventarioProductos());
+        VentanaInventario.obtenerUnicaVentanaInventario().mostrarInventarioInsumos(
+                administradorInventario.obtenerInventarioInsumos());
     }
     
-    public ArrayList<InventarioProducto> obtenerInventarioProductos(){
-        return administradorInventario.obtenerInventarioProductos();
+    public ArrayList<Insumo> obtenerInventarioInsumo(){
+        return administradorInventario.obtenerInventarioInsumos();
     }
 }

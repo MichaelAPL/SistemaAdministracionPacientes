@@ -46,12 +46,12 @@
             <Property name="text" type="java.lang.String" value="Inventario"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="irAlInventario">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ir al inventario"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irAlInventarioActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

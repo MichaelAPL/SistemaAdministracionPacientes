@@ -9,19 +9,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelos.DAOs.InventarioProductoDAO;
-import vistas.VentanaInventario;
+import modelos.DAOs.InventarioMedicamentosDAO;
+import modelos.DAOs.InventarioUtensiliosDAO;
 
 /**
  *
  * @author Angel Basto Gonzalez
  */
 public class AdministradorInventario {
-    private InventarioProductoDAO inventarioDAO;
+    private InventarioUtensiliosDAO inventarioUtensiliosDAO;
+    private InventarioMedicamentosDAO inventarioMedicamentosDAO;
     private static AdministradorInventario administradorInventario;
     
     private AdministradorInventario(){
-        inventarioDAO = new InventarioProductoDAO();
+        inventarioUtensiliosDAO = new InventarioUtensiliosDAO();
+        inventarioMedicamentosDAO = new InventarioMedicamentosDAO();
     }
     
     public static AdministradorInventario obtenerUnicoAdministradorInventario(){
@@ -31,21 +33,28 @@ public class AdministradorInventario {
         return administradorInventario;
     }
     
-    public void actualizarInventario(InventarioProducto producto){
+    public void actualizarInventario(Insumo insumo){        
         try {
-            inventarioDAO.actualizar(producto);
+            if(insumo instanceof InventarioMedicamentos){
+                inventarioMedicamentosDAO.actualizar((InventarioMedicamentos) insumo);
+            }else{
+                System.out.println("Guardando en la bd utensilio");
+                inventarioUtensiliosDAO.actualizar((InventarioUtensilios)insumo);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AdministradorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public ArrayList<InventarioProducto> obtenerInventarioProductos(){
-        ArrayList<InventarioProducto> inventarioProducto = null;
+    public ArrayList<Insumo> obtenerInventarioInsumos(){
+        ArrayList<Insumo> inventarioInsumo = null;
         try {
-            inventarioProducto = inventarioDAO.recuperarTodos();
+            inventarioInsumo = inventarioMedicamentosDAO.recuperarTodoInventarioMedicamentos();
+            inventarioInsumo.addAll(inventarioUtensiliosDAO.recuperarTodoInventarioUtensilios());
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(AdministradorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return inventarioProducto;
+        
+        return inventarioInsumo;        
     }
 }

@@ -6,10 +6,10 @@
 package vistas;
 
 import controladores.ControladorInventario;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JComboBox;
-import modelos.InventarioProducto;
+import modelos.Insumo;
+import modelos.InventarioMedicamentos;
+import modelos.InventarioUtensilios;
 
 /**
  *
@@ -22,7 +22,7 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
      */
     public static VentanaModificacionInventario ventanaModificacionInventario;
     private ControladorInventario controladorInventario = new ControladorInventario();
-    private ArrayList<InventarioProducto> inventarioProducto;
+    private ArrayList<Insumo> inventarioInsumo;
     
     private VentanaModificacionInventario() {
         initComponents();
@@ -100,18 +100,34 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String nombreProducto =String.valueOf(producto.getItemAt(producto.getSelectedIndex()));        
-        int insumo = Integer.parseInt(String.valueOf(existencias.getValue())) + 
-                obtenerCantidadInsumoAnterior(producto.getSelectedIndex());
-        int productoID = obtenerProductoID(producto.getSelectedIndex());
+        String nombreProducto = String.valueOf(producto.getItemAt(producto.getSelectedIndex()));
+        int cantidadInsumosNuevos = Integer.parseInt(String.valueOf(existencias.getValue()));
+        int cantidadInsumoTotal = obtenerCantidadInsumoAnterior(producto.getSelectedIndex()) + 
+                cantidadInsumosNuevos;
+        double costoUnitarioInsumo = inventarioInsumo.get(producto.getSelectedIndex()).getCostoUnitario();
         
-        InventarioProducto productoInventario = new InventarioProducto(productoID,nombreProducto, insumo);
+        Insumo insumoModificado;
+        if(esMedicamento(producto.getSelectedIndex())){
+            int mililitrosUnidad = ((InventarioMedicamentos)inventarioInsumo.get(producto.getSelectedIndex())).getMililitrosPorUnidad();
+            insumoModificado = new InventarioMedicamentos(
+                    nombreProducto, cantidadInsumoTotal, mililitrosUnidad, costoUnitarioInsumo);
+        }else{
+            System.out.println("Estoy creando el utensilio");
+            insumoModificado = new InventarioUtensilios(
+                    nombreProducto, cantidadInsumoTotal, costoUnitarioInsumo);
+        }
         
-        controladorInventario.mandarModificacionesAlInventario(productoInventario);
+        controladorInventario.mandarModificacionesAlInventario(insumoModificado);
         controladorInventario.actualizarVentanaInventario();
-        
         limpiarVentana();
     }//GEN-LAST:event_btnAgregarActionPerformed
+    
+    private boolean esMedicamento(int indiceSeleccionado){
+        if(inventarioInsumo.get(indiceSeleccionado) instanceof InventarioMedicamentos){
+            return true;
+        }
+        return false;
+    }
     
     public void limpiarVentana(){
         producto.setSelectedIndex(0);
@@ -120,19 +136,22 @@ public class VentanaModificacionInventario extends javax.swing.JFrame {
         ventanaModificacionInventario = null;
     }
     
-    private int obtenerProductoID(int indiceSelecionado){
-        return indiceSelecionado+1;
-    }
-    
     private int obtenerCantidadInsumoAnterior(int indiceSeleccionado){
-        return inventarioProducto.get(indiceSeleccionado).getExistencias();
+        int insumoAnterior;
+        if(esMedicamento(indiceSeleccionado)){
+            insumoAnterior = ((InventarioMedicamentos)inventarioInsumo.get(indiceSeleccionado)).getUnidadesExistentes();
+        }else{
+            insumoAnterior = ((InventarioUtensilios)inventarioInsumo.get(indiceSeleccionado)).getExistencias();
+        }
+        
+        return insumoAnterior;
     }
     
     public void insertarOpcionesMenu(){
-        inventarioProducto = controladorInventario.obtenerInventarioProductos();
-        for(int i=0; i<inventarioProducto.size(); i++){
-            producto.addItem(inventarioProducto.get(i).getNombre());
-        }  
+        inventarioInsumo = controladorInventario.obtenerInventarioInsumo();
+        for(int i=0; i<inventarioInsumo.size(); i++){
+            producto.addItem(inventarioInsumo.get(i).getNombre());
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

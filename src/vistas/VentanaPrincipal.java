@@ -32,7 +32,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         paseLista = new javax.swing.JMenuItem();
         buscarPaciente = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        irAlInventario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,13 +66,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Inventario");
 
-        jMenuItem1.setText("Ir al inventario");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        irAlInventario.setText("Ir al inventario");
+        irAlInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                irAlInventarioActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu2.add(irAlInventario);
 
         jMenuBar1.add(jMenu2);
 
@@ -107,10 +107,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlador.mostrarVentanaRegistroPacientes();
     }//GEN-LAST:event_registrarPacienteActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void irAlInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irAlInventarioActionPerformed
         System.gc();
         controlador.mostrarVentanaInventario();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_irAlInventarioActionPerformed
 
     
     /**
@@ -150,10 +150,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem buscarPaciente;
+    private javax.swing.JMenuItem irAlInventario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JMenuItem paseLista;
     private javax.swing.JMenuItem registrarPaciente;
