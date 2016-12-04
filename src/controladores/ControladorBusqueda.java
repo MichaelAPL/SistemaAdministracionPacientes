@@ -7,8 +7,6 @@ package controladores;
 
 import modelos.AsistenteDoctor;
 import vistas.RecepcionistaVentanaBusqueda;
-import vistas.VentanaBusqueda;
-import vistas.VentanaDatosPaciente;
 
 /**
  *
@@ -35,15 +33,13 @@ public class ControladorBusqueda {
         RecepcionistaVentanaBusqueda.obtenerRecepcionista();
     }
     
-    public void mandarAVentanaBusquedaPacientesEncontrados(String nombresPaciente) {
+    public void mandarARecepcionistaPacientesEncontrados(String nombresPaciente) {
         RecepcionistaVentanaBusqueda.obtenerRecepcionista().
             mostrarPacientes(asistente.buscarPacientesPorNombre(nombresPaciente));
     }
 
-    public void obtencionDatosPaciente(String idPaciente) {
-        VentanaDatosPaciente.obtenerUnicaVentanaDatosPaciente().
-            mostrarDatosPaciente(asistente.buscarPacientePorId(idPaciente));
-
+    public void recibirIDPaciente(String idPaciente) {
+        ControladorDatosPaciente.obtenerControlador().mandarARecepcionistaPaciente(idPaciente);
     }
 
 }

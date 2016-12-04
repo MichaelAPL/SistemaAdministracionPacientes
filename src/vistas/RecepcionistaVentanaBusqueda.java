@@ -40,14 +40,14 @@ public class RecepcionistaVentanaBusqueda {
             if (ventana.getListaPacientes().getSelectedValue() != null) {
                 String[] texto = String.valueOf(ventana.getListaPacientes().getSelectedValue()).split(":");
                 String idPacienteSeleccionado = texto[0];
-                controlador.obtencionDatosPaciente(idPacienteSeleccionado);
+                controlador.recibirIDPaciente(idPacienteSeleccionado);
             }
             ventana.dispose();
         });
 
         ventana.getBotonBuscar().addActionListener((ActionEvent e) -> {
             if (ventana.getNombresPaciente().getText() != null) {
-                controlador.mandarAVentanaBusquedaPacientesEncontrados(ventana.getNombresPaciente().getText());
+                controlador.mandarARecepcionistaPacientesEncontrados(ventana.getNombresPaciente().getText());
             }
         });
     }
