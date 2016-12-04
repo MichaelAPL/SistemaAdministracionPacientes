@@ -73,7 +73,7 @@ public class FacturaDAO {
         return facturas;
     }
     
-        public ArrayList<Factura> recuperarFacturas(int mes, int año) throws SQLException {
+        public ArrayList<Factura> recuperarFacturas() throws SQLException {
         this.conectorBD.conectar();
 
         String consulta = "SELECT * FROM Facturas";
