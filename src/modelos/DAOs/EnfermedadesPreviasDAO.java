@@ -43,7 +43,6 @@ public class EnfermedadesPreviasDAO {
     
     public ArrayList<String> getEnfermedadesPrevias(int paciente_id) throws SQLException{
         conectorBD.conectar();
-        
         ArrayList<String> enfermedadesPrevias = new ArrayList();
         
         String consulta = "select * from EnfermedadesPrevias where Paciente_ID = ?";

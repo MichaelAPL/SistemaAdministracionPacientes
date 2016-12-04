@@ -44,7 +44,6 @@ public class MedicamentosExternosDAO {
     
     public ArrayList<String> getMedicamentosExternos(int paciente_id) throws SQLException{
         conectorBD.conectar();
-        
         ArrayList<String> medicamentosExternos = new ArrayList();
         
         String consulta = "select * from MedicamentosExternos where Paciente_ID = ?";
