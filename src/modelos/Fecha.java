@@ -23,16 +23,16 @@ public class Fecha{
     public Fecha(int dia, int mes, int año){
         fecha = new Date();
         fecha.setDate(dia);
-        fecha.setMonth(mes);
-        fecha.setYear(año+1900);
+        fecha.setMonth(mes-1);
+        fecha.setYear(año-1900);
         this.dia = fecha.getDate();
-        this.mes = fecha.getMonth();
+        this.mes = fecha.getMonth()+1;
         this.año = configurarAño(fecha.getYear());
     }
     
     public Fecha(Date date){
         dia = date.getDate();
-        mes = date.getMonth();
+        mes = date.getMonth()+1;
         año = configurarAño(date.getYear());
         fecha = date;
     }
@@ -40,7 +40,7 @@ public class Fecha{
     public Fecha(){
         fecha = new Date();
         dia = fecha.getDate();
-        mes = fecha.getMonth();
+        mes = fecha.getMonth()+1;
         año = configurarAño(fecha.getYear());
     }
     

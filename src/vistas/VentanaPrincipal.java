@@ -36,7 +36,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Ventana");
+        jMenu1.setText("Actividades");
 
         registrarPaciente.setText("Registrar paciente");
         registrarPaciente.addActionListener(new java.awt.event.ActionListener() {

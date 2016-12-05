@@ -12,7 +12,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ventana"/>
+            <Property name="text" type="java.lang.String" value="Actividades"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="registrarPaciente">
