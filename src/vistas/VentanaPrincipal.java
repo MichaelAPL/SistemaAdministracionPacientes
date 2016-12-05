@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import com.itextpdf.text.Image;
 import controladores.ControladorPrincipal;
 
 /**
