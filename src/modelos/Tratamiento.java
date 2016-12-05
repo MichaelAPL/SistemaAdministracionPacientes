@@ -10,16 +10,16 @@ package modelos;
  * @author miguelangel
  */
 public class Tratamiento {
-    
-    private Aplicacion ultimaAplicacion;
+
     private Aplicacion siguienteAplicacion;
-    private int dosis_EDTA_ml;
+    private Aplicacion ultimaAplicacion;
     private boolean activo;
+    private int dosisEDTA_ml;
     private int id;
-    private int id_Paciente;
+    private int idPaciente;
 
     public Tratamiento(int dosisEDTA) {
-        this.dosis_EDTA_ml = dosisEDTA;
+        this.dosisEDTA_ml = dosisEDTA;
         this.ultimaAplicacion = null;
         this.siguienteAplicacion = new Aplicacion(1);
         this.activo = true;
@@ -27,10 +27,10 @@ public class Tratamiento {
 
     public void agregarAplicacion() {
         int numSiguienteAplicacion = siguienteAplicacion.getNumAplicacion() + 1;
-        
+
         ultimaAplicacion = siguienteAplicacion;
         siguienteAplicacion = new Aplicacion(numSiguienteAplicacion);
-        siguienteAplicacion.setTratamiento_id(id);
+        siguienteAplicacion.setTratamientoID(id);
     }
 
     public int getNumeroAplicacionesRealizadas() {
@@ -43,36 +43,36 @@ public class Tratamiento {
         }
     }
 
-    public Aplicacion getUltimaAplicacion() {
-        return ultimaAplicacion;
-    }
-
     public Aplicacion getSiguienteAplicacion() {
         return siguienteAplicacion;
-    }
-
-    public void setUltimaAplicacion(Aplicacion ultimaAplicacion) {
-        this.ultimaAplicacion = ultimaAplicacion;
     }
 
     public void setSiguienteAplicacion(Aplicacion siguienteAplicacion) {
         this.siguienteAplicacion = siguienteAplicacion;
     }
 
-    public int getDosis_EDTA_ml() {
-        return dosis_EDTA_ml;
+    public Aplicacion getUltimaAplicacion() {
+        return ultimaAplicacion;
     }
 
-    public void setDosis_EDTA_ml(int dosis){
-        this.dosis_EDTA_ml = dosis;
+    public void setUltimaAplicacion(Aplicacion ultimaAplicacion) {
+        this.ultimaAplicacion = ultimaAplicacion;
     }
-    
+
     public boolean isActivo() {
         return activo;
     }
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public int getDosisEDTA_ml() {
+        return dosisEDTA_ml;
+    }
+
+    public void setDosisEDTA_ml(int dosis) {
+        this.dosisEDTA_ml = dosis;
     }
 
     public int getId() {
@@ -83,12 +83,12 @@ public class Tratamiento {
         this.id = id;
     }
 
-    public int getId_Paciente() {
-        return id_Paciente;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setId_Paciente(int id_Paciente) {
-        this.id_Paciente = id_Paciente;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
-    
+
 }

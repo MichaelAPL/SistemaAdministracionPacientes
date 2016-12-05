@@ -25,11 +25,12 @@ public class ControladorRegistro {
         return controlador;
     }
     
+    public void llamarRecepcionista(){
+        RecepcionistaVentanaRegistroPaciente.obtenerRecepcionista();
+    }
+    
     public void mandarAAsistenteNuevoPaciente(Paciente paciente){
         asistente.registrarNuevoPacienteEnRegistro(paciente);
     }
     
-    public void llamarRecepcionista(){
-        RecepcionistaVentanaRegistroPaciente.obtenerRecepcionista();
-    }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelos.DAOs;
 
 import java.sql.PreparedStatement;
@@ -24,27 +19,12 @@ public class AplicacionDAO {
         this.conectorBD = new ConectorBD();
     }
 
-    public void crearAplicacion(Aplicacion aplicacion) throws SQLException {
-        conectorBD.conectar();
-
-        String campos = "Realizada, Fecha, Num_Aplicacion, Tratamiento_ID";
-        String consulta = "INSERT INTO Aplicacion (" + campos + ") VALUES (?,?,?,?)";
-
-        PreparedStatement declaracion = conectorBD.consulta(consulta);
-
-        declaracion.setBoolean(1, aplicacion.isRealizada());
-
-        java.sql.Date fechaAplicacion = new java.sql.Date(aplicacion.getFecha().getTime());
-        declaracion.setDate(2, fechaAplicacion);
-        declaracion.setInt(3, aplicacion.getNumAplicacion());
-        declaracion.setInt(4, aplicacion.getTratamiento_id());
-
-        declaracion.execute();
-
-        conectorBD.desconectar();
-    }
-
     public void actualizar(Aplicacion aplicacion) throws SQLException {
+        //indices campos
+        int INDICE_REALIZADA = 1;
+        int INDICE_FECHA = 2;
+        int INDICE_CLAUSULA = 3;
+        
         conectorBD.conectar();
 
         String consulta = "UPDATE Aplicacion SET Realizada = ?, Fecha = ? WHERE "
@@ -52,41 +32,48 @@ public class AplicacionDAO {
         
         PreparedStatement declaracion = conectorBD.consulta(consulta);
 
-        declaracion.setBoolean(1, aplicacion.isRealizada());
+        declaracion.setBoolean(INDICE_REALIZADA, aplicacion.isRealizada());
 
         java.sql.Date fechaDeAplicacion = new java.sql.Date(aplicacion.getFecha().getTime());
-        declaracion.setDate(2, fechaDeAplicacion);
-        declaracion.setInt(3, aplicacion.getTratamiento_id());
+        declaracion.setDate(INDICE_FECHA, fechaDeAplicacion);
+        declaracion.setInt(INDICE_CLAUSULA, aplicacion.getTratamientoID());
 
         declaracion.execute();
         conectorBD.desconectar();
     }
 
-    public Aplicacion getUltimaAplicacion(int tratamiento_ID, int numUltimaAplicacion) throws SQLException {
+    public void crearAplicacion(Aplicacion aplicacion) throws SQLException {
+        //indices campos
+        int INDICE_REALIZADA = 1;
+        int INDICE_FECHA = 2;
+        int INDICE_NUM_APLICACION = 3;
+        int INDICE_TRATAMIENTO_ID = 4;
+        
         conectorBD.conectar();
 
-        String consulta = "select * from Aplicacion WHERE Num_Aplicacion = ?";
+        String campos = "Realizada, Fecha, Num_Aplicacion, Tratamiento_ID";
+        String consulta = "INSERT INTO Aplicacion (" + campos + ") VALUES (?,?,?,?)";
+
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, numUltimaAplicacion);
 
-        ResultSet resultado = declaracion.executeQuery();
+        declaracion.setBoolean(INDICE_REALIZADA, aplicacion.isRealizada());
 
-        Aplicacion ultimaAplicacion = null;
-        ultimaAplicacion = new Aplicacion(resultado.getInt("Num_Aplicacion"));
-        ultimaAplicacion.setFecha(new Fecha(resultado.getDate("Fecha")));
-        ultimaAplicacion.setRealizada(true);
-        ultimaAplicacion.setTratamiento_id(resultado.getInt("Tratamiento_ID"));
+        java.sql.Date fechaAplicacion = new java.sql.Date(aplicacion.getFecha().getTime());
+        declaracion.setDate(INDICE_FECHA, fechaAplicacion);
+        declaracion.setInt(INDICE_NUM_APLICACION, aplicacion.getNumAplicacion());
+        declaracion.setInt(INDICE_TRATAMIENTO_ID, aplicacion.getTratamientoID());
+
+        declaracion.execute();
 
         conectorBD.desconectar();
-        return ultimaAplicacion;
     }
-
-    public Aplicacion getSiguienteAplicacion(int tratamiento_ID) throws SQLException {
+    
+    public Aplicacion obtenerSiguienteAplicacion(int tratamientoID) throws SQLException {
         conectorBD.conectar();
-        String consulta = "select * from Aplicacion where Tratamiento_ID = ? and Realizada = 0";
+        String consulta = "select * from Aplicacion where Tratamiento_ID = "+tratamientoID
+                + " and Realizada = 0";
 
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, tratamiento_ID);
 
         ResultSet resultado = declaracion.executeQuery();
         
@@ -95,12 +82,30 @@ public class AplicacionDAO {
         int numAplicacion = resultado.getInt("Num_Aplicacion");
         sigAplicacion = new Aplicacion(numAplicacion);
         sigAplicacion.setRealizada(resultado.getBoolean("Realizada"));
-        sigAplicacion.setTratamiento_id(resultado.getInt("Tratamiento_ID"));
+        sigAplicacion.setTratamientoID(resultado.getInt("Tratamiento_ID"));
         sigAplicacion.setFecha(new Fecha(resultado.getDate("Fecha")));
-        
-        System.out.println(tratamiento_ID);
 
         conectorBD.desconectar();
         return sigAplicacion;
     }
+
+    public Aplicacion obtenerUltimaAplicacion(int tratamientoID, int numUltimaAplicacion) throws SQLException {
+        conectorBD.conectar();
+
+        String consulta = "select * from Aplicacion WHERE Num_Aplicacion = " + numUltimaAplicacion;
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+
+        ResultSet resultado = declaracion.executeQuery();
+
+        Aplicacion ultimaAplicacion = null;
+        ultimaAplicacion = new Aplicacion(resultado.getInt("Num_Aplicacion"));
+        ultimaAplicacion.setFecha(new Fecha(resultado.getDate("Fecha")));
+        ultimaAplicacion.setRealizada(true);
+        ultimaAplicacion.setTratamientoID(resultado.getInt("Tratamiento_ID"));
+
+        conectorBD.desconectar();
+        return ultimaAplicacion;
+    }
+
+    
 }

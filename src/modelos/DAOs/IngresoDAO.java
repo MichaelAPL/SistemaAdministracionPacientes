@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelos.DAOs;
 
 import java.sql.PreparedStatement;
@@ -14,10 +10,6 @@ import modelos.Ingreso;
 import modelos.IntervaloFecha;
 import modelos.database.ConectorBD;
 
-/**
- *
- * @author Milka
- */
 public class IngresoDAO {
 
     private ConectorBD conectorBD;
@@ -27,6 +19,10 @@ public class IngresoDAO {
     }
 
     public void crearIngreso(Ingreso ingreso) throws SQLException {
+        //indices campos
+        int INDICE_FECHA = 2;
+        int INDICE_MONTO = 3;
+        
         conectorBD.conectar();
 
         String campos = "FolioIngreso, Fecha, Monto";
@@ -36,40 +32,12 @@ public class IngresoDAO {
         PreparedStatement declaracion = conectorBD.consulta(consulta);
 
         java.sql.Date fechaRegistro = new java.sql.Date(ingreso.getFecha().getTime());
-        declaracion.setDate(2, fechaRegistro);
-        declaracion.setDouble(3, ingreso.getMonto());
+        declaracion.setDate(INDICE_FECHA, fechaRegistro);
+        declaracion.setDouble(INDICE_MONTO, ingreso.getMonto());
 
         declaracion.execute();
 
         conectorBD.desconectar();
-    }
-
-    public ArrayList<Ingreso> recuperarIngresosMes(int mes, int año) throws SQLException {
-        this.conectorBD.conectar();
-
-        String consulta = "SELECT * FROM Facturas WHERE fechaRegistro BETWEEN ? AND ?";
-        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
-
-        IntervaloFecha intervalo = new IntervaloFecha(mes, año);
-        java.sql.Date inferior = new java.sql.Date(intervalo.getInferior().getTime());
-        java.sql.Date superior = new java.sql.Date(intervalo.getSuperior().getTime());
-
-        declaracionDeRecuperacion.setDate(1, inferior);
-        declaracionDeRecuperacion.setDate(2, superior);
-
-        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
-
-        ArrayList<Ingreso> ingresos = new ArrayList();
-
-        while (resultado.next()) {
-            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), new Fecha(resultado.getDate("FechaRegistro")),
-                    resultado.getDouble("Importe"));
-
-            ingresos.add(ingreso);
-        }
-
-        this.conectorBD.desconectar();
-        return ingresos;
     }
 
     public ArrayList<Ingreso> recuperarIngresos() throws SQLException {
@@ -83,7 +51,8 @@ public class IngresoDAO {
         ArrayList<Ingreso> ingresos = new ArrayList();
 
         while (resultado.next()) {
-            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), new Fecha(resultado.getDate("FechaRegistro")),
+            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), 
+                    new Fecha(resultado.getDate("FechaRegistro")),
                     resultado.getDouble("Importe"));
 
             ingresos.add(ingreso);
@@ -92,6 +61,38 @@ public class IngresoDAO {
         this.conectorBD.desconectar();
         return ingresos;
     }
+    
+    public ArrayList<Ingreso> recuperarIngresosMes(int mes, int año) throws SQLException {
+        //indice campos
+        int FECHA_LIMITE_INFERIOR = 1;
+        int FECHA_LIMITE_SUPERIOR = 2;
+        
+        this.conectorBD.conectar();
 
+        String consulta = "SELECT * FROM Facturas WHERE fechaRegistro BETWEEN ? AND ?";
+        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
+
+        IntervaloFecha intervalo = new IntervaloFecha(mes, año);
+        java.sql.Date inferior = new java.sql.Date(intervalo.getInferior().getTime());
+        java.sql.Date superior = new java.sql.Date(intervalo.getSuperior().getTime());
+
+        declaracionDeRecuperacion.setDate(FECHA_LIMITE_INFERIOR, inferior);
+        declaracionDeRecuperacion.setDate(FECHA_LIMITE_SUPERIOR, superior);
+
+        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
+
+        ArrayList<Ingreso> ingresos = new ArrayList();
+
+        while (resultado.next()) {
+            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), 
+                    new Fecha(resultado.getDate("FechaRegistro")),
+                    resultado.getDouble("Importe"));
+
+            ingresos.add(ingreso);
+        }
+
+        this.conectorBD.desconectar();
+        return ingresos;
+    }
 
 }

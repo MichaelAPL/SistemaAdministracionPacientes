@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelos;
 
 import java.sql.SQLException;
@@ -10,10 +5,6 @@ import java.util.ArrayList;
 import modelos.DAOs.FacturaDAO;
 import modelos.DAOs.IngresoDAO;
 
-/**
- *
- * @author Milka
- */
 public class Contador {
 
     private static Contador contador;
@@ -32,10 +23,6 @@ public class Contador {
         return contador;
     }
 
-    public void cobrarPaciente(){
-        double costoAplicacion = 900;
-        agregarIngreso(costoAplicacion);
-    }
     public void agregarImporte(double pagoInsumos, String descripcion) {
         try {
             Fecha fechaRegistro = new Fecha();
@@ -67,6 +54,19 @@ public class Contador {
         return ganancia;
     }
 
+    private double calcularImporteMensual(int mes, int año) {
+        double importe = 0;
+        try {
+            ArrayList<Factura> facturasDelMes = facturaDao.recuperarFacturasMes(mes, año);
+            for (int i = 0; i < facturasDelMes.size(); i++) {
+                importe += facturasDelMes.get(i).getMonto();
+            }
+        } catch (SQLException e) {
+            MensajesDeDialogo.errorConLaBD();
+        }
+        return importe;
+    }
+
     private double calcularIngresoMensual(int mes, int año) {
         double ingreso = 0;
         try {
@@ -80,17 +80,9 @@ public class Contador {
         return ingreso;
     }
 
-    private double calcularImporteMensual(int mes, int año) {
-        double importe = 0;
-        try {
-            ArrayList<Factura> facturasDelMes = facturaDao.recuperarFacturasMes(mes, año);
-            for (int i = 0; i < facturasDelMes.size(); i++) {
-                importe += facturasDelMes.get(i).getMonto();
-            }
-        } catch (SQLException e) {
-            MensajesDeDialogo.errorConLaBD();
-        }
-        return importe;
+    public void cobrarPaciente() {
+        double costoAplicacion = 900;
+        agregarIngreso(costoAplicacion);
     }
-    
+
 }

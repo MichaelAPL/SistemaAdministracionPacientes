@@ -10,23 +10,20 @@ package modelos;
  * @author Milka
  */
 public class Ingreso {
-    private int folio;
+    
     private Fecha fecha;
     private double monto;
-
+    private int folio;
+    
     public Ingreso(Fecha fecha, double monto) {
         this.fecha = fecha;
         this.monto = monto;
     }
 
     public Ingreso(int folio, Fecha fecha, double monto) {
-        this.folio = folio;
         this.fecha = fecha;
         this.monto = monto;
-    }
-
-    public int getFolio() {
-        return folio;
+        this.folio = folio;
     }
 
     public Fecha getFecha() {
@@ -36,4 +33,9 @@ public class Ingreso {
     public double getMonto() {
         return monto;
     }
+
+    public int getFolio() {
+        return folio;
+    }
+
 }

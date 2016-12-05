@@ -66,11 +66,11 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
     }
 
     public JMenuItem getjEliminarEnfermedad() {
-        return jEliminarEnfermedad;
+        return eliminarEnfermedad;
     }
 
     public JMenuItem getjEliminarMedicamento() {
-        return jEliminarMedicamento;
+        return eliminarMedicamento;
     }
 
     public JTextField getLocalidad() {
@@ -106,9 +106,9 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPopUpMenu = new javax.swing.JPopupMenu();
-        jEliminarEnfermedad = new javax.swing.JMenuItem();
+        eliminarEnfermedad = new javax.swing.JMenuItem();
         jPopUpMenu2 = new javax.swing.JPopupMenu();
-        jEliminarMedicamento = new javax.swing.JMenuItem();
+        eliminarMedicamento = new javax.swing.JMenuItem();
         panel = new javax.swing.JPanel();
         etiquetaNombre = new javax.swing.JLabel();
         etiquetaApellidos = new javax.swing.JLabel();
@@ -129,18 +129,18 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
         nombres = new javax.swing.JTextField();
         botonGuardar = new javax.swing.JButton();
         edad = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        etiquetaMedicamento = new javax.swing.JLabel();
         medicamento = new javax.swing.JTextField();
         scrollTabla1 = new javax.swing.JScrollPane();
         tablaMedicamentos = new javax.swing.JTable();
         añadirEnfermedad = new javax.swing.JButton();
         añadirMedicamento = new javax.swing.JButton();
 
-        jEliminarEnfermedad.setText("Eliminar");
-        jPopUpMenu.add(jEliminarEnfermedad);
+        eliminarEnfermedad.setText("Eliminar");
+        jPopUpMenu.add(eliminarEnfermedad);
 
-        jEliminarMedicamento.setText("Eliminar");
-        jPopUpMenu2.add(jEliminarMedicamento);
+        eliminarMedicamento.setText("Eliminar");
+        jPopUpMenu2.add(eliminarMedicamento);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -158,7 +158,7 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
 
         telefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                telefonoKeyTyped(evt);
+                evitarCaracteresNoNumericosParaTelefono(evt);
             }
         });
 
@@ -166,7 +166,7 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
 
         EDTA.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                EDTAKeyTyped(evt);
+                evitarCaracteresNoNumericosParaEDTA(evt);
             }
         });
 
@@ -186,13 +186,15 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
         tablaPadecimientos.setComponentPopupMenu(jPopUpMenu);
         scrollTabla.setViewportView(tablaPadecimientos);
 
+        botonGuardar.setText("Registrar");
+
         edad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                edadKeyTyped(evt);
+                evitarCaracteresNoNumericosParaEdad(evt);
             }
         });
 
-        jLabel1.setText("Medicamentos");
+        etiquetaMedicamento.setText("Medicamentos");
 
         tablaMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,7 +254,7 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(scrollTabla1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(etiquetaMedicamento)
                                 .addGap(3, 3, 3)
                                 .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,7 +312,7 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(etiquetaPadecimientos)
                             .addComponent(padecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
+                            .addComponent(etiquetaMedicamento)
                             .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(añadirEnfermedad)
                             .addComponent(añadirMedicamento))
@@ -341,26 +343,26 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edadKeyTyped
+    private void evitarCaracteresNoNumericosParaEdad(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_evitarCaracteresNoNumericosParaEdad
         char caracter = evt.getKeyChar();
         if (caracter < '0' || caracter > '9') {
             evt.consume();
         }
-    }//GEN-LAST:event_edadKeyTyped
+    }//GEN-LAST:event_evitarCaracteresNoNumericosParaEdad
 
-    private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
+    private void evitarCaracteresNoNumericosParaTelefono(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_evitarCaracteresNoNumericosParaTelefono
         char caracter = evt.getKeyChar();
         if (caracter < '0' || caracter > '9') {
             evt.consume();
         }
-    }//GEN-LAST:event_telefonoKeyTyped
+    }//GEN-LAST:event_evitarCaracteresNoNumericosParaTelefono
 
-    private void EDTAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EDTAKeyTyped
+    private void evitarCaracteresNoNumericosParaEDTA(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_evitarCaracteresNoNumericosParaEDTA
         char caracter = evt.getKeyChar();
         if (caracter < '0' || caracter > '9') {
             evt.consume();
         }
-    }//GEN-LAST:event_EDTAKeyTyped
+    }//GEN-LAST:event_evitarCaracteresNoNumericosParaEDTA
 
     private DefaultTableModel crearCuerpoTabla(String nombreCabecera) {
         DefaultTableModel modelo;
@@ -398,17 +400,17 @@ public class VentanaRegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JButton botonGuardar;
     private javax.swing.JTextField direccion;
     private javax.swing.JTextField edad;
+    private javax.swing.JMenuItem eliminarEnfermedad;
+    private javax.swing.JMenuItem eliminarMedicamento;
     private javax.swing.JLabel etiquetaApellidos;
     private javax.swing.JLabel etiquetaDireccion;
     private javax.swing.JLabel etiquetaDosis;
     private javax.swing.JLabel etiquetaEdad;
     private javax.swing.JLabel etiquetaLocalidad;
+    private javax.swing.JLabel etiquetaMedicamento;
     private javax.swing.JLabel etiquetaNombre;
     private javax.swing.JLabel etiquetaPadecimientos;
     private javax.swing.JLabel etiquetaTelefono;
-    private javax.swing.JMenuItem jEliminarEnfermedad;
-    private javax.swing.JMenuItem jEliminarMedicamento;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPopupMenu jPopUpMenu;
     private javax.swing.JPopupMenu jPopUpMenu2;
     private javax.swing.JTextField localidad;

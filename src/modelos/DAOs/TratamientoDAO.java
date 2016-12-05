@@ -25,68 +25,20 @@ public class TratamientoDAO {
         this.aplicacionDAO = new AplicacionDAO();
     }
 
-    public void crearTratamiento(Tratamiento tratamiento) throws SQLException {
-        conectorBD.conectar();
+     public void actualizar(Tratamiento tratamiento) throws SQLException {
+        //indices campos
+        int INDICE_DOSIS_EDTA = 1;
+        int INDICE_ACTIVO = 2;
+        int INDICE_CLAUSULA = 3;
 
-        String campos = "ID_Tratamiento, DosisEDTA, Activo, Paciente_ID";
-        String consulta = "INSERT INTO Tratamiento (" + campos + ")" + " VALUES (?,?,?,?)";
-
-        PreparedStatement declaracionTratamiento = conectorBD.consulta(consulta);
-
-        declaracionTratamiento.setInt(2, tratamiento.getDosis_EDTA_ml());
-        declaracionTratamiento.setBoolean(3, tratamiento.isActivo());
-        declaracionTratamiento.setInt(4, tratamiento.getId());
-
-        declaracionTratamiento.execute();
-
-        ResultSet generatedKeys = declaracionTratamiento.getGeneratedKeys();
-        if (generatedKeys.next()) {
-            int tratamiento_id = generatedKeys.getInt(1);
-            tratamiento.getSiguienteAplicacion().setTratamiento_id(tratamiento_id);
-        }
-
-        conectorBD.desconectar();
-
-        aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());
-    }
-
-    public Tratamiento getTratamiento(int paciente_id) throws SQLException {
-        conectorBD.conectar();
-        String consulta = "select * from Tratamiento where Paciente_ID = ? and "
-                + "Activo = 1";
-
-        PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, paciente_id);
-
-        ResultSet resultado = declaracion.executeQuery();
-
-        Tratamiento tratamiento = null;
-        
-        tratamiento = new Tratamiento(resultado.getInt("DosisEDTA"));
-        tratamiento.setId(resultado.getInt("ID_Tratamiento"));
-        tratamiento.setActivo(resultado.getBoolean("Activo"));
-        tratamiento.setId_Paciente(resultado.getInt("Paciente_ID"));
-        tratamiento.setSiguienteAplicacion(aplicacionDAO.getSiguienteAplicacion(tratamiento.getId()));
-
-        if (tratamiento.getSiguienteAplicacion().getNumAplicacion() != 1) {
-            tratamiento.setUltimaAplicacion(aplicacionDAO.getUltimaAplicacion(tratamiento.getId(),
-                    tratamiento.getSiguienteAplicacion().getNumAplicacion()-1));
-        }
-        
-        conectorBD.desconectar();
-
-        return tratamiento;
-    }
-
-    public void actualizar(Tratamiento tratamiento) throws SQLException {
         conectorBD.conectar();
         String consulta = "UPDATE Tratamiento SET DosisEDTA = ?, Activo = ? "
                 + "where ID_Tratamiento = ?";
 
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, tratamiento.getDosis_EDTA_ml());
-        declaracion.setBoolean(2, tratamiento.isActivo());
-        declaracion.setInt(3, tratamiento.getId());
+        declaracion.setInt(INDICE_DOSIS_EDTA, tratamiento.getDosisEDTA_ml());
+        declaracion.setBoolean(INDICE_ACTIVO, tratamiento.isActivo());
+        declaracion.setInt(INDICE_CLAUSULA, tratamiento.getId());
 
         declaracion.execute();
 
@@ -97,8 +49,69 @@ public class TratamientoDAO {
         }
         aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());
     }
+    
+    public void crearTratamiento(Tratamiento tratamiento) throws SQLException {
+        //indices campos
+        int INDICE_ID_TRATAMIENTO = 1;
+        int INDICE_DOSIS_EDTA = 2;
+        int INDICE_ACTIVO = 3;
+        int INDICE_PACIENTE_ID = 4;
 
+        conectorBD.conectar();
+
+        String campos = "ID_Tratamiento, DosisEDTA, Activo, Paciente_ID";
+        String consulta = "INSERT INTO Tratamiento (" + campos + ")" + " VALUES (?,?,?,?)";
+
+        PreparedStatement declaracionTratamiento = conectorBD.consulta(consulta);
+
+        declaracionTratamiento.setInt(INDICE_DOSIS_EDTA, tratamiento.getDosisEDTA_ml());
+        declaracionTratamiento.setBoolean(INDICE_ACTIVO, tratamiento.isActivo());
+        declaracionTratamiento.setInt(INDICE_PACIENTE_ID, tratamiento.getIdPaciente());
+
+        declaracionTratamiento.execute();
+
+        ResultSet generatedKeys = declaracionTratamiento.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int tratamientoID = generatedKeys.getInt(INDICE_ID_TRATAMIENTO);
+            tratamiento.getSiguienteAplicacion().setTratamientoID(tratamientoID);
+        }
+
+        conectorBD.desconectar();
+
+        aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());
+    }
+    
     public AplicacionDAO getAplicacionDAO() {
         return this.aplicacionDAO;
+    }
+
+    public Tratamiento obtenerTratamiento(int pacienteID) throws SQLException {
+        conectorBD.conectar();
+        String consulta = "select * from Tratamiento where Paciente_ID = " + pacienteID + " and "
+                + "Activo = 1";
+
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        declaracion.setInt(1, pacienteID);
+
+        ResultSet resultado = declaracion.executeQuery();
+
+        Tratamiento tratamiento = null;
+
+        tratamiento = new Tratamiento(resultado.getInt("DosisEDTA"));
+        tratamiento.setId(resultado.getInt("ID_Tratamiento"));
+        tratamiento.setActivo(resultado.getBoolean("Activo"));
+        tratamiento.setIdPaciente(resultado.getInt("Paciente_ID"));
+        tratamiento.setSiguienteAplicacion(aplicacionDAO.obtenerSiguienteAplicacion(tratamiento.getId()));
+
+        int primeraAplicacion = 1;
+
+        if (tratamiento.getSiguienteAplicacion().getNumAplicacion() != primeraAplicacion) {
+            tratamiento.setUltimaAplicacion(aplicacionDAO.obtenerUltimaAplicacion(tratamiento.getId(),
+                    tratamiento.getSiguienteAplicacion().getNumAplicacion() - 1));
+        }
+
+        conectorBD.desconectar();
+
+        return tratamiento;
     }
 }

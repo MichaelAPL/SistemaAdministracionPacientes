@@ -47,13 +47,16 @@ public class RecepcionistaVentanaRegistroPaciente {
 
         ventana.getBotonGuardar().addActionListener((ActionEvent e) -> {
             try {
-                Persona persona = new Persona(ventana.getNombres().getText(), ventana.getApellidos().getText(),
-                        ventana.getDireccion().getText(), ventana.getLocalidad().getText(),
-                        ventana.getTelefono().getText(), Integer.parseInt(ventana.getEdad().getText()));
+                Persona persona = new Persona(ventana.getNombres().getText(), 
+                    ventana.getApellidos().getText(),ventana.getDireccion().getText(), 
+                    ventana.getLocalidad().getText(),ventana.getTelefono().getText(), 
+                    Integer.parseInt(ventana.getEdad().getText()));
 
-                Tratamiento tratamiento = new Tratamiento(Integer.parseInt(ventana.getEDTA().getText()));
+                Tratamiento tratamiento = new Tratamiento
+                    (Integer.parseInt(ventana.getEDTA().getText()));
 
-                Paciente paciente = new Paciente(persona, medicamentosExternos, enfermedadesPrevias, tratamiento);
+                Paciente paciente = new Paciente(persona, medicamentosExternos, 
+                     enfermedadesPrevias, tratamiento);
 
                 controlador.mandarAAsistenteNuevoPaciente(paciente);
                 ventana.dispose();
@@ -62,7 +65,6 @@ public class RecepcionistaVentanaRegistroPaciente {
                 MensajesDeDialogo.mostrarErrorDatosEntradaIncorrectos();
             }
 
-            
         });
 
         ventana.getjEliminarEnfermedad().addActionListener((ActionEvent e) -> {
@@ -91,10 +93,12 @@ public class RecepcionistaVentanaRegistroPaciente {
     }
 
     private void actualizarDatosTabla(JTable tabla, ArrayList<String> datos) {
-        String cabecera[] = {tabla.getColumnName(0)};
+        int iNombreEncabezado = 0;
+        int iColumna = 0;
+        String cabecera[] = {tabla.getColumnName(iNombreEncabezado)};
         String[][] cuerpo = new String[datos.size()][1];
-        for (int i = 0; i < datos.size(); i++) {
-            cuerpo[i][0] = datos.get(i);
+        for (int iDato = 0; iDato < datos.size(); iDato++) {
+            cuerpo[iDato][iColumna] = datos.get(iDato);
         }
         DefaultTableModel modelo = new DefaultTableModel(cuerpo, cabecera);
         tabla.setModel(modelo);
