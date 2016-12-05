@@ -31,7 +31,7 @@ public class AsistenteDoctor {
     public Paciente buscarPacientePorId(String id) {
         Paciente pacienteEncontrado = null;
         try {
-            pacienteEncontrado = pacienteDAO.getPacientePorID(Integer.valueOf(id));
+            pacienteEncontrado = pacienteDAO.obtenerPacientePorID(Integer.valueOf(id));
         } catch (SQLException e) {
             MensajesDeDialogo.errorConLaBD();
         }
@@ -41,7 +41,7 @@ public class AsistenteDoctor {
     public ArrayList<Paciente> buscarPacientesPorNombre(String nombrePaciente) {
         ArrayList<Paciente> pacientesEncontrados = null;
         try {
-            pacientesEncontrados = pacienteDAO.getPacientesPorNombre(nombrePaciente);
+            pacientesEncontrados = pacienteDAO.obtenerPacientesPorNombre(nombrePaciente);
         } catch (SQLException e) {
             MensajesDeDialogo.errorConLaBD();
         }
@@ -52,7 +52,7 @@ public class AsistenteDoctor {
         ArrayList<Paciente> listaPacientesConCita = new ArrayList();
         ArrayList<Paciente> pacientes = obtenerPacientesEnRegistro();
         for (Paciente paciente : pacientes) {
-            if (!pacienteAsistidoHoy(paciente) && pacienteConTratamientoActivo(paciente)) {
+            if (!asistioPacienteACita(paciente) && tienePacienteTratamientoActivo(paciente)) {
                 listaPacientesConCita.add(paciente);
             }
         }
@@ -65,7 +65,7 @@ public class AsistenteDoctor {
         paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Fecha());
         
         pasarAlPacienteAlaEnfermera(paciente);
-        pasarAlPacienteAlContador();
+        pasarAlContadorPagoPaciente();
 
         crearNuevaCitaAlPaciente(paciente);
     }
@@ -78,19 +78,34 @@ public class AsistenteDoctor {
         }
     }
 
-    private void crearNuevaCitaAlPaciente(Paciente paciente) {
-        paciente.getTratamiento().agregarAplicacion();
-        actualizarAplicacionesDePacienteEnRegistro(paciente);
-    }
-
     private void actualizarAplicacionesDePacienteEnRegistro(Paciente paciente) {
         try {
-            pacienteDAO.actualizarAplicaciones(paciente);
+            pacienteDAO.actualizar(paciente);
         } catch (SQLException e) {
             MensajesDeDialogo.errorConLaBD();
         }
     }
+    
+    private boolean asistioPacienteACita(Paciente paciente) {
+        Fecha fechaHoy = new Fecha();
+        boolean pacienteYaPasoHoy = false;
+        if (asistioPacienteAPrimeraCita(paciente)) {       
+            pacienteYaPasoHoy = paciente.getTratamiento().getUltimaAplicacion().
+                getFecha().comperTo(fechaHoy);
+        }
+        
+        return pacienteYaPasoHoy;
+    }
 
+    private boolean asistioPacienteAPrimeraCita(Paciente paciente) {
+        return (paciente.getTratamiento().getUltimaAplicacion() != null);
+    }
+    
+    private void crearNuevaCitaAlPaciente(Paciente paciente) {
+        paciente.getTratamiento().agregarAplicacion();
+        actualizarAplicacionesDePacienteEnRegistro(paciente);
+    }
+    
     private ArrayList<Paciente> obtenerPacientesEnRegistro() {
         ArrayList<Paciente> pacientes = new ArrayList();
         try {
@@ -99,34 +114,18 @@ public class AsistenteDoctor {
             MensajesDeDialogo.errorConLaBD();
         }
         return pacientes;
-    }
-
-    private boolean pacienteAsistidoHoy(Paciente paciente) {
-        Fecha fechaHoy = new Fecha();
-        boolean pacienteYaPasoHoy = false;
-        if (pacientePrimeraCitaAsistida(paciente)) {       
-            pacienteYaPasoHoy = paciente.getTratamiento().getUltimaAplicacion().
-                getFecha().comperTo(fechaHoy);
-        }
-        
-        return pacienteYaPasoHoy;
-    }
-
-    private boolean pacienteConTratamientoActivo(Paciente paciente) {
-        return paciente.getTratamiento().isActivo();
-    }
-
-    private boolean pacientePrimeraCitaAsistida(Paciente paciente) {
-        return (paciente.getTratamiento().getUltimaAplicacion() != null);
+    }    
+    
+    private void pasarAlContadorPagoPaciente() {
+        Contador.llamarContador().cobrarPaciente();
     }
     
     private void pasarAlPacienteAlaEnfermera(Paciente paciente){
         Enfermera.llamarEnfermera().atenderPaciente(paciente);
     }
 
-    private void pasarAlPacienteAlContador() {
-        Contador.llamarContador().cobrarPaciente();
+    private boolean tienePacienteTratamientoActivo(Paciente paciente) {
+        return paciente.getTratamiento().isActivo();
     }
-    
-    
+  
 }

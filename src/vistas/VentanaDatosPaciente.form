@@ -284,14 +284,23 @@
     <Component class="javax.swing.JTextField" name="apellidosPaciente">
     </Component>
     <Component class="javax.swing.JTextField" name="edadPaciente">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="evitarCaracteresNoNumericosParaEdad"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="direccionPaciente">
     </Component>
     <Component class="javax.swing.JTextField" name="localidadPaciente">
     </Component>
     <Component class="javax.swing.JTextField" name="dosisEDTApaciente">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="evitarCaracteresNoNumericosParaEDTA"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="telefonoPaciente">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="evitarCaracteresNoNumericosParaTelefono"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="enfermedadNueva">
     </Component>

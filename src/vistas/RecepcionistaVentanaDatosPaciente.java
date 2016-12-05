@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
 import com.itextpdf.text.DocumentException;
@@ -10,9 +6,7 @@ import controladores.ControladorDatosPaciente;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import modelos.CreadorReportesPaciente;
+import modelos.EscritorReportesPaciente;
 import modelos.Fecha;
 import modelos.MensajesDeDialogo;
 import modelos.Paciente;
@@ -27,7 +21,8 @@ public class RecepcionistaVentanaDatosPaciente {
     private VentanaDatosPaciente ventana;
     private ControladorDatosPaciente controlador;
     private Paciente paciente;
-    private CreadorReportesPaciente creadorReportes;
+    private EscritorReportesPaciente creadorReportes;
+    private final String espacioVacio = "";
 
     private RecepcionistaVentanaDatosPaciente() {
         ventana = VentanaDatosPaciente.obtenerVentana();
@@ -66,7 +61,7 @@ public class RecepcionistaVentanaDatosPaciente {
         ventana.getInsertarEnfermedad().addActionListener((ActionEvent e) -> {
             if (ventana.getEnfermedadNueva().getText() != null) {
                 paciente.insertarEnfermedad(ventana.getEnfermedadNueva().getText());
-                ventana.getEnfermedadNueva().setText("");
+                ventana.getEnfermedadNueva().setText(espacioVacio);
             }
             mostrarEnfermedades(paciente.getEnfermedadesPrevias());
         });
@@ -74,7 +69,7 @@ public class RecepcionistaVentanaDatosPaciente {
         ventana.getInsertarMedicamento().addActionListener((ActionEvent e) -> {
             if (ventana.getMedicamentoNuevo().getText() != null) {
                 paciente.insertarEnfermedad(ventana.getMedicamentoNuevo().getText());
-                ventana.getMedicamentoNuevo().setText("");
+                ventana.getMedicamentoNuevo().setText(espacioVacio);
             }
             mostrarMedicamentos(paciente.getMedicamentosExternos());
         });
@@ -85,7 +80,7 @@ public class RecepcionistaVentanaDatosPaciente {
             
             Fecha fechaDelReporte = new Fecha();
             try {
-                creadorReportes = new CreadorReportesPaciente(exploradorArchivos.getRuta());
+                creadorReportes = new EscritorReportesPaciente(exploradorArchivos.getRuta());
                 creadorReportes.llenarReportePaciente(paciente, fechaDelReporte);
             } catch (DocumentException ex) {
                 MensajesDeDialogo.mostrarErrorAlCrearReportePaciente();
@@ -96,18 +91,6 @@ public class RecepcionistaVentanaDatosPaciente {
 
     }
 
-    private void mandarModificaciones() {
-        paciente.setNombres(ventana.getNombresPaciente().getText());
-        paciente.setApellidos(ventana.getApellidosPaciente().getText());
-        paciente.setDireccion(ventana.getDireccionPaciente().getText());
-        paciente.setEdad(Integer.valueOf(ventana.getEdadPaciente().getText()));
-        paciente.setLocalidad(ventana.getLocalidadPaciente().getText());
-        paciente.setTelefono(ventana.getTelefonoPaciente().getText());
-        paciente.getTratamiento().setDosis_EDTA_ml(Integer.valueOf(ventana.getDosisEDTApaciente().getText()));
-
-        controlador.mandarAAsistenteDatosPacienteAActualizar(paciente);
-    }
-
     public void mostrarDatosPaciente(Paciente paciente) {
         this.paciente = paciente;
         ventana.getNombresPaciente().setText(paciente.getNombres());
@@ -115,11 +98,23 @@ public class RecepcionistaVentanaDatosPaciente {
         ventana.getLocalidadPaciente().setText(paciente.getLocalidad());
         ventana.getEdadPaciente().setText(String.valueOf(paciente.getEdad()));
         ventana.getDireccionPaciente().setText(paciente.getDireccion());
-        ventana.getDosisEDTApaciente().setText(String.valueOf(paciente.getTratamiento().getDosis_EDTA_ml()));
+        ventana.getDosisEDTApaciente().setText(String.valueOf(paciente.getTratamiento().getDosisEDTA_ml()));
         ventana.getTelefonoPaciente().setText(paciente.getTelefono());
 
         mostrarEnfermedades(paciente.getEnfermedadesPrevias());
         mostrarMedicamentos(paciente.getMedicamentosExternos());
+    }
+    
+    private void mandarModificaciones() {
+        paciente.setNombres(ventana.getNombresPaciente().getText());
+        paciente.setApellidos(ventana.getApellidosPaciente().getText());
+        paciente.setDireccion(ventana.getDireccionPaciente().getText());
+        paciente.setEdad(Integer.valueOf(ventana.getEdadPaciente().getText()));
+        paciente.setLocalidad(ventana.getLocalidadPaciente().getText());
+        paciente.setTelefono(ventana.getTelefonoPaciente().getText());
+        paciente.getTratamiento().setDosisEDTA_ml(Integer.valueOf(ventana.getDosisEDTApaciente().getText()));
+
+        controlador.mandarAAsistenteDatosPacienteAActualizar(paciente);
     }
 
     private void mostrarEnfermedades(ArrayList<String> enfermedadesPrevias) {

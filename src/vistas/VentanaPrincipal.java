@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
-import com.itextpdf.text.Image;
 import controladores.ControladorPrincipal;
 
-/**
- *
- * @author Milka
- */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     public ControladorPrincipal controlador;
@@ -42,7 +33,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         registrarPaciente.setText("Registrar paciente");
         registrarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarPacienteActionPerformed(evt);
+                iniciarProcesoRegistroPaciente(evt);
             }
         });
         jMenu1.add(registrarPaciente);
@@ -50,7 +41,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         paseLista.setText("Pasar Lista");
         paseLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paseListaActionPerformed(evt);
+                iniciarProcesoPasarlista(evt);
             }
         });
         jMenu1.add(paseLista);
@@ -58,7 +49,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         buscarPaciente.setText("Buscar Paciente");
         buscarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarPacienteActionPerformed(evt);
+                iniciarProcesoBuscarPaciente(evt);
             }
         });
         jMenu1.add(buscarPaciente);
@@ -70,7 +61,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         irAlInventario.setText("Ir al inventario");
         irAlInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                irAlInventarioActionPerformed(evt);
+                iniciarProcesoVerInventario(evt);
             }
         });
         jMenu2.add(irAlInventario);
@@ -93,25 +84,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void paseListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paseListaActionPerformed
-        System.gc();
-        controlador.mostrarVentanaPaseDeLista();
-    }//GEN-LAST:event_paseListaActionPerformed
+    private void iniciarProcesoPasarlista(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarProcesoPasarlista
+        controlador.llamarControladorVentanaPaseDeLista();
+    }//GEN-LAST:event_iniciarProcesoPasarlista
 
-    private void buscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPacienteActionPerformed
-        System.gc();
-        controlador.mostrarVentanaBuscar();
-    }//GEN-LAST:event_buscarPacienteActionPerformed
+    private void iniciarProcesoBuscarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarProcesoBuscarPaciente
+        controlador.llamarControladorVentanaBuscar();
+    }//GEN-LAST:event_iniciarProcesoBuscarPaciente
 
-    private void registrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarPacienteActionPerformed
-        System.gc();
-        controlador.mostrarVentanaRegistroPacientes();
-    }//GEN-LAST:event_registrarPacienteActionPerformed
+    private void iniciarProcesoRegistroPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarProcesoRegistroPaciente
+        controlador.llamarControladorVentanaRegistroPacientes();
+    }//GEN-LAST:event_iniciarProcesoRegistroPaciente
 
-    private void irAlInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irAlInventarioActionPerformed
-        System.gc();
-        controlador.mostrarVentanaInventario();
-    }//GEN-LAST:event_irAlInventarioActionPerformed
+    private void iniciarProcesoVerInventario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarProcesoVerInventario
+        controlador.llamarControladorVentanaInventario();
+    }//GEN-LAST:event_iniciarProcesoVerInventario
 
     
     /**

@@ -38,7 +38,8 @@ public class RecepcionistaVentanaBusqueda {
     public void tomarDatos() {
         ventana.getBotonIr().addActionListener((ActionEvent e) -> {
             if (ventana.getListaPacientes().getSelectedValue() != null) {
-                String[] texto = String.valueOf(ventana.getListaPacientes().getSelectedValue()).split(":");
+                String separadorID_Nonmbre = ":";
+                String[] texto = String.valueOf(ventana.getListaPacientes().getSelectedValue()).split(separadorID_Nonmbre);
                 String idPacienteSeleccionado = texto[0];
                 controlador.recibirIDPaciente(idPacienteSeleccionado);
             }
@@ -54,9 +55,11 @@ public class RecepcionistaVentanaBusqueda {
 
     public void mostrarPacientes(ArrayList<Paciente> pacientes) {
         String[] nombresPacientes = new String[pacientes.size()];
+        String separadorID_Nonmbre = ":";
+        String espacio = " ";
         for (int i = 0; i < pacientes.size(); i++) {
-            nombresPacientes[i] = pacientes.get(i).getId() + ":"
-                    + pacientes.get(i).getNombres() + " " + pacientes.get(i).getApellidos();
+            nombresPacientes[i] = pacientes.get(i).getId() + separadorID_Nonmbre
+                    + pacientes.get(i).getNombres() + espacio + pacientes.get(i).getApellidos();
         }
 
         ventana.getListaPacientes().setListData(nombresPacientes);

@@ -6,7 +6,6 @@
 package modelos;
 
 import javax.swing.JOptionPane;
-import vistas.VentanaInventario;
 
 /**
  *
@@ -22,8 +21,18 @@ public class MensajesDeDialogo {
                 + "la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public static void mostrarErrorPreparacionSuero() {
-        JOptionPane.showMessageDialog(null, "Hubo un error al disminuir los insumos",
+    public static void ErrorRutaInvalida() {
+        JOptionPane.showMessageDialog(null, "Ruta o Dirección no valida",
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void mostrarErrorAlCrearReportePaciente() {
+        JOptionPane.showMessageDialog(null, "Error al momento de crear el reporte",
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void mostrarErrorDatosEntradaIncorrectos() {
+        JOptionPane.showMessageDialog(null, "Algun dato no ha sido llenado",
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
 
@@ -32,18 +41,9 @@ public class MensajesDeDialogo {
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public static void mostrarErrorDatosEntradaIncorrectos() {
-        JOptionPane.showMessageDialog(null, "Algun dato no ha sido llenado",
+    public static void mostrarErrorPreparacionSuero() {
+        JOptionPane.showMessageDialog(null, "Hubo un error al disminuir los insumos",
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
-    public static void mostrarErrorAlCrearReportePaciente(){
-        JOptionPane.showMessageDialog(null, "Error al momento de crear el reporte",
-                "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    
-    public static void ErrorRutaInvalida(){
-        JOptionPane.showMessageDialog(null, "Ruta o Dirección no valida",
-                "Error", JOptionPane.ERROR_MESSAGE);
-    }
+
 }

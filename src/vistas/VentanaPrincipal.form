@@ -20,7 +20,7 @@
                 <Property name="text" type="java.lang.String" value="Registrar paciente"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registrarPacienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarProcesoRegistroPaciente"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="paseLista">
@@ -28,7 +28,7 @@
                 <Property name="text" type="java.lang.String" value="Pasar Lista"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paseListaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarProcesoPasarlista"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="buscarPaciente">
@@ -36,7 +36,7 @@
                 <Property name="text" type="java.lang.String" value="Buscar Paciente"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarPacienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarProcesoBuscarPaciente"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -51,7 +51,7 @@
                 <Property name="text" type="java.lang.String" value="Ir al inventario"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irAlInventarioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarProcesoVerInventario"/>
               </Events>
             </MenuItem>
           </SubComponents>

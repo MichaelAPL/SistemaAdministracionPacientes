@@ -1,12 +1,9 @@
 
 package vistas;
 
-import controladores.ControladorBusqueda;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTextField;
-import modelos.Paciente;
 
 public class VentanaBusqueda extends javax.swing.JFrame {
     
