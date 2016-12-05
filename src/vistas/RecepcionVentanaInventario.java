@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import modelos.Insumo;
 import modelos.InventarioMedicamentos;
 import modelos.InventarioUtensilios;
+import modelos.MensajesDeDialogo;
 
 /**
  *
@@ -133,23 +134,32 @@ public class RecepcionVentanaInventario {
         });
         
         ventanaModificacionDatosInventario.getAplicarCambios().addActionListener((ActionEvent e) ->{
-            String nombreInsumo = String.valueOf(ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedItem());
-            int existencias = obtenerCantidadInsumosAnterior(
-                    ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedIndex());
-            double costoNuevo = Double.parseDouble(String.valueOf(
-                    ventanaModificacionDatosInventario.getNuevoCosto().getText()));
+            boolean costoNuevoVacio = ventanaModificacionDatosInventario.getNuevoCosto().getText() == null;
+            boolean MlsModificadoNuevoVacio = (esMedicamento(ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedIndex())
+                    && ventanaModificacionDatosInventario.getMlsModificado().getText() == null);
             
-            Insumo insumoModificado;
-            
-            if(esMedicamento(ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedIndex())){
-                int mililitrosPorUnidad = Integer.parseInt(
-                        ventanaModificacionDatosInventario.getMlsModificado().getText());
-                insumoModificado = new InventarioMedicamentos(nombreInsumo, existencias, mililitrosPorUnidad, costoNuevo);
-            }else{
-                insumoModificado = new InventarioUtensilios(nombreInsumo, existencias, costoNuevo);
+            if (costoNuevoVacio && MlsModificadoNuevoVacio) {
+                String nombreInsumo = String.valueOf(ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedItem());
+                int existencias = obtenerCantidadInsumosAnterior(
+                        ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedIndex());
+                double costoNuevo = Double.parseDouble(String.valueOf(
+                        ventanaModificacionDatosInventario.getNuevoCosto().getText()));
+
+                Insumo insumoModificado;
+
+                if (esMedicamento(ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedIndex())) {
+                    int mililitrosPorUnidad = Integer.parseInt(
+                            ventanaModificacionDatosInventario.getMlsModificado().getText());
+                    insumoModificado = new InventarioMedicamentos(nombreInsumo, existencias, mililitrosPorUnidad, costoNuevo);
+                } else {
+                    insumoModificado = new InventarioUtensilios(nombreInsumo, existencias, costoNuevo);
+                }
+                controladorInventario.mandarModificacionesAlInventario(insumoModificado);
+                controladorInventario.mandarAVentanaInventarioInsumos();
+                limpiarVentanaModificacionDatosInventario();
+            } else {
+                MensajesDeDialogo.mostrarErrorDatosEntradaIncorrectos();
             }
-            controladorInventario.mandarModificacionesAlInventario(insumoModificado);
-            controladorInventario.mandarAVentanaInventarioInsumos();
         });
     }
     
