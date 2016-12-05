@@ -117,7 +117,10 @@ public class RecepcionVentanaInventario {
                     nombreInsumo, cantidadInsumosTotal, costoUnitarioInsumo);
             }
             
+            double importeAgregado = cantidadInsumosNuevos*insumoModificado.getCostoUnitario();
+            
             controladorInventario.mandarModificacionesAlInventario(insumoModificado);
+            controladorInventario.mandarImporteInsumoAlAdministrador(nombreInsumo, cantidadInsumosNuevos,importeAgregado);
             controladorInventario.mandarAVentanaInventarioInsumos();
             
             limpiarVentanaModificaciones();
