@@ -89,4 +89,9 @@ public class AdministradorInventario {
         MensajesDeDialogo.mostrarErrorNoSeEncuentraInsumo();
         return null;
     }
+    
+    public void agregarImporteInvertido(String nombreInsumo, int cantidad, double importe){
+        String descripcion = "Se realizo una contro de " + cantidad + " " + nombreInsumo;
+        Contador.llamarContador().agregarImporte(importe, descripcion);
+    }
 }
