@@ -51,4 +51,8 @@ public class ControladorInventario {
     public ArrayList<Insumo> obtenerInventarioInsumo(){
         return administradorInventario.obtenerInventarioInsumos();
     }
+    
+    public void mandarImporteInsumoAlAdministrador(String nombreInsumo,int cantidad, double costoTotal){
+        administradorInventario.agregarImporteInvertido(nombreInsumo, cantidad,costoTotal);
+    }
 }

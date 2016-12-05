@@ -36,6 +36,7 @@ public class MensajesDeDialogo {
         JOptionPane.showMessageDialog(null, "No se pueden guadar los datos hasta "
                 + "llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
     }
+<<<<<<< HEAD
 
     public static void mostrarErrorDatosEntradaIncorrectos() {
         JOptionPane.showMessageDialog(null, "Algun dato no ha sido llenado",
@@ -51,4 +52,6 @@ public class MensajesDeDialogo {
         JOptionPane.showMessageDialog(null, "Ruta o Dirección no valida",
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
+=======
+>>>>>>> 6d58b2a27d66b6a6c495b480ea10bc0a418dbe14
 }
