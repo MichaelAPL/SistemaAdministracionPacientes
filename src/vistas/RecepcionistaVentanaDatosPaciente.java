@@ -6,13 +6,7 @@ import controladores.ControladorDatosPaciente;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelos.EscritorReportesPaciente;
-=======
-import modelos.CreadorReportesPaciente;
->>>>>>> 84c4b5de550bf222117120625c5624701c9c3972
 import modelos.Fecha;
 import modelos.MensajesDeDialogo;
 import modelos.Paciente;
@@ -27,12 +21,8 @@ public class RecepcionistaVentanaDatosPaciente {
     private VentanaDatosPaciente ventana;
     private ControladorDatosPaciente controlador;
     private Paciente paciente;
-<<<<<<< HEAD
     private EscritorReportesPaciente creadorReportes;
-=======
-    private CreadorReportesPaciente creadorReportes;
     private final String espacioVacio = "";
->>>>>>> 84c4b5de550bf222117120625c5624701c9c3972
 
     private RecepcionistaVentanaDatosPaciente() {
         ventana = VentanaDatosPaciente.obtenerVentana();

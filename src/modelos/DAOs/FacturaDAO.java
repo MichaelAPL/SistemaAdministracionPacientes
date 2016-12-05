@@ -56,29 +56,13 @@ public class FacturaDAO {
         String consulta = "SELECT * FROM Facturas";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
 
-<<<<<<< HEAD
-        IntervaloFecha intervalo = new IntervaloFecha(mes, año);
-        java.sql.Date inferior = new java.sql.Date(intervalo.getInferior().getTime());
-        java.sql.Date superior = new java.sql.Date(intervalo.getSuperior().getTime());
-        System.out.println(inferior);
-        System.out.println(superior);
-
-        declaracionDeRecuperacion.setDate(1, inferior);
-        declaracionDeRecuperacion.setDate(2, superior);
-
-=======
->>>>>>> 84c4b5de550bf222117120625c5624701c9c3972
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
 
         ArrayList<Factura> facturas = new ArrayList();
 
         while (resultado.next()) {
-<<<<<<< HEAD
-            Factura factura = new Factura(resultado.getInt("FolioFactura"), new Fecha(resultado.getDate("FechaRegistro")),
-=======
             Factura factura = new Factura(resultado.getInt("FolioFactura"),
                     new Fecha(resultado.getDate("FechaRegistro")),
->>>>>>> 84c4b5de550bf222117120625c5624701c9c3972
                     resultado.getDouble("Importe"), resultado.getString("Descripcion"));
 
             facturas.add(factura);
@@ -88,15 +72,11 @@ public class FacturaDAO {
         return facturas;
     }
 
-<<<<<<< HEAD
-    public ArrayList<Factura> recuperarFacturas() throws SQLException {
-=======
     public ArrayList<Factura> recuperarFacturasMes(int mes, int año) throws SQLException {
         //indice campos
         int FECHA_LIMITE_INFERIOR = 1;
         int FECHA_LIMITE_SUPERIOR = 2;
 
->>>>>>> 84c4b5de550bf222117120625c5624701c9c3972
         this.conectorBD.conectar();
 
         String consulta = "SELECT * FROM Facturas WHERE fechaRegistro BETWEEN ? AND ?";
@@ -114,12 +94,8 @@ public class FacturaDAO {
         ArrayList<Factura> facturas = new ArrayList();
 
         while (resultado.next()) {
-<<<<<<< HEAD
-            Factura factura = new Factura(resultado.getInt("FolioFactura"), new Fecha(resultado.getDate("FechaRegistro")),
-=======
             Factura factura = new Factura(resultado.getInt("FolioFactura"),
                     new Fecha(resultado.getDate("FechaRegistro")),
->>>>>>> 84c4b5de550bf222117120625c5624701c9c3972
                     resultado.getDouble("Importe"), resultado.getString("Descripcion"));
 
             facturas.add(factura);
