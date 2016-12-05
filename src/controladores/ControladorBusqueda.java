@@ -39,7 +39,7 @@ public class ControladorBusqueda {
     }
 
     public void recibirIDPaciente(String idPaciente) {
-        ControladorDatosPaciente.obtenerControlador().mandarARecepcionistaPaciente(idPaciente);
+        ControladorDatosPaciente.obtenerControlador().mandarARecepcionistaIDPaciente(idPaciente);
     }
 
 }

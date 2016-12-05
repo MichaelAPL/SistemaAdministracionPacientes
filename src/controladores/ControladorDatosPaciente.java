@@ -33,7 +33,7 @@ public class ControladorDatosPaciente {
         asistente.actualizarDatosPaciente(paciente);
     }
     
-    public void mandarARecepcionistaPaciente(String idPaciente){
+    public void mandarARecepcionistaIDPaciente(String idPaciente){
         RecepcionistaVentanaDatosPaciente.obtenerRecepcionista().
             mostrarDatosPaciente(asistente.buscarPacientePorId(idPaciente));
     }

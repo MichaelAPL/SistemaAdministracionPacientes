@@ -157,7 +157,7 @@ public class RecepcionVentanaInventario {
                 controladorInventario.mandarAVentanaInventarioInsumos();
                 limpiarVentanaModificacionDatosInventario();
             } catch(Exception ex){
-                MensajesDeDialogo.mostrarErrorCamposVacios();
+                MensajesDeDialogo.mostrarErrorDatosEntradaIncorrectos();
             }
         });
     }

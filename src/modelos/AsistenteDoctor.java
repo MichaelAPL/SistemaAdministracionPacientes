@@ -52,7 +52,7 @@ public class AsistenteDoctor {
         ArrayList<Paciente> listaPacientesConCita = new ArrayList();
         ArrayList<Paciente> pacientes = obtenerPacientesEnRegistro();
         for (Paciente paciente : pacientes) {
-            if (!pacienteAsistidoHoy(paciente) && pacienteConTratamientoActivo(paciente)) {
+            if (!asistioPacienteACita(paciente) && tienePacienteTratamientoActivo(paciente)) {
                 listaPacientesConCita.add(paciente);
             }
         }
@@ -101,10 +101,10 @@ public class AsistenteDoctor {
         return pacientes;
     }
 
-    private boolean pacienteAsistidoHoy(Paciente paciente) {
+    private boolean asistioPacienteACita(Paciente paciente) {
         Fecha fechaHoy = new Fecha();
         boolean pacienteYaPasoHoy = false;
-        if (pacientePrimeraCitaAsistida(paciente)) {       
+        if (asistioPacienteAPrimeraCita(paciente)) {       
             pacienteYaPasoHoy = paciente.getTratamiento().getUltimaAplicacion().
                 getFecha().comperTo(fechaHoy);
         }
@@ -112,11 +112,11 @@ public class AsistenteDoctor {
         return pacienteYaPasoHoy;
     }
 
-    private boolean pacienteConTratamientoActivo(Paciente paciente) {
+    private boolean tienePacienteTratamientoActivo(Paciente paciente) {
         return paciente.getTratamiento().isActivo();
     }
 
-    private boolean pacientePrimeraCitaAsistida(Paciente paciente) {
+    private boolean asistioPacienteAPrimeraCita(Paciente paciente) {
         return (paciente.getTratamiento().getUltimaAplicacion() != null);
     }
     
