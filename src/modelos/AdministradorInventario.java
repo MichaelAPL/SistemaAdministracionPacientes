@@ -67,19 +67,20 @@ public class AdministradorInventario {
     public void decrementarInsumo(String nombreInsumo, int cantidadDecrementar) {
         Insumo insumo = buscarInsumo(nombreInsumo);
         if (insumo instanceof InventarioMedicamentos) {
-            
             InventarioMedicamentos in_medicamento = (InventarioMedicamentos) insumo;
-            
             in_medicamento.setCantidadTotalMililitros
                 (in_medicamento.getCantidadTotalMililitros()-cantidadDecrementar);
             actualizarInventario(in_medicamento);
-            
+//            verificarCantidadUnidades(in_medicamento.getUnidadesExistentes(), nombreInsumo);
         } else {
             InventarioUtensilios in_utensilio = (InventarioUtensilios) insumo;
             in_utensilio.setExistencias
                 (in_utensilio.getExistencias()-cantidadDecrementar);
             actualizarInventario(in_utensilio);
+//            verificarCantidadUnidades(in_utensilio.getExistencias(), nombreInsumo);
         }
+        
+        
     }
 
     public ArrayList<Insumo> obtenerInventarioInsumos() {
@@ -93,5 +94,12 @@ public class AdministradorInventario {
         }
 
         return inventarioInsumo;
+    }
+    
+    private void verificarCantidadUnidades(int cantidad, String nombre){
+        int cantidadMinimaUnidades = 10;
+        if (cantidad<40) {
+            MensajesDeDialogo.mostrarCantidadInsuficienteInsumos(nombre);
+        }
     }
 }
