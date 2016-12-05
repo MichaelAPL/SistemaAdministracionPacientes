@@ -56,12 +56,13 @@ public class RecepcionistaVentanaRegistroPaciente {
                 Paciente paciente = new Paciente(persona, medicamentosExternos, enfermedadesPrevias, tratamiento);
 
                 controlador.mandarAAsistenteNuevoPaciente(paciente);
+                ventana.dispose();
                 ventana.limpiarVentana();
             } catch (Exception ex) {
-                MensajesDeDialogo.mostrarErrorCamposVacios();
+                MensajesDeDialogo.mostrarErrorDatosEntradaIncorrectos();
             }
 
-            ventana.dispose();
+            
         });
 
         ventana.getjEliminarEnfermedad().addActionListener((ActionEvent e) -> {

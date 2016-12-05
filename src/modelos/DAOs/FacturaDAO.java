@@ -54,6 +54,8 @@ public class FacturaDAO {
         IntervaloFecha intervalo = new IntervaloFecha(mes, año);
         java.sql.Date inferior = new java.sql.Date(intervalo.getInferior().getTime());
         java.sql.Date superior = new java.sql.Date(intervalo.getSuperior().getTime());
+        System.out.println(inferior);
+        System.out.println(superior);
         
         declaracionDeRecuperacion.setDate(1, inferior);
         declaracionDeRecuperacion.setDate(2, superior);

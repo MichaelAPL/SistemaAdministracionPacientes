@@ -65,6 +65,7 @@ public class AsistenteDoctor {
         paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Fecha());
         
         pasarAlPacienteAlaEnfermera(paciente);
+        pasarAlPacienteAlContador();
 
         crearNuevaCitaAlPaciente(paciente);
     }
@@ -120,7 +121,12 @@ public class AsistenteDoctor {
     }
     
     private void pasarAlPacienteAlaEnfermera(Paciente paciente){
-        Enfermera.llamarEnfermera().atenderPaciente(paciente.getTratamiento().
-                getSiguienteAplicacion().getSuero(), paciente.getTratamiento().getDosis_EDTA_ml());
+        Enfermera.llamarEnfermera().atenderPaciente(paciente);
     }
+
+    private void pasarAlPacienteAlContador() {
+        Contador.llamarContador().cobrarPaciente();
+    }
+    
+    
 }

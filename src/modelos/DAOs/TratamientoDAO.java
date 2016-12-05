@@ -8,7 +8,6 @@ package modelos.DAOs;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import modelos.Fecha;
 import modelos.Tratamiento;
 import modelos.database.ConectorBD;
 
