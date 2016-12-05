@@ -19,6 +19,11 @@ import modelos.database.ConectorBD;
  */
 public class InventarioMedicamentosDAO {
     private ConectorBD conectorBD;
+    private final int INDICE_NOMBRE = 1;
+    private final int INDICE_EXISTENCIAS = 2;
+    private final int INDICE_MLS_UNIDAD = 3;
+    private final int INDICE_MLS_TOTALES = 4;
+    private final int INDICE_COSTO_UNIDAD = 5;
     
     public InventarioMedicamentosDAO(){
         this.conectorBD = new ConectorBD();
@@ -37,11 +42,10 @@ public class InventarioMedicamentosDAO {
         ArrayList<Insumo> inventarioMedicamentos = new ArrayList();
         
         while(resultado.next()){
-            InventarioMedicamentos medicamento = new InventarioMedicamentos(resultado.getString("Nombre_Medicamento"), 
-                    resultado.getInt("Unidades_Existentes"), 
-                    resultado.getInt("Mililitros_Por_Unidad"), 
-                    resultado.getDouble("Costo_Por_Unidad"));
-            
+            InventarioMedicamentos medicamento = new InventarioMedicamentos(resultado.getString(this.INDICE_NOMBRE), 
+                    resultado.getInt(this.INDICE_EXISTENCIAS), 
+                    resultado.getInt(this.INDICE_MLS_UNIDAD), 
+                    resultado.getDouble(this.INDICE_COSTO_UNIDAD));
             inventarioMedicamentos.add(medicamento);
         }
         
@@ -61,10 +65,10 @@ public class InventarioMedicamentosDAO {
         
         PreparedStatement declaracion = conectorBD.consulta(consulta);
         
-        declaracion.setInt(1, medicamento.getUnidadesExistentes());
-        declaracion.setInt(2, medicamento.getMililitrosPorUnidad());
-        declaracion.setInt(3, medicamento.getCantidadTotalMililitros());
-        declaracion.setDouble(4, medicamento.getCostoUnitario());
+        declaracion.setInt(this.INDICE_EXISTENCIAS-1, medicamento.getUnidadesExistentes());
+        declaracion.setInt(this.INDICE_MLS_UNIDAD-1, medicamento.getMililitrosPorUnidad());
+        declaracion.setInt(this.INDICE_MLS_TOTALES-1, medicamento.getCantidadTotalMililitros());
+        declaracion.setDouble(this.INDICE_COSTO_UNIDAD-1, medicamento.getCostoUnitario());
         declaracion.setString(5, medicamento.getNombre());
         
         declaracion.execute();
