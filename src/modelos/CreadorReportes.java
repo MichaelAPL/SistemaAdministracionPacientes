@@ -20,10 +20,6 @@ import java.util.logging.Logger;
 import modelos.DAOs.PacienteDAO;
 
 
-
-
-
-
 /**
  *
  * @author miguelangel
@@ -50,10 +46,6 @@ public class CreadorReportes {
             Fecha fechaReporte, ArrayList<Paciente> pacientes) throws DocumentException {
         documento.open();
         
-        documento.add(new Paragraph(ENCABEZADO_REPORTE));
-        documento.add(new Paragraph(TITULO_REPORTE));
-        documento.add(new Paragraph("Fecha: " + fechaReporte.toString()));
-        
         Paragraph espacioEnBlanco = new Paragraph(" ");
         Paragraph nombre;
         Paragraph apellidos;
@@ -61,19 +53,30 @@ public class CreadorReportes {
         Paragraph numAplicaciones;
         Paragraph fechaInicio;
         
+        documento.add(new Paragraph(ENCABEZADO_REPORTE));
+        documento.add(new Paragraph(TITULO_REPORTE));
+        documento.add(new Paragraph("Fecha: " + fechaReporte.toString()));
+        documento.add(espacioEnBlanco);                
+        
         for (int i = 0; i < pacientes.size(); i++) {
             nombre = new Paragraph("Nombre: " + pacientes.get(i).getNombres());
             apellidos = new Paragraph("Apellidos: " + pacientes.get(i).getApellidos());
             edad = new Paragraph("Edad: " + pacientes.get(i).getEdad());
-            //numAplicaciones = new Paragraph("Número de Aplicaciones :" + 
-            //        pacientes.get(i).getTratamiento().getUltimaAplicacion().getNumAplicacion());
+            
+            if(pacientes.get(i).getTratamiento().getUltimaAplicacion() != null){
+                numAplicaciones = new Paragraph("Número de Aplicaciones: " + 
+                    pacientes.get(i).getTratamiento().getUltimaAplicacion().getNumAplicacion());
+            }else{
+                numAplicaciones = new Paragraph("Numero de Aplicaciones: 0");
+            }
+            
             fechaInicio = new Paragraph("Fecha de Inicio: " + 
                     pacientes.get(i).getFechaDeInscripcion().toString());
             
             documento.add(nombre);
             documento.add(apellidos);
             documento.add(edad);
-            //documento.add(numAplicaciones);
+            documento.add(numAplicaciones);
             documento.add(fechaInicio);
             documento.add(espacioEnBlanco);
             
@@ -104,7 +107,7 @@ public class CreadorReportes {
         CreadorReportes cr = new CreadorReportes();
         Fecha hoy = new Fecha();
         try {
-            ArrayList<Paciente> pacientes = dao.recuperarTodos();
+            ArrayList<Paciente> pacientes = dao.recuperarTodos();            
             cr.crearReporte(hoy, pacientes);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CreadorReportes.class.getName()).log(Level.SEVERE, null, ex);
