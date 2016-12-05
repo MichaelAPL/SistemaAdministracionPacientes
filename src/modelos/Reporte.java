@@ -45,7 +45,7 @@ public class Reporte {
     }
     
     public void insertarParrafo(String texto) throws DocumentException{
-        Paragraph paragraph = new Paragraph("texto");
+        Paragraph paragraph = new Paragraph(texto);
         reporte.add(paragraph);
     }
     
