@@ -19,9 +19,9 @@ import modelos.database.ConectorBD;
  * @author Milka
  */
 public class FacturaDAO {
-    
+
     private ConectorBD conectorBD;
-    
+
     public FacturaDAO() {
         this.conectorBD = new ConectorBD();
     }
@@ -56,39 +56,39 @@ public class FacturaDAO {
         java.sql.Date superior = new java.sql.Date(intervalo.getSuperior().getTime());
         System.out.println(inferior);
         System.out.println(superior);
-        
+
         declaracionDeRecuperacion.setDate(1, inferior);
         declaracionDeRecuperacion.setDate(2, superior);
-        
+
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
 
         ArrayList<Factura> facturas = new ArrayList();
 
         while (resultado.next()) {
-            Factura factura = new Factura(resultado.getInt("FolioFactura"), new Fecha (resultado.getDate("FechaRegistro")),
+            Factura factura = new Factura(resultado.getInt("FolioFactura"), new Fecha(resultado.getDate("FechaRegistro")),
                     resultado.getDouble("Importe"), resultado.getString("Descripcion"));
-            
+
             facturas.add(factura);
         }
 
         this.conectorBD.desconectar();
         return facturas;
     }
-    
-        public ArrayList<Factura> recuperarFacturas() throws SQLException {
+
+    public ArrayList<Factura> recuperarFacturas() throws SQLException {
         this.conectorBD.conectar();
 
         String consulta = "SELECT * FROM Facturas";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
 
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
-        
+
         ArrayList<Factura> facturas = new ArrayList();
 
         while (resultado.next()) {
-            Factura factura = new Factura(resultado.getInt("FolioFactura"), new Fecha (resultado.getDate("FechaRegistro")),
+            Factura factura = new Factura(resultado.getInt("FolioFactura"), new Fecha(resultado.getDate("FechaRegistro")),
                     resultado.getDouble("Importe"), resultado.getString("Descripcion"));
-            
+
             facturas.add(factura);
         }
 
