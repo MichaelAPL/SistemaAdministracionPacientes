@@ -36,29 +36,31 @@ public class Reporte {
         PdfWriter.getInstance(reporte, ficheroPdf).setInitialLeading(interlineado);
     }
     
+    public void abrirReporte(){
+        reporte.open();
+    }
+    
+    public void cerrarReporte(){
+        reporte.close();
+    }
+    
     public void insertarParrafo(String texto) throws DocumentException{
         Paragraph paragraph = new Paragraph("texto");
-        reporte.open();
         reporte.add(paragraph);
-        reporte.close();
     }
     
     public void insertarSaltoDeLinea() throws DocumentException{
         Paragraph paragraph = new Paragraph(" ");
-        reporte.open();
         reporte.add(paragraph);
-        reporte.close();
     }
     
     public void insertarTabla(String titulo, ArrayList datos) throws DocumentException{
         PdfPTable tabla = new PdfPTable(1);
-        reporte.open();
         tabla.addCell(titulo);
         for (int i = 0; i < datos.size(); i++) {
             tabla.addCell((String)datos.get(i));
         }
         reporte.add(tabla);
         insertarSaltoDeLinea();
-        reporte.close();
     }
 }

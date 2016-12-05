@@ -24,6 +24,7 @@ public class EscritorReportesPaciente {
 
 
     public void llenarReportePaciente(Paciente paciente, Fecha fechaReporte) throws DocumentException {
+        reporte.abrirReporte();
         reporte.insertarParrafo(ENCABEZADO_REPORTE);
         reporte.insertarParrafo(TITULO_REPORTE);
         reporte.insertarSaltoDeLinea();
@@ -51,5 +52,6 @@ public class EscritorReportesPaciente {
         reporte.insertarSaltoDeLinea();
         
         reporte.insertarTabla("Medicamentos", paciente.getMedicamentosExternos());
+        reporte.cerrarReporte();
     }
 }
