@@ -91,7 +91,6 @@ public class TratamientoDAO {
                 + "Activo = 1";
 
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, pacienteID);
 
         ResultSet resultado = declaracion.executeQuery();
 
