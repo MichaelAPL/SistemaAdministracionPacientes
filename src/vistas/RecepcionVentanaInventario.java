@@ -134,11 +134,7 @@ public class RecepcionVentanaInventario {
         });
         
         ventanaModificacionDatosInventario.getAplicarCambios().addActionListener((ActionEvent e) ->{
-            boolean costoNuevoVacio = ventanaModificacionDatosInventario.getNuevoCosto().getText() == null;
-            boolean MlsModificadoNuevoVacio = (esMedicamento(ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedIndex())
-                    && ventanaModificacionDatosInventario.getMlsModificado().getText() == null);
-            
-            if (costoNuevoVacio && MlsModificadoNuevoVacio) {
+            try{
                 String nombreInsumo = String.valueOf(ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedItem());
                 int existencias = obtenerCantidadInsumosAnterior(
                         ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedIndex());
@@ -157,8 +153,8 @@ public class RecepcionVentanaInventario {
                 controladorInventario.mandarModificacionesAlInventario(insumoModificado);
                 controladorInventario.mandarAVentanaInventarioInsumos();
                 limpiarVentanaModificacionDatosInventario();
-            } else {
-                MensajesDeDialogo.mostrarErrorDatosEntradaIncorrectos();
+            } catch(Exception ex){
+                MensajesDeDialogo.mostrarErrorCamposVacios();
             }
         });
     }
