@@ -31,4 +31,9 @@ public class MensajesDeDialogo {
         JOptionPane.showMessageDialog(null, "Hubo un error al disminuir los insumos",
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public static void mostrarErrorCamposVacios() {
+        JOptionPane.showMessageDialog(null, "No se pueden guadar los datos hasta "
+            + "llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

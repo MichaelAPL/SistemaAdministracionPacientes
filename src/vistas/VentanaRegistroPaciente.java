@@ -5,48 +5,105 @@
  */
 package vistas;
 
-import controladores.ControladorRegistro;
-import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import modelos.Paciente;
-import modelos.Persona;
-import modelos.Tratamiento;
 
 /**
  *
  * @author Milka
  */
-public class VentanaRegistroPacientes extends javax.swing.JFrame {
+public class VentanaRegistroPaciente extends javax.swing.JFrame {
 
     /**
-     * Creates new form VentanaRegistroPacientes
+     * Creates new form VentanaRegistroPaciente
      */
-    private static VentanaRegistroPacientes ventanaRegistro;
-    private ControladorRegistro controladorRegistro;
-    private ArrayList<String> enfermedadesPrevias;
-    private ArrayList<String> medicamentosExternos;
+    private static VentanaRegistroPaciente ventana;
 
-    private VentanaRegistroPacientes() {
+    private VentanaRegistroPaciente() {
         initComponents();
-        this.controladorRegistro = new ControladorRegistro();
-        inicializarTablaPadecimientos();
-        inicializarTablaMedicamentos();
         setLocationRelativeTo(null);
-        
+        inicializarTablaMedicamentos();
+        inicializarTablaPadecimientos();
+
     }
-    
-    public static VentanaRegistroPacientes obtenerUnicaVentanaRegistroPacientes(){
-        if (ventanaRegistro == null) {
-            ventanaRegistro = new VentanaRegistroPacientes();
+
+    public static VentanaRegistroPaciente obtenerUnicaVentana() {
+        if (ventana == null) {
+            ventana = new VentanaRegistroPaciente();
         }
-        
-        ventanaRegistro.setVisible(true);
-        return ventanaRegistro;
+        return ventana;
     }
+
+    public JTextField getEDTA() {
+        return EDTA;
+    }
+
+    public JTextField getApellidos() {
+        return apellidos;
+    }
+
+    public JButton getAñadirEnfermedad() {
+        return añadirEnfermedad;
+    }
+
+    public JButton getAñadirMedicamento() {
+        return añadirMedicamento;
+    }
+
+    public JButton getBotonGuardar() {
+        return botonGuardar;
+    }
+
+    public JTextField getDireccion() {
+        return direccion;
+    }
+
+    public JTextField getEdad() {
+        return edad;
+    }
+
+    public JMenuItem getjEliminarEnfermedad() {
+        return jEliminarEnfermedad;
+    }
+
+    public JMenuItem getjEliminarMedicamento() {
+        return jEliminarMedicamento;
+    }
+
+    public JTextField getLocalidad() {
+        return localidad;
+    }
+
+    public JTextField getMedicamento() {
+        return medicamento;
+    }
+
+    public JTextField getNombres() {
+        return nombres;
+    }
+
+    public JTextField getPadecimiento() {
+        return padecimiento;
+    }
+
+    public JTable getTablaMedicamentos() {
+        return tablaMedicamentos;
+    }
+
+    public JTable getTablaPadecimientos() {
+        return tablaPadecimientos;
+    }
+
+    public JTextField getTelefono() {
+        return telefono;
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+        private void initComponents() {
 
         jPopUpMenu = new javax.swing.JPopupMenu();
         jEliminarEnfermedad = new javax.swing.JMenuItem();
@@ -80,19 +137,9 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         añadirMedicamento = new javax.swing.JButton();
 
         jEliminarEnfermedad.setText("Eliminar");
-        jEliminarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEliminarEnfermedadActionPerformed(evt);
-            }
-        });
         jPopUpMenu.add(jEliminarEnfermedad);
 
         jEliminarMedicamento.setText("Eliminar");
-        jEliminarMedicamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEliminarMedicamentoActionPerformed(evt);
-            }
-        });
         jPopUpMenu2.add(jEliminarMedicamento);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -125,12 +172,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
 
         etiquetaPadecimientos.setText("Enfermedades Previas");
 
-        padecimiento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                padecimientoKeyPressed(evt);
-            }
-        });
-
         tablaPadecimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -146,11 +187,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         scrollTabla.setViewportView(tablaPadecimientos);
 
         botonGuardar.setText("Registrar");
-        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarActionPerformed(evt);
-            }
-        });
 
         edad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -159,12 +195,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Medicamentos");
-
-        medicamento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                medicamentoKeyPressed(evt);
-            }
-        });
 
         tablaMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,18 +211,8 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         scrollTabla1.setViewportView(tablaMedicamentos);
 
         añadirEnfermedad.setText("+");
-        añadirEnfermedad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                añadirEnfermedadActionPerformed(evt);
-            }
-        });
 
         añadirMedicamento.setText("+");
-        añadirMedicamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                añadirMedicamentoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -326,20 +346,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        Persona persona = new Persona(nombres.getText(), apellidos.getText(),
-                direccion.getText(), localidad.getText(),
-                telefono.getText(), Integer.parseInt(edad.getText()));
-
-        Tratamiento tratamiento = new Tratamiento(Integer.parseInt(this.EDTA.getText()));
-
-        Paciente paciente = new Paciente(persona, this.medicamentosExternos,
-                this.enfermedadesPrevias, tratamiento);
-        
-        controladorRegistro.mandarAAsistenteNuevoPaciente(paciente);
-        ventanaRegistro.dispose();
-    }//GEN-LAST:event_botonGuardarActionPerformed
-
     private void edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edadKeyTyped
         char caracter = evt.getKeyChar();
         if (caracter < '0' || caracter > '9') {
@@ -361,48 +367,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_EDTAKeyTyped
 
-    private void padecimientoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_padecimientoKeyPressed
-        char caracter = evt.getKeyChar();
-    }//GEN-LAST:event_padecimientoKeyPressed
-
-    private void medicamentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_medicamentoKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_medicamentoKeyPressed
-
-    private void añadirEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirEnfermedadActionPerformed
-        if(!this.padecimiento.getText().equals("")){
-            this.enfermedadesPrevias.add(padecimiento.getText());
-            actualizarDatosTabla(this.tablaPadecimientos, this.enfermedadesPrevias);
-            this.padecimiento.setText("");
-        }        
-    }//GEN-LAST:event_añadirEnfermedadActionPerformed
-
-    private void añadirMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirMedicamentoActionPerformed
-        if(!this.medicamento.getText().equals("")){
-            this.medicamentosExternos.add(medicamento.getText());
-            actualizarDatosTabla(this.tablaMedicamentos, this.medicamentosExternos);
-            this.medicamento.setText("");
-        }        
-    }//GEN-LAST:event_añadirMedicamentoActionPerformed
-
-    private void jEliminarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarEnfermedadActionPerformed
-        eliminarEnfermedad(this.tablaPadecimientos);
-    }//GEN-LAST:event_jEliminarEnfermedadActionPerformed
-
-    private void jEliminarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarMedicamentoActionPerformed
-        eliminarMedicamento(this.tablaMedicamentos);
-    }//GEN-LAST:event_jEliminarMedicamentoActionPerformed
-
-    private void inicializarTablaPadecimientos() {
-        this.enfermedadesPrevias = new ArrayList();
-        this.tablaPadecimientos.setModel(crearCuerpoTabla("Padecimientos Previos"));
-    }
-
-    private void inicializarTablaMedicamentos() {
-        this.medicamentosExternos = new ArrayList();
-        this.tablaMedicamentos.setModel(crearCuerpoTabla("Medicamentos Externos"));
-    }
-
     private DefaultTableModel crearCuerpoTabla(String nombreCabecera) {
         DefaultTableModel modelo;
         String cabecera[] = {nombreCabecera};
@@ -410,25 +374,25 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
         modelo = new DefaultTableModel(datos, cabecera);
         return modelo;
     }
-    
-    private void actualizarDatosTabla(JTable tabla, ArrayList<String> datos){
-        String cabecera[] = {tabla.getColumnName(0)};
-        String[][] cuerpo= new String[datos.size()][1];
-        for (int i = 0; i < datos.size(); i++) {
-            cuerpo[i][0] = datos.get(i);
-        }
-        DefaultTableModel modelo = new DefaultTableModel(cuerpo, cabecera);
-        tabla.setModel(modelo);
+
+    private void inicializarTablaPadecimientos() {
+        getTablaPadecimientos().setModel(crearCuerpoTabla("Padecimientos Previos"));
+    }
+
+    private void inicializarTablaMedicamentos() {
+        getTablaMedicamentos().setModel(crearCuerpoTabla("Medicamentos Externos"));
     }
     
-    private void eliminarEnfermedad(JTable tabla){
-        this.enfermedadesPrevias.remove(tabla.getSelectedRow());
-        actualizarDatosTabla(tabla, this.enfermedadesPrevias);
-    }
-    
-    private void eliminarMedicamento(JTable tabla){
-        this.medicamentosExternos.remove(tabla.getSelectedRow());
-        actualizarDatosTabla(tabla, this.medicamentosExternos);
+    public void limpiarVentana() {
+       getNombres().setText(null);
+       getApellidos().setText(null);
+       getLocalidad().setText(null);
+       getDireccion().setText(null);
+       getTelefono().setText(null);
+       getEdad().setText(null);
+       getEDTA().setText(null);
+       inicializarTablaMedicamentos();
+       inicializarTablaPadecimientos();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -463,4 +427,6 @@ public class VentanaRegistroPacientes extends javax.swing.JFrame {
     private javax.swing.JTable tablaPadecimientos;
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
+
+    
 }

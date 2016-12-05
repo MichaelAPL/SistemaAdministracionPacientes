@@ -5,12 +5,7 @@
  */
 package controladores;
 
-import modelos.AdministradorInventario;
-import modelos.AsistenteDoctor;
-import vistas.VentanaBusqueda;
-import vistas.VentanaInventario;
-import vistas.VentanaPaseLista;
-import vistas.VentanaRegistroPacientes;
+
 /**
  *
  * @author Milka
@@ -28,7 +23,8 @@ public class ControladorPrincipal {
     }
 
     public void mostrarVentanaRegistroPacientes() {
-        VentanaRegistroPacientes.obtenerUnicaVentanaRegistroPacientes();
+        ControladorRegistro.obtenerControlador();
+        ControladorRegistro.obtenerControlador().llamarRecepcionista();
     }
     
     public void mostrarVentanaInventario(){
