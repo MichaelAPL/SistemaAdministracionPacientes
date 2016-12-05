@@ -12,11 +12,6 @@ package modelos;
 public class InventarioUtensilios extends Insumo {
     private int existencias;
 
-    public InventarioUtensilios(String nombre, int existencias) {
-        super(nombre);
-        this.existencias = existencias;
-    }
-    
     public InventarioUtensilios(String nombre, int existencias, double costoUnitario){
         super(nombre, costoUnitario);
         this.existencias = existencias;

@@ -17,10 +17,10 @@ import modelos.DAOs.InventarioUtensiliosDAO;
  * @author Angel Basto Gonzalez
  */
 public class AdministradorInventario {
-
-    private InventarioUtensiliosDAO inventarioUtensiliosDAO;
-    private InventarioMedicamentosDAO inventarioMedicamentosDAO;
+    
     private static AdministradorInventario administradorInventario;
+    private InventarioMedicamentosDAO inventarioMedicamentosDAO;
+    private InventarioUtensiliosDAO inventarioUtensiliosDAO;
 
     private AdministradorInventario() {
         inventarioUtensiliosDAO = new InventarioUtensiliosDAO();
@@ -33,7 +33,7 @@ public class AdministradorInventario {
         }
         return administradorInventario;
     }
-
+    
     public void actualizarInventario(Insumo insumo) {
         try {
             if (insumo instanceof InventarioMedicamentos) {
@@ -46,20 +46,24 @@ public class AdministradorInventario {
             MensajesDeDialogo.errorConLaBD();
         }
     }
-
-    public ArrayList<Insumo> obtenerInventarioInsumos() {
-        ArrayList<Insumo> inventarioInsumo = null;
-        try {
-            inventarioInsumo = inventarioMedicamentosDAO.recuperarTodoInventarioMedicamentos();
-            inventarioInsumo.addAll(inventarioUtensiliosDAO.recuperarTodoInventarioUtensilios());
-        } catch (SQLException ex) {
-            MensajesDeDialogo.errorConLaBD();
-            Logger.getLogger(AdministradorInventario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return inventarioInsumo;
+    
+    public void agregarImporteInvertido(String nombreInsumo, int cantidad, double importe) {
+        String descripcion = "Se realizo una contro de " + cantidad + " " + nombreInsumo;
+        Contador.llamarContador().agregarImporte(importe, descripcion);
     }
-
+    
+    private Insumo buscarInsumo(String nombreInsumo) {
+        ArrayList<Insumo> insumos = AdministradorInventario.
+                obtenerUnicoAdministradorInventario().obtenerInventarioInsumos();
+        for (int i = 0; i < insumos.size(); i++) {
+            if (insumos.get(i).getNombre().equals(nombreInsumo)) {
+                return insumos.get(i);
+            }
+        }
+        MensajesDeDialogo.mostrarErrorNoSeEncuentraInsumo();
+        return null;
+    }
+    
     public void decrementarInsumo(String nombreInsumo, int cantidadDecrementar) {
         Insumo insumo = buscarInsumo(nombreInsumo);
         if (insumo instanceof InventarioMedicamentos) {
@@ -77,21 +81,17 @@ public class AdministradorInventario {
             actualizarInventario(in_utensilio);
         }
     }
-    
-    private Insumo buscarInsumo(String nombreInsumo) {
-        ArrayList<Insumo> insumos = AdministradorInventario.
-                obtenerUnicoAdministradorInventario().obtenerInventarioInsumos();
-        for (int i = 0; i < insumos.size(); i++) {
-            if (insumos.get(i).getNombre().equals(nombreInsumo)) {
-                return insumos.get(i);
-            }
+
+    public ArrayList<Insumo> obtenerInventarioInsumos() {
+        ArrayList<Insumo> inventarioInsumo = null;
+        try {
+            inventarioInsumo = inventarioMedicamentosDAO.recuperarTodoInventarioMedicamentos();
+            inventarioInsumo.addAll(inventarioUtensiliosDAO.recuperarTodoInventarioUtensilios());
+        } catch (SQLException ex) {
+            MensajesDeDialogo.errorConLaBD();
+            Logger.getLogger(AdministradorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MensajesDeDialogo.mostrarErrorNoSeEncuentraInsumo();
-        return null;
-    }
-    
-    public void agregarImporteInvertido(String nombreInsumo, int cantidad, double importe){
-        String descripcion = "Se realizo una contro de " + cantidad + " " + nombreInsumo;
-        Contador.llamarContador().agregarImporte(importe, descripcion);
+
+        return inventarioInsumo;
     }
 }

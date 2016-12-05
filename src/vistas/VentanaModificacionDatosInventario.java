@@ -22,9 +22,7 @@ public class VentanaModificacionDatosInventario extends javax.swing.JFrame {
     private VentanaModificacionDatosInventario() {
         initComponents();
         setLocationRelativeTo(null);
-        //etiquetaCosto.setVisible(false);
         etiquetaMls.setVisible(false);
-        //nuevoCosto.setVisible(false);
         MlsModificado.setVisible(false);
     }
     
@@ -73,6 +71,7 @@ public class VentanaModificacionDatosInventario extends javax.swing.JFrame {
         aplicarCambios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Modificacion Inventario");
 
         opcionesMenu.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 

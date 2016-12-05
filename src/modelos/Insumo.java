@@ -21,20 +21,20 @@ public class Insumo {
     public Insumo(String nombre) {
         this.nombre = nombre;
     }
-
+    
+    public double getCostoUnitario() {
+        return costoUnitario;
+    }
+    
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getCostoUnitario() {
-        return costoUnitario;
-    }
-
     public void setCostoUnitario(double costoUnitario) {
         this.costoUnitario = costoUnitario;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

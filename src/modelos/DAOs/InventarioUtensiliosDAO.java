@@ -19,9 +19,31 @@ import modelos.database.ConectorBD;
  */
 public class InventarioUtensiliosDAO {
     private ConectorBD conectorBD;
+    private final int INDICE_Nombre_Utensilio = 1;
+    private final int INDICE_Existencias = 2;
+    private final int INDICE_Costo_Unitario = 3;
     
     public InventarioUtensiliosDAO(){
         this.conectorBD = new ConectorBD();
+    }
+    
+    public void actualizar(InventarioUtensilios utensilio) throws SQLException{
+        conectorBD.conectar();
+        int INDICE_Clausula = 3;
+        
+        String consulta = "UPDATE InventarioUtensilios SET Existencias = ?,"
+                + "Costo_Unitario = ?"
+                + "where Nombre_Utensilio = ?";
+        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        
+        declaracion.setInt(this.INDICE_Existencias-1, utensilio.getExistencias());
+        declaracion.setDouble(this.INDICE_Costo_Unitario-1, utensilio.getCostoUnitario());
+        declaracion.setString(INDICE_Clausula, utensilio.getNombre());
+        
+        declaracion.execute();
+        
+        this.conectorBD.desconectar();
     }
     
     public ArrayList<Insumo> recuperarTodoInventarioUtensilios() throws SQLException{
@@ -37,8 +59,9 @@ public class InventarioUtensiliosDAO {
         ArrayList<Insumo> inventarioUtensilios = new ArrayList();
         
         while(resultado.next()){
-            InventarioUtensilios utensilio = new InventarioUtensilios(resultado.getString("Nombre_Utensilio"), 
-                            resultado.getInt("Existencias"), resultado.getDouble("Costo_Unitario"));
+            InventarioUtensilios utensilio = new InventarioUtensilios(resultado.getString(this.INDICE_Nombre_Utensilio), 
+                            resultado.getInt(this.INDICE_Existencias), 
+                            resultado.getDouble(this.INDICE_Costo_Unitario));
             
             inventarioUtensilios.add(utensilio);
         }
@@ -46,23 +69,5 @@ public class InventarioUtensiliosDAO {
         this.conectorBD.desconectar();
         //**********************
         return inventarioUtensilios;
-    }
-    
-    public void actualizar(InventarioUtensilios utensilio) throws SQLException{
-        conectorBD.conectar();
-        
-        String consulta = "UPDATE InventarioUtensilios SET Existencias = ?,"
-                + "Costo_Unitario = ?"
-                + "where Nombre_Utensilio = ?";
-        
-        PreparedStatement declaracion = conectorBD.consulta(consulta);
-        
-        declaracion.setInt(1, utensilio.getExistencias());
-        declaracion.setDouble(2, utensilio.getCostoUnitario());
-        declaracion.setString(3, utensilio.getNombre());
-        
-        declaracion.execute();
-        
-        this.conectorBD.desconectar();
     }
 }

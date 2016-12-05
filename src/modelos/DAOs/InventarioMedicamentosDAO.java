@@ -29,6 +29,29 @@ public class InventarioMedicamentosDAO {
         this.conectorBD = new ConectorBD();
     }
     
+    public void actualizar(InventarioMedicamentos medicamento) throws SQLException{
+        conectorBD.conectar();
+        
+        String consulta = "UPDATE InventarioMedicamentos SET Unidades_Existentes = ?,"
+                + "Mililitros_Por_Unidad = ?,"
+                + "Mililitros_Totales_Existentes = ?,"
+                + "Costo_Por_Unidad = ?"
+                + "where Nombre_Medicamento = ?";
+        int INDICE_Clausula = 5;
+        
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        
+        declaracion.setInt(this.INDICE_EXISTENCIAS-1, medicamento.getUnidadesExistentes());
+        declaracion.setInt(this.INDICE_MLS_UNIDAD-1, medicamento.getMililitrosPorUnidad());
+        declaracion.setInt(this.INDICE_MLS_TOTALES-1, medicamento.getCantidadTotalMililitros());
+        declaracion.setDouble(this.INDICE_COSTO_UNIDAD-1, medicamento.getCostoUnitario());
+        declaracion.setString(INDICE_Clausula, medicamento.getNombre());
+        
+        declaracion.execute();
+        
+        this.conectorBD.desconectar();
+    }
+    
     public ArrayList<Insumo> recuperarTodoInventarioMedicamentos() throws SQLException{
         conectorBD.conectar();
         
@@ -52,27 +75,5 @@ public class InventarioMedicamentosDAO {
         this.conectorBD.desconectar();
         
         return inventarioMedicamentos;
-    }
-    
-    public void actualizar(InventarioMedicamentos medicamento) throws SQLException{
-        conectorBD.conectar();
-        
-        String consulta = "UPDATE InventarioMedicamentos SET Unidades_Existentes = ?,"
-                + "Mililitros_Por_Unidad = ?,"
-                + "Mililitros_Totales_Existentes = ?,"
-                + "Costo_Por_Unidad = ?"
-                + "where Nombre_Medicamento = ?";
-        
-        PreparedStatement declaracion = conectorBD.consulta(consulta);
-        
-        declaracion.setInt(this.INDICE_EXISTENCIAS-1, medicamento.getUnidadesExistentes());
-        declaracion.setInt(this.INDICE_MLS_UNIDAD-1, medicamento.getMililitrosPorUnidad());
-        declaracion.setInt(this.INDICE_MLS_TOTALES-1, medicamento.getCantidadTotalMililitros());
-        declaracion.setDouble(this.INDICE_COSTO_UNIDAD-1, medicamento.getCostoUnitario());
-        declaracion.setString(5, medicamento.getNombre());
-        
-        declaracion.execute();
-        
-        this.conectorBD.desconectar();
     }
 }
