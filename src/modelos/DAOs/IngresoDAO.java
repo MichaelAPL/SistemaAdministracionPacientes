@@ -19,8 +19,9 @@ import modelos.database.ConectorBD;
  * @author Milka
  */
 public class IngresoDAO {
+
     private ConectorBD conectorBD;
-    
+
     public IngresoDAO() {
         this.conectorBD = new ConectorBD();
     }
@@ -30,7 +31,7 @@ public class IngresoDAO {
 
         String campos = "FolioIngreso, Fecha, Monto";
 
-        String consulta = "INSERT INTO Ingresos (" + campos + ")" + " VALUES (?,?,?,?)";
+        String consulta = "INSERT INTO Ingresos (" + campos + ")" + " VALUES (?,?,?)";
 
         PreparedStatement declaracion = conectorBD.consulta(consulta);
 
@@ -43,7 +44,7 @@ public class IngresoDAO {
         conectorBD.desconectar();
     }
 
-        public ArrayList<Ingreso> recuperarIngresosMes(int mes, int año) throws SQLException {
+    public ArrayList<Ingreso> recuperarIngresosMes(int mes, int año) throws SQLException {
         this.conectorBD.conectar();
 
         String consulta = "SELECT * FROM Facturas WHERE fechaRegistro BETWEEN ? AND ?";
@@ -52,43 +53,45 @@ public class IngresoDAO {
         IntervaloFecha intervalo = new IntervaloFecha(mes, año);
         java.sql.Date inferior = new java.sql.Date(intervalo.getInferior().getTime());
         java.sql.Date superior = new java.sql.Date(intervalo.getSuperior().getTime());
-        
+
         declaracionDeRecuperacion.setDate(1, inferior);
         declaracionDeRecuperacion.setDate(2, superior);
-        
+
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
 
         ArrayList<Ingreso> ingresos = new ArrayList();
 
         while (resultado.next()) {
-            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), new Fecha (resultado.getDate("FechaRegistro")),
+            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), new Fecha(resultado.getDate("FechaRegistro")),
                     resultado.getDouble("Importe"));
-            
+
             ingresos.add(ingreso);
         }
 
         this.conectorBD.desconectar();
         return ingresos;
     }
-    
-        public ArrayList<Ingreso> recuperarIngresos() throws SQLException {
+
+    public ArrayList<Ingreso> recuperarIngresos() throws SQLException {
         this.conectorBD.conectar();
 
         String consulta = "SELECT * FROM Facturas";
         PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
 
         ResultSet resultado = declaracionDeRecuperacion.executeQuery();
-        
+
         ArrayList<Ingreso> ingresos = new ArrayList();
 
         while (resultado.next()) {
-            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), new Fecha (resultado.getDate("FechaRegistro")),
+            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), new Fecha(resultado.getDate("FechaRegistro")),
                     resultado.getDouble("Importe"));
-            
+
             ingresos.add(ingreso);
         }
 
         this.conectorBD.desconectar();
         return ingresos;
     }
+
+
 }

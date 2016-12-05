@@ -32,6 +32,10 @@ public class Contador {
         return contador;
     }
 
+    public void cobrarPaciente(){
+        double costoAplicacion = 900;
+        agregarIngreso(costoAplicacion);
+    }
     public void agregarImporte(double pagoInsumos, String descripcion) {
         try {
             Fecha fechaRegistro = new Fecha();

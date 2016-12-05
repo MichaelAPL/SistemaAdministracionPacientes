@@ -5,9 +5,16 @@
  */
 package vistas;
 
+import com.itextpdf.text.DocumentException;
 import controladores.ControladorDatosPaciente;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelos.CreadorReportesPaciente;
+import modelos.Fecha;
+import modelos.MensajesDeDialogo;
 import modelos.Paciente;
 
 /**
@@ -20,6 +27,7 @@ public class RecepcionistaVentanaDatosPaciente {
     private VentanaDatosPaciente ventana;
     private ControladorDatosPaciente controlador;
     private Paciente paciente;
+    private CreadorReportesPaciente creadorReportes;
 
     private RecepcionistaVentanaDatosPaciente() {
         ventana = VentanaDatosPaciente.obtenerVentana();
@@ -69,6 +77,21 @@ public class RecepcionistaVentanaDatosPaciente {
                 ventana.getMedicamentoNuevo().setText("");
             }
             mostrarMedicamentos(paciente.getMedicamentosExternos());
+        });
+        
+        ventana.getGenerarReoporte().addActionListener((ActionEvent e) ->{
+            ExploradorArchivos exploradorArchivos = 
+                    new ExploradorArchivos("Seleccione donde guardará el reporte");                        
+            
+            Fecha fechaDelReporte = new Fecha();
+            try {
+                creadorReportes = new CreadorReportesPaciente(exploradorArchivos.getRuta());
+                creadorReportes.llenarReportePaciente(paciente, fechaDelReporte);
+            } catch (DocumentException ex) {
+                MensajesDeDialogo.mostrarErrorAlCrearReportePaciente();
+            } catch (FileNotFoundException ex) {
+                MensajesDeDialogo.ErrorRutaInvalida();
+            }
         });
 
     }

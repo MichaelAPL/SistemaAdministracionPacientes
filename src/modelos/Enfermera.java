@@ -23,8 +23,10 @@ public class Enfermera {
         return enfermera;
     }
     
-    public void atenderPaciente(Suero suero, int dosisEDTA){
-        prepararSuero(suero, dosisEDTA);
+    public void atenderPaciente(Paciente paciente){
+        
+        prepararSuero(paciente.getTratamiento().getSiguienteAplicacion().getSuero()
+            , paciente.getTratamiento().getDosis_EDTA_ml());
     }
 
     public void prepararSuero(Suero suero, int dosisEDTA) {
