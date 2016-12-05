@@ -5,7 +5,7 @@
  */
 package vistas;
 
-import controladores.ControladorVentanaPaseLista;
+import controladores.ControladorPaseLista;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import modelos.Paciente;
@@ -18,11 +18,11 @@ public class RecepcionistaVentanaPaseLista {
 
     private static RecepcionistaVentanaPaseLista recepcionista;
     private VentanaPaseLista ventana;
-    private ControladorVentanaPaseLista controlador;
+    private ControladorPaseLista controlador;
 
     private RecepcionistaVentanaPaseLista() {
         ventana = VentanaPaseLista.obtenerUnicaVentana();
-        controlador = ControladorVentanaPaseLista.obtenerControlador();
+        controlador = ControladorPaseLista.obtenerControlador();
         tomarDatos();
     }
     

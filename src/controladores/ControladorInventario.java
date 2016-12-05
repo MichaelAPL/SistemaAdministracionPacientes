@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controladores;
 
 import java.util.ArrayList;
 import modelos.AdministradorInventario;
 import modelos.Insumo;
 import vistas.RecepcionVentanaInventario;
-import vistas.VentanaInventario;
 
 /**
  *
@@ -17,17 +12,17 @@ import vistas.VentanaInventario;
  */
 public class ControladorInventario {
     private final AdministradorInventario administradorInventario;
-    private static ControladorInventario controladorInventario;
+    private static ControladorInventario controlador;
     
     public ControladorInventario() {
         administradorInventario = AdministradorInventario.obtenerUnicoAdministradorInventario();                
     }
     
     public static ControladorInventario obtenerControladorInventario(){
-        if(controladorInventario==null){
-            controladorInventario = new ControladorInventario();
+        if(controlador==null){
+            controlador = new ControladorInventario();
         }
-        return controladorInventario;
+        return controlador;
     }
     
     public void llamarARecepcionVentanaInventario(){
@@ -36,11 +31,6 @@ public class ControladorInventario {
     
     public void mandarModificacionesAlInventario(Insumo insumo){
         administradorInventario.actualizarInventario(insumo);
-    }
-    
-    public void actualizarVentanaInventario(){
-//        VentanaInventario.obtenerUnicaVentanaInventario().mostrarInventarioInsumos(
-//                administradorInventario.obtenerInventarioInsumos());
     }
     
     public void mandarAVentanaInventarioInsumos(){

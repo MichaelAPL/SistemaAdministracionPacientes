@@ -85,7 +85,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarProcesoPasarlista(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarProcesoPasarlista
-        controlador.llamarControladorVentanaPaseDeLista();
+        controlador.llamarControladorVentanaPaseLista();
     }//GEN-LAST:event_iniciarProcesoPasarlista
 
     private void iniciarProcesoBuscarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarProcesoBuscarPaciente

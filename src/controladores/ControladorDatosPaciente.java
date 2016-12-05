@@ -10,7 +10,7 @@ public class ControladorDatosPaciente {
     private static ControladorDatosPaciente controlador;
     private AsistenteDoctor asistente;
     
-    public ControladorDatosPaciente(){
+    private ControladorDatosPaciente(){
         asistente = AsistenteDoctor.obtenerUnicoAsistenteDoctor();
     }
     

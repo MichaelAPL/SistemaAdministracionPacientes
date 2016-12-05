@@ -4,18 +4,18 @@ package controladores;
 import modelos.AsistenteDoctor;
 import vistas.RecepcionistaVentanaPaseLista;
 
-public class ControladorVentanaPaseLista {
+public class ControladorPaseLista {
 
     private final AsistenteDoctor asistente;
-    private static ControladorVentanaPaseLista controlador;
+    private static ControladorPaseLista controlador;
     
-    private ControladorVentanaPaseLista() {
+    private ControladorPaseLista() {
         asistente = AsistenteDoctor.obtenerUnicoAsistenteDoctor();
     }
    
-    public static ControladorVentanaPaseLista obtenerControlador(){
+    public static ControladorPaseLista obtenerControlador(){
         if (controlador == null) {
-            controlador = new ControladorVentanaPaseLista();
+            controlador = new ControladorPaseLista();
         }
         return controlador;
     }

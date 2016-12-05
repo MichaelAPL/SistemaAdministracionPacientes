@@ -3,9 +3,9 @@ package controladores;
 
 public class ControladorPrincipal {
     
-    public void llamarControladorVentanaPaseDeLista(){
-        ControladorVentanaPaseLista.obtenerControlador();
-        ControladorVentanaPaseLista.obtenerControlador().mandarARecepcionistaPacientesConCita();
+    public void llamarControladorVentanaPaseLista(){
+        ControladorPaseLista.obtenerControlador();
+        ControladorPaseLista.obtenerControlador().mandarARecepcionistaPacientesConCita();
     }
 
     public void llamarControladorVentanaBuscar() {
