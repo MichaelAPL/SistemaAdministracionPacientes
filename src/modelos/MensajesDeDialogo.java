@@ -41,4 +41,14 @@ public class MensajesDeDialogo {
         JOptionPane.showMessageDialog(null, "Algun dato no ha sido llenado",
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public static void mostrarErrorAlCrearReportePaciente(){
+        JOptionPane.showMessageDialog(null, "Error al momento de crear el reporte",
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public static void ErrorRutaInvalida(){
+        JOptionPane.showMessageDialog(null, "Ruta o Dirección no valida",
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
