@@ -12,13 +12,13 @@ import java.io.FileNotFoundException;
  *
  * @author miguelangel
  */
-public class CreadorReportesPaciente {
+public class EscritorReportesPaciente {
 
     private Reporte reporte;
     private final String ENCABEZADO_REPORTE = "Consultorio Dr Miguel Jaime Pat Chuc";
     private final String TITULO_REPORTE = "REPORTE DE PACIENTES";
     
-    public CreadorReportesPaciente(String ruta) throws FileNotFoundException, DocumentException{
+    public EscritorReportesPaciente(String ruta) throws FileNotFoundException, DocumentException{
         reporte = new Reporte(ruta, "Paciente");
     }
 

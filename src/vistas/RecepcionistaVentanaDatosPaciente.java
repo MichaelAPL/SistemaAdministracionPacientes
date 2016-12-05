@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelos.CreadorReportesPaciente;
+import modelos.EscritorReportesPaciente;
 import modelos.Fecha;
 import modelos.MensajesDeDialogo;
 import modelos.Paciente;
@@ -27,7 +27,7 @@ public class RecepcionistaVentanaDatosPaciente {
     private VentanaDatosPaciente ventana;
     private ControladorDatosPaciente controlador;
     private Paciente paciente;
-    private CreadorReportesPaciente creadorReportes;
+    private EscritorReportesPaciente creadorReportes;
 
     private RecepcionistaVentanaDatosPaciente() {
         ventana = VentanaDatosPaciente.obtenerVentana();
@@ -85,7 +85,7 @@ public class RecepcionistaVentanaDatosPaciente {
             
             Fecha fechaDelReporte = new Fecha();
             try {
-                creadorReportes = new CreadorReportesPaciente(exploradorArchivos.getRuta());
+                creadorReportes = new EscritorReportesPaciente(exploradorArchivos.getRuta());
                 creadorReportes.llenarReportePaciente(paciente, fechaDelReporte);
             } catch (DocumentException ex) {
                 MensajesDeDialogo.mostrarErrorAlCrearReportePaciente();
