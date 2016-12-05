@@ -18,8 +18,8 @@ public class MensajesDeDialogo {
     }
 
     public static void errorConLaBD() {
-        JOptionPane.showMessageDialog(VentanaInventario.obtenerUnicaVentanaInventario(),
-                "No ha sido posible conectarse a la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No ha sido posible conectarse a "
+                + "la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public static void mostrarErrorPreparacionSuero() {

@@ -2,8 +2,6 @@ package modelos;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelos.DAOs.PacienteDAO;
 
 public class AsistenteDoctor {
@@ -109,6 +107,7 @@ public class AsistenteDoctor {
             pacienteYaPasoHoy = paciente.getTratamiento().getUltimaAplicacion().
                 getFecha().comperTo(fechaHoy);
         }
+        
         return pacienteYaPasoHoy;
     }
 
