@@ -1,10 +1,8 @@
 package vistas;
 
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import modelos.Paciente;
 
 /**
  *

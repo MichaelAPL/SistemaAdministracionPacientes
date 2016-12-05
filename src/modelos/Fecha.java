@@ -24,16 +24,16 @@ public class Fecha{
         fecha = new Date();
         fecha.setDate(dia);
         fecha.setMonth(mes);
-        fecha.setYear(año);
+        fecha.setYear(año+1900);
         this.dia = fecha.getDate();
         this.mes = fecha.getMonth();
-        this.año = fecha.getYear();
+        this.año = configurarAño(fecha.getYear());
     }
     
     public Fecha(Date date){
         dia = date.getDate();
         mes = date.getMonth();
-        año = date.getYear();
+        año = configurarAño(date.getYear());
         fecha = date;
     }
     
@@ -41,7 +41,7 @@ public class Fecha{
         fecha = new Date();
         dia = fecha.getDate();
         mes = fecha.getMonth();
-        año = fecha.getYear();
+        año = configurarAño(fecha.getYear());
     }
     
     public long getTime(){
@@ -55,7 +55,10 @@ public class Fecha{
     
     public boolean comperTo(Fecha fecha){
         return ((fecha.dia == dia)&&(fecha.mes == mes)&&(fecha.año == año));
-        
+    }
     
+    private int configurarAño(int año){
+        int añoModificado = año+1900;
+        return añoModificado;
     }
 }
