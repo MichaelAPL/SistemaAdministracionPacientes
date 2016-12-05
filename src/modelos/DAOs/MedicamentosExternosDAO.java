@@ -25,30 +25,38 @@ public class MedicamentosExternosDAO {
     }
     
     public void crearMedicamentosExternos(Paciente paciente) throws SQLException{
+        //indices campos
+        int INDICE_PACIENTE_ID = 1;
+        int INDICE_NUM_MEDICAMENTO = 2;
+        int INDICE_NOMBRE_MEDICAMENTO = 3;
+        
         conectorBD.conectar();
         
         String camposMedicamentos = "Paciente_ID, numMedicamento, NombreMedicamento";
         String consulta = "INSERT INTO MedicamentosExternos ("+camposMedicamentos+")" + 
                 " VALUES (?,?,?)";
         
-        for (int i = 0; i < paciente.getMedicamentosExternos().size(); i++) {
+        for (int iMedicamento = 0; iMedicamento < paciente.getMedicamentosExternos().size(); iMedicamento++) {
+            
             PreparedStatement declaracionMedicamentos = conectorBD.consulta(consulta);
-            declaracionMedicamentos.setInt(1, paciente.getId());
-            declaracionMedicamentos.setInt(2, i);
-            declaracionMedicamentos.setString(3, paciente.getMedicamentosExternos().get(i));
+            
+            declaracionMedicamentos.setInt(INDICE_PACIENTE_ID, paciente.getId());
+            declaracionMedicamentos.setInt(INDICE_NUM_MEDICAMENTO, iMedicamento);
+            declaracionMedicamentos.setString(INDICE_NOMBRE_MEDICAMENTO, paciente.
+                    getMedicamentosExternos().get(iMedicamento));
+            
             declaracionMedicamentos.execute();
         }
         
         conectorBD.desconectar();
     }
     
-    public ArrayList<String> getMedicamentosExternos(int paciente_id) throws SQLException{
+    public ArrayList<String> getMedicamentosExternos(int pacienteID) throws SQLException{
         conectorBD.conectar();
         ArrayList<String> medicamentosExternos = new ArrayList();
         
-        String consulta = "select * from MedicamentosExternos where Paciente_ID = ?";
+        String consulta = "select * from MedicamentosExternos where Paciente_ID = "+ pacienteID;
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, paciente_id);
         
         ResultSet resultados = declaracion.executeQuery();
         
@@ -61,16 +69,22 @@ public class MedicamentosExternosDAO {
     }
     
     public void actualizar(Paciente paciente) throws SQLException{
+        //indices campos
+        int INDICE_NUM_MEDICAMENTO = 1;
+        int INDICE_NOMBRE_MEDICAMENTO = 2;
+        int INDICE_CLAUSULA = 3;
+        
         conectorBD.conectar();
         
         String consulta = "UPDATE MedicamentosExternos SET NumMedicamento = ?,"
                 + " NombreMedicamento = ? where Paciente_ID = ?";
         
-        for (int i = 0; i < paciente.getMedicamentosExternos().size(); i++){
+        for (int iMedicamento = 0; iMedicamento < paciente.getMedicamentosExternos().size(); iMedicamento++){
             PreparedStatement declaracion = conectorBD.consulta(consulta);
-            declaracion.setInt(1, i);
-            declaracion.setString(2, paciente.getMedicamentosExternos().get(i));
-            declaracion.setInt(3, paciente.getId());
+            declaracion.setInt(INDICE_NUM_MEDICAMENTO, iMedicamento);
+            declaracion.setString(INDICE_NOMBRE_MEDICAMENTO, 
+                    paciente.getMedicamentosExternos().get(iMedicamento));
+            declaracion.setInt(INDICE_CLAUSULA, paciente.getId());
             declaracion.execute();
         }
                 

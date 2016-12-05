@@ -24,30 +24,37 @@ public class EnfermedadesPreviasDAO {
     }
         
     public void crearEnfermedadesPrevias(Paciente paciente) throws SQLException{
+        //indices campos
+        int INDICE_PACIENTE_ID = 1;
+        int INDICE_NUM_ENFERM = 2;
+        int INDICE_NOMBRE_ENFER = 3;
+        
         conectorBD.conectar();
         
         String camposEnfermedades = "Paciente_ID, NumEnfer, NombreEnfer";
         String consulta = "INSERT INTO EnfermedadesPrevias (" + camposEnfermedades + ")" +
                 " VALUES (?, ?, ?)";
         
-        for (int i = 0; i < paciente.getEnfermedadesPrevias().size(); i++) {
+        for (int iEnfermedad = 0; iEnfermedad < paciente.getEnfermedadesPrevias().size(); iEnfermedad++) {
             PreparedStatement declaracionEnfermedades = conectorBD.consulta(consulta);
-            declaracionEnfermedades.setInt(1, paciente.getId());
-            declaracionEnfermedades.setInt(2, i);
-            declaracionEnfermedades.setString(3, paciente.getEnfermedadesPrevias().get(i));
+            declaracionEnfermedades.setInt(INDICE_PACIENTE_ID, paciente.getId());
+            declaracionEnfermedades.setInt(INDICE_NUM_ENFERM, iEnfermedad);
+            declaracionEnfermedades.setString(INDICE_NOMBRE_ENFER, paciente.
+                    getEnfermedadesPrevias().get(iEnfermedad));
             declaracionEnfermedades.execute();
         }
                         
         conectorBD.desconectar();
     }
     
-    public ArrayList<String> getEnfermedadesPrevias(int paciente_id) throws SQLException{
+    public ArrayList<String> getEnfermedadesPrevias(int pacienteID) throws SQLException{
         conectorBD.conectar();
         ArrayList<String> enfermedadesPrevias = new ArrayList();
         
-        String consulta = "select * from EnfermedadesPrevias where Paciente_ID = ?";
+        String consulta = "select * from EnfermedadesPrevias where Paciente_ID = "+ pacienteID;
+        
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(1, paciente_id);
+        
         
         ResultSet resultados = declaracion.executeQuery();
         
@@ -60,16 +67,21 @@ public class EnfermedadesPreviasDAO {
     }
     
     public void actualizar(Paciente paciente) throws SQLException{
+        //indices campos
+        int INDICE_NUM_ENFERM = 1;
+        int INDICE_NOMBRE_ENFER = 2;
+        int INDICE_PACIENTE_ID = 3;
+        
         conectorBD.conectar();
         
         String consulta = "UPDATE EnfermedadesPrevias SET NumEnfer = ?,"
                 + " NombreEnfer = ? where Paciente_ID = ?";
         
-        for (int i = 0; i < paciente.getEnfermedadesPrevias().size(); i++){
+        for (int iEnfermedad = 0; iEnfermedad < paciente.getEnfermedadesPrevias().size(); iEnfermedad++){
             PreparedStatement declaracion = conectorBD.consulta(consulta);
-            declaracion.setInt(1, i);
-            declaracion.setString(2, paciente.getEnfermedadesPrevias().get(i));
-            declaracion.setInt(3, paciente.getId());
+            declaracion.setInt(INDICE_NUM_ENFERM, iEnfermedad);
+            declaracion.setString(INDICE_NOMBRE_ENFER, paciente.getEnfermedadesPrevias().get(iEnfermedad));
+            declaracion.setInt(INDICE_PACIENTE_ID, paciente.getId());
             declaracion.execute();
         }
                 

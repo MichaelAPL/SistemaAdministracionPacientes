@@ -31,7 +31,7 @@ public class AsistenteDoctor {
     public Paciente buscarPacientePorId(String id) {
         Paciente pacienteEncontrado = null;
         try {
-            pacienteEncontrado = pacienteDAO.getPacientePorID(Integer.valueOf(id));
+            pacienteEncontrado = pacienteDAO.obtenerPacientePorID(Integer.valueOf(id));
         } catch (SQLException e) {
             MensajesDeDialogo.errorConLaBD();
         }
@@ -41,7 +41,7 @@ public class AsistenteDoctor {
     public ArrayList<Paciente> buscarPacientesPorNombre(String nombrePaciente) {
         ArrayList<Paciente> pacientesEncontrados = null;
         try {
-            pacientesEncontrados = pacienteDAO.getPacientesPorNombre(nombrePaciente);
+            pacientesEncontrados = pacienteDAO.obtenerPacientesPorNombre(nombrePaciente);
         } catch (SQLException e) {
             MensajesDeDialogo.errorConLaBD();
         }
@@ -85,7 +85,7 @@ public class AsistenteDoctor {
 
     private void actualizarAplicacionesDePacienteEnRegistro(Paciente paciente) {
         try {
-            pacienteDAO.actualizarAplicaciones(paciente);
+            pacienteDAO.actualizar(paciente);
         } catch (SQLException e) {
             MensajesDeDialogo.errorConLaBD();
         }

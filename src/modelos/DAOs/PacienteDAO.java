@@ -18,6 +18,7 @@ public class PacienteDAO {
     private TratamientoDAO tratamientoDAO;
     private final MedicamentosExternosDAO medicamentosExternosDAO;
     private final EnfermedadesPreviasDAO enfermedadesPreviasDAO;
+    
 
     public PacienteDAO() {
         this.conectorBD = new ConectorBD();
@@ -88,7 +89,7 @@ public class PacienteDAO {
             Paciente paciente = new Paciente(persona,
                     medicamentosExternosDAO.getMedicamentosExternos(paciente_id),
                     enfermedadesPreviasDAO.getEnfermedadesPrevias(paciente_id),
-                    tratamientoDAO.getTratamiento(paciente_id),
+                    tratamientoDAO.obtenerTratamiento(paciente_id),
                     new Fecha(fechaInscripcion), paciente_id);
             pacientes.add(paciente);
         }
@@ -108,7 +109,7 @@ public class PacienteDAO {
 
         ArrayList enfermedadesPrevias = enfermedadesPreviasDAO.getEnfermedadesPrevias(id);
         ArrayList medicamentosExternos = medicamentosExternosDAO.getMedicamentosExternos(id);
-        Tratamiento tratamiento = tratamientoDAO.getTratamiento(id);
+        Tratamiento tratamiento = tratamientoDAO.obtenerTratamiento(id);
         Date fechaInscripcion = null;
         Persona persona = null;
 
@@ -148,7 +149,7 @@ public class PacienteDAO {
             Paciente paciente = new Paciente(persona,
                     medicamentosExternosDAO.getMedicamentosExternos(paciente_id),
                     enfermedadesPreviasDAO.getEnfermedadesPrevias(paciente_id),
-                    tratamientoDAO.getTratamiento(paciente_id),
+                    tratamientoDAO.obtenerTratamiento(paciente_id),
                     new Fecha(fechaInscripcion), paciente_id);
 
             pacientes.add(paciente);
@@ -159,31 +160,33 @@ public class PacienteDAO {
     }
 
     public void actualizar(Paciente paciente) throws SQLException {
+        // indices de actualizacion
+        int INDICE_NOMBRES = 1;
+        int INDICE_APELLIDOS = 2;
+        int INDICE_DIRECCION = 3;
+        int INDICE_LOCALIDAD = 4;
+        int INDICE_TELEFONO = 5;
+        int INDICE_EDAD = 6;
+        int INDICE_ENFERMEDADES = 7;
+        int INDICE_MEDICAMENTOS = 8;
+        int INDICE_CLAUSULA = 9;
+        
         conectorBD.conectar();
-        int campoNombres = 1;
-        int campoApellidos = 2;
-        int campoDireccion = 3;
-        int campoLocalidad = 4;
-        int campoTelefono = 5;
-        int campoEdad = 6;
-        int campoEnfermedadesPrevias = 7;
-        int campoMedicamentosExternos = 8;
-        int campoClausula = 9;
         
         String consulta = "UPDATE Paciente SET Nombre = ?, Apellido = ?, Direccion = ?, "
                 + "Localidad = ?, Telefono = ?, Edad = ?, EnfermedadesPrevias = ?, "
                 + "MedicamentosExternos = ? where ID_Paciente = ?";
 
         PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setString(campoNombres, paciente.getNombres());
-        declaracion.setString(campoApellidos, paciente.getApellidos());
-        declaracion.setString(campoDireccion, paciente.getDireccion());
-        declaracion.setString(campoLocalidad, paciente.getLocalidad());
-        declaracion.setString(campoTelefono, paciente.getTelefono());
-        declaracion.setInt(campoEdad, paciente.getEdad());
-        declaracion.setInt(campoEnfermedadesPrevias, paciente.getEnfermedadesPrevias().size());
-        declaracion.setInt(campoMedicamentosExternos, paciente.getMedicamentosExternos().size());
-        declaracion.setInt(campoClausula, paciente.getId());
+        declaracion.setString(INDICE_NOMBRES, paciente.getNombres());
+        declaracion.setString(INDICE_APELLIDOS, paciente.getApellidos());
+        declaracion.setString(INDICE_DIRECCION, paciente.getDireccion());
+        declaracion.setString(INDICE_LOCALIDAD, paciente.getLocalidad());
+        declaracion.setString(INDICE_TELEFONO, paciente.getTelefono());
+        declaracion.setInt(INDICE_EDAD, paciente.getEdad());
+        declaracion.setInt(INDICE_ENFERMEDADES, paciente.getEnfermedadesPrevias().size());
+        declaracion.setInt(INDICE_MEDICAMENTOS, paciente.getMedicamentosExternos().size());
+        declaracion.setInt(INDICE_CLAUSULA, paciente.getId());
 
         enfermedadesPreviasDAO.actualizar(paciente);
         medicamentosExternosDAO.actualizar(paciente);
@@ -192,7 +195,7 @@ public class PacienteDAO {
         conectorBD.desconectar();
     }
 
-    public void actualizarAplicaciones(Paciente paciente) throws SQLException {
+    public void delegarActualizarAplicaciones(Paciente paciente) throws SQLException {
         tratamientoDAO.getAplicacionDAO().actualizar(paciente.getTratamiento().getUltimaAplicacion());
         tratamientoDAO.getAplicacionDAO().crearAplicacion(paciente.getTratamiento().getSiguienteAplicacion());
     }
