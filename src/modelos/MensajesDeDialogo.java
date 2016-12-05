@@ -31,4 +31,9 @@ public class MensajesDeDialogo {
         JOptionPane.showMessageDialog(null, "Hubo un error al disminuir los insumos",
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public static void mostrarErrorDatosEntradaIncorrectos(){
+        JOptionPane.showMessageDialog(null, "Algun dato no ha sido llenado", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
