@@ -10,10 +10,6 @@ import modelos.Ingreso;
 import modelos.IntervaloFecha;
 import modelos.database.ConectorBD;
 
-/**
- *
- * @author Milka
- */
 public class IngresoDAO {
 
     private ConectorBD conectorBD;
@@ -44,6 +40,28 @@ public class IngresoDAO {
         conectorBD.desconectar();
     }
 
+    public ArrayList<Ingreso> recuperarIngresos() throws SQLException {
+        this.conectorBD.conectar();
+
+        String consulta = "SELECT * FROM Facturas";
+        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
+
+        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
+
+        ArrayList<Ingreso> ingresos = new ArrayList();
+
+        while (resultado.next()) {
+            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), 
+                    new Fecha(resultado.getDate("FechaRegistro")),
+                    resultado.getDouble("Importe"));
+
+            ingresos.add(ingreso);
+        }
+
+        this.conectorBD.desconectar();
+        return ingresos;
+    }
+    
     public ArrayList<Ingreso> recuperarIngresosMes(int mes, int año) throws SQLException {
         //indice campos
         int FECHA_LIMITE_INFERIOR = 1;
@@ -76,28 +94,5 @@ public class IngresoDAO {
         this.conectorBD.desconectar();
         return ingresos;
     }
-
-    public ArrayList<Ingreso> recuperarIngresos() throws SQLException {
-        this.conectorBD.conectar();
-
-        String consulta = "SELECT * FROM Facturas";
-        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
-
-        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
-
-        ArrayList<Ingreso> ingresos = new ArrayList();
-
-        while (resultado.next()) {
-            Ingreso ingreso = new Ingreso(resultado.getInt("FolioFactura"), 
-                    new Fecha(resultado.getDate("FechaRegistro")),
-                    resultado.getDouble("Importe"));
-
-            ingresos.add(ingreso);
-        }
-
-        this.conectorBD.desconectar();
-        return ingresos;
-    }
-
 
 }

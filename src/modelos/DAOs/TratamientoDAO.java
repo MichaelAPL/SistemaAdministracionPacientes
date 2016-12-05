@@ -25,6 +25,31 @@ public class TratamientoDAO {
         this.aplicacionDAO = new AplicacionDAO();
     }
 
+     public void actualizar(Tratamiento tratamiento) throws SQLException {
+        //indices campos
+        int INDICE_DOSIS_EDTA = 1;
+        int INDICE_ACTIVO = 2;
+        int INDICE_CLAUSULA = 3;
+
+        conectorBD.conectar();
+        String consulta = "UPDATE Tratamiento SET DosisEDTA = ?, Activo = ? "
+                + "where ID_Tratamiento = ?";
+
+        PreparedStatement declaracion = conectorBD.consulta(consulta);
+        declaracion.setInt(INDICE_DOSIS_EDTA, tratamiento.getDosisEDTA_ml());
+        declaracion.setBoolean(INDICE_ACTIVO, tratamiento.isActivo());
+        declaracion.setInt(INDICE_CLAUSULA, tratamiento.getId());
+
+        declaracion.execute();
+
+        conectorBD.desconectar();
+
+        if (tratamiento.getUltimaAplicacion() != null) {
+            aplicacionDAO.actualizar(tratamiento.getUltimaAplicacion());
+        }
+        aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());
+    }
+    
     public void crearTratamiento(Tratamiento tratamiento) throws SQLException {
         //indices campos
         int INDICE_ID_TRATAMIENTO = 1;
@@ -39,21 +64,25 @@ public class TratamientoDAO {
 
         PreparedStatement declaracionTratamiento = conectorBD.consulta(consulta);
 
-        declaracionTratamiento.setInt(INDICE_DOSIS_EDTA, tratamiento.getDosis_EDTA_ml());
+        declaracionTratamiento.setInt(INDICE_DOSIS_EDTA, tratamiento.getDosisEDTA_ml());
         declaracionTratamiento.setBoolean(INDICE_ACTIVO, tratamiento.isActivo());
-        declaracionTratamiento.setInt(INDICE_PACIENTE_ID, tratamiento.getId_Paciente());
+        declaracionTratamiento.setInt(INDICE_PACIENTE_ID, tratamiento.getIdPaciente());
 
         declaracionTratamiento.execute();
 
         ResultSet generatedKeys = declaracionTratamiento.getGeneratedKeys();
         if (generatedKeys.next()) {
-            int tratamiento_id = generatedKeys.getInt(INDICE_ID_TRATAMIENTO);
-            tratamiento.getSiguienteAplicacion().setTratamiento_id(tratamiento_id);
+            int tratamientoID = generatedKeys.getInt(INDICE_ID_TRATAMIENTO);
+            tratamiento.getSiguienteAplicacion().setTratamientoID(tratamientoID);
         }
 
         conectorBD.desconectar();
 
         aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());
+    }
+    
+    public AplicacionDAO getAplicacionDAO() {
+        return this.aplicacionDAO;
     }
 
     public Tratamiento obtenerTratamiento(int pacienteID) throws SQLException {
@@ -71,7 +100,7 @@ public class TratamientoDAO {
         tratamiento = new Tratamiento(resultado.getInt("DosisEDTA"));
         tratamiento.setId(resultado.getInt("ID_Tratamiento"));
         tratamiento.setActivo(resultado.getBoolean("Activo"));
-        tratamiento.setId_Paciente(resultado.getInt("Paciente_ID"));
+        tratamiento.setIdPaciente(resultado.getInt("Paciente_ID"));
         tratamiento.setSiguienteAplicacion(aplicacionDAO.obtenerSiguienteAplicacion(tratamiento.getId()));
 
         int primeraAplicacion = 1;
@@ -84,34 +113,5 @@ public class TratamientoDAO {
         conectorBD.desconectar();
 
         return tratamiento;
-    }
-
-    public void actualizar(Tratamiento tratamiento) throws SQLException {
-        //indices campos
-        int INDICE_DOSIS_EDTA = 1;
-        int INDICE_ACTIVO = 2;
-        int INDICE_CLAUSULA = 3;
-
-        conectorBD.conectar();
-        String consulta = "UPDATE Tratamiento SET DosisEDTA = ?, Activo = ? "
-                + "where ID_Tratamiento = ?";
-
-        PreparedStatement declaracion = conectorBD.consulta(consulta);
-        declaracion.setInt(INDICE_DOSIS_EDTA, tratamiento.getDosis_EDTA_ml());
-        declaracion.setBoolean(INDICE_ACTIVO, tratamiento.isActivo());
-        declaracion.setInt(INDICE_CLAUSULA, tratamiento.getId());
-
-        declaracion.execute();
-
-        conectorBD.desconectar();
-
-        if (tratamiento.getUltimaAplicacion() != null) {
-            aplicacionDAO.actualizar(tratamiento.getUltimaAplicacion());
-        }
-        aplicacionDAO.crearAplicacion(tratamiento.getSiguienteAplicacion());
-    }
-
-    public AplicacionDAO getAplicacionDAO() {
-        return this.aplicacionDAO;
     }
 }

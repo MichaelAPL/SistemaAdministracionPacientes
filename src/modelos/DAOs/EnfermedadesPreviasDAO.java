@@ -22,6 +22,28 @@ public class EnfermedadesPreviasDAO {
     public EnfermedadesPreviasDAO(){
         this.conectorBD = new ConectorBD();
     }
+    
+    public void actualizar(Paciente paciente) throws SQLException{
+        //indices campos
+        int INDICE_NUM_ENFERM = 1;
+        int INDICE_NOMBRE_ENFER = 2;
+        int INDICE_PACIENTE_ID = 3;
+        
+        conectorBD.conectar();
+        
+        String consulta = "UPDATE EnfermedadesPrevias SET NumEnfer = ?,"
+                + " NombreEnfer = ? where Paciente_ID = ?";
+        
+        for (int iEnfermedad = 0; iEnfermedad < paciente.getEnfermedadesPrevias().size(); iEnfermedad++){
+            PreparedStatement declaracion = conectorBD.consulta(consulta);
+            declaracion.setInt(INDICE_NUM_ENFERM, iEnfermedad);
+            declaracion.setString(INDICE_NOMBRE_ENFER, paciente.getEnfermedadesPrevias().get(iEnfermedad));
+            declaracion.setInt(INDICE_PACIENTE_ID, paciente.getId());
+            declaracion.execute();
+        }
+                
+        conectorBD.desconectar();
+    }
         
     public void crearEnfermedadesPrevias(Paciente paciente) throws SQLException{
         //indices campos
@@ -66,25 +88,5 @@ public class EnfermedadesPreviasDAO {
         return enfermedadesPrevias;
     }
     
-    public void actualizar(Paciente paciente) throws SQLException{
-        //indices campos
-        int INDICE_NUM_ENFERM = 1;
-        int INDICE_NOMBRE_ENFER = 2;
-        int INDICE_PACIENTE_ID = 3;
-        
-        conectorBD.conectar();
-        
-        String consulta = "UPDATE EnfermedadesPrevias SET NumEnfer = ?,"
-                + " NombreEnfer = ? where Paciente_ID = ?";
-        
-        for (int iEnfermedad = 0; iEnfermedad < paciente.getEnfermedadesPrevias().size(); iEnfermedad++){
-            PreparedStatement declaracion = conectorBD.consulta(consulta);
-            declaracion.setInt(INDICE_NUM_ENFERM, iEnfermedad);
-            declaracion.setString(INDICE_NOMBRE_ENFER, paciente.getEnfermedadesPrevias().get(iEnfermedad));
-            declaracion.setInt(INDICE_PACIENTE_ID, paciente.getId());
-            declaracion.execute();
-        }
-                
-        conectorBD.desconectar();
-    }
+    
 }

@@ -163,6 +163,24 @@ public class VentanaDatosPaciente extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaMedicamentosPaciente);
 
+        edadPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                evitarCaracteresNoNumericosParaEdad(evt);
+            }
+        });
+
+        dosisEDTApaciente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                evitarCaracteresNoNumericosParaEDTA(evt);
+            }
+        });
+
+        telefonoPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                evitarCaracteresNoNumericosParaTelefono(evt);
+            }
+        });
+
         eliminarEnfermedad.setText("eliminar");
 
         insertarEnfermedad.setText("insertar");
@@ -313,6 +331,27 @@ public class VentanaDatosPaciente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void evitarCaracteresNoNumericosParaEdad(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_evitarCaracteresNoNumericosParaEdad
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_evitarCaracteresNoNumericosParaEdad
+
+    private void evitarCaracteresNoNumericosParaTelefono(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_evitarCaracteresNoNumericosParaTelefono
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_evitarCaracteresNoNumericosParaTelefono
+
+    private void evitarCaracteresNoNumericosParaEDTA(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_evitarCaracteresNoNumericosParaEDTA
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_evitarCaracteresNoNumericosParaEDTA
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

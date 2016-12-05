@@ -65,7 +65,7 @@ public class AsistenteDoctor {
         paciente.getTratamiento().getSiguienteAplicacion().setFecha(new Fecha());
         
         pasarAlPacienteAlaEnfermera(paciente);
-        pasarAlPacienteAlContador();
+        pasarAlContadorPagoPaciente();
 
         crearNuevaCitaAlPaciente(paciente);
     }
@@ -78,11 +78,6 @@ public class AsistenteDoctor {
         }
     }
 
-    private void crearNuevaCitaAlPaciente(Paciente paciente) {
-        paciente.getTratamiento().agregarAplicacion();
-        actualizarAplicacionesDePacienteEnRegistro(paciente);
-    }
-
     private void actualizarAplicacionesDePacienteEnRegistro(Paciente paciente) {
         try {
             pacienteDAO.actualizar(paciente);
@@ -90,17 +85,7 @@ public class AsistenteDoctor {
             MensajesDeDialogo.errorConLaBD();
         }
     }
-
-    private ArrayList<Paciente> obtenerPacientesEnRegistro() {
-        ArrayList<Paciente> pacientes = new ArrayList();
-        try {
-            pacientes = pacienteDAO.recuperarTodos();
-        } catch (SQLException e) {
-            MensajesDeDialogo.errorConLaBD();
-        }
-        return pacientes;
-    }
-
+    
     private boolean asistioPacienteACita(Paciente paciente) {
         Fecha fechaHoy = new Fecha();
         boolean pacienteYaPasoHoy = false;
@@ -112,21 +97,35 @@ public class AsistenteDoctor {
         return pacienteYaPasoHoy;
     }
 
-    private boolean tienePacienteTratamientoActivo(Paciente paciente) {
-        return paciente.getTratamiento().isActivo();
-    }
-
     private boolean asistioPacienteAPrimeraCita(Paciente paciente) {
         return (paciente.getTratamiento().getUltimaAplicacion() != null);
+    }
+    
+    private void crearNuevaCitaAlPaciente(Paciente paciente) {
+        paciente.getTratamiento().agregarAplicacion();
+        actualizarAplicacionesDePacienteEnRegistro(paciente);
+    }
+    
+    private ArrayList<Paciente> obtenerPacientesEnRegistro() {
+        ArrayList<Paciente> pacientes = new ArrayList();
+        try {
+            pacientes = pacienteDAO.recuperarTodos();
+        } catch (SQLException e) {
+            MensajesDeDialogo.errorConLaBD();
+        }
+        return pacientes;
+    }    
+    
+    private void pasarAlContadorPagoPaciente() {
+        Contador.llamarContador().cobrarPaciente();
     }
     
     private void pasarAlPacienteAlaEnfermera(Paciente paciente){
         Enfermera.llamarEnfermera().atenderPaciente(paciente);
     }
 
-    private void pasarAlPacienteAlContador() {
-        Contador.llamarContador().cobrarPaciente();
+    private boolean tienePacienteTratamientoActivo(Paciente paciente) {
+        return paciente.getTratamiento().isActivo();
     }
-    
-    
+  
 }

@@ -50,6 +50,28 @@ public class FacturaDAO {
         conectorBD.desconectar();
     }
 
+    public ArrayList<Factura> recuperarFacturas() throws SQLException {
+        this.conectorBD.conectar();
+
+        String consulta = "SELECT * FROM Facturas";
+        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
+
+        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
+
+        ArrayList<Factura> facturas = new ArrayList();
+
+        while (resultado.next()) {
+            Factura factura = new Factura(resultado.getInt("FolioFactura"),
+                    new Fecha(resultado.getDate("FechaRegistro")),
+                    resultado.getDouble("Importe"), resultado.getString("Descripcion"));
+
+            facturas.add(factura);
+        }
+
+        this.conectorBD.desconectar();
+        return facturas;
+    }
+
     public ArrayList<Factura> recuperarFacturasMes(int mes, int año) throws SQLException {
         //indice campos
         int FECHA_LIMITE_INFERIOR = 1;
@@ -72,29 +94,7 @@ public class FacturaDAO {
         ArrayList<Factura> facturas = new ArrayList();
 
         while (resultado.next()) {
-            Factura factura = new Factura(resultado.getInt("FolioFactura"), 
-                    new Fecha(resultado.getDate("FechaRegistro")),
-                    resultado.getDouble("Importe"), resultado.getString("Descripcion"));
-
-            facturas.add(factura);
-        }
-
-        this.conectorBD.desconectar();
-        return facturas;
-    }
-
-    public ArrayList<Factura> recuperarFacturas() throws SQLException {
-        this.conectorBD.conectar();
-
-        String consulta = "SELECT * FROM Facturas";
-        PreparedStatement declaracionDeRecuperacion = conectorBD.consulta(consulta);
-
-        ResultSet resultado = declaracionDeRecuperacion.executeQuery();
-
-        ArrayList<Factura> facturas = new ArrayList();
-
-        while (resultado.next()) {
-            Factura factura = new Factura(resultado.getInt("FolioFactura"), 
+            Factura factura = new Factura(resultado.getInt("FolioFactura"),
                     new Fecha(resultado.getDate("FechaRegistro")),
                     resultado.getDouble("Importe"), resultado.getString("Descripcion"));
 

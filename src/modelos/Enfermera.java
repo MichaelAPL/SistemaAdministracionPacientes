@@ -3,10 +3,6 @@ package modelos;
 import modelos.enums.NombresInsumos;
 import modelos.enums.Suero;
 
-/**
- *
- * @author Milka
- */
 public class Enfermera {
 
     private static Enfermera enfermera;
@@ -26,7 +22,7 @@ public class Enfermera {
     public void atenderPaciente(Paciente paciente){
         
         prepararSuero(paciente.getTratamiento().getSiguienteAplicacion().getSuero()
-            , paciente.getTratamiento().getDosis_EDTA_ml());
+            , paciente.getTratamiento().getDosisEDTA_ml());
     }
 
     public void prepararSuero(Suero suero, int dosisEDTA) {
@@ -48,15 +44,13 @@ public class Enfermera {
                 MensajesDeDialogo.mostrarErrorPreparacionSuero();
         }
     }
-
-    private void prepararSueroQuelante(int dosisEDTA) {
-        administrador.decrementarInsumo(NombresInsumos.EDTA.getNombre(), dosisEDTA);
-    }
-
+    
     private void prepararSueroMineralizante() {
         administrador.decrementarInsumo(NombresInsumos.MVI.getNombre(), NombresInsumos.MVI.getDosis());
     }
-
     
+    private void prepararSueroQuelante(int dosisEDTA) {
+        administrador.decrementarInsumo(NombresInsumos.EDTA.getNombre(), dosisEDTA);
+    }
 
 }

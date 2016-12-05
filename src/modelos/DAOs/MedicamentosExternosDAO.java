@@ -24,6 +24,29 @@ public class MedicamentosExternosDAO {
         this.conectorBD = new ConectorBD();
     }
     
+    public void actualizar(Paciente paciente) throws SQLException{
+        //indices campos
+        int INDICE_NUM_MEDICAMENTO = 1;
+        int INDICE_NOMBRE_MEDICAMENTO = 2;
+        int INDICE_CLAUSULA = 3;
+        
+        conectorBD.conectar();
+        
+        String consulta = "UPDATE MedicamentosExternos SET NumMedicamento = ?,"
+                + " NombreMedicamento = ? where Paciente_ID = ?";
+        
+        for (int iMedicamento = 0; iMedicamento < paciente.getMedicamentosExternos().size(); iMedicamento++){
+            PreparedStatement declaracion = conectorBD.consulta(consulta);
+            declaracion.setInt(INDICE_NUM_MEDICAMENTO, iMedicamento);
+            declaracion.setString(INDICE_NOMBRE_MEDICAMENTO, 
+                    paciente.getMedicamentosExternos().get(iMedicamento));
+            declaracion.setInt(INDICE_CLAUSULA, paciente.getId());
+            declaracion.execute();
+        }
+                
+        conectorBD.desconectar();
+    }
+    
     public void crearMedicamentosExternos(Paciente paciente) throws SQLException{
         //indices campos
         int INDICE_PACIENTE_ID = 1;
@@ -67,27 +90,5 @@ public class MedicamentosExternosDAO {
         conectorBD.desconectar();
         return medicamentosExternos;
     }
-    
-    public void actualizar(Paciente paciente) throws SQLException{
-        //indices campos
-        int INDICE_NUM_MEDICAMENTO = 1;
-        int INDICE_NOMBRE_MEDICAMENTO = 2;
-        int INDICE_CLAUSULA = 3;
-        
-        conectorBD.conectar();
-        
-        String consulta = "UPDATE MedicamentosExternos SET NumMedicamento = ?,"
-                + " NombreMedicamento = ? where Paciente_ID = ?";
-        
-        for (int iMedicamento = 0; iMedicamento < paciente.getMedicamentosExternos().size(); iMedicamento++){
-            PreparedStatement declaracion = conectorBD.consulta(consulta);
-            declaracion.setInt(INDICE_NUM_MEDICAMENTO, iMedicamento);
-            declaracion.setString(INDICE_NOMBRE_MEDICAMENTO, 
-                    paciente.getMedicamentosExternos().get(iMedicamento));
-            declaracion.setInt(INDICE_CLAUSULA, paciente.getId());
-            declaracion.execute();
-        }
-                
-        conectorBD.desconectar();
-    }
+   
 }
