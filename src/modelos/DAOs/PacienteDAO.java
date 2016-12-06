@@ -55,6 +55,7 @@ public class PacienteDAO {
         declaracion.setInt(INDICE_ENFERMEDADES, paciente.getEnfermedadesPrevias().size());
         declaracion.setInt(INDICE_MEDICAMENTOS, paciente.getMedicamentosExternos().size());
         declaracion.setInt(INDICE_CLAUSULA, paciente.getId());
+        declaracion.execute();
 
         enfermedadesPreviasDAO.actualizar(paciente);
         medicamentosExternosDAO.actualizar(paciente);
@@ -94,7 +95,7 @@ public class PacienteDAO {
         if (generatedKeys.next()) {
             int id = generatedKeys.getInt(1);
             paciente.setId(id);
-            paciente.getTratamiento().setId(id);
+            paciente.getTratamiento().setIdPaciente(id);
         }
 
         conectorBD.desconectar();

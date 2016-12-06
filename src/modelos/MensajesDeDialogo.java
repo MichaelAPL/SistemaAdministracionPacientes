@@ -50,4 +50,9 @@ public class MensajesDeDialogo {
         JOptionPane.showMessageDialog(null, "La cantidad de producto de "+
             nombre+" es insuficiente", "Información", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public static void operacionExisota(){
+        JOptionPane.showMessageDialog(null, "Se realizó la operación con Éxito",
+                "Operación Exitosa", JOptionPane.OK_OPTION);
+    }
 }

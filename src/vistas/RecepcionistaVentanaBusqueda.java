@@ -43,6 +43,7 @@ public class RecepcionistaVentanaBusqueda {
                 String idPacienteSeleccionado = texto[0];
                 controlador.recibirIDPaciente(idPacienteSeleccionado);
             }
+            limpiarCampos();
             ventana.dispose();
         });
 
@@ -64,5 +65,10 @@ public class RecepcionistaVentanaBusqueda {
 
         ventana.getListaPacientes().setListData(nombresPacientes);
     }
-
+    
+    private void limpiarCampos(){
+        this.ventana.getNombresPaciente().setText("");
+        String[] listaVacia = {""};
+        this.ventana.getListaPacientes().setListData(listaVacia);
+    }
 }

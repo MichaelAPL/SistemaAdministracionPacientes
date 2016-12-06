@@ -84,5 +84,4 @@ public class Contador {
         double costoAplicacion = 900;
         agregarIngreso(costoAplicacion);
     }
-
 }

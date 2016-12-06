@@ -11,10 +11,10 @@ public class Aplicacion {
     private int tratamientoID;
 
     public Aplicacion(int numAplicacion) {
-        this.fecha = new Fecha();
-        this.suero = setSuero();
+        this.fecha = new Fecha();        
         this.realizada = false;
         this.numAplicacion = numAplicacion;
+        setSuero();
     }
 
     public Fecha getFecha() {
@@ -24,16 +24,16 @@ public class Aplicacion {
     public void setFecha(Fecha fecha) {
         this.fecha = fecha;
     }
-
-    public Suero getSuero() {
-        return suero;
+    
+    public Suero getSuero(){
+        return this.suero;
     }
     
-    private Suero setSuero() {
+    private void setSuero() {
         if (cambiarASueroMineral()) {
-            return Suero.MINERAL;
+            this.suero = Suero.MINERAL;
         } else {
-            return Suero.QUELANTE;
+            this.suero = Suero.QUELANTE;
         }
     }
 

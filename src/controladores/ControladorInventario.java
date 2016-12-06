@@ -14,7 +14,7 @@ public class ControladorInventario {
     private final AdministradorInventario administradorInventario;
     private static ControladorInventario controlador;
     
-    public ControladorInventario() {
+    private ControladorInventario() {
         administradorInventario = AdministradorInventario.obtenerUnicoAdministradorInventario();                
     }
     

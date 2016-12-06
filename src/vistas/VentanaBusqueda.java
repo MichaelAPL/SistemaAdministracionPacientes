@@ -90,7 +90,7 @@ public class VentanaBusqueda extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(179, 179, 179)
                                 .addComponent(botonBuscar)))
-                        .addGap(0, 31, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(198, 198, 198)

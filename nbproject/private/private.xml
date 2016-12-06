@@ -1,19 +1,45 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/InventarioUtensiliosDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/RecepcionistaVentanaRegistroPaciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/ExploradorArchivos.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Aplicacion.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaRegistroPaciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/EscritorReportesPaciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Factura.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Fecha.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaDatosPaciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/InventarioMedicamentosDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Paciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/TratamientoDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/IngresoDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaInventario.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/AdministradorInventario.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/controladores/ControladorInventario.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Persona.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/PacienteDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Tratamiento.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/MensajesDeDialogo.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/RecepcionistaVentanaDatosPaciente.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/RecepcionistaVentanaBusqueda.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Reporte.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Ingreso.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/VentanaPrincipal.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/AplicacionDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/IntervaloFecha.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/EscritorReporteInventario.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/InventarioUtensilios.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/AsistenteDoctor.java</file>
             <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/database/ConectorBD.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Contador.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/RecepcionistaVentanaPaseLista.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/vistas/RecepcionVentanaInventario.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/DAOs/FacturaDAO.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Enfermera.java</file>
+            <file>file:/home/miguelangel/NetBeansProjects/SistemaAdministracionPacientes/src/modelos/Insumo.java</file>
         </group>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-    </open-files>
-</project-private>
->>>>>>> e21b1db4fcb8bc7745b68f8cdb355fe43ecdd9a8

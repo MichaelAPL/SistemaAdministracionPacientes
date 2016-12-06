@@ -26,9 +26,8 @@ public class RecepcionistaVentanaDatosPaciente {
 
     private RecepcionistaVentanaDatosPaciente() {
         ventana = VentanaDatosPaciente.obtenerVentana();
-        controlador = ControladorDatosPaciente.obtenerControlador().obtenerControlador();
+        controlador = ControladorDatosPaciente.obtenerControlador();
         modificarDatos();
-
     }
 
     public static RecepcionistaVentanaDatosPaciente obtenerRecepcionista() {
