@@ -8,6 +8,7 @@ package vistas;
 import controladores.ControladorBusqueda;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import modelos.Paciente;
 
 /**
@@ -68,7 +69,7 @@ public class RecepcionistaVentanaBusqueda {
     
     private void limpiarCampos(){
         this.ventana.getNombresPaciente().setText("");
-        String[] listaVacia = {""};
-        this.ventana.getListaPacientes().setListData(listaVacia);
+        String[] listaVacia = {"", "", ""};
+        this.ventana.getListaPacientes().repaint();
     }
 }
