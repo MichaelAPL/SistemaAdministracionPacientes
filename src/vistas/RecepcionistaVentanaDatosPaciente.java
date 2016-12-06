@@ -67,7 +67,7 @@ public class RecepcionistaVentanaDatosPaciente {
 
         ventana.getInsertarMedicamento().addActionListener((ActionEvent e) -> {
             if (ventana.getMedicamentoNuevo().getText() != null) {
-                paciente.insertarEnfermedad(ventana.getMedicamentoNuevo().getText());
+                paciente.insertarMedicamento(ventana.getMedicamentoNuevo().getText());
                 ventana.getMedicamentoNuevo().setText(espacioVacio);
             }
             mostrarMedicamentos(paciente.getMedicamentosExternos());
