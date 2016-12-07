@@ -69,4 +69,10 @@ public class RecepcionistaVentanaBusqueda {
             MensajesDeDialogo.mostrarMensajePacienteNoEncontrado();
         }
     }
+    
+    private void limpiarCampos(){
+        this.ventana.getNombresPaciente().setText("");
+        String[] listaVacia = {"", "", ""};
+        this.ventana.getListaPacientes().repaint();
+    }
 }

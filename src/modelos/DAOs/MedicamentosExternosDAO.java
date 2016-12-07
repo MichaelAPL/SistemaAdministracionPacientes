@@ -25,26 +25,21 @@ public class MedicamentosExternosDAO {
     }
     
     public void actualizar(Paciente paciente) throws SQLException{
-        //indices campos
-        int INDICE_NUM_MEDICAMENTO = 1;
-        int INDICE_NOMBRE_MEDICAMENTO = 2;
-        int INDICE_CLAUSULA = 3;
+        int INDICE_PACIENTE_ID = 1;
         
         conectorBD.conectar();
         
-        String consulta = "UPDATE MedicamentosExternos SET NumMedicamento = ?,"
-                + " NombreMedicamento = ? where Paciente_ID = ?";
+        String consultaEliminacion = "DELETE FROM MedicamentosExternos "
+                + "where Paciente_ID = ?";
         
-        for (int iMedicamento = 0; iMedicamento < paciente.getMedicamentosExternos().size(); iMedicamento++){
-            PreparedStatement declaracion = conectorBD.consulta(consulta);
-            declaracion.setInt(INDICE_NUM_MEDICAMENTO, iMedicamento);
-            declaracion.setString(INDICE_NOMBRE_MEDICAMENTO, 
-                    paciente.getMedicamentosExternos().get(iMedicamento));
-            declaracion.setInt(INDICE_CLAUSULA, paciente.getId());
-            declaracion.execute();
-        }
-                
+        PreparedStatement declaracionEliminacion = conectorBD.consulta(consultaEliminacion);
+        declaracionEliminacion.setInt(INDICE_PACIENTE_ID, paciente.getId());
+        
+        declaracionEliminacion.execute();
+        
         conectorBD.desconectar();
+        
+        crearMedicamentosExternos(paciente);
     }
     
     public void crearMedicamentosExternos(Paciente paciente) throws SQLException{

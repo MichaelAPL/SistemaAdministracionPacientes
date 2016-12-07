@@ -56,12 +56,12 @@ public class PacienteDAO {
         declaracion.setInt(INDICE_MEDICAMENTOS, paciente.getMedicamentosExternos().size());
         declaracion.setInt(INDICE_CLAUSULA, paciente.getId());
         declaracion.execute();
+        
+        conectorBD.desconectar();
 
         enfermedadesPreviasDAO.actualizar(paciente);
         medicamentosExternosDAO.actualizar(paciente);
         tratamientoDAO.actualizar(paciente.getTratamiento());
-
-        conectorBD.desconectar();
     }
 
     public void crearPaciente(Paciente paciente) throws SQLException {

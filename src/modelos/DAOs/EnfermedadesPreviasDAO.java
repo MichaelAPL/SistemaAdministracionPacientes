@@ -25,24 +25,21 @@ public class EnfermedadesPreviasDAO {
     
     public void actualizar(Paciente paciente) throws SQLException{
         //indices campos
-        int INDICE_NUM_ENFERM = 1;
-        int INDICE_NOMBRE_ENFER = 2;
-        int INDICE_PACIENTE_ID = 3;
+        int INDICE_PACIENTE_ID = 1;
         
         conectorBD.conectar();
         
-        String consulta = "UPDATE EnfermedadesPrevias SET NumEnfer = ?,"
-                + " NombreEnfer = ? where Paciente_ID = ?";
+        String consultaEliminacion = "DELETE FROM EnfermedadesPrevias "
+                + "where Paciente_ID = ?";
         
-        for (int iEnfermedad = 0; iEnfermedad < paciente.getEnfermedadesPrevias().size(); iEnfermedad++){
-            PreparedStatement declaracion = conectorBD.consulta(consulta);
-            declaracion.setInt(INDICE_NUM_ENFERM, iEnfermedad);
-            declaracion.setString(INDICE_NOMBRE_ENFER, paciente.getEnfermedadesPrevias().get(iEnfermedad));
-            declaracion.setInt(INDICE_PACIENTE_ID, paciente.getId());
-            declaracion.execute();
-        }
-                
+        PreparedStatement declaracionEliminacion = conectorBD.consulta(consultaEliminacion);
+        declaracionEliminacion.setInt(INDICE_PACIENTE_ID, paciente.getId());
+        
+        declaracionEliminacion.execute();
+        
         conectorBD.desconectar();
+        
+        crearEnfermedadesPrevias(paciente);
     }
         
     public void crearEnfermedadesPrevias(Paciente paciente) throws SQLException{
