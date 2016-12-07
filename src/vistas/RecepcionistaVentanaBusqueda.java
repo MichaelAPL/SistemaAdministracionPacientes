@@ -8,6 +8,7 @@ package vistas;
 import controladores.ControladorBusqueda;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import modelos.MensajesDeDialogo;
 import modelos.Paciente;
 
 /**
@@ -43,7 +44,6 @@ public class RecepcionistaVentanaBusqueda {
                 String idPacienteSeleccionado = texto[0];
                 controlador.recibirIDPaciente(idPacienteSeleccionado);
             }
-            limpiarCampos();
             ventana.dispose();
         });
 
@@ -54,21 +54,19 @@ public class RecepcionistaVentanaBusqueda {
         });
     }
 
-    public void mostrarPacientes(ArrayList<Paciente> pacientes) {
-        String[] nombresPacientes = new String[pacientes.size()];
-        String separadorID_Nonmbre = ":";
-        String espacio = " ";
-        for (int i = 0; i < pacientes.size(); i++) {
-            nombresPacientes[i] = pacientes.get(i).getId() + separadorID_Nonmbre
-                    + pacientes.get(i).getNombres() + espacio + pacientes.get(i).getApellidos();
-        }
+    public void mostrarPacientes(ArrayList<Paciente> pacientes) {        
+        if(pacientes.size()!=0){
+            String[] nombresPacientes = new String[pacientes.size()];
+            String separadorID_Nonmbre = ":";
+            String espacio = " ";
+            for (int i = 0; i < pacientes.size(); i++) {
+                nombresPacientes[i] = pacientes.get(i).getId() + separadorID_Nonmbre
+                        + pacientes.get(i).getNombres() + espacio + pacientes.get(i).getApellidos();
+            }
 
-        ventana.getListaPacientes().setListData(nombresPacientes);
-    }
-    
-    private void limpiarCampos(){
-        this.ventana.getNombresPaciente().setText("");
-        String[] listaVacia = {""};
-        this.ventana.getListaPacientes().setListData(listaVacia);
+            ventana.getListaPacientes().setListData(nombresPacientes);
+        }else{
+            MensajesDeDialogo.mostrarMensajePacienteNoEncontrado();
+        }
     }
 }

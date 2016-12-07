@@ -55,4 +55,9 @@ public class MensajesDeDialogo {
         JOptionPane.showMessageDialog(null, "Se realizó la operación con Éxito",
                 "Operación Exitosa", JOptionPane.OK_OPTION);
     }
+    
+    public static void mostrarMensajePacienteNoEncontrado(){
+        JOptionPane.showMessageDialog(null, "No se encontraron coincidencias con su busqueda", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
