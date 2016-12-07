@@ -59,6 +59,7 @@ public class RecepcionistaVentanaRegistroPaciente {
                      enfermedadesPrevias, tratamiento);
 
                 controlador.mandarAAsistenteNuevoPaciente(paciente);
+                MensajesDeDialogo.mostrarMensajeDatosGuardadosExitosamente();
                 ventana.dispose();
                 ventana.limpiarVentana();
             } catch (Exception ex) {

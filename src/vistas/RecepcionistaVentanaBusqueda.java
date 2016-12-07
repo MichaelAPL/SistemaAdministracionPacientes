@@ -43,6 +43,8 @@ public class RecepcionistaVentanaBusqueda {
                 String[] texto = String.valueOf(ventana.getListaPacientes().getSelectedValue()).split(separadorID_Nonmbre);
                 String idPacienteSeleccionado = texto[0];
                 controlador.recibirIDPaciente(idPacienteSeleccionado);
+            }else{
+                MensajesDeDialogo.mostrarMensajeErrorDeSeleccion();
             }
             ventana.dispose();
         });

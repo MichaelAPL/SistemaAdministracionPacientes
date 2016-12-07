@@ -23,6 +23,7 @@ public class AsistenteDoctor {
     public void actualizarDatosPaciente(Paciente paciente) {
         try {
             pacienteDAO.actualizar(paciente);
+            MensajesDeDialogo.mostrarMensajeDatosGuardadosExitosamente();
         } catch (SQLException e) {
             MensajesDeDialogo.errorConLaBD();
         }

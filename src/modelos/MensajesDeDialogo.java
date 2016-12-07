@@ -60,4 +60,14 @@ public class MensajesDeDialogo {
         JOptionPane.showMessageDialog(null, "No se encontraron coincidencias con su busqueda", 
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public static void mostrarMensajeErrorDeSeleccion(){
+        JOptionPane.showMessageDialog(null, "No ha seleccionado correctamente", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public static void mostrarMensajeDatosGuardadosExitosamente(){
+        JOptionPane.showMessageDialog(null, "Datos actualizados correctamente", 
+                "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

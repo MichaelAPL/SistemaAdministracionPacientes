@@ -81,6 +81,7 @@ public class RecepcionistaVentanaDatosPaciente {
             try {
                 creadorReportes = new EscritorReportesPaciente(exploradorArchivos.getRuta());
                 creadorReportes.llenarReportePaciente(paciente, fechaDelReporte);
+                MensajesDeDialogo.operacionExisota();
             } catch (DocumentException ex) {
                 MensajesDeDialogo.mostrarErrorAlCrearReportePaciente();
             } catch (FileNotFoundException ex) {
