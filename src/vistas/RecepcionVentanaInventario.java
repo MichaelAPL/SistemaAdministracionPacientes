@@ -114,8 +114,8 @@ public class RecepcionVentanaInventario {
         
     }
     
-    private int obtenerCantidadInsumosAnterior(int indiceSeleccionado){
-        int insumoAnterior;
+    private double obtenerCantidadInsumosAnterior(int indiceSeleccionado){
+        double insumoAnterior;
         if(esMedicamento(indiceSeleccionado)){
             insumoAnterior = ((InventarioMedicamentos)inventarioInsumo.get(
                 indiceSeleccionado)).getUnidadesExistentes();
@@ -132,7 +132,7 @@ public class RecepcionVentanaInventario {
                     ventanaModificacionInventario.getMenuInsumo().getSelectedItem());
             int cantidadInsumosNuevos = Integer.parseInt(String.valueOf(
                     ventanaModificacionInventario.getExistencias().getValue()));            
-            int cantidadInsumosTotal = cantidadInsumosNuevos + 
+            double cantidadInsumosTotal = cantidadInsumosNuevos + 
                     obtenerCantidadInsumosAnterior(ventanaModificacionInventario.getMenuInsumo().getSelectedIndex());
             double costoUnitarioInsumo = inventarioInsumo.get(
                     ventanaModificacionInventario.getMenuInsumo().getSelectedIndex()).getCostoUnitario();
@@ -171,7 +171,7 @@ public class RecepcionVentanaInventario {
         ventanaModificacionDatosInventario.getAplicarCambios().addActionListener((ActionEvent e) ->{
             try{
                 String nombreInsumo = String.valueOf(ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedItem());
-                int existencias = obtenerCantidadInsumosAnterior(
+                double existencias = obtenerCantidadInsumosAnterior(
                         ventanaModificacionDatosInventario.getOpcionesMenu().getSelectedIndex());
                 double costoNuevo = Double.parseDouble(String.valueOf(
                         ventanaModificacionDatosInventario.getNuevoCosto().getText()));
