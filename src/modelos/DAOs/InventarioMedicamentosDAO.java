@@ -41,7 +41,7 @@ public class InventarioMedicamentosDAO {
         
         PreparedStatement declaracion = conectorBD.consulta(consulta);
         
-        declaracion.setInt(this.INDICE_EXISTENCIAS-1, medicamento.getUnidadesExistentes());
+        declaracion.setDouble(this.INDICE_EXISTENCIAS-1, medicamento.getUnidadesExistentes());
         declaracion.setInt(this.INDICE_MLS_UNIDAD-1, medicamento.getMililitrosPorUnidad());
         declaracion.setInt(this.INDICE_MLS_TOTALES-1, medicamento.getCantidadTotalMililitros());
         declaracion.setDouble(this.INDICE_COSTO_UNIDAD-1, medicamento.getCostoUnitario());
@@ -66,8 +66,8 @@ public class InventarioMedicamentosDAO {
         
         while(resultado.next()){
             InventarioMedicamentos medicamento = new InventarioMedicamentos(resultado.getString(this.INDICE_NOMBRE), 
-                    resultado.getInt(this.INDICE_EXISTENCIAS), 
                     resultado.getInt(this.INDICE_MLS_UNIDAD), 
+                    resultado.getInt(this.INDICE_MLS_TOTALES), 
                     resultado.getDouble(this.INDICE_COSTO_UNIDAD));
             inventarioMedicamentos.add(medicamento);
         }

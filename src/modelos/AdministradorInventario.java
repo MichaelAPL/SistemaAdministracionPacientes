@@ -63,10 +63,18 @@ public class AdministradorInventario {
 
     public void decrementarInsumo(String nombreInsumo, int cantidadDecrementar) {
         Insumo insumo = buscarInsumo(nombreInsumo);
-        if (insumo instanceof InventarioMedicamentos) {
+        if (insumo instanceof InventarioMedicamentos) {            
             InventarioMedicamentos in_medicamento = (InventarioMedicamentos) insumo;
-            in_medicamento.setCantidadTotalMililitros(in_medicamento.getCantidadTotalMililitros() - cantidadDecrementar);
-            actualizarInventario(in_medicamento);
+            int cantidadMililitrosAct = in_medicamento.getCantidadTotalMililitros() - cantidadDecrementar;
+            
+            InventarioMedicamentos medicamentoAct = new InventarioMedicamentos(in_medicamento.getNombre(), 
+                    in_medicamento.getMililitrosPorUnidad(), cantidadMililitrosAct, in_medicamento.getCostoUnitario());
+            System.out.println("Cantidad act: " + cantidadMililitrosAct);
+            System.out.println("Cantidad total no act: " + in_medicamento.getCantidadTotalMililitros());
+            System.out.println("Cantidad decr: " + cantidadDecrementar);
+            double result = cantidadMililitrosAct/in_medicamento.getMililitrosPorUnidad();
+            System.out.println("Deberia ser " + result);
+            actualizarInventario(medicamentoAct);
         } else {
             InventarioUtensilios in_utensilio = (InventarioUtensilios) insumo;
             in_utensilio.setExistencias(in_utensilio.getExistencias() - cantidadDecrementar);

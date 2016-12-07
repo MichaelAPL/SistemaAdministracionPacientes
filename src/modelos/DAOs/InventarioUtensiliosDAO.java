@@ -37,7 +37,7 @@ public class InventarioUtensiliosDAO {
         
         PreparedStatement declaracion = conectorBD.consulta(consulta);
         
-        declaracion.setInt(this.INDICE_Existencias-1, utensilio.getExistencias());
+        declaracion.setDouble(this.INDICE_Existencias-1, utensilio.getExistencias());
         declaracion.setDouble(this.INDICE_Costo_Unitario-1, utensilio.getCostoUnitario());
         declaracion.setString(INDICE_Clausula, utensilio.getNombre());
         

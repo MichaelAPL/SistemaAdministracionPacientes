@@ -10,19 +10,30 @@ package modelos;
  * @author Angel Basto Gonzalez
  */
 public class InventarioMedicamentos extends Insumo {
-    private int unidadesExistentes;
+    private double unidadesExistentes;
     private int mililitrosPorUnidad;
     private int cantidadTotalMililitros;
     
-    public InventarioMedicamentos(String nombre, int unidadesExistentes, int mililitrosPorUnidad, double costoUnitario) {
+    public InventarioMedicamentos(String nombre, int mililitrosPorUnidad, int mililitrosTotales, double costoUnitario) {
+        super(nombre, costoUnitario);
+        this.mililitrosPorUnidad = mililitrosPorUnidad;
+        this.cantidadTotalMililitros = mililitrosTotales;
+        this.unidadesExistentes = calcularUnidadesExistentes();
+    }
+    
+    public InventarioMedicamentos(String nombre,double unidadesExistentes, int mililitrosPorUnidad, double costoUnitario){
         super(nombre, costoUnitario);
         this.unidadesExistentes = unidadesExistentes;
         this.mililitrosPorUnidad = mililitrosPorUnidad;
-        this.cantidadTotalMililitros = calcularMililitrosTotal();
+        this.cantidadTotalMililitros = calculcarCantidadTotalMililitros();
     }
     
-    private int calcularMililitrosTotal(){
-        return getUnidadesExistentes()*getMililitrosPorUnidad();
+    private double calcularUnidadesExistentes(){
+        return getCantidadTotalMililitros()/getMililitrosPorUnidad();
+    }
+    
+    private int calculcarCantidadTotalMililitros(){
+        return (int) (getMililitrosPorUnidad()*getUnidadesExistentes());
     }
     
     public int getCantidadTotalMililitros(){
@@ -33,7 +44,7 @@ public class InventarioMedicamentos extends Insumo {
         return mililitrosPorUnidad;
     }
     
-    public int getUnidadesExistentes() {
+    public double getUnidadesExistentes() {
         return unidadesExistentes;
     }
     
@@ -44,7 +55,7 @@ public class InventarioMedicamentos extends Insumo {
     public void setMililitrosPorUnidad(int mililitrosPorUnidad) {
         this.mililitrosPorUnidad = mililitrosPorUnidad;
     }
-    public void setUnidadesExistentes(int unidadesExistentes) {
+    public void setUnidadesExistentes(double unidadesExistentes) {
         this.unidadesExistentes = unidadesExistentes;
     }
 }
