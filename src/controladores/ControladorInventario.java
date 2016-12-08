@@ -29,6 +29,10 @@ public class ControladorInventario {
         RecepcionVentanaInventario.obtenerRecepcionVentanaInventario();
     }
     
+    public void mandarImporteInsumoAlAdministrador(String nombreInsumo,int cantidad, double costoTotal){
+        administradorInventario.agregarImporteInvertido(nombreInsumo, cantidad,costoTotal);
+    }
+    
     public void mandarModificacionesAlInventario(Insumo insumo){
         administradorInventario.actualizarInventario(insumo);
     }
@@ -40,9 +44,5 @@ public class ControladorInventario {
     
     public ArrayList<Insumo> obtenerInventarioInsumo(){
         return administradorInventario.obtenerInventarioInsumos();
-    }
-    
-    public void mandarImporteInsumoAlAdministrador(String nombreInsumo,int cantidad, double costoTotal){
-        administradorInventario.agregarImporteInvertido(nombreInsumo, cantidad,costoTotal);
     }
 }

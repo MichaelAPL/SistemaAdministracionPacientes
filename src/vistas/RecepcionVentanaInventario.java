@@ -20,10 +20,10 @@ import modelos.MensajesDeDialogo;
  */
 public class RecepcionVentanaInventario {
     private static RecepcionVentanaInventario recepcion;
-    private VentanaInventario ventanaInventario;
-    private VentanaModificacionInventario ventanaModificacionInventario;
-    private VentanaModificacionDatosInventario ventanaModificacionDatosInventario;
-    private ControladorInventario controladorInventario;
+    private final VentanaInventario ventanaInventario;
+    private final VentanaModificacionInventario ventanaModificacionInventario;
+    private final VentanaModificacionDatosInventario ventanaModificacionDatosInventario;
+    private final ControladorInventario controladorInventario;
     private ArrayList<Insumo> inventarioInsumo;
     
     private RecepcionVentanaInventario(){
@@ -43,34 +43,6 @@ public class RecepcionVentanaInventario {
             recepcion = new RecepcionVentanaInventario();
         }
         return recepcion;
-    }
-    
-    private boolean esMedicamento(int indiceSeleecionado){
-        if(inventarioInsumo.get(indiceSeleecionado) 
-                instanceof InventarioMedicamentos){
-            return true;
-        }
-        return false;
-    }
-    
-    private void insertarOpcionesMenuVentanaModificacionInventario(JComboBox menu) {
-        inventarioInsumo = controladorInventario.obtenerInventarioInsumo();
-        for (int i = 0; i < inventarioInsumo.size(); i++) {
-            menu.addItem(inventarioInsumo.get(i).getNombre());
-        }
-    }
-    
-    private void limpiarVentanaModificaciones(){
-        ventanaModificacionInventario.getMenuInsumo().setSelectedIndex(0);
-        ventanaModificacionInventario.getExistencias().setValue(0);
-        ventanaModificacionInventario.dispose();
-    }
-    
-    private void limpiarVentanaModificacionDatosInventario(){
-        ventanaModificacionDatosInventario.getMlsModificado().setText("");
-        ventanaModificacionDatosInventario.getNuevoCosto().setText("");
-        ventanaModificacionDatosInventario.getOpcionesMenu().setSelectedIndex(0);
-        ventanaModificacionDatosInventario.dispose();
     }
     
     public void mostrarInventarioInsumo(ArrayList<Insumo> insumos){
@@ -112,18 +84,6 @@ public class RecepcionVentanaInventario {
             ventanaModificacionDatosInventario.setVisible(true);
         });
         
-    }
-    
-    private double obtenerCantidadInsumosAnterior(int indiceSeleccionado){
-        double insumoAnterior;
-        if(esMedicamento(indiceSeleccionado)){
-            insumoAnterior = ((InventarioMedicamentos)inventarioInsumo.get(
-                indiceSeleccionado)).getUnidadesExistentes();
-        }else{
-            insumoAnterior = ((InventarioUtensilios)inventarioInsumo.get(
-                indiceSeleccionado)).getExistencias();
-        }
-        return insumoAnterior;
     }
     
     public void tomarModificacionesInventario(){
@@ -192,5 +152,45 @@ public class RecepcionVentanaInventario {
                 MensajesDeDialogo.mostrarErrorDatosEntradaIncorrectos();
             }
         });
+    }
+    
+    private boolean esMedicamento(int indiceSeleecionado){
+        if(inventarioInsumo.get(indiceSeleecionado) 
+                instanceof InventarioMedicamentos){
+            return true;
+        }
+        return false;
+    }
+    
+    private void insertarOpcionesMenuVentanaModificacionInventario(JComboBox menu) {
+        inventarioInsumo = controladorInventario.obtenerInventarioInsumo();
+        for (int i = 0; i < inventarioInsumo.size(); i++) {
+            menu.addItem(inventarioInsumo.get(i).getNombre());
+        }
+    }
+    
+    private void limpiarVentanaModificaciones(){
+        ventanaModificacionInventario.getMenuInsumo().setSelectedIndex(0);
+        ventanaModificacionInventario.getExistencias().setValue(0);
+        ventanaModificacionInventario.dispose();
+    }
+    
+    private void limpiarVentanaModificacionDatosInventario(){
+        ventanaModificacionDatosInventario.getMlsModificado().setText("");
+        ventanaModificacionDatosInventario.getNuevoCosto().setText("");
+        ventanaModificacionDatosInventario.getOpcionesMenu().setSelectedIndex(0);
+        ventanaModificacionDatosInventario.dispose();
+    }
+    
+    private double obtenerCantidadInsumosAnterior(int indiceSeleccionado){
+        double insumoAnterior;
+        if(esMedicamento(indiceSeleccionado)){
+            insumoAnterior = ((InventarioMedicamentos)inventarioInsumo.get(
+                indiceSeleccionado)).getUnidadesExistentes();
+        }else{
+            insumoAnterior = ((InventarioUtensilios)inventarioInsumo.get(
+                indiceSeleccionado)).getExistencias();
+        }
+        return insumoAnterior;
     }
 }
